@@ -19,6 +19,7 @@
         <a target="_blank" class="project" href="https://thecourseforum.com"
           >theCourseForum</a
         >
+        <span class="description">&#8212; university enrollment analytics</span>
       </li>
       <li>
         <a
@@ -27,10 +28,16 @@
           href="https://atlas-devs-atlas.vercel.app/"
           >atlas</a
         >
+        <span class="description"
+          >&#8212; cutting-edge machine learning research blog</span
+        >
       </li>
       <li>
         <a target="_blank" class="project" href="https://github.com/nvimdev"
           >nvimdev</a
+        >
+        <span class="description"
+          >&#8212; open-source neovim contributions</span
         >
       </li>
     </ol>
@@ -45,6 +52,7 @@
     a {
       color: inherit;
     }
+
     body {
       font-family: et-book;
       font-size: 1.5em;
@@ -55,11 +63,11 @@
       overscroll-behavior-y: none;
       overscroll-behavior-x: none;
     }
-
     body,
     html {
       overflow-anchor: none;
     }
+
     .project {
       position: relative;
       text-decoration: none;
@@ -72,10 +80,36 @@
       background-color: #000;
       bottom: 0;
       left: 0;
-      transition: width 0.3s;
+      transition: width 0.4s;
     }
     .project:hover::after {
       width: 100%;
     }
+    .description {
+      visibility: hidden;
+      white-space: nowrap;
+      overflow: hidden;
+      width: 0;
+      transition: all 0.4s ease;
+      display: inline-block;
+      vertical-align: top;
+      max-width: 0;
+    }
+    .project:hover + .description,
+    .description.revealed {
+      visibility: visible;
+      width: auto;
+      max-width: 450px;
+    }
   </style>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      document.querySelectorAll(".project").forEach((project) => {
+        project.addEventListener("mouseover", () => {
+          const description = project.nextElementSibling;
+          description.classList.add("revealed");
+        });
+      });
+    });
+  </script>
 </html>
