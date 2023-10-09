@@ -4,10 +4,6 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link
-      href="https://fonts.googleapis.com/css?family=EB Garamond"
-      rel="stylesheet"
-    />
     <title>Barrett Ruth</title>
   </head>
 
@@ -16,7 +12,15 @@
     <aside>Software developer.</aside>
     <aside>Simplicity advocate.</aside>
     <h2><a href="https://github.com/barrett-ruth">projects</a></h2>
-    <h2><a href="https://github.com/nvimdev">nvimdev</a></h2>
+    <ol>
+      <li>
+        <a class="project" href="https://thecourseforum.com">theCourseForum</a>
+      </li>
+      <li>
+        <a class="project" href="https://atlas-devs-atlas.vercel.app/">atlas</a>
+      </li>
+      <li><a class="project" href="https://github.com/nvimdev">nvimdev</a></li>
+    </ol>
     <h2><a href="/resume.pdf">resume</a></h2>
   </body>
 
@@ -31,9 +35,34 @@
     body {
       font-family: et-book;
       font-size: 1.5em;
-      background-color: #fffff8;
+      background-color: #f9f5d7;
       margin: 100px auto;
       max-width: 650px;
+      scroll-behavior: smooth;
+      overscroll-behavior-y: none;
+      overscroll-behavior-x: none;
+    }
+
+    body,
+    html {
+      overflow-anchor: none;
+    }
+    .project {
+      position: relative;
+      text-decoration: none;
+    }
+    .project::after {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 1px;
+      background-color: #000;
+      bottom: 0;
+      left: 0;
+      transition: width 0.3s;
+    }
+    .project:hover::after {
+      width: 100%;
     }
   </style>
 </html>
