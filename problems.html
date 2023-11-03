@@ -4,37 +4,35 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-    />
-    <title>Barrett Ruth</title>
+    <link rel="stylesheet" href="styles.css" />
+    <title>Problems - Sliding Window</title>
   </head>
-
   <body>
-    nothing here for now :)
+     <h1>Trapping the Rainwaters</h1>
+       <p>Trapping Raintwaters Leetcode Problem Description</p>
+    <p>
+        Example: Finding the maximum sum subarray of a fixed size.
+    </p>
+    <pre class="sliding-window-algorithm">
+    </pre>
+    <h2>Topic Relevance</h2>
+    <p>
+        The sliding window algorithm is widely used in software development for solving optimization problems, especially when dealing with arrays or lists. It's useful in scenarios where you need to track a subset of data within a larger dataset efficiently, making it a crucial tool in fields like data analysis, machine learning, and others.
+    </p>
   </body>
-
-  <style type="text/css">
-    @font-face {
-      font-family: et-book;
-      src: url(et-book.ttf);
+  <script>
+    document.querySelector('.sliding-window-algorithm').innerText = 
+String.raw`
+int trap(vector<int>& height) {
+    auto l = height.begin(), r = height.end() - 1;
+    int level = 0, water = 0;
+    while (l != r + 1) {
+        int lower = *l < *r ? *l++ : *r--;
+        level = max(level, lower);
+        water += level - lower;
     }
-
-    body {
-      font-family: et-book;
-      font-size: 1.5em;
-      background-color: #f9f5d7;
-      margin: 100px auto;
-      max-width: 650px;
-      scroll-behavior: smooth;
-      overscroll-behavior-y: none;
-      overscroll-behavior-x: none;
-    }
-    body,
-    html {
-      overflow-anchor: none;
-      padding: 0 5%;
-    }
-  </style>
+    return water;
+}
+`
+  </script>
 </html>
