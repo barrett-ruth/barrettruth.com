@@ -4,39 +4,12 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="gruvbox-light.css" />
     <link rel="stylesheet" href="index.css" />
-    <link rel="stylesheet" href="problems.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js"></script>
-    <title>Problems - Sliding Window</title>
+    <title>Interview Problems</title>
   </head>
   <body>
-    <h1>Trapping the Rainwaters</h1>
-    <p>Trapping Raintwaters Leetcode Problem Description</p>
-    <p>Example: Finding the maximum sum subarray of a fixed size.</p>
-    <pre><code></code></pre>
-    <h2>Topic Relevance</h2>
-    <p>
-      The sliding window algorithm is widely used in software development for
-      solving optimization problems, especially when dealing with arrays or
-      lists. It's useful in scenarios where you need to track a subset of data
-      within a larger dataset efficiently, making it a crucial tool in fields
-      like data analysis, machine learning, and others.
-    </p>
-    <script>
-      document.querySelector("code").textContent = `
-int trap(vector<int>& height) {
-    auto l = height.begin(), r = height.end() - 1;
-    int level = 0, water = 0;
-    while (l != r + 1) {
-        int lower = *l < *r ? *l++ : *r--;
-        level = max(level, lower);
-        water += level - lower;
-    }
-    return water;
-}
-`;
-      hljs.highlightAll();
-    </script>
+    <h1>Problems</h1>
+    <p>Description</p>
+    <a href="problems/rainwater.html"><h2>Trapping Rainwater</h2></a>
   </body>
 </html>
