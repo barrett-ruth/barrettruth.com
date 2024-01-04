@@ -27,7 +27,8 @@
     </p>
     <script>
       const code = document.querySelector(".trapping-rainwater");
-      code.textContent = `int trap(vector<int>& height) {
+      code.textContent = `
+int trap(vector<int>& height) {
     auto l = height.begin(), r = height.end() - 1;
     int level = 0, water = 0;
     while (l != r + 1) {
@@ -36,7 +37,8 @@
         water += level - lower;
     }
     return water;
-}`;
+}
+`;
       hljs.highlightAll();
     </script>
   </body>
