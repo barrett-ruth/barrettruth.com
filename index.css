@@ -1,10 +1,18 @@
+@font-face {
+  font-family: Signifier;
+  src: url('public/signifier/Signifier-Regular.ttf');
+}
+
 html,
 body {
   height: 100%;
-  font-family: "EB Garamond";
+  font-family: "Signifier";
   margin: 0;
   display: flex;
   flex-direction: column;
+  overscroll-behavior-x: none;
+  overscroll-behavior-y: none;
+  background-color: #f3f3f3;
 }
 
 main {
@@ -15,7 +23,6 @@ header,
 footer {
   text-align: center;
   padding: 10px 0;
-  background-color: #f3f3f3;
 }
 
 header {
@@ -40,5 +47,5 @@ img.logo {
 }
 
 ul {
-  list-style-type: none; /* no bullet points */
+  list-style: none; /* no bullet points */
 }
