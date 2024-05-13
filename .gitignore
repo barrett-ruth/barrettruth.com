@@ -1,1 +1,3 @@
 public/**/*.ttf
+*.md
+.DS_Store
