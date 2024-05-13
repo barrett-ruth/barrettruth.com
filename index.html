@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -9,74 +9,107 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
     />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap"
+      rel="stylesheet"
+    />
     <title>Barrett Ruth</title>
   </head>
 
   <body>
-    <div class="container">
-      <div class="social-icons">
-        <a href="https://linkedin.com/in/barrett-ruth" target="_blank">
-          <i class="fab fa-linkedin"></i>
-        </a>
-        <a href="https://github.com/barrett-ruth" target="_blank">
-          <i class="fab fa-github"></i>
-        </a>
-        <a href="mailto:br.barrettruth@gmail.com" target="_blank">
-          <i class="fas fa-envelope"></i>
-        </a>
+    <header>
+      <div class="header-left">
+        <img src="public/logo.webp" alt="Barrett Ruth logo" class="logo" />
       </div>
-      <h1>Barrett Ruth</h1>
-    </div>
-    <aside>Software developer.</aside>
-    <aside>Simplicity advocate.</aside>
-    <h2>
-      <a target="_blank" href="https://github.com/barrett-ruth">projects</a>
-    </h2>
-    <ol>
-      <li>
-        <a target="_blank" class="project" href="https://thecourseforum.com"
-          >theCourseForum</a
-        >
-        <span class="description"
-          >&#8212; university-wide enrollment analytics</span
-        >
-      </li>
-      <li>
-        <a
-          target="_blank"
-          class="project"
-          href="https://atlas-devs-atlas.vercel.app/"
-          >atlas</a
-        >
-        <span class="description"
-          >&#8212; cutting-edge machine learning research blog</span
-        >
-      </li>
-      <li>
-        <a target="_blank" class="project" href="https://github.com/nvimdev"
-          >nvimdev</a
-        >
-        <span class="description"
-          >&#8212; open-source neovim contributions</span
-        >
-      </li>
-    </ol>
-    <h2>
-      <a href="https://swe-interview-prep.vercel.app" target="_blank"
-        >interview preparation</a
-      >
-    </h2>
-    <h2><a target="_blank" href="/public/resume.pdf">resume</a></h2>
-    <h2 style="display: none">
-      <a target="_blank" href="/public/transcript.pdf">transcript</a>
-    </h2>
+      <div class="header-right">
+        <span>Header Text Here</span>
+      </div>
+    </header>
+    <main>
+      <ul>
+        <li>Projects</li>
+        <li>Resume</li>
+        <li>Transcript</li>
+      </ul>
+    </main>
+    <footer>
+      <div>Footer Text Here</div>
+      <div>
+        <a href="https://twitter.com/yourtwitterhandle">Twitter</a> |
+        <a href="https://linkedin.com/in/yourlinkedinprofile">LinkedIn</a>
+      </div>
+    </footer>
   </body>
+
+  <!-- <body> -->
+  <!--   TODO: move this -->
+  <!--   <div class="container"> -->
+  <!--     <div class="social-icons"> -->
+  <!--       <a href="https://linkedin.com/in/barrett-ruth" target="_blank"> -->
+  <!--         <i class="fab fa-linkedin"></i> -->
+  <!--       </a> -->
+  <!--       <a href="https://github.com/barrett-ruth" target="_blank"> -->
+  <!--         <i class="fab fa-github"></i> -->
+  <!--       </a> -->
+  <!--       <a href="mailto:br.barrettruth@gmail.com" target="_blank"> -->
+  <!--         <i class="fas fa-envelope"></i> -->
+  <!--       </a> -->
+  <!--     </div> -->
+  <!--     <h1>Barrett Ruth</h1> -->
+  <!--   </div> -->
+  <!--   <aside>Software developer.</aside> -->
+  <!--   <aside>Simplicity advocate.</aside> -->
+  <!--   <h2> -->
+  <!--     <a target="_blank" href="https://github.com/barrett-ruth">projects</a> -->
+  <!--   </h2> -->
+  <!--   <ol> -->
+  <!--     <li> -->
+  <!--       <a target="_blank" class="project" href="https://thecourseforum.com" -->
+  <!--         >theCourseForum</a -->
+  <!--       > -->
+  <!--       <span class="description" -->
+  <!--         >&#8212; university-wide enrollment analytics</span -->
+  <!--       > -->
+  <!--     </li> -->
+  <!--     <li> -->
+  <!--       <a -->
+  <!--         target="_blank" -->
+  <!--         class="project" -->
+  <!--         href="https://atlas-devs-atlas.vercel.app/" -->
+  <!--         >atlas</a -->
+  <!--       > -->
+  <!--       <span class="description" -->
+  <!--         >&#8212; cutting-edge machine learning research blog</span -->
+  <!--       > -->
+  <!--     </li> -->
+  <!--     TODO: no -->
+  <!--     <li> -->
+  <!--       <a target="_blank" class="project" href="https://github.com/nvimdev" -->
+  <!--         >nvimdev</a -->
+  <!--       > -->
+  <!--       <span class="description" -->
+  <!--         >&#8212; open-source neovim contributions</span -->
+  <!--       > -->
+  <!--     </li> -->
+  <!--   </ol> -->
+  <!--   TODO: remove this? -->
+  <!--   <h2> -->
+  <!--     <a href="https://swe-interview-prep.vercel.app" target="_blank" -->
+  <!--       >interview preparation</a -->
+  <!--     > -->
+  <!--   </h2> -->
+  <!--   <h2><a target="_blank" href="/public/resume.pdf">resume</a></h2> -->
+  <!--   <h2 style="display: none"> -->
+  <!--     <a target="_blank" href="/public/transcript.pdf">transcript</a> -->
+  <!--   </h2> -->
+  <!-- </body> -->
   <script>
     document.addEventListener("DOMContentLoaded", function () {
-      document.querySelectorAll(".project").forEach((project) => {
-        project.addEventListener("mouseover", () => {
-          const description = project.nextElementSibling;
-          description.classList.add("revealed");
+      document.querySelectorAll(".project").forEach((p) => {
+        p.addEventListener("mouseover", () => {
+          p.nextElementSibling.classList.add("revealed");
         });
       });
     });
