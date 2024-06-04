@@ -16,6 +16,8 @@
       rel="stylesheet"
     />
     <title>Barrett Ruth</title>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
   </head>
 
   <body>
@@ -28,6 +30,8 @@
       </div>
     </header>
     <main>
+      <p>Here is an equation: \(x = {-b \pm \sqrt{b^2-4ac} \over 2a}\)</p>
+
       <h2>Projects</h2>
       <ul>
         <li>
@@ -77,6 +81,39 @@
       </div>
     </footer>
   </body>
+
+  <svg width="500" height="100"></svg>
+
+  <script>
+    // Data for the bar chart
+    const data = [4, 8, 15, 16, 23, 42];
+
+    // Create the bar chart
+    const svg = d3.select("svg");
+    const margin = { top: 20, right: 30, bottom: 30, left: 40 };
+    const width = +svg.attr("width") - margin.left - margin.right;
+    const height = +svg.attr("height") - margin.top - margin.bottom;
+    const barWidth = width / data.length;
+
+    const y = d3
+      .scaleLinear()
+      .domain([0, d3.max(data)])
+      .range([height, 0]);
+
+    const g = svg
+      .append("g")
+      .attr("transform", `translate(${margin.left},${margin.top})`);
+
+    g.selectAll("rect")
+      .data(data)
+      .enter()
+      .append("rect")
+      .attr("class", "bar")
+      .attr("x", (d, i) => i * barWidth)
+      .attr("y", (d) => y(d))
+      .attr("width", barWidth - 1)
+      .attr("height", (d) => height - y(d));
+  </script>
 
   <!-- <body> -->
   <!--   TODO: remove this? -->
