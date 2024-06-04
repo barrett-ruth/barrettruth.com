@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="index.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&display=swap"
+      rel="stylesheet"
+    />
+    <title>Barrett Ruth</title>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+  </head>
+
+  <body>
+    <header>
+      <div class="header-left">
+        <img src="public/logo.webp" alt="Barrett Ruth logo" class="logo" />
+      </div>
+      <div class="header-right">
+        <span>Header Text Here</span>
+      </div>
+    </header>
+    <main>
+      <p>Here is an equation: \(x = {-b \pm \sqrt{b^2-4ac} \over 2a}\)</p>
+
+      <h2>Projects</h2>
+      <ul>
+        <li>
+          <a href="https://trbcap.com" class="project" target="_blank"
+            >TRB Capital Management</a
+          >
+          <span class="description">&#8212; quantitative asset management</span>
+        </li>
+        <li>
+          <a href="https://thecourseforum.com" class="project" target="_blank"
+            >theCourseForum</a
+          >
+        </li>
+        <!-- TODO: tinground -->
+        <li>
+          <a
+            href="https://atlas-devs-atlas.vercel.app/"
+            class="project"
+            target="_blank"
+            >atlas</a
+          >
+          <span class="description">&#8212; machine learning research</span>
+        </li>
+        <!-- TODO: no -->
+        <li>
+          <a href="https://github.com/nvimdev" class="project" target="_blank"
+            >nvimdev</a
+          >
+          <span class="description">&#8212; open-source neovim plugins</span>
+        </li>
+      </ul>
+      <h2>Resume</h2>
+      <h2>Transcript</h2>
+    </main>
+    <footer>
+      <div>Footer Text Here</div>
+      <div>
+        <a href="https://linkedin.com/in/barrett-ruth" target="_blank">
+          <i class="fab fa-linkedin"></i>
+        </a>
+        <a href="https://github.com/barrett-ruth" target="_blank">
+          <i class="fab fa-github"></i>
+        </a>
+        <a href="mailto:br.barrettruth@gmail.com" target="_blank">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </div>
+    </footer>
+  </body>
+
+  <svg width="500" height="100"></svg>
+
+  <script>
+    // Data for the bar chart
+    const data = [4, 8, 15, 16, 23, 42];
+
+    // Create the bar chart
+    const svg = d3.select("svg");
+    const margin = { top: 20, right: 30, bottom: 30, left: 40 };
+    const width = +svg.attr("width") - margin.left - margin.right;
+    const height = +svg.attr("height") - margin.top - margin.bottom;
+    const barWidth = width / data.length;
+
+    const y = d3
+      .scaleLinear()
+      .domain([0, d3.max(data)])
+      .range([height, 0]);
+
+    const g = svg
+      .append("g")
+      .attr("transform", `translate(${margin.left},${margin.top})`);
+
+    g.selectAll("rect")
+      .data(data)
+      .enter()
+      .append("rect")
+      .attr("class", "bar")
+      .attr("x", (d, i) => i * barWidth)
+      .attr("y", (d) => y(d))
+      .attr("width", barWidth - 1)
+      .attr("height", (d) => height - y(d));
+  </script>
+
+  <!-- <body> -->
+  <!--   TODO: remove this? -->
+  <!--   <h2> -->
+  <!--     <a href="https://swe-interview-prep.vercel.app" target="_blank" -->
+  <!--       >interview preparation</a -->
+  <!--     > -->
+  <!--   </h2> -->
+  <!--   <h2><a target="_blank" href="/public/resume.pdf">resume</a></h2> -->
+  <!--   <h2 style="display: none"> -->
+  <!--     <a target="_blank" href="/public/transcript.pdf">transcript</a> -->
+  <!--   </h2> -->
+  <!-- </body> -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      document.querySelectorAll(".project").forEach((p) => {
+        p.addEventListener("mouseover", () => {
+          p.nextElementSibling.classList.add("revealed");
+        });
+      });
+    });
+  </script>
+</html>
