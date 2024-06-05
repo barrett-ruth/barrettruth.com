@@ -6,4 +6,4 @@ DISTRIBUTION_ID="$1"
 
 shift
 
-aws cloudfront create-invalidate --distribution-id "$DISTRIBUTION_ID" --paths "$*"
+aws cloudfront create-invalidation --distribution-id "$DISTRIBUTION_ID" --paths "$*"
