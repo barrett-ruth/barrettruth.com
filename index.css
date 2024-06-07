@@ -74,9 +74,10 @@ a {
 }
 
 .topics {
-  padding-left: 30px;
   font-size: 2.5em;
-  margin: 0;
+  flex: 1;
+  justify-content: flex-begin;
+  align-items: center;
 }
 
 .topic {
