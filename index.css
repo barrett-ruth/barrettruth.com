@@ -102,6 +102,12 @@ a {
 
 .topics {
   font-size: 3em;
+  flex: 1;
+  justify-content: space-between;
+}
+
+.post {
+  font-size: 2em;
 }
 
 .software a:hover {
@@ -113,12 +119,8 @@ a {
 .trading a:hover {
   color: #d50032;
 }
-.interview-problems a:hover {
+.algorithms a:hover {
   color: #6a0dad;
-}
-
-.logo {
-  height: 40px;
 }
 
 .topic a {

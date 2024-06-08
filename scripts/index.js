@@ -1,20 +1,39 @@
-function typechars(e, url = "wip.html") {
+const postMapping = new Map([
+  ["Software", ["Post 1", "Post 2", "Post 3"]],
+  ["Economics", ["Economy 1", "Economy 2"]],
+  ["Trading", ["Trade Secrets", "Market Trends"]],
+  ["Algorithms", ["Algorithm Challenges", "Data Structures 101"]],
+]);
+
+// TODO: ensure handling multiple clicks
+function renderPosts(topic) {
+  const posts = document.getElementById("posts");
+  posts.innerHTML = "";
+
+  postMapping.get(topic).forEach((postName) => {
+    const post = document.createElement("div");
+    post.classList.add("post");
+    post.textContent = postName;
+    posts.appendChild(post);
+  });
+}
+
+function typechars(e) {
   e.preventDefault();
 
-  const text = ` ${e.target.textContent.toLowerCase()}/`;
+  const topic = e.target.textContent;
+  const terminalText = ` ${topic.toLowerCase()}/`;
   const terminalPrompt = document.querySelector(".prompt");
+  terminalPrompt.innerHTML = "barrett@ruth:~$ ";
 
   let i = 0;
 
   function typechar() {
-    if (i < text.length) {
-      terminalPrompt.innerHTML += text.charAt(i);
-      i++;
-      setTimeout(typechar, 1000 / text.length);
+    if (i < terminalText.length) {
+      terminalPrompt.innerHTML += terminalText.charAt(i++);
+      setTimeout(typechar, 1000 / terminalText.length);
     } else {
-      setTimeout(() => {
-        window.location.href = url;
-      }, 500);
+      renderPosts(topic);
     }
   }
 
@@ -22,6 +41,5 @@ function typechars(e, url = "wip.html") {
 }
 
 window.addEventListener("beforeunload", () => {
-  const terminalPrompt = document.querySelector(".prompt");
-  terminalPrompt.innerHTML = "barrett@ruth:~$ ";
+  document.querySelector(".prompt").innerHTML = "barrett@ruth:~$ ";
 });
