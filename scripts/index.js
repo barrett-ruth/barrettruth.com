@@ -28,7 +28,6 @@ function clearPrompt(delay, callback) {
 
   function removeChar() {
     if (i++ < topicLength) {
-      console.log("clearing char");
       terminalPrompt.textContent = terminalPrompt.textContent.slice(0, -1);
       setTimeout(removeChar, delay / topicLength);
     } else {
