@@ -41,7 +41,7 @@ function refresh(e) {
     function removeChar() {
       if (i++ < topicLength) {
         terminalPrompt.textContent = terminalPrompt.textContent.slice(0, -1);
-        setTimeout(removeChar, 1000 / topicLength);
+        setTimeout(removeChar, 500 / topicLength);
       } else {
         i = 0;
         clearing = false;
@@ -77,7 +77,7 @@ function typechars(e) {
   function typechar() {
     if (i < terminalText.length) {
       terminalPrompt.innerHTML += terminalText.charAt(i++);
-      setTimeout(typechar, 1000 / terminalText.length);
+      setTimeout(typechar, 500 / terminalText.length);
     } else {
       renderPosts(topic);
     }
