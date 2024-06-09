@@ -15,7 +15,44 @@ const postMapping = new Map([
   ["Algorithms", ["two pointers", "convex hull"]],
 ]);
 
-// TODO: ensure handling multiple clicks
+const TERMINAL_PROMPT = "barrett@ruth:~$ ";
+let clearing = false;
+
+function refresh(e) {
+  e.preventDefault();
+
+  const topics = document.querySelectorAll(".topic a");
+
+  topics.forEach((topic) => {
+    topic.classList.remove("active");
+    topic.style.color = "";
+  });
+
+  document.getElementById("posts").innerHTML = "";
+
+  const terminalPrompt = document.querySelector(".prompt");
+  const topicLength = terminalPrompt.innerHTML.length - TERMINAL_PROMPT.length;
+
+  function clearPrompt() {
+    if (clearing) return;
+    clearing = true;
+
+    let i = 0;
+    function removeChar() {
+      if (i++ < topicLength) {
+        terminalPrompt.textContent = terminalPrompt.textContent.slice(0, -1);
+        setTimeout(removeChar, 1000 / topicLength);
+      } else {
+        i = 0;
+        clearing = false;
+      }
+    }
+
+    removeChar();
+  }
+  clearPrompt();
+}
+
 function renderPosts(topic) {
   const posts = document.getElementById("posts");
   posts.innerHTML = "";
@@ -32,12 +69,11 @@ function typechars(e) {
   e.preventDefault();
 
   const topic = e.target.textContent;
-  const terminalText = ` ${topic.toLowerCase()}/`;
+  const terminalText = `${topic.toLowerCase()}/`;
   const terminalPrompt = document.querySelector(".prompt");
-  terminalPrompt.innerHTML = "barrett@ruth:~$ ";
+  terminalPrompt.innerHTML = TERMINAL_PROMPT;
 
   let i = 0;
-
   function typechar() {
     if (i < terminalText.length) {
       terminalPrompt.innerHTML += terminalText.charAt(i++);
@@ -51,7 +87,7 @@ function typechars(e) {
 }
 
 window.addEventListener("beforeunload", () => {
-  document.querySelector(".prompt").innerHTML = "barrett@ruth:~$ ";
+  document.querySelector(".prompt").innerHTML = TERMINAL_PROMPT;
 });
 
 function applyColor(topic) {
@@ -94,6 +130,7 @@ document.addEventListener("DOMContentLoaded", function () {
       });
 
       topic.classList.add("active");
+      document.getElementById("posts").innerHTML = "";
       applyColor(topic);
     });
   });
