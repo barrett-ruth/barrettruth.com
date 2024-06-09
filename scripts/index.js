@@ -1,8 +1,18 @@
 const postMapping = new Map([
-  ["Software", ["Post 1", "Post 2", "Post 3"]],
-  ["Economics", ["Economy 1", "Economy 2"]],
-  ["Trading", ["Trade Secrets", "Market Trends"]],
-  ["Algorithms", ["Algorithm Challenges", "Data Structures 101"]],
+  [
+    "Software",
+    [
+      "from github pages to aws",
+      "designing this website",
+      "working in the terminal",
+    ],
+  ],
+  [
+    "Economics",
+    ["romer-solow model", "the short run", "to invest or not to invest"],
+  ],
+  ["Trading", ["InteractiveBrokers TWS", "valuation"]],
+  ["Algorithms", ["two pointers", "convex hull"]],
 ]);
 
 // TODO: ensure handling multiple clicks
@@ -42,4 +52,49 @@ function typechars(e) {
 
 window.addEventListener("beforeunload", () => {
   document.querySelector(".prompt").innerHTML = "barrett@ruth:~$ ";
+});
+
+function applyColor(topic) {
+  switch (topic.parentElement.className.split(" ")[1]) {
+    case "software":
+      topic.style.color = "#0073e6";
+      break;
+    case "economics":
+      topic.style.color = "#009975";
+      break;
+    case "trading":
+      topic.style.color = "#d50032";
+      break;
+    case "algorithms":
+      topic.style.color = "#6a0dad";
+      break;
+  }
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  const topics = document.querySelectorAll(".topic a");
+
+  topics.forEach((topic) => {
+    topic.addEventListener("mouseenter", () => {
+      applyColor(topic);
+    });
+
+    topic.addEventListener("mouseleave", () => {
+      if (!topic.classList.contains("active")) {
+        topic.style.color = "";
+      }
+    });
+
+    topic.addEventListener("click", (e) => {
+      e.preventDefault();
+
+      topics.forEach((t) => {
+        t.classList.remove("active");
+        t.style.color = "";
+      });
+
+      topic.classList.add("active");
+      applyColor(topic);
+    });
+  });
 });

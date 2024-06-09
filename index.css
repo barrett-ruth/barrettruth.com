@@ -83,7 +83,6 @@ footer {
 .main {
   flex: 1;
   display: flex;
-  align-items: center;
 }
 
 .header-links a,
@@ -93,6 +92,8 @@ footer {
 
 ul {
   list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 a {
@@ -100,27 +101,31 @@ a {
   text-decoration: none;
 }
 
+.content {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.posts,
+.topics {
+  padding: 0 40px;
+  align-self: center;
+}
+
 .topics {
   font-size: 3em;
+}
+
+.posts {
+  font-size: 2em;
+  text-align: right;
   flex: 1;
-  justify-content: space-between;
 }
 
 .post {
-  font-size: 2em;
-}
-
-.software a:hover {
-  color: #0073e6;
-}
-.economics a:hover {
-  color: #009975;
-}
-.trading a:hover {
-  color: #d50032;
-}
-.algorithms a:hover {
-  color: #6a0dad;
+  font-style: italic;
+  margin-bottom: 25px;
 }
 
 .topic a {
@@ -138,17 +143,16 @@ a {
   display: block;
   margin-top: 4px;
   background: currentColor;
+  width: 0;
+  right: 100%;
+  position: absolute;
   transition:
     width 0.5s ease,
     right 0.5s ease;
 }
 
-.topic a:hover::after {
+.topic a:hover::after,
+.topic a.active::after {
   width: 100%;
   right: 0;
-}
-
-.topic a:not(:hover)::after {
-  width: 0;
-  right: 100%;
 }
