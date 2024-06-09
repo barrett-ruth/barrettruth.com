@@ -18,6 +18,29 @@ const postMapping = new Map([
 const TERMINAL_PROMPT = "barrett@ruth:~$ ";
 let clearing = false;
 
+function clearPrompt(delay, callback) {
+  if (clearing) return;
+  clearing = true;
+
+  const terminalPrompt = document.querySelector(".prompt");
+  const topicLength = terminalPrompt.innerHTML.length - TERMINAL_PROMPT.length;
+  let i = 0;
+
+  function removeChar() {
+    if (i++ < topicLength) {
+      console.log("clearing char");
+      terminalPrompt.textContent = terminalPrompt.textContent.slice(0, -1);
+      setTimeout(removeChar, delay / topicLength);
+    } else {
+      i = 0;
+      clearing = false;
+      callback && callback();
+    }
+  }
+
+  removeChar();
+}
+
 function refresh(e) {
   e.preventDefault();
 
@@ -30,27 +53,7 @@ function refresh(e) {
 
   document.getElementById("posts").innerHTML = "";
 
-  const terminalPrompt = document.querySelector(".prompt");
-  const topicLength = terminalPrompt.innerHTML.length - TERMINAL_PROMPT.length;
-
-  function clearPrompt() {
-    if (clearing) return;
-    clearing = true;
-
-    let i = 0;
-    function removeChar() {
-      if (i++ < topicLength) {
-        terminalPrompt.textContent = terminalPrompt.textContent.slice(0, -1);
-        setTimeout(removeChar, 500 / topicLength);
-      } else {
-        i = 0;
-        clearing = false;
-      }
-    }
-
-    removeChar();
-  }
-  clearPrompt();
+  clearPrompt(500);
 }
 
 function renderPosts(topic) {
@@ -69,21 +72,24 @@ function typechars(e) {
   e.preventDefault();
 
   const topic = e.target.textContent;
-  const terminalText = `${topic.toLowerCase()}/`;
+  const terminalText = ` ${topic.toLowerCase()}/`;
   const terminalPrompt = document.querySelector(".prompt");
-  terminalPrompt.innerHTML = TERMINAL_PROMPT;
+  const delay =
+    terminalPrompt.innerHTML.length > TERMINAL_PROMPT.length ? 250 : 500;
 
-  let i = 0;
-  function typechar() {
-    if (i < terminalText.length) {
-      terminalPrompt.innerHTML += terminalText.charAt(i++);
-      setTimeout(typechar, 500 / terminalText.length);
-    } else {
-      renderPosts(topic);
+  clearPrompt(delay, () => {
+    let i = 0;
+    function typechar() {
+      if (i < terminalText.length) {
+        terminalPrompt.innerHTML += terminalText.charAt(i++);
+        setTimeout(typechar, delay / terminalText.length);
+      } else {
+        renderPosts(topic);
+      }
     }
-  }
 
-  typechar();
+    typechar();
+  });
 }
 
 window.addEventListener("beforeunload", () => {
