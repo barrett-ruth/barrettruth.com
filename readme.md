@@ -4,4 +4,4 @@ My portfolio website
 
 ## todo
 
-- mobile support
+- Mobile support
