@@ -4,6 +4,21 @@ body {
   flex-direction: column;
 }
 
+header,
+footer {
+  font-size: 1.5em;
+  display: flex;
+  padding: 20px;
+  align-items: center;
+}
+
+header {
+  justify-content: space-between;
+}
+footer {
+  justify-content: flex-end;
+}
+
 .main {
   flex: 1;
   display: flex;
