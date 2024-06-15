@@ -61,7 +61,7 @@ footer {
   justify-content: flex-end;
 }
 
-.cursor {
+.terminal-cursor {
   display: inline-block;
   width: 10px;
   height: 1em;
@@ -78,7 +78,7 @@ footer {
   }
 }
 
-.terminal-prompt {
+.terminal-container {
   font-family: "Courier New", monospace;
 }
 

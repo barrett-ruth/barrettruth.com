@@ -22,7 +22,7 @@ function clearPrompt(delay, callback) {
   if (clearing) return;
   clearing = true;
 
-  const terminalPrompt = document.querySelector(".prompt");
+  const terminalPrompt = document.querySelector(".terminal-prompt");
   const topicLength = terminalPrompt.innerHTML.length - TERMINAL_PROMPT.length;
   let i = 0;
 
@@ -83,7 +83,7 @@ function typechars(e) {
 
   const topic = e.target.textContent;
   const terminalText = ` ${topic.toLowerCase()}/`;
-  const terminalPrompt = document.querySelector(".prompt");
+  const terminalPrompt = document.querySelector(".terminal-prompt");
   const delay =
     terminalPrompt.innerHTML.length > TERMINAL_PROMPT.length ? 250 : 500;
 
@@ -104,7 +104,7 @@ function typechars(e) {
 }
 
 window.addEventListener("beforeunload", () => {
-  document.querySelector(".prompt").innerHTML = TERMINAL_PROMPT;
+  document.querySelector(".terminal-prompt").innerHTML = TERMINAL_PROMPT;
 });
 
 function applyColor(topic) {
