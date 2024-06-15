@@ -56,6 +56,7 @@ let typing = false;
 function typechars(e) {
   e.preventDefault();
 
+  if (e.target.classList.contains("active")) return;
   if (typing) return;
   typing = true;
 
@@ -118,6 +119,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     topic.addEventListener("click", (e) => {
       e.preventDefault();
+
+      if (topic.classList.contains("active")) return;
 
       topics.forEach((t) => {
         t.classList.remove("active");
