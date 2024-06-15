@@ -8,7 +8,7 @@ const postMapping = new Map([
     ],
   ],
   [
-    "economics",
+    "Economics",
     [
       { name: "romer-solow model" },
       { name: "the short run" },
