@@ -46,6 +46,8 @@ function renderPosts(topic) {
     link.href = postLink ? `/posts/${postLink}.html` : `/wip.html`;
     link.textContent = postName;
 
+    link.style.textDecoration = "underline";
+
     post.appendChild(link);
     posts.appendChild(post);
   });
@@ -86,20 +88,16 @@ window.addEventListener("beforeunload", () => {
   document.querySelector(".terminal-prompt").innerHTML = TERMINAL_PROMPT;
 });
 
-function applyColor(topic) {
-  switch (topic.parentElement.className.split(" ")[1]) {
+function getTopicColor(topicName) {
+  switch (topicName) {
     case "software":
-      topic.style.color = "#0073e6";
-      break;
+      return "#0073e6";
     case "economics":
-      topic.style.color = "#009975";
-      break;
+      return "#009975";
     case "trading":
-      topic.style.color = "#d50032";
-      break;
+      return "#d50032";
     case "algorithms":
-      topic.style.color = "#6a0dad";
-      break;
+      return "#6a0dad";
   }
 }
 
@@ -107,8 +105,10 @@ document.addEventListener("DOMContentLoaded", function () {
   const topics = document.querySelectorAll(".topic a");
 
   topics.forEach((topic) => {
+    const topicName = topic.parentElement.className.split(" ")[1];
+
     topic.addEventListener("mouseenter", () => {
-      applyColor(topic);
+      topic.style.color = getTopicColor(topicName);
     });
 
     topic.addEventListener("mouseleave", () => {
@@ -129,7 +129,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       topic.classList.add("active");
       document.getElementById("posts").innerHTML = "";
-      applyColor(topic);
+      topic.style.color = getTopicColor(topicName);
     });
   });
 });
