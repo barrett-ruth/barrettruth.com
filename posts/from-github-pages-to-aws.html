@@ -9,19 +9,55 @@
     <link rel="icon" type="image/webp" href="../public/logo.webp" />
     <title>Barrett Ruth</title>
   </head>
-  <body>
+  <body class="graph">
     <header>
-      <a href="/" onclick="home(event)">
-        <div class="terminal-prompt">
-          <span class="prompt">barrett@ruth:~$</span>
-          <span class="cursor"></span>
+      <a
+        href="/"
+        style="text-decoration: none; color: inherit"
+        onclick="goHome(event)"
+      >
+        <div class="terminal-container">
+          <span class="terminal-prompt">barrett@ruth:~$ /software</span>
+          <span class="terminal-cursor"></span>
         </div>
       </a>
     </header>
     <main class="main">
-      <ul>
-        <li>hi</li>
-      </ul>
+      <div class="post-container">
+        <header class="post-header">
+          <h1 class="post-title">From GitHub Pages to AWS</h1>
+          <p class="post-meta">
+            <time datetime="2024-06-15">15/06/2024</time>
+          </p>
+        </header>
+        <article>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla felis
+            quam, varius eu ullamcorper ac, tempus eget risus. Vestibulum ante
+            ipsum primis in faucibus orci luctus et ultrices posuere cubilia
+            Curae; Nunc convallis sem id sapien dictum condimentum. Quisque
+            placerat diam vel dolor facilisis, vel gravida lorem lacinia. Sed
+            dapibus eleifend tortor, a gravida orci convallis non. Nam auctor
+            justo id magna accumsan, sit amet accumsan lorem dapibus. Nullam
+            eleifend enim nec augue fermentum, vel feugiat dolor elementum.
+            Integer et sapien nec ipsum aliquet sodales. Nam eleifend id nisi
+            vel consectetur. Ut et magna sit amet elit tempus elementum.
+            Curabitur elementum quam at erat iaculis, ut ultrices leo
+            vestibulum. Nam quis fermentum mi, at bibendum orci.
+          </p>
+          <p>
+            Vestibulum ac diam sit amet quam vehicula elementum. Curabitur
+            laoreet arcu eu mi luctus, in consectetur nisi fermentum. Praesent
+            nec nisl et leo sollicitudin tempus. Morbi non tincidunt est. Duis
+            non felis pharetra, malesuada nulla a, iaculis felis. Proin sit amet
+            dui dignissim, pellentesque felis a, eleifend velit. Morbi ac tortor
+            nec arcu euismod lacinia et ac libero. Sed non risus aliquet,
+            venenatis nulla vel, commodo augue. Mauris in neque vel nulla
+            sollicitudin egestas. Cras fringilla urna sed mi scelerisque, at
+            laoreet metus dapibus.
+          </p>
+        </article>
+      </div>
     </main>
     <script src="../scripts/common.js"></script>
   </body>

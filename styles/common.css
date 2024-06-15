@@ -26,6 +26,30 @@
   font-style: italic;
 }
 
+html,
+body {
+  font-family: "Signifier", serif;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+header,
+footer {
+  font-size: 1.5em;
+  display: flex;
+  padding: 20px;
+  align-items: center;
+}
+
+header {
+  justify-content: space-between;
+}
+footer {
+  justify-content: flex-end;
+}
+
 .graph {
   background-image: linear-gradient(
       to right,
@@ -56,4 +80,3 @@
 .terminal-container {
   font-family: "Courier New", monospace;
 }
-
