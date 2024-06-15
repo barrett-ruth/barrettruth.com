@@ -35,6 +35,8 @@ body {
   height: 100%;
   display: flex;
   flex-direction: column;
+}
+.graph {
   background-image: linear-gradient(
       to right,
       rgba(200, 200, 200, 0.4) 1px,

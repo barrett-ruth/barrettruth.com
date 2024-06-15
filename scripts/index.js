@@ -62,13 +62,24 @@ function renderPosts(topic) {
   postMapping.get(topic).forEach((postName) => {
     const post = document.createElement("div");
     post.classList.add("post");
-    post.textContent = postName;
+
+    const link = document.createElement("a");
+    post.classList.add("post");
+    link.href = `/posts/${postName.replace(/\s+/g, "-").toLowerCase()}.html`;
+    link.textContent = postName;
+
+    post.appendChild(link);
     posts.appendChild(post);
   });
 }
 
+let typing = false;
+
 function typechars(e) {
   e.preventDefault();
+
+  if (typing) return;
+  typing = true;
 
   const topic = e.target.textContent;
   const terminalText = ` ${topic.toLowerCase()}/`;
@@ -84,6 +95,7 @@ function typechars(e) {
         setTimeout(typechar, delay / terminalText.length);
       } else {
         renderPosts(topic);
+        typing = false;
       }
     }
 
