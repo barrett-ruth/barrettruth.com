@@ -2,17 +2,21 @@ const postMapping = new Map([
   [
     "Software",
     [
-      "from github pages to aws",
-      "designing this website",
-      "working in the terminal",
+      { name: "from github pages to aws", link: "from-github-pages-to-aws" },
+      { name: "designing this website" },
+      { name: "working in the terminal" },
     ],
   ],
   [
-    "Economics",
-    ["romer-solow model", "the short run", "to invest or not to invest"],
+    "economics",
+    [
+      { name: "romer-solow model" },
+      { name: "the short run" },
+      { name: "to invest or not to invest" },
+    ],
   ],
-  ["Trading", ["InteractiveBrokers TWS", "valuation"]],
-  ["Algorithms", ["two pointers", "convex hull"]],
+  ["Trading", [{ name: "InteractiveBrokers TWS" }, { name: "valuation" }]],
+  ["Algorithms", [{ name: "two pointers" }, { name: "convex hull" }]],
 ]);
 
 const TERMINAL_PROMPT = "barrett@ruth:~$ ";
@@ -59,13 +63,12 @@ function renderPosts(topic) {
   const posts = document.getElementById("posts");
   posts.innerHTML = "";
 
-  postMapping.get(topic).forEach((postName) => {
+  postMapping.get(topic).forEach(({ name: postName, link: postLink }) => {
     const post = document.createElement("div");
     post.classList.add("post");
 
     const link = document.createElement("a");
-    post.classList.add("post");
-    link.href = `/posts/${postName.replace(/\s+/g, "-").toLowerCase()}.html`;
+    link.href = postLink ? `/posts/${postLink}.html` : `/wip.html`;
     link.textContent = postName;
 
     post.appendChild(link);
