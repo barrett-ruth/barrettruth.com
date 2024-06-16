@@ -35,6 +35,11 @@ body {
   height: 100%;
 }
 
+header,
+footer {
+  padding: 20px;
+}
+
 .graph {
   background-image: linear-gradient(
       to right,

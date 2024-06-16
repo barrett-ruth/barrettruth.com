@@ -1,7 +1,7 @@
 html,
 body {
   font-family: "Signifier", serif;
-  overflow: hidden;
+  overflow: scroll;
   margin: 0;
   padding: 0;
   height: 100%;
@@ -10,7 +10,6 @@ body {
 header {
   font-size: 1.5em;
   display: flex;
-  padding: 20px;
   align-items: center;
   justify-content: space-between;
 }
@@ -28,10 +27,6 @@ header {
   max-width: 80%;
 }
 
-.post-title {
-  font-weight: normal;
-}
-
 .post-meta {
   font-style: italic;
   /* space between date and title */
@@ -40,9 +35,8 @@ header {
 
 .post-title {
   font-weight: normal;
-}
-
-.post-title {
+  font-size: 2.2em;
+  margin: 50px 0;
   width: 100%;
   position: relative;
   display: inline-block;
@@ -71,6 +65,7 @@ header {
 article {
   font-size: 1.5em;
   line-height: 1.2em;
+  padding-bottom: 20px;
 }
 
 article h2 {

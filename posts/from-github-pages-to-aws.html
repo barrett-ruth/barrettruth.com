@@ -24,40 +24,128 @@
     </header>
     <main class="main">
       <div class="post-container">
-        <div class="header-container">
-          <header class="post-header">
-            <h1 class="post-title">From GitHub Pages to AWS</h1>
-            <p class="post-meta">
-              <time datetime="2024-06-15">15/06/2024</time>
-            </p>
-          </header>
-        </div>
+        <header class="post-header">
+          <h1 class="post-title">From GitHub Pages to AWS</h1>
+          <p class="post-meta">
+            <time datetime="2024-06-15">15/06/2024</time>
+          </p>
+        </header>
         <article>
-          <h2>a subheading you will fix</h2>
+          <h2>pages begone</h2>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla felis
-            quam, varius eu ullamcorper ac, tempus eget risus. Vestibulum ante
-            ipsum primis in faucibus orci luctus et ultrices posuere cubilia
-            Curae; Nunc convallis sem id sapien dictum condimentum. Quisque
-            placerat diam vel dolor facilisis, vel gravida lorem lacinia. Sed
-            dapibus eleifend tortor, a gravida orci convallis non. Nam auctor
-            justo id magna accumsan, sit amet accumsan lorem dapibus. Nullam
-            eleifend enim nec augue fermentum, vel feugiat dolor elementum.
-            Integer et sapien nec ipsum aliquet sodales. Nam eleifend id nisi
-            vel consectetur. Ut et magna sit amet elit tempus elementum.
-            Curabitur elementum quam at erat iaculis, ut ultrices leo
-            vestibulum. Nam quis fermentum mi, at bibendum orci.
+            Though GitHub Pages may work for hosting your small, internal,
+            static site, I don't think Pages is the right choice for
+            <i>anyone</i>:
+          </p>
+          <ol>
+            <!-- TODO: cite -->
+            <li>Bandwidth caps: scale your software by default</li>
+            <li>
+              Limited SEO control: not a downside if you don't want want
+              traffic...
+            </li>
+            <li>Static &amp; client-side only: keep your options open</li>
+          </ol>
+          <h2>why aws?</h2>
+          <p>
+            I used pages before because I had little knowledge of cloud
+            computing.
           </p>
           <p>
-            Vestibulum ac diam sit amet quam vehicula elementum. Curabitur
-            laoreet arcu eu mi luctus, in consectetur nisi fermentum. Praesent
-            nec nisl et leo sollicitudin tempus. Morbi non tincidunt est. Duis
-            non felis pharetra, malesuada nulla a, iaculis felis. Proin sit amet
-            dui dignissim, pellentesque felis a, eleifend velit. Morbi ac tortor
-            nec arcu euismod lacinia et ac libero. Sed non risus aliquet,
-            venenatis nulla vel, commodo augue. Mauris in neque vel nulla
-            sollicitudin egestas. Cras fringilla urna sed mi scelerisque, at
-            laoreet metus dapibus.
+            This is not a justification&mdash;if you are a software developer,
+            learn it.
+          </p>
+          <p>
+            Prior to hosting this site, I developed and hosted an internal
+            application with Google Cloud while working at
+            <a href="https://nthventure.com">nth Venture</a>. Getting a single
+            Compute Engine up and running made me step away from cloud for the
+            entire next year.
+          </p>
+          <p>AWS is:</p>
+          <ol>
+            <li>
+              Industry standard: not an actual reason but it convinced me
+              nonetheless
+            </li>
+            <li>
+              Secure: soon to be used by VISA, which holds security to a nearly
+              stupid extent (seriously, I can&apos;t even clone a repository)
+            </li>
+            <li>
+              Well-documented: everything in the documentation worked
+              <i>first try</i>. This is extremely rare in software, so
+              compliments to Chef Bezos.
+            </li>
+          </ol>
+          <h2>the setup</h2>
+          <p>
+            This website is pure HTML, CSS, and JavaScript. While I will
+            certainly need sever-side capabilities eventually, I am seeing how
+            far the purist route can take me.
+          </p>
+          <p>AWS-wise, I use:</p>
+          <ul>
+            <li>S3, to host the content (static for now)</li>
+            <li>CloudFront, to serve and cache said content</li>
+            <li>Route53, to manage routing</li>
+            <li>
+              GoDaddy, to reserve
+              <a target="_blank" href="https://barrettruth.com"
+                >barrettruth.com</a
+              >
+            </li>
+          </ul>
+          <p>A user request can be modelled as follows:</p>
+          <ol>
+            <li>
+              A user accesses the website by typing barrettruth.com in their
+              browser.
+            </li>
+            <li>
+              GoDaddy&apos; s DNS servers are queried, which translating the
+              domain name to my Route53&apos;s IP address.
+            </li>
+            <li>
+              Route53 then routes to the request to my CloudFront distribution
+              associated with my S3 bucket.
+            </li>
+            <li>
+              CloudFront checks its edge caches for the requested content. If
+              the content is stale or not cached, CloudFront fetches the content
+              from S3. Otherwise, it uses the cached content from an edge
+              server.
+            </li>
+            <li>CloudFront returns the content to the user&apos;s browser.</li>
+          </ol>
+          <div style="display: flex; justify-content: center">
+            <img
+              width="50%"
+              src="../public/website-design.webp"
+              alt="system design of my portfolio
+          website"
+            />
+          </div>
+          <h2>difficulties</h2>
+          <p>
+            The hardest part of hosting this website was interfacing with
+            GoDaddy.
+          </p>
+          <p>
+            For example, configuring SSL certificates with GoDaddy is needlessly
+            challenging. Follow
+            <a
+              target="blank"
+              href="https://docs.aws.amazon.com/amplify/latest/userguide/to-add-a-custom-domain-managed-by-godaddy.html"
+              >AWS&apos;s guide</a
+            >
+            if you really want to. Otherwise,
+            <a
+              target="blank"
+              href="https://www.godaddy.com/help/edit-my-domain-nameservers-664"
+              >configure your GoDaddy nameservers</a
+            >
+            and point them to your own DNS service (like Route53) instead.
           </p>
         </article>
       </div>
