@@ -40,7 +40,7 @@
             <time datetime="2024-06-16">16/06/2024</time>
           </p>
         </header>
-        <article>
+        <article class="post-article">
           <h2>technique overview</h2>
           <h3>
             <a
@@ -71,8 +71,8 @@
             potentially new largest area. A running maximizum, the answer, is
             maintained.
           </p>
-          <pre><code class="language-python">
-def maxArea(height: list[int]) -> int:
+          <div class="post-code">
+            <pre><code class="language-python">def maxArea(height: list[int]) -> int:
     area = 0
     l, r = 0, len(height) - 1
     while l < r:
@@ -82,8 +82,8 @@ def maxArea(height: list[int]) -> int:
             l += 1
         while l < r and height[r] <= min_height:
             r -= 1
-    return area
-          </code></pre>
+    return area</code></pre>
+          </div>
           <!-- <h3> -->
           <!--   <a -->
           <!--     target="blank" -->
