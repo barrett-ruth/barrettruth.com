@@ -24,7 +24,7 @@ header {
 }
 
 .post-container {
-  max-width: 80%;
+  width: 80%;
 }
 
 .post-meta {
@@ -71,4 +71,12 @@ article {
 article h2 {
   font-weight: normal;
   font-style: italic;
+}
+
+article h3 {
+  font-weight: normal;
+}
+
+article a {
+  text-decoration: underline;
 }

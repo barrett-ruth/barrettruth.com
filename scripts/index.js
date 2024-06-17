@@ -16,7 +16,10 @@ const postMapping = new Map([
     ],
   ],
   ["Trading", [{ name: "InteractiveBrokers TWS" }, { name: "valuation" }]],
-  ["Algorithms", [{ name: "two pointers" }, { name: "convex hull" }]],
+  [
+    "Algorithms",
+    [{ name: "two pointers", link: "two-pointers" }, { name: "convex hull" }],
+  ],
 ]);
 
 function refresh(e) {
