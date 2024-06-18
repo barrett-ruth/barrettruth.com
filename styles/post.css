@@ -85,6 +85,19 @@ header {
   display: flex;
   justify-content: center;
 }
+
 .language-python {
-  font-size: 0.9em !important;
+  /* override prism.js styles */
+  font-size: 0.85em !important;
+}
+
+.problem-header {
+  position: relative;
+}
+
+.problem-toggle {
+  font-family: "Courier New", monospace;
+  position: absolute;
+  cursor: pointer;
+  left: -25px;
 }

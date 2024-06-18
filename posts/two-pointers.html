@@ -42,37 +42,41 @@
         </header>
         <article class="post-article">
           <h2>technique overview</h2>
-          <h3>
-            <a
-              target="blank"
-              href="https://leetcode.com/problems/container-with-most-water/"
-              >container with most water</a
-            >
-          </h3>
-          <p>Sometimes, the mathematical solution is the simplest.</p>
-          <p>
-            The area of a container bounded by the ground and its columns at
-            positions \((l, r)\) is: \[ \text{area} = \text{width} \cdot
-            \text{length} = (r - l) \cdot \min\{height[l], height[r]\} \]
-          </p>
-          <p>
-            At its core, this is a maximization problem: maximize the contained
-            area. \[ \max\{(r - l) \cdot \min\{height[l], height[r]\}\} \]
-          </p>
-          <p>
-            Given a new column position \(l_0 < l\) or \(r_0 < r\), the
-            contained area can only increase if the height of the corresponding
-            column increases.
-          </p>
-          <!-- TODO: add footnote -->
-          <p>
-            The following correct solution surveys all containers, initialized
-            with the widest columns positions, that are valid candidates for a
-            potentially new largest area. A running maximizum, the answer, is
-            maintained.
-          </p>
-          <div class="post-code">
-            <pre><code class="language-python">def maxArea(height: list[int]) -> int:
+          <div class="problem-header">
+            <h3>
+              <a
+                target="blank"
+                href="https://leetcode.com/problems/container-with-most-water/"
+                >container with most water</a
+              >
+            </h3>
+          </div>
+          <div class="problem-content">
+            <p>Sometimes, the mathematical solution is the simplest.</p>
+            <p>
+              The area of a container bounded by the ground and its columns at
+              positions \((l, r)\) is: \[ \text{area} = \text{width} \cdot
+              \text{length} = (r - l) \cdot \min\{height[l], height[r]\} \]
+            </p>
+            <p>
+              At its core, this is a maximization problem: maximize the
+              contained area. \[ \max\{(r - l) \cdot \min\{height[l],
+              height[r]\}\} \]
+            </p>
+            <p>
+              Given a new column position \(l_0 < l\) or \(r_0 < r\), the
+              contained area can only increase if the height of the
+              corresponding column increases.
+            </p>
+            <!-- TODO: add footnote -->
+            <p>
+              The following correct solution surveys all containers, initialized
+              with the widest columns positions, that are valid candidates for a
+              potentially new largest area. A running maximizum, the answer, is
+              maintained.
+            </p>
+            <div class="post-code">
+              <pre><code class="language-python">`def maxArea(height: list[int]) -> int:
     ans = 0
     l, r = 0, len(height) - 1
 
@@ -85,41 +89,47 @@
         while l < r and height[r] <= min_height:
             r -= 1
 
-    return ans</code></pre>
+    return ans`</code></pre>
+            </div>
           </div>
-          <h3>
-            <a
-              target="blank"
-              href="https://leetcode.com/problems/boats-to-save-people/"
-              >boats to save people</a
-            >
-          </h3>
-          <p>
-            Usually, the metaphorical problem description is a distraction.
-            However, I find that thinking within the confines of "boats" and
-            "people" yields an intuitive solution in this case.
-          </p>
-          <p>
-            <!-- TODO: footnote -->
-            Since only two people can fit in a boat at a time, pairing up
-            lightest and heaviest individuals will result in the least amount of
-            boats being used.
-          </p>
-          <p>
-            However, the weights are given in random order. Efficiently pairing
-            up the lightest and heaviest individuals, then, requires the most
-            common two-pointers prepreocessing step: sorting.
-          </p>
-          <p>Finally, flesh out any remaining aspects of the implementation:</p>
-          <ol>
-            <li>If one person remains, give them a boat.</li>
-            <li>
-              If both people don&apos;t fit, use the heavier person&mdash;the
-              lighter could maybe fit with someone else.
-            </li>
-          </ol>
-          <div class="post-code">
-            <pre><code class="language-python">def minimum_rescue_boats(people: list[int], limit: int) -> int:
+          <div class="problem-header">
+            <h3>
+              <a
+                target="blank"
+                href="https://leetcode.com/problems/boats-to-save-people/"
+                >boats to save people</a
+              >
+            </h3>
+          </div>
+          <div class="problem-content">
+            <p>
+              Usually, the metaphorical problem description is a distraction.
+              However, I find that thinking within the confines of "boats" and
+              "people" yields an intuitive solution in this case.
+            </p>
+            <p>
+              <!-- TODO: footnote -->
+              Since only two people can fit in a boat at a time, pairing up
+              lightest and heaviest individuals will result in the least amount
+              of boats being used.
+            </p>
+            <p>
+              However, the weights are given in random order. Efficiently
+              pairing up the lightest and heaviest individuals, then, requires
+              the most common two-pointers prepreocessing step: sorting.
+            </p>
+            <p>
+              Finally, flesh out any remaining aspects of the implementation:
+            </p>
+            <ol>
+              <li>If one person remains, give them a boat.</li>
+              <li>
+                If both people don&apos;t fit, use the heavier person&mdash;the
+                lighter could maybe fit with someone else.
+              </li>
+            </ol>
+            <div class="post-code">
+              <pre><code class="language-python">def minimum_rescue_boats(people: list[int], limit: int) -> int:
     ans = 0
     l, r = 0, len(people) - 1
 
@@ -138,6 +148,7 @@
             r -= 1
 
     return ans</code></pre>
+            </div>
           </div>
         </article>
       </div>
