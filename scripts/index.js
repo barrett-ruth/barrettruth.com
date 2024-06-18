@@ -46,7 +46,9 @@ function renderPosts(topic) {
     post.classList.add("post");
 
     const link = document.createElement("a");
-    link.href = postLink ? `/posts/${postLink}.html` : `/wip.html`;
+    link.href = postLink
+      ? `/posts/${topic.toLowerCase()}/${postLink}.html`
+      : `/wip.html`;
     link.textContent = postName;
 
     link.style.textDecoration = "underline";
