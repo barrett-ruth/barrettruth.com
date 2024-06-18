@@ -45,6 +45,10 @@ a {
   text-decoration: none;
 }
 
+li {
+  margin-bottom: 10px;
+}
+
 .graph {
   background-image: linear-gradient(
       to right,

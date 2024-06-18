@@ -3,7 +3,7 @@ const postMapping = new Map([
     "Software",
     [
       { name: "from github pages to aws", link: "from-github-pages-to-aws" },
-      { name: "designing this website" },
+      { name: "designing this website", link: "designing-this-website" },
       { name: "working in the terminal" },
     ],
   ],
