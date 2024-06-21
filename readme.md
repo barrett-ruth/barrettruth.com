@@ -6,3 +6,4 @@ My portfolio website
 
 - Mobile support
 - Problem toggler
+- stop overflow

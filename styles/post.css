@@ -96,7 +96,7 @@ header {
 }
 
 .problem-toggle {
-  font-family: "Courier New", monospace;
+  font-family: monospace;
   position: absolute;
   cursor: pointer;
   left: -25px;
