@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="/styles/common.css" />
+    <link rel="stylesheet" href="/styles/post.css" />
+    <link rel="icon" type="image/webp" href="/public/logo.webp" />
+    <link rel="stylesheet" href="/public/katex/katex.css" />
+    <script defer src="/public/katex/katex.js"></script>
+    <script
+      defer
+      src="/public/katex/katex-render.js"
+      onload="renderMathInElement(document.body);"
+    ></script>
+    <script defer src="/public/d3.js"></script>
+    <title>Barrett Ruth</title>
+  </head>
+  <body class="graph">
+    <header>
+      <a
+        href="/"
+        style="text-decoration: none; color: inherit"
+        onclick="goHome(event)"
+      >
+        <div class="terminal-container">
+          <span class="terminal-prompt">barrett@ruth:~$ /economics</span>
+          <span class="terminal-cursor"></span>
+        </div>
+      </a>
+    </header>
+    <main class="main">
+      <div class="post-container">
+        <header class="post-header">
+          <h1 class="post-title">Models of Production</h1>
+          <p class="post-meta">
+            <time datetime="2024-06-22">22/06/2024</time>
+          </p>
+        </header>
+        <article class="post-article">
+          <h2>solow</h2>
+          <div class="fold"><h3>introduction</h3></div>
+          <div>
+            <p>
+              The Solow Model is an economic model of production that
+              incorporates the incorporates the idea of capital accumulation.
+              Based on the
+              <a
+                target="blank"
+                href="https://en.wikipedia.org/wiki/Cobb%E2%80%93Douglas_production_function"
+                >Cobb-Douglas production function</a
+              >, the Solow Model describes production as follows:
+              \[Y_t=F(K_t,L_t)=\bar{A}K_t^\alpha L_t^{1-\alpha}\] With:
+            </p>
+            <ul>
+              <li>\(\bar{A}\): total factor productivity (TFP)</li>
+              <li>
+                \(\alpha\): capital&apos;s share of output&mdash;usually \(1/3\)
+                based on
+                <a target="blank" href="https://arxiv.org/pdf/1105.2123"
+                  >empirical data</a
+                >
+              </li>
+            </ul>
+            <p>
+              In this simple model, the following statements describe the
+              economy:
+            </p>
+            <ol>
+              <li>
+                Output is either saved or consumed; in other words, savings
+                equals investment
+              </li>
+              <li>
+                Capital accumulates according to investment \(I_t\) and
+                depreciation \(\bar{d}\), beginning with \(K_0\)
+              </li>
+              <li>Labor \(L_t\) is time-independent</li>
+              <li>
+                A savings rate \(\bar{s}\) describes the invested portion of
+                total output
+              </li>
+            </ol>
+            <p>
+              Including the production function, these four ideas encapsulate
+              the Solow Model:
+            </p>
+            <div style="display: flex; justify-content: center">
+              <div style="margin: 0 20px">
+                <ol>
+                  <li>\(C_t + I_t = Y_t\)</li>
+                  <li>\(\Delta K_{t+1} = I_t - \bar{d} K_t\)</li>
+                </ol>
+              </div>
+              <div>
+                <ol start="3">
+                  <li>\(L_t = \bar{L}\)</li>
+                  <li>\(I_t = \bar{s} Y_t\)</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+          <div class="fold">
+            <h3>solving the model</h3>
+          </div>
+          <div>
+            <p>
+              Visualizing the model, namely output as a function of capital,
+              provides helpful intuition before solving it.
+            </p>
+            <p>
+              Letting \((L_t,\alpha)=(\bar{L}, \frac{1}{3})\), it follows that
+              \(Y_t=F(K_t,L_t)=\bar{A}K_t^{\frac{1}{3}}
+              \bar{L_t}^{\frac{2}{3}}\). Utilizing this simplification and its
+              graphical representation below, output is clearly characterized by
+              the cube root of capital:
+            </p>
+          </div>
+          <div class="fold"><h3>conclusions</h3></div>
+          <p>hello conclusions</p>
+          <h2>romer</h2>
+          <h2>romer-solow</h2>
+        </article>
+      </div>
+    </main>
+    <script src="/scripts/common.js"></script>
+    <script src="/scripts/post.js"></script>
+  </body>
+</html>

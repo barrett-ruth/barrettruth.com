@@ -10,7 +10,7 @@ const postMapping = new Map([
   [
     "Economics",
     [
-      { name: "romer-solow model", link: "romer-solow-model" },
+      { name: "models of production", link: "models-of-production" },
       { name: "the short run" },
       { name: "to invest or not to invest" },
     ],
