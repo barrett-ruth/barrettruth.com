@@ -15,12 +15,16 @@ document.addEventListener("DOMContentLoaded", () => {
     h2.prepend(mdHeading);
   });
 
-  document.querySelectorAll(".problem-header h3").forEach((h3, i) => {
+  document.querySelectorAll(".fold h3").forEach((h3, i) => {
     const toggle = document.createElement("span");
-    toggle.textContent = i === 0 ? "v" : ">";
+    toggle.textContent = "v";
+
+    // only unfold first algorithm problem
+    if (urlToTopic() === "algorithms" && i === 0) toggle.textContent = "v";
+
     h3.parentElement.nextElementSibling.style.display =
       toggle.textContent === ">" ? "none" : "block";
-    toggle.classList.add("problem-toggle");
+    toggle.classList.add("fold-toggle");
     toggle.addEventListener("click", () => {
       const content = h3.parentElement.nextElementSibling;
       toggle.textContent = toggle.textContent === ">" ? "v" : ">";

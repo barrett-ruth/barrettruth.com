@@ -91,11 +91,11 @@ header {
   font-size: 0.85em !important;
 }
 
-.problem-header {
+.fold {
   position: relative;
 }
 
-.problem-toggle {
+.fold-toggle {
   font-family: monospace;
   position: absolute;
   cursor: pointer;
