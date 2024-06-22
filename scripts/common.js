@@ -28,3 +28,16 @@ function goHome(e) {
 
   clearPrompt(500, () => (window.location.href = "/"));
 }
+
+function getTopicColor(topicName) {
+  switch (topicName) {
+    case "software":
+      return "#0073e6";
+    case "economics":
+      return "#009975";
+    case "trading":
+      return "#d50032";
+    case "algorithms":
+      return "#6a0dad";
+  }
+}

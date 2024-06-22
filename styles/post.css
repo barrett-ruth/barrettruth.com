@@ -45,7 +45,7 @@ header {
 .post-title::before {
   content: "";
   position: absolute;
-  background-color: #0073e6;
+  background-color: var(--topic-color);
   height: 30px;
   width: 2px;
   bottom: -10px;
@@ -55,7 +55,7 @@ header {
 .post-title::after {
   content: "";
   position: absolute;
-  background-color: #0073e6;
+  background-color: var(--topic-color);
   width: 200px;
   height: 2px;
   bottom: -10px;

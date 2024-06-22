@@ -10,7 +10,7 @@ const postMapping = new Map([
   [
     "Economics",
     [
-      { name: "romer-solow model" },
+      { name: "romer-solow model", link: "romer-solow-model" },
       { name: "the short run" },
       { name: "to invest or not to invest" },
     ],
@@ -92,19 +92,6 @@ function typechars(e) {
 window.addEventListener("beforeunload", () => {
   document.querySelector(".terminal-prompt").innerHTML = TERMINAL_PROMPT;
 });
-
-function getTopicColor(topicName) {
-  switch (topicName) {
-    case "software":
-      return "#0073e6";
-    case "economics":
-      return "#009975";
-    case "trading":
-      return "#d50032";
-    case "algorithms":
-      return "#6a0dad";
-  }
-}
 
 document.addEventListener("DOMContentLoaded", function () {
   const topics = document.querySelectorAll(".topic a");
