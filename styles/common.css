@@ -29,7 +29,7 @@
 html,
 body {
   font-family: "Signifier", serif;
-  overflow: hidden;
+  overscroll-behavior: none;
   margin: 0;
   padding: 0;
   height: 100%;
