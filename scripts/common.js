@@ -29,7 +29,7 @@ function goHome(e) {
   clearPrompt(500, () => (window.location.href = "/"));
 }
 
-function getTopicColor(topicName) {
+const getTopicColor = (topicName) => {
   switch (topicName) {
     case "software":
       return "#0073e6";
@@ -40,4 +40,6 @@ function getTopicColor(topicName) {
     case "algorithms":
       return "#6a0dad";
   }
-}
+};
+
+const urlToTopic = () => window.location.pathname.split("/")[2];

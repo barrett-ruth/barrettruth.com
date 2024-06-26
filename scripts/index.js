@@ -12,7 +12,7 @@ const postMapping = new Map([
     [
       { name: "models of production", link: "models-of-production" },
       { name: "the short run" },
-      { name: "to invest or not to invest" },
+      { name: "in the aggregate" },
     ],
   ],
   ["Trading", [{ name: "InteractiveBrokers TWS" }, { name: "valuation" }]],
@@ -23,7 +23,7 @@ const postMapping = new Map([
 ]);
 
 function refresh(e) {
-  e.preventDefault();
+  if (window.location.pathname !== "/") e.preventDefault();
 
   const topics = document.querySelectorAll(".topic a");
 

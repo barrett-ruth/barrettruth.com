@@ -1,7 +1,3 @@
-const urlToTopic = () => {
-  return new URL(window.location.href).pathname.split("/")[2];
-};
-
 document.documentElement.style.setProperty(
   "--topic-color",
   getTopicColor(urlToTopic()),
