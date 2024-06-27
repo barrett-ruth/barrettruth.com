@@ -163,6 +163,24 @@ function drawSolowGraph() {
     .attr("stroke", "black")
     .attr("stroke-width", 1)
     .attr("stroke-dasharray", "5,5");
+
+  const y_star = solowOutput(k_star);
+  svg
+    .append("foreignObject")
+    .attr("width", "20em")
+    .attr("height", "2em")
+    .attr("x", x(k_star) - 150)
+    .attr("y", y(y_star) - 50)
+    .append("xhtml:body")
+    .style("font-size", "0.75em")
+    .html(`<div class="solow-visualization-eq"></div>`);
+  katex.render(
+    `(K^*,Y^*)=(${k_star.toFixed(0)},${y_star.toFixed(0)})`,
+    document.querySelector(".solow-visualization-eq"),
+    {
+      throwOnError: false,
+    },
+  );
 }
 
 document.addEventListener("DOMContentLoaded", function () {
