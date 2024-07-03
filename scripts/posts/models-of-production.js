@@ -384,6 +384,55 @@ function drawRomerlGraph() {
         .x((d) => x(d.year))
         .y((d) => y(d.Y)),
     );
+
+  svg
+    .append("line")
+    .attr("x1", x(T_MAX / 2))
+    .attr("y1", y(romerData[T_MAX - 1].Y))
+    .attr("x2", x(T_MAX / 2))
+    .attr("y2", height)
+    .attr("stroke", "black")
+    .attr("stroke-width", 1)
+    .attr("stroke-dasharray", "4");
+
+  svg
+    .append("foreignObject")
+    .attr("width", "5em")
+    .attr("height", "2em")
+    .attr("x", x(0) + 15)
+    .attr("y", y(romerData[0].Y))
+    .append("xhtml:body")
+    .style("font-size", "0.6em")
+    .html(`<div class="romer-changel-before"></div>`);
+  katex.render(
+    `\\bar{l}_0=${l_}`,
+    document.querySelector(".romer-changel-before"),
+  );
+
+  svg
+    .append("foreignObject")
+    .attr("width", "5em")
+    .attr("height", "2em")
+    .attr("x", x(T_MAX / 2) + 15)
+    .attr("y", y(romerData[T_MAX / 2].Y))
+    .append("xhtml:body")
+    .style("font-size", "0.6em")
+    .html(`<div class="romer-changel-after"></div>`);
+  katex.render(
+    `\\bar{l}_1=${l}`,
+    document.querySelector(".romer-changel-after"),
+  );
+
+  svg
+    .append("foreignObject")
+    .attr("width", "4em")
+    .attr("height", "2em")
+    .attr("x", x(T_MAX))
+    .attr("y", y(romerData[T_MAX - 1].Y))
+    .append("xhtml:body")
+    .style("font-size", "0.75em")
+    .html(`<div class="romer-changel-y"></div>`);
+  katex.render("log_{10}Y", document.querySelector(".romer-changel-y"));
 }
 
 document.addEventListener("DOMContentLoaded", function () {
