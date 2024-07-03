@@ -147,7 +147,7 @@
                         type="range"
                         id="sliderD"
                         min="0.01"
-                        max="1"
+                        max="0.99"
                         step="0.01"
                         value="0.50"
                       />
@@ -165,7 +165,7 @@
                         type="range"
                         id="sliderS"
                         min="0.01"
-                        max="1"
+                        max="0.99"
                         step="0.01"
                         value="0.50"
                       />
@@ -179,7 +179,7 @@
                         type="range"
                         id="sliderAlpha"
                         min="0.01"
-                        max="1"
+                        max="0.99"
                         step="0.01"
                         value="0.33"
                       />
@@ -213,8 +213,6 @@
           </div>
           <div class="fold">
             <h3>analysis</h3>
-          </div>
-          <div>
             <p>
               Using both mathematical intuition and manipulating the
               visualization above, we find that:
@@ -262,10 +260,250 @@
               alter the most important predictor of output, TFP.
             </p>
           </div>
-          <h2>romer</h2>
-          <!-- TODO: transition talking about "Romer model does, though" -->
-          <!-- TODO: say the romer model provides avenue for LR growth -->
+          <!-- Solow TODO -->
           <!-- TODO: dynamics?????? -->
+          <!-- TODO: K_0 -->
+          <h2>romer</h2>
+          <div class="fold"><h3>introduction</h3></div>
+          <div>
+            <p>How, then, can we address these shortcomings?</p>
+            <p>
+              The Romer Model provides an answer by both modeling ideas \(A_t\)
+              (analagous to TFP in the Solow model) endogenously and utilizing
+              them to provide a justification for sustained long-run growth.
+            </p>
+            <p>The Model divides the world into two parts:</p>
+            <ul style="list-style: unset">
+              <li>
+                <u>Objects</u>: finite resources, like capital and labor in the
+                Solow Model
+              </li>
+              <li>
+                <u>Ideas</u>: infinite,
+                <a
+                  target="blank"
+                  href="https://en.wikipedia.org/wiki/Rivalry_(economics)"
+                  >non-rivalrous</a
+                >
+                items leveraged in production (note that ideas may be
+                <a href="blank" href="https://www.wikiwand.com/en/Excludability"
+                  >excludable</a
+                >, though)
+              </li>
+            </ul>
+            <p>
+              The Romer Models&apos; production function can be modelled as:
+              \[Y_t=F(A_t,L_{yt})=A_tL_{yt}\] With:
+            </p>
+            <ul>
+              <li>\(A_t\): the amount of ideas \(A\) in period \(t\)</li>
+              <li>
+                \(L_{yt}\): the population working on production-facing
+                (output-driving) tasks
+              </li>
+            </ul>
+            <p>
+              Assuming \(L_t=\bar{L}\) people work in the economy, a proportion
+              \(\bar{l}\) of the population focuses on making ideas:
+              \(L_{at}=\bar{l}\bar{L}\rightarrow L_{yt}=(1-\bar{l})\bar{L}\).
+            </p>
+            <!-- TODO: footnotes - dynamic JS? -->
+            <p>
+              Further, this economy garners ideas with time at rate
+              <u>\(\bar{z}\)</u>: the &quot;speed of ideas&quot;. Now, we can
+              describe the quantity of ideas tomorrow as function of those of
+              today: the <u>Law of Ideal Motion</u> (I made that up).
+              \[A_{t+1}=A_t+\bar{z}A_tL_{at}\leftrightarrow\Delta
+              A_{t+1}=\bar{z}A_tL_{at}\]
+            </p>
+            <p>
+              Analagously to capital in the solow model, ideas begin in the
+              economy with some \(\bar{A}_0\gt0\) and grow at an
+              <i>exponential</i> rate. At its core, this is because ideas are
+              non-rivalrous; more ideas bring about more ideas.
+            </p>
+            <p>Finally, we have a model:</p>
+            <div style="display: flex; justify-content: center">
+              <div style="padding-right: 50px">
+                <ol>
+                  <li>\(Y_t=A_tL_{yt}\)</li>
+                  <li>\(\Delta A_{t+1} = \bar{z}A_tL_{at}\)</li>
+                </ol>
+              </div>
+              <div style="padding-left: 50px">
+                <ol start="3">
+                  <li>\(L_{yt}+L_{at}=\bar{L}\)</li>
+                  <li>\(L_{at}=\bar{l}\bar{L}\)</li>
+                </ol>
+              </div>
+            </div>
+            <p>
+              A visualization of the Romer Model shows that the economy grows
+              exponentially&mdash;production knows no bounds (<a
+                target="blank"
+                href="https://en.wikipedia.org/wiki/Ceteris_paribus"
+                ><i>ceteris parbibus</i></a
+              >, of course). A graph of \(log_{10}(Y_t)\) can be seen below:
+            </p>
+            <div class="graph">
+              <div id="romer-visualization"></div>
+            </div>
+            <div class="sliders">
+              <div style="padding-right: 20px">
+                <ul>
+                  <li>
+                    <div class="slider">
+                      <label for="sliderZ">\(\bar{z}:\)</label>
+                      <span id="outputZ">0.50</span>
+                      <input
+                        type="range"
+                        id="sliderZ"
+                        min="0.1"
+                        max="0.99"
+                        step="0.01"
+                        value="0.50"
+                      />
+                    </div>
+                  </li>
+                  <li>
+                    <div class="slider">
+                      <label for="sliderL">\(\bar{L}:\)</label>
+                      <span id="outputL">505</span>
+                      <input
+                        type="range"
+                        id="sliderL"
+                        min="10"
+                        max="1000"
+                        step="19"
+                        value="505"
+                      />
+                    </div>
+                  </li>
+                </ul>
+              </div>
+              <div style="padding-left: 20px">
+                <ul start="3">
+                  <li>
+                    <div class="slider">
+                      <label for="sliderl">\(\bar{l}:\)</label>
+                      <span id="outputl">0.50</span>
+                      <input
+                        type="range"
+                        id="sliderl"
+                        min="0.01"
+                        max="0.99"
+                        step="0.01"
+                        value="0.50"
+                      />
+                    </div>
+                  </li>
+                  <li>
+                    <div class="slider">
+                      <label for="sliderA0">\(\bar{A}_0:\)</label>
+                      <span id="outputA0">5000</span>
+                      <input
+                        type="range"
+                        id="sliderA0"
+                        min="1"
+                        max="10000"
+                        step="100"
+                        value="5000"
+                      />
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <p>
+              Playing with the sliders, this graph may seem underwhelming in
+              comparison to the Solow Model. However, on a logarithmic scale,
+              small changes in the parameters lead to massive changes in the
+              growth rate of ideas and economices:
+            </p>
+            <div class="romer-table-container">
+              <table id="romer-table">
+                <thead>
+                  <tr id="romer-table-header"></tr>
+                </thead>
+                <tbody>
+                  <tr id="row-A_t"></tr>
+                  <tr id="row-Y_t"></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="fold"><h3>solving the model</h3></div>
+          <div>
+            <p>
+              To find the output in terms of exogenous parameters, first note
+              that \[L_t=\bar{L}\rightarrow L_{yt}=(1-\bar{l})\bar{L}\]
+            </p>
+            <p>
+              Now, all that remains is to find ideas \(A_t\). It is assumed that
+              ideas grow at some rate \(g_A\): \[A_t=A_0(1+g_A)^t\]
+            </p>
+            <p>
+              Using the growth rate formula, we find: \[g_A=\frac{\Delta
+              A_{t+1}-A_t}{A_t}=\frac{A_t+\bar{z}A_tL_{at}-A_t}{A_t}=\bar{z}L_{at}=\bar{z}\bar{l}\bar{L}\]
+            </p>
+            <p>
+              Thus, ideas \(A_t=A_0(1+\bar{z}\bar{l}\bar{L})^t\). Finally,
+              output can be solved the production function: \[Y_t=A_t
+              L_{yt}=A_0(1+\bar{z}\bar{l}\bar{L})(1-\bar{l})\bar{L}\]
+            </p>
+            <!-- <p> -->
+            <!--   It follows that the intensive form can be written as: -->
+            <!--   \[y_t=\frac{Y_t}{\bar{L}}=A_0(1+\bar{z}\bar{l}\bar{L})(1-\bar{l})\]. -->
+            <!-- </p> -->
+          </div>
+          <div class="fold"><h3>analysis</h3></div>
+          <div>
+            <p>
+              We see the Romer model exhibits long-run growth because ideas have
+              non-diminishing returns due to their nonrival nature. In this
+              model, capital and income eventually slow but ideas continue to
+              yield increasing, unrestricted returns.
+            </p>
+            <p>
+              Further, all economy continually and perpetually grow along a
+              "Balanced Growth Path" as previously defined by \(Y_t\) as a
+              function of the endogenous variables. This directly contrasts the
+              Solow model, in which an economy converges to a steady-state with
+              transition dynamics.
+            </p>
+            <p>
+              Changes in the growth rate of ideas, then, alter the growth rate
+              of output itself&mdash;in this case, parameters \(\bar{l},
+              \bar{z}\), and \(\bar{L}\). This is best exemplified by comparing
+              the growth rate before and and after a parameter changes. In the
+              below example, a larger \(\bar{l}\) initially drops output due to
+              less workers being allocated to production. Soon after, though,
+              output recovers along a &quot;higher&quot; Balanced Growth Path.
+            </p>
+            <div class="graph">
+              <div id="romer-lchange-visualization"></div>
+            </div>
+            <div class="sliders">
+              <div style="padding-right: 20px">
+                <ul>
+                  <li>
+                    <div class="slider">
+                      <label for="sliderlChange">\(\bar{l}:\)</label>
+                      <span id="outputlChange">0.50</span>
+                      <input
+                        type="range"
+                        id="sliderlChange"
+                        min="0.1"
+                        max="0.99"
+                        step="0.01"
+                        value="0.50"
+                      />
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
           <h2>romer-solow</h2>
         </article>
       </div>

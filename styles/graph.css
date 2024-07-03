@@ -68,3 +68,23 @@ ul {
   list-style: none;
   margin: 0;
 }
+
+.romer-table-container {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+#romer-table {
+  text-align: center;
+  margin-top: 20px;
+  margin: 0;
+  font-size: 0.8em;
+  border-collapse: collapse;
+}
+
+#romer-table th,
+#romer-table td {
+  border: 1px solid black;
+  text-align: center;
+  padding: 5px;
+}
