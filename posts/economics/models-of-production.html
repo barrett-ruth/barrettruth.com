@@ -471,7 +471,7 @@
               <p>
                 Thus, ideas \(A_t=A_0(1+\bar{z}\bar{l}\bar{L})^t\). Finally,
                 output can be solved the production function: \[Y_t=A_t
-                L_{yt}=A_0(1+\bar{z}\bar{l}\bar{L})(1-\bar{l})\bar{L}\]
+                L_{yt}=A_0(1+\bar{z}\bar{l}\bar{L})^t(1-\bar{l})\bar{L}\]
               </p>
               <!-- <p> -->
               <!--   It follows that the intensive form can be written as: -->
@@ -488,10 +488,10 @@
               </p>
               <p>
                 Further, all economy continually and perpetually grow along a
-                "Balanced Growth Path" as previously defined by \(Y_t\) as a
-                function of the endogenous variables. This directly contrasts
-                the Solow model, in which an economy converges to a steady-state
-                with transition dynamics.
+                constant "Balanced Growth Path" as previously defined by \(Y_t\)
+                as a function of the endogenous variables. This directly
+                contrasts the Solow model, in which an economy converges to a
+                steady-state via transition dynamics.
               </p>
               <p>
                 Changes in the growth rate of ideas, then, alter the growth rate
@@ -569,12 +569,12 @@
                 Intuitively, incorporating capital into output via the Solow
                 Model&apos;s production function, as well as including the
                 <u>Law of Capital Motion</u> seems like one way to legitimately
-                create the so-called &apos;Romer-Solow&apos; model:
+                create this so-called &quot;Romer-Solow&quot; model:
               </p>
               <div style="display: flex; justify-content: center">
                 <div style="padding-right: 50px">
                   <ol>
-                    <li>\(Y_t=K_t^\alpha L_{yt}^{1-\alpha}\)</li>
+                    <li>\(Y_t=A_t K_t^\alpha L_{yt}^{1-\alpha}\)</li>
                     <li>\(\Delta K_{t+1}=\bar{s}Y_t-\bar{d}K_t\)</li>
                     <li>\(\Delta A_{t+1} = \bar{z}A_tL_{at}\)</li>
                   </ol>
@@ -588,7 +588,68 @@
               </div>
             </div>
             <div class="fold"><h3>solving the model</h3></div>
-            <div>content</div>
+            <p>
+              Based on the the motivations for creating this model, it is more
+              useful to first analyze the growth rates of equilibrium long run
+              output \(Y_t^*\).
+            </p>
+            <p>
+              According to the production function, \[g_Y=g_A+\alpha
+              g_K+(1-\alpha)g_{L_{y}}\]
+            </p>
+            <p>
+              From previous analysis it was found that
+              \(g_A=\bar{z}\bar{l}\bar{L}\).
+            </p>
+            <p>
+              Based on the <u>Law of Capital Motion</u>, \[g_K=\frac{\Delta
+              K_{t+1}}{K_t}=\bar{s}\frac{Y_t}{K_t}-\bar{d}\]
+            </p>
+            <p>
+              Because growth rates are constant on the Balanced Growth Path,
+              \(g_K\) must be constant as well. Thus, so is
+              \(\bar{s}\frac{Y_t}{K_t}-\bar{d}\); it must be that
+              \(g_K^*=g_Y^*\).
+            </p>
+            <p>
+              The model assumes population is constant, so
+              \(g_{\bar{L}}=0\rightarrow g_{\bar{L}_yt}=0\) as well.
+            </p>
+            <p>
+              Combining these terms, we find:
+              \[g_Y^*=\bar{z}\bar{l}\bar{L}+\alpha g_Y^*+(1-\alpha)\cdot 0\]
+              \[\rightarrow g_Y^*=\frac{\bar{z}\bar{l}\bar{L}}{1-\alpha}\]
+            </p>
+            <p>
+              Solving for \(Y_t^*\) is trivial after discovering \(g_K=g_Y\)
+              must hold on a balanced growth path.
+            </p>
+            <p>
+              Invoking the <u>Law of Capital Motion</u> with magic chants,
+              \[g_K^*=\bar{s}\frac{Y_t^*}{K_t^*}-\bar{d}=g_Y^*\rightarrow
+              K_t^*=\frac{\bar{s}Y_t^*}{g_Y^*+\bar{d}}\]
+            </p>
+            <p>
+              Isolating \(Y_t^*\), \[Y_t^*=A_t^*
+              (\frac{\bar{s}Y_t^*}{g_Y^*+\bar{d}})^\alpha
+              ({(1-\bar{l})\bar{L}})^{1-\alpha}\] \[\rightarrow
+              {Y_t^*}^{1-\alpha}=A_t^*(\frac{\bar{s}}{g_Y^*+\bar{d}})^\alpha({(1-\bar{l})\bar{L}})^{1-\alpha}\]
+            </p>
+            <p>
+              Plugging in the known expressions for \(A_t^*\) and \(g_Y^*\), a
+              final expression for the Balanced Growth Path output as a function
+              of the endogenous parameters and time is obtained: \[
+              Y_t^*={(A_0(1+\bar{z}\bar{l}\bar{L})^t})^\frac{1}{1-\alpha}(\frac{\bar{s}}{\frac{\bar{z}\bar{l}\bar{L}}{1-\alpha}+\bar{d}})^\frac{\alpha}{1-\alpha}(1-\bar{l})\bar{L}\]
+            </p>
+          </div>
+          <div class="fold"><h3>analysis</h3></div>
+          <div>
+            <p>
+              Intuitively, this means that idea-driving factors, as well as an
+              increased allocation of labor to output, will increase the
+              Balanced Growth Path (the <i>level</i> of long-run growth),
+              combining both the Romer and Solow model.
+            </p>
           </div>
         </article>
       </div>
