@@ -53,477 +53,542 @@
             in Intermediate Macroeconomics (ECON 3020) during the Spring
             semester of 2024 at the University of Virginia.
           </p>
-          <h2>solow</h2>
-          <div class="fold"><h3>introduction</h3></div>
+          <div class="fold"><h2>solow</h2></div>
           <div>
-            <p>
-              The Solow Model is an economic model of production that
-              incorporates the incorporates the idea of capital accumulation.
-              Based on the
-              <a
-                target="blank"
-                href="https://en.wikipedia.org/wiki/Cobb%E2%80%93Douglas_production_function"
-                >Cobb-Douglas production function</a
-              >, the Solow Model describes production as follows:
-              \[Y_t=F(K_t,L_t)=\bar{A}K_t^\alpha L_t^{1-\alpha}\] With:
-            </p>
-            <ul>
-              <li>\(\bar{A}\): total factor productivity (TFP)</li>
-              <li>
-                \(\alpha\): capital&apos;s share of output&mdash;usually \(1/3\)
-                based on
-                <a target="blank" href="https://arxiv.org/pdf/1105.2123"
-                  >empirical data</a
-                >
-              </li>
-            </ul>
-            <p>
-              In this simple model, the following statements describe the
-              economy:
-            </p>
-            <ol>
-              <li>
-                Output is either saved or consumed; in other words, savings
-                equals investment
-              </li>
-              <li>
-                Capital accumulates according to investment \(I_t\) and
-                depreciation \(\bar{d}\), beginning with \(K_0\) (often called
-                the
-                <u>Law of Capital Motion</u>)
-              </li>
-              <li>Labor \(L_t\) is time-independent</li>
-              <li>
-                A savings rate \(\bar{s}\) describes the invested portion of
-                total output
-              </li>
-            </ol>
-            <p>
-              Including the production function, these four ideas encapsulate
-              the Solow Model:
-            </p>
-            <div style="display: flex; justify-content: center">
-              <div style="padding-right: 50px">
-                <ol>
-                  <li>\(C_t + I_t = Y_t\)</li>
-                  <li>\(\Delta K_{t+1} = I_t - \bar{d} K_t\)</li>
-                </ol>
-              </div>
-              <div style="padding-left: 50px">
-                <ol start="3">
-                  <li>\(L_t = \bar{L}\)</li>
-                  <li>\(I_t = \bar{s} Y_t\)</li>
-                </ol>
-              </div>
-            </div>
-          </div>
-          <div class="fold">
-            <h3>solving the model</h3>
-          </div>
-          <div>
-            <p>
-              Visualizing the model, namely output as a function of capital,
-              provides helpful intuition before solving it.
-            </p>
-            <p>
-              Letting \((L_t,\alpha)=(\bar{L}, \frac{1}{3})\), it follows that
-              \(Y_t=F(K_t,L_t)=\bar{A}K_t^{\frac{1}{3}} \bar{L}^{\frac{2}{3}}\).
-              Utilizing this simplification and its graphical representation
-              below, output is clearly characterized by the cube root of
-              capital:
-            </p>
-            <div class="graph">
-              <div id="solow-visualization"></div>
-            </div>
-            <div class="sliders">
-              <div style="padding-right: 20px">
-                <ul>
-                  <li>
-                    <div class="slider">
-                      <label for="sliderA">\(A:\)</label>
-                      <span id="outputA">1.00</span>
-                      <input
-                        type="range"
-                        id="sliderA"
-                        min="0.1"
-                        max="2"
-                        step="0.01"
-                        value="1"
-                      />
-                    </div>
-                  </li>
-                  <li>
-                    <div class="slider">
-                      <label for="sliderD">\(d:\)</label>
-                      <span id="outputD">0.50</span>
-                      <input
-                        type="range"
-                        id="sliderD"
-                        min="0.01"
-                        max="0.99"
-                        step="0.01"
-                        value="0.50"
-                      />
-                    </div>
-                  </li>
-                </ul>
-              </div>
-              <div style="padding-left: 20px">
-                <ul start="3">
-                  <li>
-                    <div class="slider">
-                      <label for="sliderS">\(s:\)</label>
-                      <span id="outputS">0.50</span>
-                      <input
-                        type="range"
-                        id="sliderS"
-                        min="0.01"
-                        max="0.99"
-                        step="0.01"
-                        value="0.50"
-                      />
-                    </div>
-                  </li>
-                  <li>
-                    <div class="slider">
-                      <label for="sliderAlpha">\(\alpha:\)</label>
-                      <span id="outputAlpha">0.33</span>
-                      <input
-                        type="range"
-                        id="sliderAlpha"
-                        min="0.01"
-                        max="0.99"
-                        step="0.01"
-                        value="0.33"
-                      />
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <p>
-              When investment is completely disincentivized by depreciation (in
-              other words, \(sY_t=\bar{d}K_t\)), the economy equilibrates at a
-              so-called &quot;steady-state&quot; with equilibrium
-              \((K_t,Y_t)=(K_t^*,Y_t^*)\).
-            </p>
-            <p>
-              Using this equilibrium condition, it follows that:
-              \[Y_t^*=\bar{A}{K_t^*}^\alpha\bar{L}^{1-\alpha} \rightarrow
-              \bar{d}K_t^*=\bar{s}\bar{A}{K_t^*}^\alpha\bar{L}^{1-\alpha}\]
-              \[\rightarrow
-              K^*=\bar{L}(\frac{\bar{s}\bar{A}}{\bar{d}})^\frac{1}{1-\alpha}\]
-              \[\rightarrow
-              Y^*=\bar{A}^\frac{1}{1-\alpha}(\frac{\bar{s}}{\bar{d}})^\frac{\alpha}{1-\alpha}\bar{L}\]
-            </p>
-            <p>
-              Thus, the equilibrium intensive form (output per worker) of both
-              capital and output are summarized as follows:
-              \[(k^*,y^*)=(\frac{K^*}{\bar{L}},\frac{Y^*}{\bar{L}})
-              =((\frac{\bar{s}\bar{A}}{\bar{d}})^\frac{1}{1-\alpha},
-              \bar{A}^\frac{1}{1-\alpha}(\frac{\bar{s}}{\bar{d}})^\frac{\alpha}{1-\alpha})\]
-            </p>
-          </div>
-          <div class="fold">
-            <h3>analysis</h3>
-          </div>
-          <div>
-            <p>
-              Using both mathematical intuition and manipulating the
-              visualization above, we find that:
-            </p>
-            <ul style="list-style: unset">
-              <li>
-                \(\bar{A}\) has a positive relationship with steady-state output
-              </li>
-              <li>
-                Capital is influenced by workforce size, TFP, and savings rate
-              </li>
-              <li>
-                Capital output share's \(\alpha\) impact on output is twofold:
-                <ol>
-                  <li>Directly through capital quantity</li>
-                  <li>Indirectly through TFP</li>
-                </ol>
-              </li>
-              <li>
-                Large deviations in capital from steady-state \(K^*\) induce net
-                investments of larger magnitude, leading to an accelerated
-                reversion to the steady-state
-              </li>
-              <li>
-                Economies stagnate at the steady-state \((K^*,Y^*)\)&mdash;this
-                model provides no avenues for long-run growth.
-              </li>
-            </ul>
-            <p>
-              Lastly (and perhaps most importantly), exogenous parameters
-              \(\bar{s}, \bar{d}\), and \(\bar{A}\) all have immense
-              ramifications on economic status. For example, comparing the
-              difference in country \(C_1\)&apos;s output versus \(C_2\)&apos;s
-              using the Solow Model, we find that a difference in economic
-              performance can only be explained by these factors: \[
-              \frac{Y_1}{Y_2}=\frac{\bar{A_1}}{\bar{A_2}}(\frac{\bar{s_1}}{\bar{s_2}})^\frac{\alpha}{1-\alpha}
-              \]
-            </p>
-            <p>
-              We see that TFP is more important in explaining the differences in
-              per capital output
-              (\(\frac{1}{1-\alpha}>\frac{\alpha}{1-\alpha},\alpha\in[0,1)\)).
-              <!-- TODO: poor phrasing -->
-              Notably, the Solow Model does not give any insights into how to
-              alter the most important predictor of output, TFP.
-            </p>
-          </div>
-          <!-- Solow TODO -->
-          <!-- TODO: dynamics?????? -->
-          <!-- TODO: K_0 -->
-          <h2>romer</h2>
-          <div class="fold"><h3>introduction</h3></div>
-          <div>
-            <p>How, then, can we address these shortcomings?</p>
-            <p>
-              The Romer Model provides an answer by both modeling ideas \(A_t\)
-              (analagous to TFP in the Solow model) endogenously and utilizing
-              them to provide a justification for sustained long-run growth.
-            </p>
-            <p>The Model divides the world into two parts:</p>
-            <ul style="list-style: unset">
-              <li>
-                <u>Objects</u>: finite resources, like capital and labor in the
-                Solow Model
-              </li>
-              <li>
-                <u>Ideas</u>: infinite,
+            <div class="fold"><h3>introduction</h3></div>
+            <div>
+              <p>
+                The Solow Model is an economic model of production that
+                incorporates the incorporates the idea of capital accumulation.
+                Based on the
                 <a
                   target="blank"
-                  href="https://en.wikipedia.org/wiki/Rivalry_(economics)"
-                  >non-rivalrous</a
-                >
-                items leveraged in production (note that ideas may be
-                <a href="blank" href="https://www.wikiwand.com/en/Excludability"
-                  >excludable</a
-                >, though)
-              </li>
-            </ul>
-            <p>
-              The Romer Models&apos; production function can be modelled as:
-              \[Y_t=F(A_t,L_{yt})=A_tL_{yt}\] With:
-            </p>
-            <ul>
-              <li>\(A_t\): the amount of ideas \(A\) in period \(t\)</li>
-              <li>
-                \(L_{yt}\): the population working on production-facing
-                (output-driving) tasks
-              </li>
-            </ul>
-            <p>
-              Assuming \(L_t=\bar{L}\) people work in the economy, a proportion
-              \(\bar{l}\) of the population focuses on making ideas:
-              \(L_{at}=\bar{l}\bar{L}\rightarrow L_{yt}=(1-\bar{l})\bar{L}\).
-            </p>
-            <!-- TODO: footnotes - dynamic JS? -->
-            <p>
-              Further, this economy garners ideas with time at rate
-              <u>\(\bar{z}\)</u>: the &quot;speed of ideas&quot;. Now, we can
-              describe the quantity of ideas tomorrow as function of those of
-              today: the <u>Law of Ideal Motion</u> (I made that up).
-              \[A_{t+1}=A_t+\bar{z}A_tL_{at}\leftrightarrow\Delta
-              A_{t+1}=\bar{z}A_tL_{at}\]
-            </p>
-            <p>
-              Analagously to capital in the solow model, ideas begin in the
-              economy with some \(\bar{A}_0\gt0\) and grow at an
-              <i>exponential</i> rate. At its core, this is because ideas are
-              non-rivalrous; more ideas bring about more ideas.
-            </p>
-            <p>Finally, we have a model:</p>
-            <div style="display: flex; justify-content: center">
-              <div style="padding-right: 50px">
-                <ol>
-                  <li>\(Y_t=A_tL_{yt}\)</li>
-                  <li>\(\Delta A_{t+1} = \bar{z}A_tL_{at}\)</li>
-                </ol>
-              </div>
-              <div style="padding-left: 50px">
-                <ol start="3">
-                  <li>\(L_{yt}+L_{at}=\bar{L}\)</li>
-                  <li>\(L_{at}=\bar{l}\bar{L}\)</li>
-                </ol>
-              </div>
-            </div>
-            <p>
-              A visualization of the Romer Model shows that the economy grows
-              exponentially&mdash;production knows no bounds (<a
-                target="blank"
-                href="https://en.wikipedia.org/wiki/Ceteris_paribus"
-                ><i>ceteris parbibus</i></a
-              >, of course). A graph of \(log_{10}(Y_t)\) can be seen below:
-            </p>
-            <div class="graph">
-              <div id="romer-visualization"></div>
-            </div>
-            <div class="sliders">
-              <div style="padding-right: 20px">
-                <ul>
-                  <li>
-                    <div class="slider">
-                      <label for="sliderZ">\(\bar{z}:\)</label>
-                      <span id="outputZ">0.50</span>
-                      <input
-                        type="range"
-                        id="sliderZ"
-                        min="0.1"
-                        max="0.99"
-                        step="0.01"
-                        value="0.50"
-                      />
-                    </div>
-                  </li>
-                  <li>
-                    <div class="slider">
-                      <label for="sliderL">\(\bar{L}:\)</label>
-                      <span id="outputL">505</span>
-                      <input
-                        type="range"
-                        id="sliderL"
-                        min="10"
-                        max="1000"
-                        step="19"
-                        value="505"
-                      />
-                    </div>
-                  </li>
-                </ul>
-              </div>
-              <div style="padding-left: 20px">
-                <ul start="3">
-                  <li>
-                    <div class="slider">
-                      <label for="sliderl">\(\bar{l}:\)</label>
-                      <span id="outputl">0.50</span>
-                      <input
-                        type="range"
-                        id="sliderl"
-                        min="0.01"
-                        max="0.99"
-                        step="0.01"
-                        value="0.50"
-                      />
-                    </div>
-                  </li>
-                  <li>
-                    <div class="slider">
-                      <label for="sliderA0">\(\bar{A}_0:\)</label>
-                      <span id="outputA0">5000</span>
-                      <input
-                        type="range"
-                        id="sliderA0"
-                        min="1"
-                        max="10000"
-                        step="100"
-                        value="5000"
-                      />
-                    </div>
-                  </li>
-                </ul>
+                  href="https://en.wikipedia.org/wiki/Cobb%E2%80%93Douglas_production_function"
+                  >Cobb-Douglas production function</a
+                >, the Solow Model describes production as follows:
+                \[Y_t=F(K_t,L_t)=\bar{A}K_t^\alpha L_t^{1-\alpha}\] With:
+              </p>
+              <ul>
+                <li>\(\bar{A}\): total factor productivity (TFP)</li>
+                <li>
+                  \(\alpha\): capital&apos;s share of output&mdash;usually
+                  \(1/3\) based on
+                  <a target="blank" href="https://arxiv.org/pdf/1105.2123"
+                    >empirical data</a
+                  >
+                </li>
+              </ul>
+              <p>
+                In this simple model, the following statements describe the
+                economy:
+              </p>
+              <ol>
+                <li>
+                  Output is either saved or consumed; in other words, savings
+                  equals investment
+                </li>
+                <li>
+                  Capital accumulates according to investment \(I_t\) and
+                  depreciation \(\bar{d}\), beginning with \(K_0\) (often called
+                  the
+                  <u>Law of Capital Motion</u>)
+                </li>
+                <li>Labor \(L_t\) is time-independent</li>
+                <li>
+                  A savings rate \(\bar{s}\) describes the invested portion of
+                  total output
+                </li>
+              </ol>
+              <p>
+                Including the production function, these four ideas encapsulate
+                the Solow Model:
+              </p>
+              <div style="display: flex; justify-content: center">
+                <div style="padding-right: 50px">
+                  <ol>
+                    <li>\(C_t + I_t = Y_t\)</li>
+                    <li>\(\Delta K_{t+1} = I_t - \bar{d} K_t\)</li>
+                  </ol>
+                </div>
+                <div style="padding-left: 50px">
+                  <ol start="3">
+                    <li>\(L_t = \bar{L}\)</li>
+                    <li>\(I_t = \bar{s} Y_t\)</li>
+                  </ol>
+                </div>
               </div>
             </div>
-            <p>
-              Playing with the sliders, this graph may seem underwhelming in
-              comparison to the Solow Model. However, on a logarithmic scale,
-              small changes in the parameters lead to massive changes in the
-              growth rate of ideas and economices:
-            </p>
-            <div class="romer-table-container">
-              <table id="romer-table">
-                <thead>
-                  <tr id="romer-table-header"></tr>
-                </thead>
-                <tbody>
-                  <tr id="row-A_t"></tr>
-                  <tr id="row-Y_t"></tr>
-                </tbody>
-              </table>
+            <div class="fold">
+              <h3>solving the model</h3>
+            </div>
+            <div>
+              <p>
+                Visualizing the model, namely output as a function of capital,
+                provides helpful intuition before solving it.
+              </p>
+              <p>
+                Letting \((L_t,\alpha)=(\bar{L}, \frac{1}{3})\), it follows that
+                \(Y_t=F(K_t,L_t)=\bar{A}K_t^{\frac{1}{3}}
+                \bar{L}^{\frac{2}{3}}\). Utilizing this simplification and its
+                graphical representation below, output is clearly characterized
+                by the cube root of capital:
+              </p>
+              <div class="graph">
+                <div id="solow-visualization"></div>
+              </div>
+              <div class="sliders">
+                <div style="padding-right: 20px">
+                  <ul>
+                    <li>
+                      <div class="slider">
+                        <label for="sliderA">\(A:\)</label>
+                        <span id="outputA">1.00</span>
+                        <input
+                          type="range"
+                          id="sliderA"
+                          min="0.1"
+                          max="2"
+                          step="0.01"
+                          value="1"
+                        />
+                      </div>
+                    </li>
+                    <li>
+                      <div class="slider">
+                        <label for="sliderD">\(d:\)</label>
+                        <span id="outputD">0.50</span>
+                        <input
+                          type="range"
+                          id="sliderD"
+                          min="0.01"
+                          max="0.99"
+                          step="0.01"
+                          value="0.50"
+                        />
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                <div style="padding-left: 20px">
+                  <ul start="3">
+                    <li>
+                      <div class="slider">
+                        <label for="sliderS">\(s:\)</label>
+                        <span id="outputS">0.50</span>
+                        <input
+                          type="range"
+                          id="sliderS"
+                          min="0.01"
+                          max="0.99"
+                          step="0.01"
+                          value="0.50"
+                        />
+                      </div>
+                    </li>
+                    <li>
+                      <div class="slider">
+                        <label for="sliderAlpha">\(\alpha:\)</label>
+                        <span id="outputAlpha">0.33</span>
+                        <input
+                          type="range"
+                          id="sliderAlpha"
+                          min="0.01"
+                          max="0.99"
+                          step="0.01"
+                          value="0.33"
+                        />
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <p>
+                When investment is completely disincentivized by depreciation
+                (in other words, \(sY_t=\bar{d}K_t\)), the economy equilibrates
+                at a so-called &quot;steady-state&quot; with equilibrium
+                \((K_t,Y_t)=(K_t^*,Y_t^*)\).
+              </p>
+              <p>
+                Using this equilibrium condition, it follows that:
+                \[Y_t^*=\bar{A}{K_t^*}^\alpha\bar{L}^{1-\alpha} \rightarrow
+                \bar{d}K_t^*=\bar{s}\bar{A}{K_t^*}^\alpha\bar{L}^{1-\alpha}\]
+                \[\rightarrow
+                K^*=\bar{L}(\frac{\bar{s}\bar{A}}{\bar{d}})^\frac{1}{1-\alpha}\]
+                \[\rightarrow
+                Y^*=\bar{A}^\frac{1}{1-\alpha}(\frac{\bar{s}}{\bar{d}})^\frac{\alpha}{1-\alpha}\bar{L}\]
+              </p>
+              <p>
+                Thus, the equilibrium intensive form (output per worker) of both
+                capital and output are summarized as follows:
+                \[(k^*,y^*)=(\frac{K^*}{\bar{L}},\frac{Y^*}{\bar{L}})
+                =((\frac{\bar{s}\bar{A}}{\bar{d}})^\frac{1}{1-\alpha},
+                \bar{A}^\frac{1}{1-\alpha}(\frac{\bar{s}}{\bar{d}})^\frac{\alpha}{1-\alpha})\]
+              </p>
+            </div>
+            <div class="fold">
+              <h3>analysis</h3>
+            </div>
+            <div>
+              <p>
+                Using both mathematical intuition and manipulating the
+                visualization above, we find that:
+              </p>
+              <ul style="list-style: unset">
+                <li>
+                  \(\bar{A}\) has a positive relationship with steady-state
+                  output
+                </li>
+                <li>
+                  Capital is influenced by workforce size, TFP, and savings rate
+                </li>
+                <li>
+                  Capital output share's \(\alpha\) impact on output is twofold:
+                  <ol>
+                    <li>Directly through capital quantity</li>
+                    <li>Indirectly through TFP</li>
+                  </ol>
+                </li>
+                <li>
+                  Large deviations in capital from steady-state \(K^*\) induce
+                  net investments of larger magnitude, leading to an accelerated
+                  reversion to the steady-state
+                </li>
+                <li>
+                  Economies stagnate at the steady-state
+                  \((K^*,Y^*)\)&mdash;this model provides no avenues for
+                  long-run growth.
+                </li>
+              </ul>
+              <p>
+                Lastly (and perhaps most importantly), exogenous parameters
+                \(\bar{s}, \bar{d}\), and \(\bar{A}\) all have immense
+                ramifications on economic status. For example, comparing the
+                difference in country \(C_1\)&apos;s output versus
+                \(C_2\)&apos;s using the Solow Model, we find that a difference
+                in economic performance can only be explained by these factors:
+                \[
+                \frac{Y_1}{Y_2}=\frac{\bar{A_1}}{\bar{A_2}}(\frac{\bar{s_1}}{\bar{s_2}})^\frac{\alpha}{1-\alpha}
+                \]
+              </p>
+              <p>
+                We see that TFP is more important in explaining the differences
+                in per capital output
+                (\(\frac{1}{1-\alpha}>\frac{\alpha}{1-\alpha},\alpha\in[0,1)\)).
+                <!-- TODO: poor phrasing -->
+                Notably, the Solow Model does not give any insights into how to
+                alter the most important predictor of output, TFP.
+              </p>
             </div>
           </div>
-          <div class="fold"><h3>solving the model</h3></div>
+          <div class="fold"><h2>romer</h2></div>
           <div>
-            <p>
-              To find the output in terms of exogenous parameters, first note
-              that \[L_t=\bar{L}\rightarrow L_{yt}=(1-\bar{l})\bar{L}\]
-            </p>
-            <p>
-              Now, all that remains is to find ideas \(A_t\). It is assumed that
-              ideas grow at some rate \(g_A\): \[A_t=A_0(1+g_A)^t\]
-            </p>
-            <p>
-              Using the growth rate formula, we find: \[g_A=\frac{\Delta
-              A_{t+1}-A_t}{A_t}=\frac{A_t+\bar{z}A_tL_{at}-A_t}{A_t}=\bar{z}L_{at}=\bar{z}\bar{l}\bar{L}\]
-            </p>
-            <p>
-              Thus, ideas \(A_t=A_0(1+\bar{z}\bar{l}\bar{L})^t\). Finally,
-              output can be solved the production function: \[Y_t=A_t
-              L_{yt}=A_0(1+\bar{z}\bar{l}\bar{L})(1-\bar{l})\bar{L}\]
-            </p>
-            <!-- <p> -->
-            <!--   It follows that the intensive form can be written as: -->
-            <!--   \[y_t=\frac{Y_t}{\bar{L}}=A_0(1+\bar{z}\bar{l}\bar{L})(1-\bar{l})\]. -->
-            <!-- </p> -->
-          </div>
-          <div class="fold"><h3>analysis</h3></div>
-          <div>
-            <p>
-              We see the Romer model exhibits long-run growth because ideas have
-              non-diminishing returns due to their nonrival nature. In this
-              model, capital and income eventually slow but ideas continue to
-              yield increasing, unrestricted returns.
-            </p>
-            <p>
-              Further, all economy continually and perpetually grow along a
-              "Balanced Growth Path" as previously defined by \(Y_t\) as a
-              function of the endogenous variables. This directly contrasts the
-              Solow model, in which an economy converges to a steady-state with
-              transition dynamics.
-            </p>
-            <p>
-              Changes in the growth rate of ideas, then, alter the growth rate
-              of output itself&mdash;in this case, parameters \(\bar{l},
-              \bar{z}\), and \(\bar{L}\). This is best exemplified by comparing
-              the growth rate before and and after a parameter changes. In the
-              below example, a larger \(\bar{l}\) initially drops output due to
-              less workers being allocated to production. Soon after, though,
-              output recovers along a &quot;higher&quot; Balanced Growth Path.
-            </p>
-            <div class="graph">
-              <div id="romer-lchange-visualization"></div>
-            </div>
-            <div class="sliders">
-              <div style="padding-right: 20px">
-                <ul>
-                  <li>
-                    <div class="slider">
-                      <label for="sliderlChange">\(\bar{l}_1:\)</label>
-                      <span id="outputlChange">0.50</span>
-                      <input
-                        type="range"
-                        id="sliderlChange"
-                        min="0.1"
-                        max="0.99"
-                        step="0.01"
-                        value="0.50"
-                      />
-                    </div>
-                  </li>
-                </ul>
+            <div class="fold"><h3>introduction</h3></div>
+            <div>
+              <p>How, then, can we address these shortcomings?</p>
+              <p>
+                The Romer Model provides an answer by both modeling ideas
+                \(A_t\) (analagous to TFP in the Solow model) endogenously and
+                utilizing them to provide a justification for sustained long-run
+                growth.
+              </p>
+              <p>The Model divides the world into two parts:</p>
+              <ul style="list-style: unset">
+                <li>
+                  <u>Objects</u>: finite resources, like capital and labor in
+                  the Solow Model
+                </li>
+                <li>
+                  <u>Ideas</u>: infinite,
+                  <a
+                    target="blank"
+                    href="https://en.wikipedia.org/wiki/Rivalry_(economics)"
+                    >non-rivalrous</a
+                  >
+                  items leveraged in production (note that ideas may be
+                  <a
+                    href="blank"
+                    href="https://www.wikiwand.com/en/Excludability"
+                    >excludable</a
+                  >, though)
+                </li>
+              </ul>
+              <p>
+                The Romer Models&apos; production function can be modelled as:
+                \[Y_t=F(A_t,L_{yt})=A_tL_{yt}\] With:
+              </p>
+              <ul>
+                <li>\(A_t\): the amount of ideas \(A\) in period \(t\)</li>
+                <li>
+                  \(L_{yt}\): the population working on production-facing
+                  (output-driving) tasks
+                </li>
+              </ul>
+              <p>
+                Assuming \(L_t=\bar{L}\) people work in the economy, a
+                proportion \(\bar{l}\) of the population focuses on making
+                ideas: \(L_{at}=\bar{l}\bar{L}\rightarrow
+                L_{yt}=(1-\bar{l})\bar{L}\).
+              </p>
+              <!-- TODO: footnotes - dynamic JS? -->
+              <p>
+                Further, this economy garners ideas with time at rate
+                <u>\(\bar{z}\)</u>: the &quot;speed of ideas&quot;. Now, we can
+                describe the quantity of ideas tomorrow as function of those of
+                today: the <u>Law of Ideal Motion</u> (I made that up).
+                \[A_{t+1}=A_t+\bar{z}A_tL_{at}\leftrightarrow\Delta
+                A_{t+1}=\bar{z}A_tL_{at}\]
+              </p>
+              <p>
+                Analagously to capital in the solow model, ideas begin in the
+                economy with some \(\bar{A}_0\gt0\) and grow at an
+                <i>exponential</i> rate. At its core, this is because ideas are
+                non-rivalrous; more ideas bring about more ideas.
+              </p>
+              <p>Finally, we have a model:</p>
+              <div style="display: flex; justify-content: center">
+                <div style="padding-right: 50px">
+                  <ol>
+                    <li>\(Y_t=A_tL_{yt}\)</li>
+                    <li>\(\Delta A_{t+1} = \bar{z}A_tL_{at}\)</li>
+                  </ol>
+                </div>
+                <div style="padding-left: 50px">
+                  <ol start="3">
+                    <li>\(L_{yt}+L_{at}=\bar{L}\)</li>
+                    <li>\(L_{at}=\bar{l}\bar{L}\)</li>
+                  </ol>
+                </div>
+              </div>
+              <p>
+                A visualization of the Romer Model shows that the economy grows
+                exponentially&mdash;production knows no bounds (<a
+                  target="blank"
+                  href="https://en.wikipedia.org/wiki/Ceteris_paribus"
+                  ><i>ceteris parbibus</i></a
+                >, of course). A graph of \(log_{10}(Y_t)\) can be seen below:
+              </p>
+              <div class="graph">
+                <div id="romer-visualization"></div>
+              </div>
+              <div class="sliders">
+                <div style="padding-right: 20px">
+                  <ul>
+                    <li>
+                      <div class="slider">
+                        <label for="sliderZ">\(\bar{z}:\)</label>
+                        <span id="outputZ">0.50</span>
+                        <input
+                          type="range"
+                          id="sliderZ"
+                          min="0.1"
+                          max="0.99"
+                          step="0.01"
+                          value="0.50"
+                        />
+                      </div>
+                    </li>
+                    <li>
+                      <div class="slider">
+                        <label for="sliderL">\(\bar{L}:\)</label>
+                        <span id="outputL">505</span>
+                        <input
+                          type="range"
+                          id="sliderL"
+                          min="10"
+                          max="1000"
+                          step="19"
+                          value="505"
+                        />
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                <div style="padding-left: 20px">
+                  <ul start="3">
+                    <li>
+                      <div class="slider">
+                        <label for="sliderl">\(\bar{l}:\)</label>
+                        <span id="outputl">0.50</span>
+                        <input
+                          type="range"
+                          id="sliderl"
+                          min="0.01"
+                          max="0.99"
+                          step="0.01"
+                          value="0.50"
+                        />
+                      </div>
+                    </li>
+                    <li>
+                      <div class="slider">
+                        <label for="sliderA0">\(\bar{A}_0:\)</label>
+                        <span id="outputA0">5000</span>
+                        <input
+                          type="range"
+                          id="sliderA0"
+                          min="1"
+                          max="10000"
+                          step="100"
+                          value="5000"
+                        />
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <p>
+                Playing with the sliders, this graph may seem underwhelming in
+                comparison to the Solow Model. However, on a logarithmic scale,
+                small changes in the parameters lead to massive changes in the
+                growth rate of ideas and economices:
+              </p>
+              <div class="romer-table-container">
+                <table id="romer-table">
+                  <thead>
+                    <tr id="romer-table-header"></tr>
+                  </thead>
+                  <tbody>
+                    <tr id="row-A_t"></tr>
+                    <tr id="row-Y_t"></tr>
+                  </tbody>
+                </table>
               </div>
             </div>
+            <div class="fold"><h3>solving the model</h3></div>
+            <div>
+              <p>
+                To find the output in terms of exogenous parameters, first note
+                that \[L_t=\bar{L}\rightarrow L_{yt}=(1-\bar{l})\bar{L}\]
+              </p>
+              <p>
+                Now, all that remains is to find ideas \(A_t\). It is assumed
+                that ideas grow at some rate \(g_A\): \[A_t=A_0(1+g_A)^t\]
+              </p>
+              <p>
+                Using the growth rate formula, we find: \[g_A=\frac{\Delta
+                A_{t+1}-A_t}{A_t}=\frac{A_t+\bar{z}A_tL_{at}-A_t}{A_t}=\bar{z}L_{at}=\bar{z}\bar{l}\bar{L}\]
+              </p>
+              <p>
+                Thus, ideas \(A_t=A_0(1+\bar{z}\bar{l}\bar{L})^t\). Finally,
+                output can be solved the production function: \[Y_t=A_t
+                L_{yt}=A_0(1+\bar{z}\bar{l}\bar{L})(1-\bar{l})\bar{L}\]
+              </p>
+              <!-- <p> -->
+              <!--   It follows that the intensive form can be written as: -->
+              <!--   \[y_t=\frac{Y_t}{\bar{L}}=A_0(1+\bar{z}\bar{l}\bar{L})(1-\bar{l})\]. -->
+              <!-- </p> -->
+            </div>
+            <div class="fold"><h3>analysis</h3></div>
+            <div>
+              <p>
+                We see the Romer model exhibits long-run growth because ideas
+                have non-diminishing returns due to their nonrival nature. In
+                this model, capital and income eventually slow but ideas
+                continue to yield increasing, unrestricted returns.
+              </p>
+              <p>
+                Further, all economy continually and perpetually grow along a
+                "Balanced Growth Path" as previously defined by \(Y_t\) as a
+                function of the endogenous variables. This directly contrasts
+                the Solow model, in which an economy converges to a steady-state
+                with transition dynamics.
+              </p>
+              <p>
+                Changes in the growth rate of ideas, then, alter the growth rate
+                of output itself&mdash;in this case, parameters \(\bar{l},
+                \bar{z}\), and \(\bar{L}\). This is best exemplified by
+                comparing the growth rate before and and after a parameter
+                changes. In the below example, a larger \(\bar{l}\) initially
+                drops output due to less workers being allocated to production.
+                Soon after, though, output recovers along a &quot;higher&quot;
+                Balanced Growth Path.
+              </p>
+              <div class="graph">
+                <div id="romer-lchange-visualization"></div>
+              </div>
+              <div class="sliders">
+                <div style="padding-right: 20px">
+                  <ul>
+                    <li>
+                      <div class="slider">
+                        <label for="sliderlChange">\(\bar{l}_1:\)</label>
+                        <span id="outputlChange">0.50</span>
+                        <input
+                          type="range"
+                          id="sliderlChange"
+                          min="0.1"
+                          max="0.99"
+                          step="0.01"
+                          value="0.50"
+                        />
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <p>
+                Notably, while both the Romer and Solow Models help to analyze
+                growth across countries, they both are unable to resolve one
+                question: why can and do investment rates and TFP differ across
+                contries? This is a more fundamental economic question involving
+                culture, institutions, and social dynamics&mdash;one day I hope
+                we&apos;ll have an answer.
+              </p>
+            </div>
           </div>
-          <h2>romer-solow</h2>
-          <div class="fold"><h3>introduction</h3></div>
+          <div class="fold"><h2>romer-solow</h2></div>
           <div>
-            <p>hi</p>
-            <p>hello</p>
+            <div class="fold"><h3>introduction</h3></div>
+            <div>
+              <p>
+                While the Romer Model provides an avenue for long-run economic
+                growth, it is anything but realistic&mdash;surely economies due
+                not grow at an ever-increasing blistering rate into perpetuity.
+                A model in which:
+              </p>
+              <ul style="list-style: unset">
+                <li>
+                  Economies grow <i>faster</i> the further <i>below</i> they are
+                  from their balanced growth path
+                </li>
+                <li>
+                  Economies grow <i>slower</i> the further <i>above</i> they are
+                  from their balanced growth path
+                </li>
+              </ul>
+              <p>
+                would certainly be more pragmatic. The Solow Model&apos;s
+                capital dynamics do, in some sense, mirror part of this behavior
+                with respect to the steady-state (output converges
+                quicker/slower to the steady state the further/closer it is from
+                equilibrium).
+              </p>
+              <p>
+                Combining the dynamics of the Romer Model&apos;s ideas and the
+                Solow Model&apos;s capital stock could yield the desired result.
+                Intuitively, incorporating capital into output via the Solow
+                Model&apos;s production function, as well as including the
+                <u>Law of Capital Motion</u> seems like one way to legitimately
+                create the so-called &apos;Romer-Solow&apos; model:
+              </p>
+              <div style="display: flex; justify-content: center">
+                <div style="padding-right: 50px">
+                  <ol>
+                    <li>\(Y_t=K_t^\alpha L_{yt}^{1-\alpha}\)</li>
+                    <li>\(\Delta K_{t+1}=\bar{s}Y_t-\bar{d}K_t\)</li>
+                    <li>\(\Delta A_{t+1} = \bar{z}A_tL_{at}\)</li>
+                  </ol>
+                </div>
+                <div style="padding-left: 50px">
+                  <ol start="4">
+                    <li>\(L_{yt}+L_{at}=\bar{L}\)</li>
+                    <li>\(L_{at}=\bar{l}\bar{L}\)</li>
+                  </ol>
+                </div>
+              </div>
+            </div>
+            <div class="fold"><h3>solving the model</h3></div>
+            <div>content</div>
           </div>
         </article>
       </div>
