@@ -303,13 +303,16 @@ function drawRomerlGraph() {
     A0 = 50;
   margin = { top: 20, right: 100, bottom: 20, left: 50 };
 
-  const slider = document.getElementById(`sliderlChange`);
-  slider.oninput = function () {
-    slider.previousElementSibling.innerText = this.value;
-    drawRomerlGraph();
-  };
+  ["lChange", "t0"].forEach((param) => {
+    const slider = document.getElementById(`slider${param}`);
+    slider.oninput = function () {
+      slider.previousElementSibling.innerText = this.value;
+      drawRomerlGraph();
+    };
+  });
 
-  const l = parseFloat(document.getElementById("outputlChange").textContent);
+  const l = parseFloat(document.getElementById("outputlChange").textContent),
+    t0 = parseFloat(document.getElementById("outputt0").textContent);
 
   const container = document.getElementById("romer-lchange-visualization");
   const width = container.clientWidth - margin.left - margin.right;
@@ -329,14 +332,14 @@ function drawRomerlGraph() {
     l_ = 0.1;
   const romerData = [];
 
-  for (let t = 1; t <= Math.floor(T_MAX / 2) - 1; ++t) {
+  for (let t = 1; t <= t0; ++t) {
     const A_t = A * (1 + z * l_ * L);
     const Y_t = A_t * (1 - l_) * L;
     romerData.push({ year: t, A: A_t, Y: Math.log10(Y_t) });
     A = A_t;
   }
 
-  for (let t = Math.floor(T_MAX / 2); t <= T_MAX; ++t) {
+  for (let t = t0 + 1; t <= T_MAX; ++t) {
     const A_t = A * (1 + z * l * L);
     const Y_t = A_t * (1 - l) * L;
     romerData.push({ year: t, A: A_t, Y: Math.log10(Y_t) });
@@ -385,11 +388,12 @@ function drawRomerlGraph() {
         .y((d) => y(d.Y)),
     );
 
+  console.log(t0)
   svg
     .append("line")
-    .attr("x1", x(T_MAX / 2))
+    .attr("x1", x(t0))
     .attr("y1", y(romerData[T_MAX - 1].Y))
-    .attr("x2", x(T_MAX / 2))
+    .attr("x2", x(t0))
     .attr("y2", height)
     .attr("stroke", "black")
     .attr("stroke-width", 1)
@@ -413,8 +417,8 @@ function drawRomerlGraph() {
     .append("foreignObject")
     .attr("width", "5em")
     .attr("height", "2em")
-    .attr("x", x(T_MAX / 2) + 15)
-    .attr("y", y(romerData[T_MAX / 2].Y))
+    .attr("x", x(t0) + 15)
+    .attr("y", y(romerData[t0].Y))
     .append("xhtml:body")
     .style("font-size", "0.6em")
     .html(`<div class="romer-changel-after"></div>`);
