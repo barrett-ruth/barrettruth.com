@@ -4,17 +4,17 @@ function drawSolowGraph() {
     margin = { top: 20, right: 30, bottom: 20, left: 50 };
 
   ["A", "D", "S", "Alpha"].forEach((param) => {
-    const slider = document.getElementById(`slider${param}`);
+    const slider = document.getElementById(`sliderS${param}`);
     slider.oninput = function () {
       slider.previousElementSibling.innerText = this.value;
       drawSolowGraph();
     };
   });
 
-  const A = parseFloat(document.getElementById("outputA").textContent),
-    D = parseFloat(document.getElementById("outputD").textContent),
-    S = parseFloat(document.getElementById("outputS").textContent),
-    alpha = parseFloat(document.getElementById("outputAlpha").textContent);
+  const A = parseFloat(document.getElementById("outputSA").textContent),
+    D = parseFloat(document.getElementById("outputSD").textContent),
+    S = parseFloat(document.getElementById("outputSS").textContent),
+    alpha = parseFloat(document.getElementById("outputSAlpha").textContent);
   const solowOutput = (K) => A * Math.pow(K, alpha) * Math.pow(L, 1 - alpha);
   const solowDepreciation = (K) => D * K;
   const solowInvestment = (Y) => S * Y;
@@ -204,17 +204,17 @@ function drawRomerGraph() {
   margin = { top: 20, right: 100, bottom: 20, left: 50 };
 
   ["Z", "L", "l", "A0"].forEach((param) => {
-    const slider = document.getElementById(`slider${param}`);
+    const slider = document.getElementById(`sliderR${param}`);
     slider.oninput = function () {
       slider.previousElementSibling.innerText = this.value;
       drawRomerGraph();
     };
   });
 
-  const z = parseFloat(document.getElementById("outputZ").textContent),
-    L = parseFloat(document.getElementById("outputL").textContent),
-    l = parseFloat(document.getElementById("outputl").textContent),
-    A0 = parseFloat(document.getElementById("outputA0").textContent);
+  const z = parseFloat(document.getElementById("outputRZ").textContent),
+    L = parseFloat(document.getElementById("outputRL").textContent),
+    l = parseFloat(document.getElementById("outputRl").textContent),
+    A0 = parseFloat(document.getElementById("outputRA0").textContent);
 
   const container = document.getElementById("romer-visualization");
   const width = container.clientWidth - margin.left - margin.right;
@@ -388,7 +388,6 @@ function drawRomerlGraph() {
         .y((d) => y(d.Y)),
     );
 
-  console.log(t0)
   svg
     .append("line")
     .attr("x1", x(t0))
@@ -439,6 +438,84 @@ function drawRomerlGraph() {
   katex.render("log_{10}Y", document.querySelector(".romer-changel-y"));
 }
 
+function calculateRomerSolowData(T_MAX, L, l, A0, alpha, K0, s, d, z) {
+  let A = A0,
+    K = K0,
+    romerSolowData = [];
+
+  for (let t = 1; t <= T_MAX; t++) {
+    const Y_t = A * Math.pow(K, alpha) * Math.pow((1 - l) * L, 1 - alpha);
+    const A_t = A * (1 + z * l * L);
+    K = K + s * Y_t - d * K;
+    romerSolowData.push({ year: t, A: A_t, K: K_t, Y: Math.log10(Y_t) });
+    A = A_t;
+  }
+
+  return romerSolowData;
+}
+
+function drawRomerSolow() {
+  const T_MAX = 100;
+  margin = { top: 20, right: 100, bottom: 20, left: 50 };
+
+  ["Z", "L", "l", "A0"].forEach((param) => {
+    const slider = document.getElementById(`sliderRS${param}`);
+    slider.oninput = function () {
+      slider.previousElementSibling.innerText = this.value;
+      drawRomerSolowGraph();
+    };
+  });
+
+  const z = parseFloat(document.getElementById("outputRSZ").textContent),
+    L = parseFloat(document.getElementById("outputRSL").textContent),
+    l = parseFloat(document.getElementById("outputRSl").textContent),
+    A0 = parseFloat(document.getElementById("outputRSA0").textContent);
+
+  const container = document.getElementById("romer-solow-visualization");
+  const width = container.clientWidth - margin.left - margin.right;
+  const height = container.clientHeight - margin.top - margin.bottom;
+
+  container.innerHTML = "";
+
+  const svg = d3
+    .select("#romer-solow-visualization")
+    .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform", `translate(${margin.left}, ${margin.top})`);
+
+  const romerSolowData = calculateRomerSolowData();
+
+  const x = d3.scaleLinear().domain([1, T_MAX]).range([0, width]);
+  svg
+    .append("g")
+    .attr("transform", `translate(0, ${height})`)
+    .call(d3.axisBottom(x))
+    .append("text")
+    .attr("fill", "#000")
+    .attr("x", width + 10)
+    .attr("y", -10)
+    .style("text-anchor", "end")
+    .style("font-size", "1.5em")
+    .text("t");
+
+  const y = d3
+    .scaleLinear()
+    .domain([0, romerSolowData[romerSolowData.length - 1].Y])
+    .range([height, 0]);
+  svg
+    .append("g")
+    .call(d3.axisLeft(y).ticks(10, d3.format(".1s")))
+    .append("text")
+    .attr("fill", "#000")
+    .attr("x", 0)
+    .attr("y", -10)
+    .style("text-anchor", "start")
+    .style("font-size", "1.5em")
+    .text("log(Y)");
+}
+
 document.addEventListener("DOMContentLoaded", function () {
   drawSolowGraph();
   window.onresize = drawSolowGraph;
@@ -448,4 +525,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   drawRomerlGraph();
   window.onresize = drawRomerlGraph;
+
+  drawRomerSolow();
+  window.onresize = drawRomerSolow;
 });
