@@ -141,7 +141,7 @@
                   <ul>
                     <li>
                       <div class="slider">
-                        <label for="sliderSA">\(A:\)</label>
+                        <label for="sliderSA">\(\bar{A}:\)</label>
                         <span id="outputSA">1.00</span>
                         <input
                           type="range"
@@ -155,11 +155,11 @@
                     </li>
                     <li>
                       <div class="slider">
-                        <label for="sliderSD">\(d:\)</label>
-                        <span id="outputSD">0.50</span>
+                        <label for="sliderSd">\(\bar{d}:\)</label>
+                        <span id="outputSd">0.50</span>
                         <input
                           type="range"
-                          id="sliderSD"
+                          id="sliderSd"
                           min="0.01"
                           max="0.99"
                           step="0.01"
@@ -173,11 +173,11 @@
                   <ul start="3">
                     <li>
                       <div class="slider">
-                        <label for="sliderSS">\(s:\)</label>
-                        <span id="outputSS">0.50</span>
+                        <label for="sliderSs">\(\bar{s}:\)</label>
+                        <span id="outputSs">0.50</span>
                         <input
                           type="range"
-                          id="sliderSS"
+                          id="sliderSs"
                           min="0.01"
                           max="0.99"
                           step="0.01"
@@ -187,11 +187,11 @@
                     </li>
                     <li>
                       <div class="slider">
-                        <label for="sliderSAlpha">\(\alpha:\)</label>
-                        <span id="outputSAlpha">0.33</span>
+                        <label for="sliderSalpha">\(\alpha:\)</label>
+                        <span id="outputSalpha">0.33</span>
                         <input
                           type="range"
-                          id="sliderSAlpha"
+                          id="sliderSalpha"
                           min="0.01"
                           max="0.99"
                           step="0.01"
@@ -375,11 +375,11 @@
                   <ul>
                     <li>
                       <div class="slider">
-                        <label for="sliderRZ">\(\bar{z}:\)</label>
-                        <span id="outputRZ">0.50</span>
+                        <label for="sliderRz">\(\bar{z}:\)</label>
+                        <span id="outputRz">0.50</span>
                         <input
                           type="range"
-                          id="sliderRZ"
+                          id="sliderRz"
                           min="0.1"
                           max="0.99"
                           step="0.01"
@@ -422,14 +422,14 @@
                     <li>
                       <div class="slider">
                         <label for="sliderRA0">\(\bar{A}_0:\)</label>
-                        <span id="outputRA0">5000</span>
+                        <span id="outputRA0">500</span>
                         <input
                           type="range"
                           id="sliderRA0"
-                          min="1"
-                          max="10000"
+                          min="0"
+                          max="1000"
                           step="100"
-                          value="5000"
+                          value="500"
                         />
                       </div>
                     </li>
@@ -473,10 +473,6 @@
                 output can be solved the production function: \[Y_t=A_t
                 L_{yt}=A_0(1+\bar{z}\bar{l}\bar{L})^t(1-\bar{l})\bar{L}\]
               </p>
-              <!-- <p> -->
-              <!--   It follows that the intensive form can be written as: -->
-              <!--   \[y_t=\frac{Y_t}{\bar{L}}=A_0(1+\bar{z}\bar{l}\bar{L})(1-\bar{l})\]. -->
-              <!-- </p> -->
             </div>
             <div class="fold"><h3>analysis</h3></div>
             <div>
@@ -688,11 +684,13 @@
                 rate and a negative relationship with the depreciation rate.
               </p>
               <p>
-                However, do economics grow <i>faster</i>/<i>slower</i> the
-                further <i>below</i>/<i>above</i> they are from their Balanced
-                Growth Path, as initially desired? While this can be
-                mathematically proven (of course), sometimes a visualization
-                helps.
+                Using the visualization below, we see a growth pattern similar
+                to that of the Romer Model. However, the Romer-Solow economy
+                indeed grows at a faster rate than the Romer model&mdash;I had
+                to cap \(\bar{L}\) at \(400\) and \(\alpha\) at \(0.4\) because
+                output would be
+                <i> too large </i> for JavaScript to contain in a number (the
+                graph would disappear).
               </p>
               <div class="graph">
                 <div id="romer-solow-visualization"></div>
@@ -702,25 +700,53 @@
                   <ul>
                     <li>
                       <div class="slider">
-                        <label for="sliderRSA">\(A:\)</label>
-                        <span id="outputRSA">1.00</span>
+                        <label for="sliderRSz">\(\bar{z}:\)</label>
+                        <span id="outputRSz">0.50</span>
                         <input
                           type="range"
-                          id="sliderRSA"
+                          id="sliderRSz"
                           min="0.1"
-                          max="2"
+                          max="0.99"
                           step="0.01"
-                          value="1"
+                          value="0.50"
                         />
                       </div>
                     </li>
                     <li>
                       <div class="slider">
-                        <label for="sliderRSD">\(d:\)</label>
-                        <span id="outputRSD">0.50</span>
+                        <label for="sliderRSA0">\(A_0:\)</label>
+                        <span id="outputRSA0">500</span>
                         <input
                           type="range"
-                          id="sliderRSD"
+                          id="sliderRSA0"
+                          min="0"
+                          max="1000"
+                          step="10"
+                          value="500"
+                        />
+                      </div>
+                    </li>
+                    <li>
+                      <div class="slider">
+                        <label for="sliderRSd">\(\bar{d}:\)</label>
+                        <span id="outputRSd">0.50</span>
+                        <input
+                          type="range"
+                          id="sliderRSd"
+                          min="0.01"
+                          max="0.99"
+                          step="0.01"
+                          value="0.50"
+                        />
+                      </div>
+                    </li>
+                    <li>
+                      <div class="slider">
+                        <label for="sliderRSs">\(\bar{s}:\)</label>
+                        <span id="outputRSs">0.50</span>
+                        <input
+                          type="range"
+                          id="sliderRSs"
                           min="0.01"
                           max="0.99"
                           step="0.01"
@@ -734,11 +760,25 @@
                   <ul start="3">
                     <li>
                       <div class="slider">
-                        <label for="sliderRSS">\(s:\)</label>
-                        <span id="outputRSS">0.50</span>
+                        <label for="sliderRSalpha">\(\alpha:\)</label>
+                        <span id="outputRSalpha">0.33</span>
                         <input
                           type="range"
-                          id="sliderRSS"
+                          id="sliderRSalpha"
+                          min="0.01"
+                          max="0.40"
+                          step="0.01"
+                          value="0.33"
+                        />
+                      </div>
+                    </li>
+                    <li>
+                      <div class="slider">
+                        <label for="sliderRSl">\(\bar{l}:\)</label>
+                        <span id="outputRSl">0.50</span>
+                        <input
+                          type="range"
+                          id="sliderRSl"
                           min="0.01"
                           max="0.99"
                           step="0.01"
@@ -748,21 +788,136 @@
                     </li>
                     <li>
                       <div class="slider">
-                        <label for="sliderRSAlpha">\(\alpha:\)</label>
-                        <span id="outputRSAlpha">0.33</span>
+                        <label for="sliderRSL">\(\bar{L}:\)</label>
+                        <span id="outputRSL">200</span>
                         <input
                           type="range"
-                          id="sliderRSAlpha"
-                          min="0.01"
-                          max="0.99"
-                          step="0.01"
-                          value="0.33"
+                          id="sliderRSL"
+                          min="0"
+                          max="400"
+                          step="10"
+                          value="200"
                         />
                       </div>
                     </li>
                   </ul>
                 </div>
               </div>
+              <p>
+                Playing with the parameters, the previous mathematical findings
+                are validated. For example, because
+                \(g_Y^*=\frac{\bar{z}\bar{l}\bar{L}}{1-\alpha}\), only changes
+                in parameters \(\alpha,\bar{z},\bar{l}\), and \(\bar{L}\) affect
+                the growth rate of output, manifesting as the y-axis scaling
+                up/down on a ratio scale.
+              </p>
+              <p>
+                However, do economics grow <i>faster</i>/<i>slower</i> the
+                further <i>below</i>/<i>above</i> they are from their Balanced
+                Growth Path, as initially desired? While this can be
+                mathematically proven (of course), sometimes a visualization
+                helps.
+              </p>
+              <p>
+                The graph below illustrates the transition dynamics of
+                Romer-Solow Model. Namely, \((\bar{z}, \bar{l}, \bar{L},
+                \alpha)=(0.5, 0.5, 100, 0.33)\forall t&lt;t_0\), then update to
+                the slider values when \(t>t_0\).
+              </p>
+              <div class="graph">
+                <div id="romer-solow-change-visualization"></div>
+              </div>
+              <div class="sliders">
+                <div style="padding-right: 20px">
+                  <ul>
+                    <li>
+                      <div class="slider">
+                        <label for="sliderRSCz0">\(\bar{z}_0:\)</label>
+                        <span id="outputRSCz0">0.50</span>
+                        <input
+                          type="range"
+                          id="sliderRSCz0"
+                          min="0.1"
+                          max="0.99"
+                          step="0.01"
+                          value="0.50"
+                        />
+                      </div>
+                    </li>
+                    <li>
+                      <div class="slider">
+                        <label for="sliderRSCalpha0">\(\alpha_0:\)</label>
+                        <span id="outputRSCalpha0">0.33</span>
+                        <input
+                          type="range"
+                          id="sliderRSCalpha0"
+                          min="0.01"
+                          max="0.54"
+                          step="0.01"
+                          value="0.33"
+                        />
+                      </div>
+                    </li>
+                    <li>
+                      <div class="slider">
+                        <label for="sliderRSCL0">\(\bar{L}_0:\)</label>
+                        <span id="outputRSCL0">100</span>
+                        <input
+                          type="range"
+                          id="sliderRSCL0"
+                          min="0"
+                          max="200"
+                          step="10"
+                          value="100"
+                        />
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                <div style="padding-left: 20px">
+                  <ul start="3">
+                    <li>
+                      <div class="slider">
+                        <label for="sliderRSCl0">\(\bar{l}_0:\)</label>
+                        <span id="outputRSCl0">0.50</span>
+                        <input
+                          type="range"
+                          id="sliderRSCl0"
+                          min="0.01"
+                          max="0.99"
+                          step="0.01"
+                          value="0.50"
+                        />
+                      </div>
+                    </li>
+                    <li>
+                      <div class="slider">
+                        <label for="sliderRSCt0">\(t_0:\)</label>
+                        <span id="outputRSCt0">50</span>
+                        <input
+                          type="range"
+                          id="sliderRSCt0"
+                          min="0"
+                          max="100"
+                          step="1"
+                          value="50"
+                        />
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <p>
+                Finally, it is clear that economies converge to their Balanced
+                Growth Path as desired&mdash;something slightly more convoluted
+                to prove from the complex expression for \(Y^*\) derived
+                earlier. For example, with an increase in \(\alpha_0\), output
+                grows at an increasing rate after the change, then increases at
+                a decreasing rate as it converges to the new higher Balanced
+                Growth Path. Increasing parameters \(\bar{z},\bar{l},\bar{L}\)
+                yield similar results, although the changes are visually less
+                obvious.
+              </p>
             </div>
           </div>
         </article>
