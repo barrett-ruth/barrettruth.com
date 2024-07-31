@@ -93,7 +93,8 @@ li {
   justify-content: center;
 }
 
-.language-python {
+.language-python,
+.language-cpp {
   /* override prism.js styles */
   font-size: 0.85em !important;
 }

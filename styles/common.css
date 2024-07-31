@@ -79,3 +79,7 @@ li {
 .terminal-container {
   font-family: "Courier New", monospace;
 }
+
+.inline-code {
+  display: inline-block;
+}
