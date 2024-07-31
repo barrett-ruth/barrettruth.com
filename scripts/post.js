@@ -39,6 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll("article h2").forEach((h2) => {
     const mdHeading = document.createElement("span");
     mdHeading.textContent = "# ";
+    mdHeading.style.fontStyle = "normal";
     mdHeading.style.color = getTopicColor(urlToTopic());
     h2.prepend(mdHeading);
   });

@@ -18,7 +18,11 @@ const postMapping = new Map([
   ["Trading", [{ name: "InteractiveBrokers TWS" }, { name: "valuation" }]],
   [
     "Algorithms",
-    [{ name: "two pointers", link: "two-pointers" }, { name: "convex hull" }],
+    [
+      { name: "extrema circular buffer", link: "extrema-circular-buffer" },
+      { name: "two pointers", link: "two-pointers" },
+      { name: "convex hull" },
+    ],
   ],
 ]);
 
