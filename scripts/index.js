@@ -4,15 +4,15 @@ const postMapping = new Map([
     [
       { name: "from github pages to aws", link: "from-github-pages-to-aws" },
       { name: "designing this website", link: "designing-this-website" },
-      { name: "working in the terminal" },
+      // { name: "working in the terminal" },
     ],
   ],
   [
     "Economics",
     [
       { name: "models of production", link: "models-of-production" },
-      { name: "the short run" },
-      { name: "in the aggregate" },
+      // { name: "the short run" },
+      // { name: "in the aggregate" },
     ],
   ],
   ["Trading", [{ name: "InteractiveBrokers TWS" }, { name: "valuation" }]],
@@ -21,7 +21,6 @@ const postMapping = new Map([
     [
       { name: "extrema circular buffer", link: "extrema-circular-buffer" },
       { name: "two pointers", link: "two-pointers" },
-      { name: "convex hull" },
     ],
   ],
 ]);
