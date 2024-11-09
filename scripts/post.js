@@ -34,6 +34,7 @@ const setStyle = (h) => {
   const mdHeading = document.createElement("span");
   const header = tagToHeader.has(h.tagName) ? tagToHeader.get(h.tagName) : "";
   mdHeading.textContent = `${header} `;
+  mdHeading.style.color = getTopicColor(urlToTopic());
   h.prepend(mdHeading);
 };
 

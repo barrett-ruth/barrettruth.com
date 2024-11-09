@@ -19,6 +19,7 @@ const postMapping = new Map([
   [
     "Algorithms",
     [
+      { name: "leetcode daily", link: "leetcode-daily" },
       { name: "extrema circular buffer", link: "extrema-circular-buffer" },
       { name: "two pointers", link: "two-pointers" },
     ],

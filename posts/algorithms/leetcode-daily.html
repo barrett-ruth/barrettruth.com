@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="/styles/common.css" />
+    <link rel="stylesheet" href="/styles/post.css" />
+    <link rel="icon" type="image/webp" href="/public/logo.webp" />
+    <link href="/public/prism/prism.css" rel="stylesheet" />
+    <link href="/public/prism/prism-theme.css" rel="stylesheet" />
+    <script defer src="/public/prism/prism.js"></script>
+    <link rel="stylesheet" href="/public/katex/katex.css" />
+    <script defer src="/public/katex/katex.js"></script>
+    <script
+      defer
+      src="/public/katex/katex-render.js"
+      onload="renderMathInElement(document.body);"
+    ></script>
+    <title>Barrett Ruth</title>
+  </head>
+  <body class="graph-background">
+    <header>
+      <a
+        href="/"
+        style="text-decoration: none; color: inherit"
+        onclick="goHome(event)"
+      >
+        <div class="terminal-container">
+          <span class="terminal-prompt">barrett@ruth:~$ /algorithms</span>
+          <span class="terminal-cursor"></span>
+        </div>
+      </a>
+    </header>
+    <main class="main">
+      <div class="post-container">
+        <header class="post-header">
+          <h1 class="post-title">Leetcode Daily</h1>
+        </header>
+        <article class="post-article">
+          <div class="fold">
+            <h2>
+              <a
+                target="blank"
+                href="https://leetcode.com/problems/minimum-array-end/"
+                >minimum array end</a
+              >
+              &mdash; 9/11/24
+            </h2>
+          </div>
+          <div class="problem-content">
+            <h3>problem statement</h3>
+            <p>
+              Given some \(x\) and \(n\), construct a strictly increasing array
+              (say
+              <code>nums</code>
+              ) of length \(n\) such that
+              <code>nums[0] & nums[1] ... & nums[n - 1] == x</code>
+              , where
+              <code>&</code>
+              denotes the bitwise AND operator.
+            </p>
+            <p>
+              Finally, return the minimum possible value of
+              <code>nums[n - 1]</code>.
+            </p>
+          </div>
+          <h3>understanding the problem</h3>
+          <p>
+            The main difficulty in this problem lies in understanding what is
+            being asked (intentionally or not, the phrasing is terrible). Some
+            initial notes:
+          </p>
+          <ul>
+            <li>The final array need not be constructed</li>
+            <li>
+              If the element-wise bitwise AND of an array equals
+              <code>x</code> if and only if each element has
+              <code>x</code>&apos;s bits set&mdash;and no other bit it set by
+              all elements
+            </li>
+            <li>
+              It makes sense to set <code>nums[0] == x</code> to ensure
+              <code>nums[n - 1]</code> is minimal
+            </li>
+          </ul>
+          <h3>developing an approach</h3>
+          <p>
+            An inductive approach is helpful. Consider the natural question:
+            &ldquo;If I had correctly generated <code>nums[:i]</code>&rdquo;,
+            how could I find <code>nums[i]</code>? In other words,
+            <i
+              >how can I find the next smallest number such that
+              <code>nums</code>
+              &apos;s element-wise bitwise AND is still \(x\)?</i
+            >
+          </p>
+          <p>
+            Hmm... this is tricky. Let&apos;s think of a similar problem to
+            glean some insight: &ldquo;Given some \(x\), how can I find the next
+            smallest number?&rdquo;. The answer is, of course, add one (bear
+            with me here).
+          </p>
+          <p>
+            We also know that all of <code>nums[i]</code> must have at least
+            \(x\)&apos;s bits set. Therefore, we need to alter the unset bits of
+            <code>nums[i]</code>.
+          </p>
+          <p>
+            The key insight of this problem is combining these two ideas to
+            answer our question:
+            <i
+              >Just &ldquo;add one&rdquo; to <code>nums[i - 1]</code>&apos;s
+              unset bits</i
+            >. Repeat this to find <code>nums[n - 1]</code>.
+          </p>
+          <p>
+            One last piece is missing&mdash;how do we know the element-wise
+            bitwise AND is <i>exactly</i> \(x\)? Because
+            <code>nums[i > 0]</code> only sets \(x\)&apos;s unset bits, every
+            number in <code>nums</code> will have at least \(x\)&apos;s bits
+            set. Further, no other bits will be set because \(x\) has them
+            unset.
+          </p>
+          <h3>carrying out the plan</h3>
+          <p>Let&apos;s flesh out the remaining parts of the algorithm:</p>
+          <ul>
+            <li>
+              <code>len(nums) == n</code> and we initialize
+              <code>nums[0] == x</code>. So, we need to &ldquo;add one&rdquo;
+              <code>n - 1</code> times
+            </li>
+            <li>
+              How do we carry out the additions? We could iterate \(n - 1\)
+              times and simulate them. However, we already know how we want to
+              alter the unset bits of <code>nums[0]</code> inductively&mdash;
+              (add one) <i>and</i> how many times we want to do this (\(n -
+              1\)). Because we&apos;re adding one \(n-1\) times to \(x\)&apos;s
+              unset bits (right to left, of course), we simply set its unset
+              bits to those of \(n - 1\).
+            </li>
+          </ul>
+          <p>
+            The implementation is relatively straightfoward. Traverse \(x\) from
+            least-to-most significant bit, setting its \(i\)th unset bit to \(n
+            - 1\)&apos;s \(i\)th bit. Use a bitwise mask <code>mask</code> to
+            traverse \(x\).
+          </p>
+          <div class="post-code">
+            <pre><code class="language-cpp">long long minEnd(int n, long long x) {
+    int bits_to_distribute = n - 1;
+    long long mask = 1;
+
+    while (bits_to_distribute > 0) {
+        if ((x & mask) == 0) {
+            // if the bit should be set, set it-otherwise, leave it alone
+            if ((bits_to_distribute & 1) == 1)
+                x |= mask;
+            bits_to_distribute >>= 1;
+        }
+        mask <<= 1;
+    }
+
+    return x;
+}</code></pre>
+          </div>
+          <h3>asymptotic complexity</h3>
+          <p>
+            <u>Space Complexity</u>: \(\Theta(1)\)&mdash;a constant amount of
+            numeric variables are allocated regardless of \(n\) and \(x\).
+          </p>
+          <p>
+            <u>Time Complexity</u>: in the worst case, may need to traverse the
+            entirety of \(x\) to distribute every bit of \(n - 1\) to \(x\).
+            This occurs if and only if \(x\) is all ones (\(\exists k\gt 0 :
+            2^k-1=x\))). \(x\) and \(n\) have \(lg(x)\) and \(lg(n)\) bits
+            respectively, so the solution is \(O(lg(x) + lg(n))\in O(log(xn))\).
+            \(1\leq x,n\leq 1e8\), so this runtime is bounded by
+            \(O(log(1e8^2))=O(log(1e16))=O(16)\).
+          </p>
+        </article>
+      </div>
+    </main>
+    <script src="/scripts/common.js"></script>
+    <script src="/scripts/post.js"></script>
+  </body>
+</html>
