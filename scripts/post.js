@@ -27,6 +27,9 @@ const makeFold = (h, i) => {
   });
 
   const mdHeading = document.createElement("span");
+  console.log(
+    `header ${h.tagName} getting prefix ${tagToHeader.get(h.tagName)}, ${h.textContent}`,
+  );
   const header = tagToHeader.has(h.tagName) ? tagToHeader.get(h.tagName) : "";
   mdHeading.textContent = `${header} `;
   mdHeading.style.color = getTopicColor(urlToTopic());
@@ -38,12 +41,14 @@ const makeFold = (h, i) => {
 document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll("article h2").forEach((h2) => {
     const mdHeading = document.createElement("span");
-    mdHeading.textContent = "# ";
     mdHeading.style.fontStyle = "normal";
     mdHeading.style.color = getTopicColor(urlToTopic());
     h2.prepend(mdHeading);
   });
 
-  document.querySelectorAll(".fold h2").forEach(makeFold);
+  document.querySelectorAll(".fold h2").forEach((x) => {
+    console.log("making h2 fold");
+    makeFold(x);
+  });
   document.querySelectorAll(".fold h3").forEach(makeFold);
 });
