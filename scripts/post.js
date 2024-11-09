@@ -25,30 +25,21 @@ const makeFold = (h, i) => {
     toggle.textContent = toggle.textContent === ">" ? "v" : ">";
     content.style.display = toggle.textContent === ">" ? "none" : "block";
   });
+  toggle.style.color = getTopicColor(urlToTopic());
 
-  const mdHeading = document.createElement("span");
-  console.log(
-    `header ${h.tagName} getting prefix ${tagToHeader.get(h.tagName)}, ${h.textContent}`,
-  );
-  const header = tagToHeader.has(h.tagName) ? tagToHeader.get(h.tagName) : "";
-  mdHeading.textContent = `${header} `;
-  mdHeading.style.color = getTopicColor(urlToTopic());
-
-  h.prepend(mdHeading);
   h.prepend(toggle);
 };
 
-document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll("article h2").forEach((h2) => {
-    const mdHeading = document.createElement("span");
-    mdHeading.style.fontStyle = "normal";
-    mdHeading.style.color = getTopicColor(urlToTopic());
-    h2.prepend(mdHeading);
-  });
+const setStyle = (h) => {
+  const mdHeading = document.createElement("span");
+  const header = tagToHeader.has(h.tagName) ? tagToHeader.get(h.tagName) : "";
+  mdHeading.textContent = `${header} `;
+  h.prepend(mdHeading);
+};
 
-  document.querySelectorAll(".fold h2").forEach((x) => {
-    console.log("making h2 fold");
-    makeFold(x);
-  });
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll(".post-article h2").forEach(setStyle);
+  document.querySelectorAll(".post-article h3").forEach(setStyle);
+  document.querySelectorAll(".fold h2").forEach(makeFold);
   document.querySelectorAll(".fold h3").forEach(makeFold);
 });
