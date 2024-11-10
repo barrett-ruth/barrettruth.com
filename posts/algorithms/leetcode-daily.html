@@ -42,6 +42,186 @@
             <h2>
               <a
                 target="blank"
+                href="https://leetcode.com/problems/shortest-subarray-with-or-at-least-k-ii/description/"
+                >shortest subarray with or at least k ii</a
+              >
+              &mdash; 9/12/24
+            </h2>
+          </div>
+          <div class="problem-content">
+            <h3>problem statement</h3>
+            <p>
+              Given an array of non-negative integers \(num\) and some \(k\),
+              find the length of the shortest non-empty subarray of nums such
+              that its element-wise bitwise OR is greater than or equal to
+              \(k\)&mdash;return -1 if no such array exists.
+            </p>
+            <h3>developing an approach</h3>
+            <p>Another convoluted, uninspired bitwise-oriented daily.</p>
+            <p>
+              Anways, we&apos;re looking for a subarray that satisfies a
+              condition. Considering all subarrays with
+              <code>len(nums)</code>\(\leq2\times10^5\) is impractical according
+              to the common rule of \(\approx10^8\) computations per second on
+              modern CPUs.
+            </p>
+            <p>
+              Say we&apos;s building some array <code>xs</code>. Adding another
+              element <code>x</code> to this sequence can only increase or
+              element-wise bitwise OR. Of course, it makes sense to do this.
+              However, consider <code>xs</code> after&mdash;it is certainly
+              possible that including <code>x</code> finally got us to at least
+              <code>k</code>. However, not all of the elements in the array are
+              useful now; we should remove some.
+            </p>
+            <p>
+              Which do we remove? Certainly not any from the
+              middle&mdash;we&apos;d no longer be considering a subarray. We can
+              only remove from the beginning.
+            </p>
+            <p>
+              Now, how many times do we remove? While the element-wise bitwise
+              OR of <code>xs</code> is \(\geq k\), we can na&iuml;vely remove
+              from the start of <code>xs</code> to find the smallest subarray.
+            </p>
+            <p>
+              Lastly, what&apos; the state of <code>xs</code> after these
+              removals? Now, we (may) have an answer and the element-wise
+              bitwise OR of <code>xs</code> is guaranteed to be \(\lt k\).
+              Inductively, expand the array to search for a better answer.
+            </p>
+            <p>
+              This approach is generally called a variable-sized &ldquo;sliding
+              window&rdquo;. Every element of
+              <code>nums</code> is only added (considered in the element-wise
+              bitwise OR) or removed (discard) one time, yielding an
+              asymptotically linear time complexity. In other words, this is a
+              realistic approach for our constraints.
+            </p>
+            <h3>carrying out the plan</h3>
+            <p>Plugging in our algorithm to my sliding window framework:</p>
+            <div class="post-code">
+              <pre><code class="language-python">def minimumSubarrayLength(self, nums, k):
+        # provide a sentinel for "no window found"
+        ans = sys.maxsize
+        window = deque()
+        l = 0
+
+        # expand the window by default
+        for r in range(len(nums)):
+            # consider `nums[r]`
+            window.append(nums[r])
+            # shrink window while valid
+            while l <= r and reduce(operator.or_, window) >= k:
+                ans = min(ans, r - l + 1)
+                window.popleft()
+                l += 1
+
+        # normalize to -1 as requested
+        return -1 if ans == sys.maxsize else ans
+</code></pre>
+            </div>
+            <p>Done, right? No. TLE.</p>
+            <p>
+              If you thought this solution would work, you move too fast.
+              Consider <i>every</i> aspect of an algorithm before implementing
+              it. In this case, we (I) overlooked one core question:
+            </p>
+            <ol style="list-style: none">
+              <li><i>How do we maintain our element-wise bitwise OR</i>?</li>
+            </ol>
+            <p>
+              Calculating it by directly maintaining a window of length \(n\)
+              takes \(n\) time&mdash;with a maximum window size of \(n\), this
+              solution is \(O(n^2)\).
+            </p>
+            <p>
+              Let&apos;s try again. Adding an element is simple&mdash;OR it to
+              some cumulative value. Removing an element, not so much.
+              Considering some \(x\) to remove, we only unset one of its bits
+              from our aggregated OR if it&apos;s the &ldquo;last&rdquo; one of
+              these bits set across all numbers contributing to our aggregated
+              value.
+            </p>
+            <p>
+              Thus, to maintain our aggregate OR, we want to map bit
+              &ldquo;indices&rdquo; to counts. A hashmap (dictionary) or static
+              array will do just find. Adding/removing some \(x\) will
+              increment/decrement each the counter&apos;s bit count at its
+              respective position. I like to be uselessly specific
+              sometimes&mdash;choosing the latter approach, how big should our
+              array be? As many bits as represented by the largest of
+              \(nums\)&mdash;(or \(k\) itself): \[\lfloor \lg({max\{nums,k
+              \})}\rfloor+1\]
+            </p>
+            <p>Note that:</p>
+            <ol>
+              <li>
+                Below we use the
+                <a
+                  target="_blank"
+                  href="https://artofproblemsolving.com/wiki/index.php/Change_of_base_formula"
+                  >change of base formula for logarithms</a
+                >
+                because \(log_2(x)\) is not available in python.
+              </li>
+              <li>
+                It&apos;s certainly possible that \(max(nums, k)=0\). To avoid
+                the invalid calculation \(log(0)\), take the larger of \(1\) and
+                this calculation. The number of digits will then (correctly) be
+                \(1\) in this special case.
+              </li>
+            </ol>
+            <div class="post-code">
+              <pre><code class="language-python">def minimumSubarrayLength(self, nums, k):
+    ans = sys.maxsize
+
+    largest = max(*nums, k)
+    num_digits = floor((log(max(largest, 1))) / log(2)) + 1
+
+    counts = [0] * num_digits
+    l = 0
+
+    def update(x, delta):
+        for i in range(len(counts)):
+            if x & 1:
+                counts[i] += 1 * delta
+            x >>= 1
+
+    def bitwise_or():
+        return reduce(
+            operator.or_,
+            (1 << i if count else 0 for i, count in enumerate(counts)),
+            0
+        )
+
+    for r, num in enumerate(nums):
+        update(num, 1)
+        while l <= r and bitwise_or() >= k:
+            ans = min(ans, r - l + 1)
+            update(nums[l], -1)
+            l += 1
+
+    return -1 if ans == sys.maxsize else ans
+</code></pre>
+            </div>
+            <h3>asymptotic complexity</h3>
+            <p>
+              Note that the size of the frequency map is bounded by
+              \(lg_{2}({10^9})\approx30\).
+            </p>
+            <p><u>Space Complexity</u>:Thus, the window uses \(O(1)\) space.</p>
+            <p>
+              <u>Time Complexity</u>: \(\Theta(\)<code>len(nums)</code>\()\)
+              &mdash;every element of <code>nums</code> is considered at least
+              once and takes \(O(1)\) work each to find the element-wise bitwise
+              OR.
+            </p>
+          </div>
+          <div class="fold">
+            <h2>
+              <a
+                target="blank"
                 href="https://leetcode.com/problems/minimum-array-end/"
                 >minimum array end</a
               >
@@ -64,90 +244,89 @@
               Finally, return the minimum possible value of
               <code>nums[n - 1]</code>.
             </p>
-          </div>
-          <h3>understanding the problem</h3>
-          <p>
-            The main difficulty in this problem lies in understanding what is
-            being asked (intentionally or not, the phrasing is terrible). Some
-            initial notes:
-          </p>
-          <ul>
-            <li>The final array need not be constructed</li>
-            <li>
-              If the element-wise bitwise AND of an array equals
-              <code>x</code> if and only if each element has
-              <code>x</code>&apos;s bits set&mdash;and no other bit it set by
-              all elements
-            </li>
-            <li>
-              It makes sense to set <code>nums[0] == x</code> to ensure
-              <code>nums[n - 1]</code> is minimal
-            </li>
-          </ul>
-          <h3>developing an approach</h3>
-          <p>
-            An inductive approach is helpful. Consider the natural question:
-            &ldquo;If I had correctly generated <code>nums[:i]</code>&rdquo;,
-            how could I find <code>nums[i]</code>? In other words,
-            <i
-              >how can I find the next smallest number such that
-              <code>nums</code>
-              &apos;s element-wise bitwise AND is still \(x\)?</i
-            >
-          </p>
-          <p>
-            Hmm... this is tricky. Let&apos;s think of a similar problem to
-            glean some insight: &ldquo;Given some \(x\), how can I find the next
-            smallest number?&rdquo;. The answer is, of course, add one (bear
-            with me here).
-          </p>
-          <p>
-            We also know that all of <code>nums[i]</code> must have at least
-            \(x\)&apos;s bits set. Therefore, we need to alter the unset bits of
-            <code>nums[i]</code>.
-          </p>
-          <p>
-            The key insight of this problem is combining these two ideas to
-            answer our question:
-            <i
-              >Just &ldquo;add one&rdquo; to <code>nums[i - 1]</code>&apos;s
-              unset bits</i
-            >. Repeat this to find <code>nums[n - 1]</code>.
-          </p>
-          <p>
-            One last piece is missing&mdash;how do we know the element-wise
-            bitwise AND is <i>exactly</i> \(x\)? Because
-            <code>nums[i > 0]</code> only sets \(x\)&apos;s unset bits, every
-            number in <code>nums</code> will have at least \(x\)&apos;s bits
-            set. Further, no other bits will be set because \(x\) has them
-            unset.
-          </p>
-          <h3>carrying out the plan</h3>
-          <p>Let&apos;s flesh out the remaining parts of the algorithm:</p>
-          <ul>
-            <li>
-              <code>len(nums) == n</code> and we initialize
-              <code>nums[0] == x</code>. So, we need to &ldquo;add one&rdquo;
-              <code>n - 1</code> times
-            </li>
-            <li>
-              How do we carry out the additions? We could iterate \(n - 1\)
-              times and simulate them. However, we already know how we want to
-              alter the unset bits of <code>nums[0]</code> inductively&mdash;
-              (add one) <i>and</i> how many times we want to do this (\(n -
-              1\)). Because we&apos;re adding one \(n-1\) times to \(x\)&apos;s
-              unset bits (right to left, of course), we simply set its unset
-              bits to those of \(n - 1\).
-            </li>
-          </ul>
-          <p>
-            The implementation is relatively straightfoward. Traverse \(x\) from
-            least-to-most significant bit, setting its \(i\)th unset bit to \(n
-            - 1\)&apos;s \(i\)th bit. Use a bitwise mask <code>mask</code> to
-            traverse \(x\).
-          </p>
-          <div class="post-code">
-            <pre><code class="language-cpp">long long minEnd(int n, long long x) {
+            <h3>understanding the problem</h3>
+            <p>
+              The main difficulty in this problem lies in understanding what is
+              being asked (intentionally or not, the phrasing is terrible). Some
+              initial notes:
+            </p>
+            <ul>
+              <li>The final array need not be constructed</li>
+              <li>
+                If the element-wise bitwise AND of an array equals
+                <code>x</code> if and only if each element has
+                <code>x</code>&apos;s bits set&mdash;and no other bit it set by
+                all elements
+              </li>
+              <li>
+                It makes sense to set <code>nums[0] == x</code> to ensure
+                <code>nums[n - 1]</code> is minimal
+              </li>
+            </ul>
+            <h3>developing an approach</h3>
+            <p>
+              An inductive approach is helpful. Consider the natural question:
+              &ldquo;If I had correctly generated <code>nums[:i]</code>&rdquo;,
+              how could I find <code>nums[i]</code>? In other words,
+              <i
+                >how can I find the next smallest number such that
+                <code>nums</code>
+                &apos;s element-wise bitwise AND is still \(x\)?</i
+              >
+            </p>
+            <p>
+              Hmm... this is tricky. Let&apos;s think of a similar problem to
+              glean some insight: &ldquo;Given some \(x\), how can I find the
+              next smallest number?&rdquo;. The answer is, of course, add one
+              (bear with me here).
+            </p>
+            <p>
+              We also know that all of <code>nums[i]</code> must have at least
+              \(x\)&apos;s bits set. Therefore, we need to alter the unset bits
+              of <code>nums[i]</code>.
+            </p>
+            <p>
+              The key insight of this problem is combining these two ideas to
+              answer our question:
+              <i
+                >Just &ldquo;add one&rdquo; to <code>nums[i - 1]</code>&apos;s
+                unset bits</i
+              >. Repeat this to find <code>nums[n - 1]</code>.
+            </p>
+            <p>
+              One last piece is missing&mdash;how do we know the element-wise
+              bitwise AND is <i>exactly</i> \(x\)? Because
+              <code>nums[i > 0]</code> only sets \(x\)&apos;s unset bits, every
+              number in <code>nums</code> will have at least \(x\)&apos;s bits
+              set. Further, no other bits will be set because \(x\) has them
+              unset.
+            </p>
+            <h3>carrying out the plan</h3>
+            <p>Let&apos;s flesh out the remaining parts of the algorithm:</p>
+            <ul>
+              <li>
+                <code>len(nums) == n</code> and we initialize
+                <code>nums[0] == x</code>. So, we need to &ldquo;add one&rdquo;
+                <code>n - 1</code> times
+              </li>
+              <li>
+                How do we carry out the additions? We could iterate \(n - 1\)
+                times and simulate them. However, we already know how we want to
+                alter the unset bits of <code>nums[0]</code> inductively&mdash;
+                (add one) <i>and</i> how many times we want to do this (\(n -
+                1\)). Because we&apos;re adding one \(n-1\) times to
+                \(x\)&apos;s unset bits (right to left, of course), we simply
+                set its unset bits to those of \(n - 1\).
+              </li>
+            </ul>
+            <p>
+              The implementation is relatively straightfoward. Traverse \(x\)
+              from least-to-most significant bit, setting its \(i\)th unset bit
+              to \(n - 1\)&apos;s \(i\)th bit. Use a bitwise mask
+              <code>mask</code> to traverse \(x\).
+            </p>
+            <div class="post-code">
+              <pre><code class="language-cpp">long long minEnd(int n, long long x) {
     int bits_to_distribute = n - 1;
     long long mask = 1;
 
@@ -163,21 +342,22 @@
 
     return x;
 }</code></pre>
+            </div>
+            <h3>asymptotic complexity</h3>
+            <p>
+              <u>Space Complexity</u>: \(\Theta(1)\)&mdash;a constant amount of
+              numeric variables are allocated regardless of \(n\) and \(x\).
+            </p>
+            <p>
+              <u>Time Complexity</u>: in the worst case, may need to traverse
+              the entirety of \(x\) to distribute every bit of \(n - 1\) to
+              \(x\). This occurs if and only if \(x\) is all ones (\(\exists
+              k\gt 0 : 2^k-1=x\))). \(x\) and \(n\) have \(lg(x)\) and \(lg(n)\)
+              bits respectively, so the solution is \(O(lg(x) + lg(n))\in
+              O(log(xn))\). \(1\leq x,n\leq 1e8\), so this runtime is bounded by
+              \(O(log(1e8^2))\in O(log(1e16))\in O(1)\).
+            </p>
           </div>
-          <h3>asymptotic complexity</h3>
-          <p>
-            <u>Space Complexity</u>: \(\Theta(1)\)&mdash;a constant amount of
-            numeric variables are allocated regardless of \(n\) and \(x\).
-          </p>
-          <p>
-            <u>Time Complexity</u>: in the worst case, may need to traverse the
-            entirety of \(x\) to distribute every bit of \(n - 1\) to \(x\).
-            This occurs if and only if \(x\) is all ones (\(\exists k\gt 0 :
-            2^k-1=x\))). \(x\) and \(n\) have \(lg(x)\) and \(lg(n)\) bits
-            respectively, so the solution is \(O(lg(x) + lg(n))\in O(log(xn))\).
-            \(1\leq x,n\leq 1e8\), so this runtime is bounded by
-            \(O(log(1e8^2))=O(log(1e16))=O(16)=O(1)\).
-          </p>
         </article>
       </div>
     </main>
