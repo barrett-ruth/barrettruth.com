@@ -11,7 +11,7 @@ const tagToHeader = new Map([
 const makeFold = (h, i) => {
   const toggle = document.createElement("span");
   toggle.style.fontStyle = "normal";
-  toggle.textContent = "v";
+  toggle.textContent = ">";
 
   // only unfold first algorithm problem
   if (urlToTopic() === "algorithms" && i === 0) toggle.textContent = "v";
