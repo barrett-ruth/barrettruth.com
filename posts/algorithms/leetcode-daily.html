@@ -42,6 +42,120 @@
             <h2>
               <a
                 target="blank"
+                href="https://leetcode.com/problems/most-beautiful-item-for-each-query/description/"
+                >most beautiful item for each query</a
+              >
+              &mdash; 9/12/24
+            </h2>
+          </div>
+          <div class="problem-content">
+            <h3>problem statement</h3>
+            <p>
+              Given an array <code>items</code> of \((price, beauty)\) tuples,
+              answer each integer query of \(queries\). The answer to some
+              <code>query[i]</code> is the maximum beauty of an item with
+              \(price\leq\)<code>items[i][0]</code>.
+            </p>
+            <h3>understanding the problem</h3>
+            <p>
+              Focus on one aspect of the problem at a time. To answer a query,
+              we need to have considered:
+            </p>
+            <ol>
+              <li>Items with a non-greater price</li>
+              <li>The beauty of all such items</li>
+            </ol>
+            <p>
+              Given some query, how can we <i>efficiently</i> identify the
+              &ldquo;last&rdquo; item with an acceptable price? Leverage the
+              most common pre-processing algorithm: sorting. Subsequently, we
+              can binary search <code>items</code> (keyed by price, of course)
+              to identify all considerable items in \(O(lg(n))\).
+            </p>
+            <p>
+              Great. Now we need to find the item with the largest beauty.
+              Na&iuml;vely considering all the element is a
+              <i>correct</i> approach&mdash;but is it correct? Considering our
+              binary search \(O(lg(n))\) and beauty search \(O(n)\) across
+              \(\Theta(n)\) queries with
+              <code>len(items)<=len(queries)</code>\(\leq10^5\), an
+              \(O(n^2lg(n))\) approach is certainly unacceptable.
+            </p>
+            <p>
+              Consider alternative approaches to responding to our queries. It
+              is clear that answering them in-order yields no benefit (i.e. we
+              have to consider each item all over again, per query)&mdash;could
+              we answer them in another order to save computations?
+            </p>
+            <p>
+              Visualizing our items from left-to-right, we&apos;s interested in
+              both increasing beauty and prices. If we can scan our items left
+              to right, we can certainly &ldquo;accumulate&rdquo; a running
+              maximal beauty. We can leverage sorting once again to answer our
+              queries left-to-right, then re-order them appropriately before
+              returning a final answer. Sorting both <code>queries</code> and
+              <code>items</code> with a linear scan will take \(O(nlg(n))\)
+              time, meeting the constraints.
+            </p>
+          </div>
+          <h3>fleshing out the approach</h3>
+          <p>
+            A few specifics need to be understood before coding up the approach:
+          </p>
+          <ul>
+            <li>
+              Re-ordering the queries: couple <code>query[i]</code> with
+              <code>i</code>, then sort. When responding to queries in sorted
+              order, we know where to place them in an output
+              container&mdash;index <code>i</code>.
+            </li>
+            <li>
+              The linear scan: accumulate a running maximal beauty, starting at
+              index <code>0</code>. For some query <code>query</code>, we want
+              to consider all items with price less than or equal to
+              <code>query</code>. Therefore, loop until this condition is
+              <i>violated</i>&mdash; the previous index will represent the last
+              considered item.
+            </li>
+            <li>
+              Edge cases: it&apos;s perfectly possible the last considered item
+              is invalid (consider a query cheaper than the cheapest item).
+              Return <code>0</code> as specified by the problem constraints.
+            </li>
+          </ul>
+          <h3>
+            carrying out the plan
+          </h3>
+<div class="post-code">
+              <pre><code class="language-cpp">vector<int> maximumBeauty(vector<vector<int>>& items, vector<int>& queries) {
+  std::sort(items.begin(), items.end());
+  std::vector&lt;pair&lt;int, int&gt;&gt; sorted_queries;
+  sorted_queries.reserve(queries.size());
+  // couple queries with their indices
+  for (size_t i = 0; i < queries.size(); ++i) {
+    sorted_queries.emplace_back(queries[i], i);
+  }
+  std::sort(sorted_queries.begin(), sorted_queries.end());
+
+  int beauty = items[0][1];
+  size_t i = 0;
+  std::vector<int> ans(queries.size());
+
+  for (const auto [query, index] : sorted_queries) {
+    while (i < items.size() && items[i][0] <= query) {
+        beauty = std::max(beauty, items[i][1]);
+        ++i;
+    }
+    // invariant: items[i - 1] is the rightmost considerable item
+    ans[index] = i > 0 && items[i - 1][0] <= query ? beauty : 0;
+  }
+
+  return std::move(ans);</code></pre>
+            </div>
+          <div class="fold">
+            <h2>
+              <a
+                target="blank"
                 href="https://leetcode.com/problems/shortest-subarray-with-or-at-least-k-ii/description/"
                 >shortest subarray with or at least k ii</a
               >
@@ -210,7 +324,9 @@
               Note that the size of the frequency map is bounded by
               \(lg_{2}({10^9})\approx30\).
             </p>
-            <p><u>Space Complexity</u>: Thus, the window uses \(O(1)\) space.</p>
+            <p>
+              <u>Space Complexity</u>: Thus, the window uses \(O(1)\) space.
+            </p>
             <p>
               <u>Time Complexity</u>: \(\Theta(\)<code>len(nums)</code>\()\)
               &mdash;every element of <code>nums</code> is considered at least
