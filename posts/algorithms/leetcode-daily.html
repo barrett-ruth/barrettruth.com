@@ -158,12 +158,12 @@
               runtime in terms of \(max\{n,m\}\).
             </p>
             <p>
-              <u>Time Complexity</u>: \(O(nlg(n)+mlg(m)+m)=O(nlg(n)+mlg(m))\).
-              An argument can be made that because
+              <u>Time Complexity</u>: \(O(nlg(n)+mlg(m)+m)\in
+              O(nlg(n)+mlg(m))\). An argument can be made that because
               <code>queries[i],items[i][{0,1}]</code>\(\leq10^9\), radix sort
               can be leveraged to achieve a time complexity of \(O(d \cdot (n +
-              k + m + k)) = O(9 \cdot (n + m + 20)) = O(9n+9m + 180) = O(9n+9m)
-              = O(n+m)\).
+              k + m + k))\in O(9\cdot (n + m))\in O(9n+9m)\in O(9n+9m)\in
+              O(n+m)\).
             </p>
             <p>
               <u>Space Complexity</u>: \(\Theta(1)\), considering that \(O(m)\)
