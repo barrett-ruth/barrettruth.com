@@ -97,37 +97,35 @@
               <code>items</code> with a linear scan will take \(O(nlg(n))\)
               time, meeting the constraints.
             </p>
-          </div>
-          <h3>fleshing out the approach</h3>
-          <p>
-            A few specifics need to be understood before coding up the approach:
-          </p>
-          <ul>
-            <li>
-              Re-ordering the queries: couple <code>query[i]</code> with
-              <code>i</code>, then sort. When responding to queries in sorted
-              order, we know where to place them in an output
-              container&mdash;index <code>i</code>.
-            </li>
-            <li>
-              The linear scan: accumulate a running maximal beauty, starting at
-              index <code>0</code>. For some query <code>query</code>, we want
-              to consider all items with price less than or equal to
-              <code>query</code>. Therefore, loop until this condition is
-              <i>violated</i>&mdash; the previous index will represent the last
-              considered item.
-            </li>
-            <li>
-              Edge cases: it&apos;s perfectly possible the last considered item
-              is invalid (consider a query cheaper than the cheapest item).
-              Return <code>0</code> as specified by the problem constraints.
-            </li>
-          </ul>
-          <h3>
-            carrying out the plan
-          </h3>
-<div class="post-code">
-              <pre><code class="language-cpp">vector<int> maximumBeauty(vector<vector<int>>& items, vector<int>& queries) {
+            <h3>carrying out the plan</h3>
+            <p>
+              A few specifics need to be understood before coding up the
+              approach:
+            </p>
+            <ul>
+              <li>
+                Re-ordering the queries: couple <code>query[i]</code> with
+                <code>i</code>, then sort. When responding to queries in sorted
+                order, we know where to place them in an output
+                container&mdash;index <code>i</code>.
+              </li>
+              <li>
+                The linear scan: accumulate a running maximal beauty, starting
+                at index <code>0</code>. For some query <code>query</code>, we
+                want to consider all items with price less than or equal to
+                <code>query</code>. Therefore, loop until this condition is
+                <i>violated</i>&mdash; the previous index will represent the
+                last considered item.
+              </li>
+              <li>
+                Edge cases: it&apos;s perfectly possible the last considered
+                item is invalid (consider a query cheaper than the cheapest
+                item). Return <code>0</code> as specified by the problem
+                constraints.
+              </li>
+            </ul>
+            <div class="post-code">
+              <pre><code class="language-cpp">vector&lt;int&gt; maximumBeauty(vector&lt;vector&lt;int&gt;&gt;& items, vector&lt;int&gt;& queries) {
   std::sort(items.begin(), items.end());
   std::vector&lt;pair&lt;int, int&gt;&gt; sorted_queries;
   sorted_queries.reserve(queries.size());
@@ -139,7 +137,7 @@
 
   int beauty = items[0][1];
   size_t i = 0;
-  std::vector<int> ans(queries.size());
+  std::vector&lt;int&gt; ans(queries.size());
 
   for (const auto [query, index] : sorted_queries) {
     while (i < items.size() && items[i][0] <= query) {
@@ -152,6 +150,30 @@
 
   return std::move(ans);</code></pre>
             </div>
+            <h3>asymptotic complexity</h3>
+            <p>
+              Let <code>n=len(items)</code> and <code>m=len(queries)</code>.
+              There may be more items than queries, or vice versa. Note that a
+              &ldquo;looser&rdquo; upper bound can be found by analyzing the
+              runtime in terms of \(max\{n,m\}\).
+            </p>
+            <p>
+              <u>Time Complexity</u>: \(O(nlg(n)+mlg(m)+m)=O(nlg(n)+mlg(m))\).
+              An argument can be made that because
+              <code>queries[i],items[i][{0,1}]</code>\(\leq10^9\), radix sort
+              can be leveraged to achieve a time complexity of \(O(d \cdot (n +
+              k + m + k)) = O(9 \cdot (n + m + 20)) = O(9n+9m + 180) = O(9n+9m)
+              = O(n+m)\).
+            </p>
+            <p>
+              <u>Space Complexity</u>: \(\Theta(1)\), considering that \(O(m)\)
+              space must be allocated. If <code>queries</code>/<code
+                >items</code
+              >
+              cannot be modified in-place, increase the space complexity by
+              \(m\)/\(n\) respectively.
+            </p>
+          </div>
           <div class="fold">
             <h2>
               <a
@@ -159,7 +181,7 @@
                 href="https://leetcode.com/problems/shortest-subarray-with-or-at-least-k-ii/description/"
                 >shortest subarray with or at least k ii</a
               >
-              &mdash; 9/12/24
+              &mdash; 9/11/24
             </h2>
           </div>
           <div class="problem-content">
@@ -341,7 +363,7 @@
                 href="https://leetcode.com/problems/minimum-array-end/"
                 >minimum array end</a
               >
-              &mdash; 9/11/24
+              &mdash; 9/10/24
             </h2>
           </div>
           <div class="problem-content">
