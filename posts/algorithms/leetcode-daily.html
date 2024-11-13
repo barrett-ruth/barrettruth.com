@@ -42,6 +42,206 @@
             <h2>
               <a
                 target="blank"
+                href="https://leetcode.com/problems/count-the-number-of-fair-pairs/"
+                >count the number of fair pairs</a
+              >
+              &mdash; 9/13/24
+            </h2>
+          </div>
+          <div class="problem-content">
+            <h3>problem statement</h3>
+            <p>
+              Given an array <code>nums</code> of integers and upper/lower
+              integer bounds <code>upper</code>/<code>lower</code> respectively,
+              return the number of unique valid index pairs such that: \[i\neq
+              j,lower\leq nums[i]+nums[j]\leq upper\]
+            </p>
+            <h3>understanding the problem</h3>
+            <p>
+              This is another sleeper daily in which a bit of thinking in the
+              beginning pays dividends. Intuitively, I think it makes sense to
+              reduce the &ldquo;dimensionality&rdquo; of the problem. Choosing
+              both <code>i</code> and <code>j</code> concurrently seems tricky,
+              so let&apos;s assume we&apos;ve found a valid <code>i</code>. What
+              must be true? Well: \[i\neq j,lower-nums[i]\leq nums[j]\leq
+              upper-nums[i]\]
+            </p>
+            <p>
+              It doesn&apos;t seem like we&apos;ve made much progress. If nums
+              is a sequence of random integers,
+              <i
+                >there&apos;s truly no way to find all <code>j</code> satisfying
+                this condition efficiently</i
+              >.
+            </p>
+            <p>
+              The following question naturally arises: can we modify our input
+              to find such <code>j</code> efficiently? Recall our goal: find the
+              smallest/largest j to fit within our altered bounds&mdash;in other
+              words, find the smallest \(x\) less/greater than or equal to a
+              number. If binary search bells aren&apos;t clanging in your head
+              right now, I&apos;m not sure what to say besides keep practicing.
+            </p>
+            <p>
+              So, it would be nice to sort <code>nums</code> to find such
+              <code>j</code> relatively quickly. However:
+              <i>are we actually allowed to do this?</i> This is the core
+              question I think everyone skips over. Maybe it is trivial but it
+              is important to emphasize:
+            </p>
+            <ul style="list-style: none">
+              <li>
+                <i>Yes, we are allowed to sort the input</i>. Re-frame the
+                problem: what we are actually doing is choosing distinct
+                <code>i</code>, <code>j</code> to satisfy some condition. The
+                order of <code>nums</code> does not matter&mdash;rather, its
+                contents do. Any input to this algorithm with
+                <code>nums</code> with the same contents will yield the same
+                result. If we were to modify <code>nums</code> instead of
+                rearrange it, this would be invalid because we could be
+                introducing/taking away valid index combinations.
+              </li>
+            </ul>
+            <p>
+              Let&apos;s consider our solution a bit more before implementing
+              it:
+            </p>
+            <ul>
+              <li>
+                Is the approach feasible? We&apos;re sorting
+                <code>nums</code> then binary searching over it considering all
+                <code>i</code>, which will take around \(O(nlg(n))\) time.
+                <code>len(nums)</code>\(\leq10^5\), so this is fine.
+              </li>
+              <li>
+                How do we avoid double-counting? The logic so far makes no
+                effort. If we consider making all pairs with indices
+                <i>less than</i> <code>i</code> for all
+                <code>i</code> left-to-right, we&apos;ll be considering all
+                valid pairs with no overlap. This is a common pattern&mdash;take
+                a moment to justify it to yourself.
+              </li>
+              <li>
+                <i>Exactly</i> how many elements do we count? Okay, we&apos;re
+                considering some rightmost index <code>i</code> and we&apos;ve
+                found upper and lower index bounds <code>j</code> and
+                <code>k</code> respectively. We can pair
+                <code>nums[j]</code> with all elements up to an including
+                <code>nums[k]</code> (besides <code>nums[j]</code>). There are
+                exactly \(k-j\) of these. If the indexing confuses you, draw it
+                out and prove it to yourself.
+              </li>
+              <li>
+                How do we get our final answer? Accumulate all
+                <code>k-j</code> for all <code>i</code>.
+              </li>
+            </ul>
+            <h3>carrying out the plan</h3>
+            <p>
+              The following approach implements our logic quite elegantly and
+              directly. The third and fourth arguments to the
+              <code>bisect</code> calls specify <code>lo</code> (inclusive) and
+              <code>hi</code> (exclusive) bounds for our search space, mirroring
+              the criteria that we search across all indices \(\lt i\).
+            </p>
+            <div class="post-code">
+              <pre><code class="language-python">def countFairPairs(self, nums, lower, upper):
+    nums.sort()
+    ans = 0
+
+    for i, num in enumerate(nums):
+       k = bisect_left(nums, lower - num, 0, i)
+       j = bisect_right(nums, upper - num, 0, i)
+
+       ans += k - j
+
+    return ans</code></pre>
+            </div>
+            <h3>optimizing the approach</h3>
+            <p>
+              If we interpret the criteria this way, the above approach is
+              relatively efficient. To improve this approach, we&apos;ll need to
+              reinterpret the constraints. Forget about the indexing and
+              consider the constraint in aggregate. We want to find all \(i,j\)
+              with \(x=nums[i]+nums[j]\) such that \(i\neq j,lower\leq x\leq
+              upper\).
+            </p>
+            <p>
+              We <i>still</i> need to reduce the &ldquo;dimensionality&rdquo; of
+              the problem&mdash;there are just too many moving parts to consider
+              at once. This seems challening. Let&apos;s simplify the problem to
+              identify helpful ideas: pretend <code>lower</code> does not exist
+              (and, of course, that <code>nums</code> is sorted).
+            </p>
+            <p>
+              We&apos;re looking for all index pairs with sum \(\leq upper\).
+              And behold: (almost) two sum in the wild. This can be accomplished
+              with a two-pointers approach&mdash;this post is getting quite long
+              so we&apos;ll skip over why this is the case&mdash;but the main
+              win here is that we can solve this simplified version of our
+              problem in \(O(n)\).
+            </p>
+            <p>
+              Are we any closer to actually solving the problem? Now, we have
+              the count of index pairs \(\leq upper\). Is this our answer?
+              No&mdash;some may be too small, namely, with sum \(\lt lower\).
+              Let&apos;s exclude those by running our two-pointer approach with
+              and upper bound of \(lower-1\) (we want to include \(lower\)).
+              Now, our count reflects the total number of index pairs with a sum
+              in our interval bound.
+            </p>
+            <p>
+              Note that this really is just running a prefix sum/using the
+              &ldquo;inclusion-exclusion&rdquo; principle/however you want to
+              phrase it.
+            </p>
+            <div class="post-code">
+              <pre><code class="language-python">def countFairPairs(self, nums, lower, upper):
+    nums.sort()
+    ans = 0
+
+    def pairs_leq(x: int) -> int:
+        pairs = 0
+        l, r = 0, len(nums) - 1
+        while l < r:
+            if nums[l] + nums[r] <= x:
+                pairs += r - l
+                l += 1
+            else:
+                r -= 1
+        return pairs
+
+    return pairs_leq(upper) - pairs_leq(lower - 1)</code></pre>
+            </div>
+            <h3>some more considerations</h3>
+            <p>
+              The second approach is <i>asymptotically</i> equivalent. However,
+              it&apos;s still worth considering for two reasons:
+            </p>
+            <ol>
+              <li>
+                If an interviewer says &ldquo;assume <code>nums</code> is
+                sorted&rdquo; or &ldquo;how can we do
+                better?&rdquo;&mdash;you&apos;re cooked.
+              </li>
+              <li>
+                (Much) more importantly, it&apos;s extremely valuable to be able
+                to <i>reconceptualize</i> a problem and look at it from
+                different angles. Not being locked in on a solution shows
+                perseverance, curiosity, and strong problem-solving abilities.
+              </li>
+            </ol>
+            <h3>asymptotic complexity</h3>
+            <p>
+              <u>Time Complexity</u>: \(O(nlg(n))\) for both&mdash;\(O(n)\) if
+              <code>nums</code> is sorted with respect to the second approach.
+            </p>
+            <p><u>Space Complexity</u>: \(\Theta(1)\) for both.</p>
+          </div>
+          <div class="fold">
+            <h2>
+              <a
+                target="blank"
                 href="https://leetcode.com/problems/most-beautiful-item-for-each-query/description/"
                 >most beautiful item for each query</a
               >
