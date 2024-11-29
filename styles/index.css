@@ -40,7 +40,6 @@ ul {
   width: 100%;
 }
 
-.posts,
 .topics {
   padding: 0 40px;
   align-self: center;
@@ -48,12 +47,6 @@ ul {
 
 .topics {
   font-size: 3em;
-}
-
-.posts {
-  font-size: 2em;
-  text-align: right;
-  flex: 1;
 }
 
 .post {

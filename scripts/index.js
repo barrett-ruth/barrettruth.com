@@ -1,29 +1,8 @@
 const postMapping = new Map([
-  [
-    "Software",
-    [
-      { name: "from github pages to aws", link: "from-github-pages-to-aws" },
-      { name: "designing this website", link: "designing-this-website" },
-      // { name: "working in the terminal" },
-    ],
-  ],
-  [
-    "Economics",
-    [
-      { name: "models of production", link: "models-of-production" },
-      // { name: "the short run" },
-      // { name: "in the aggregate" },
-    ],
-  ],
-  ["Trading", [{ name: "InteractiveBrokers TWS" }, { name: "valuation" }]],
-  [
-    "Algorithms",
-    [
-      { name: "leetcode daily", link: "leetcode-daily" },
-      { name: "extrema circular buffer", link: "extrema-circular-buffer" },
-      { name: "two pointers", link: "two-pointers" },
-    ],
-  ],
+  ["Software", []],
+  ["Economics", []],
+  ["Trading", []],
+  ["Algorithms", []],
 ]);
 
 function refresh(e) {
@@ -36,30 +15,7 @@ function refresh(e) {
     topic.style.color = "";
   });
 
-  document.getElementById("posts").innerHTML = "";
-
   clearPrompt(500);
-}
-
-function renderPosts(topic) {
-  const posts = document.getElementById("posts");
-  posts.innerHTML = "";
-
-  postMapping.get(topic).forEach(({ name: postName, link: postLink }) => {
-    const post = document.createElement("div");
-    post.classList.add("post");
-
-    const link = document.createElement("a");
-    link.href = postLink
-      ? `/posts/${topic.toLowerCase()}/${postLink}.html`
-      : `/wip.html`;
-    link.textContent = postName;
-
-    link.style.textDecoration = "underline";
-
-    post.appendChild(link);
-    posts.appendChild(post);
-  });
 }
 
 let typing = false;
@@ -84,8 +40,9 @@ function typechars(e) {
         terminalPrompt.innerHTML += terminalText.charAt(i++);
         setTimeout(typechar, delay / terminalText.length);
       } else {
-        renderPosts(topic);
         typing = false;
+
+        window.location.replace(`/posts/${topic.toLowerCase()}/index.html`)
       }
     }
 
@@ -124,7 +81,6 @@ document.addEventListener("DOMContentLoaded", function () {
       });
 
       topic.classList.add("active");
-      document.getElementById("posts").innerHTML = "";
       topic.style.color = getTopicColor(topicName);
     });
   });
