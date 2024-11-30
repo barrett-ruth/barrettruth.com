@@ -68,6 +68,10 @@ pre {
   border: 1px solid #e1e1e1;
 }
 
+pre * {
+  background: #f4f4f4 !important;
+}
+
 .post-title::before {
   content: "";
   position: absolute;
