@@ -109,3 +109,11 @@ pre * {
 .post-article a {
   text-decoration: underline;
 }
+
+.language-python,
+.language-py,
+.language-cc,
+.language-cpp {
+  /* override prism.js styles */
+  font-size: 0.8em !important;
+}
