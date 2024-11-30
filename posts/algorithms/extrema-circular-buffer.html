@@ -51,23 +51,19 @@
           <p>Design a data structure supporting the following operations:</p>
           <ul>
             <li>
-              <span class="inline-code"
-                ><code>build(size_t capacity)</code></span
-              >
+              <span><code>build(size_t capacity)</code></span>
               : initialize the data structure with capacity/window size
-              <span class="inline-code"><code>capacity</code></span>
+              <span><code>capacity</code></span>
             </li>
             <ul>
               <li>
                 The data structure must always hold \(\leq\)
-                <span class="inline-code"><code>capacity</code></span>
+                <span><code>capacity</code></span>
                 prices.
               </li>
             </ul>
             <li>
-              <span class="inline-code"
-                ><code>void push_back(double value)</code></span
-              >
+              <span><code>void push_back(double value)</code></span>
             </li>
             <ul>
               <li>
@@ -76,15 +72,15 @@
               </li>
             </ul>
             <li>
-              <span class="inline-code"><code>void pop_front()</code></span>
+              <span><code>void pop_front()</code></span>
               : remove the price from the front of the window
             </li>
             <li>
-              <span class="inline-code"><code>size_t size()</code></span>
+              <span><code>size_t size()</code></span>
               : return the number of prices in the data structure
             </li>
             <li>
-              <span class="inline-code"><code>double get()</code></span>
+              <span><code>double get()</code></span>
               : return the extrema (min or max)
             </li>
           </ul>
@@ -104,9 +100,7 @@
               <a
                 target="blank"
                 href="https://en.cppreference.com/w/cpp/container/deque"
-                ><span class="inline-code"
-                  ><code>std::deque&lt;double&gt;</code></span
-                ></a
+                ><span><code>std::deque&lt;double&gt;</code></span></a
               >.
             </p>
             <p>
@@ -115,13 +109,13 @@
               operations. The minimum/maximum element must be found via a linear
               scan in \(O(n)\) time, certainly far from optimal.
             </p>
-            <div class="code" data-file="naive.cpp"</div>
+            <div class="code" data-file="naive.cpp"></div>
           </div>
           <h3>optimizing the approach</h3>
           <div class="problem-content">
             <p>
               Rather than bear the brunt of the work finding extrema in calls to
-              <span class="inline-code"><code>get()</code></span
+              <span><code>get()</code></span
               >, we can distribute it across the data structure as it is built.
             </p>
             <p>
@@ -214,13 +208,9 @@
               </li>
               <li>
                 The class could leverage templates to take in a comparator
-                <span class="inline-code"
-                  ><code>std::less&lt;double&gt;</code></span
-                >
+                <span><code>std::less&lt;double&gt;</code></span>
                 ) to easily specify a minimum/maximum
-                <span class="inline-code"
-                  ><code>ExtremaCircularBuffer</code></span
-                >
+                <span><code>ExtremaCircularBuffer</code></span>
                 as well as a value type to support all operations.
               </li>
               <li>
