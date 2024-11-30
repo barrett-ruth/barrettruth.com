@@ -92,8 +92,7 @@ function drawSolowGraph() {
     .attr("y", y(outputData[K_MAX - 1].Y))
     .append("xhtml:body")
     .style("font-size", "0.75em")
-    .html(`<div class="solow-visualization-y"></div>`);
-  katex.render("Y", document.querySelector(".solow-visualization-y"));
+    .html(`\\(Y\\)`);
 
   const depreciationData = Array.from({ length: K_MAX }, (_, k) => ({
     K: k,
@@ -121,8 +120,8 @@ function drawSolowGraph() {
     .attr("y", y(depreciationData[K_MAX - 1].Y))
     .append("xhtml:body")
     .style("font-size", "0.75em")
-    .html(`<div class="solow-visualization-d"></div>`);
-  katex.render("\\bar{d}K", document.querySelector(".solow-visualization-d"));
+    .append("xhtml:div")
+    .html("\\(\\bar{d}K\\)");
 
   const investmentData = outputData.map((d) => ({
     K: d.K,
@@ -150,8 +149,7 @@ function drawSolowGraph() {
     .attr("y", y(investmentData[K_MAX - 1].Y))
     .append("xhtml:body")
     .style("font-size", "0.75em")
-    .html(`<div class="solow-visualization-i"></div>`);
-  katex.render("I", document.querySelector(".solow-visualization-i"));
+    .html("\\(I\\)");
 
   const k_star = L * Math.pow((s * A) / d, 1 / (1 - alpha));
   svg
@@ -169,15 +167,11 @@ function drawSolowGraph() {
     .append("foreignObject")
     .attr("width", "20em")
     .attr("height", "2em")
-    .attr("x", x(k_star) - 150)
-    .attr("y", y(y_star) - 50)
+    .attr("x", x(k_star) - 40)
+    .attr("y", y(y_star) - 40)
     .append("xhtml:body")
     .style("font-size", "0.75em")
-    .html(`<div class="solow-visualization-eq"></div>`);
-  katex.render(
-    `(K^*,Y^*)=(${k_star.toFixed(0)},${y_star.toFixed(0)})`,
-    document.querySelector(".solow-visualization-eq"),
-  );
+    .html(`(${k_star.toFixed(0)}, ${y_star.toFixed(0)})`);
 }
 
 const formatNumber = (num) => {
@@ -191,12 +185,9 @@ const updateRomerTable = (romerData) => {
   const rowA_t = document.getElementById("row-A_t");
   const rowY_t = document.getElementById("row-Y_t");
 
-  tableHeader.innerHTML = `<th ${normalFont}><div class="romer-table-time"></th>`;
-  katex.render(`t`, document.querySelector(".romer-table-time"));
-  rowA_t.innerHTML = `<td class="romer-table-at"></td>`;
-  rowY_t.innerHTML = `<td class="romer-table-yt"></td>`;
-  katex.render("A_t", document.querySelector(".romer-table-at"));
-  katex.render("Y_t", document.querySelector(".romer-table-yt"));
+  tableHeader.innerHTML = `<th ${normalFont}>t</th>`;
+  rowA_t.innerHTML = `<td class="romer-table-at">A_t</td>`;
+  rowY_t.innerHTML = `<td class="romer-table-yt">Y_t</td>`;
 
   romerData.forEach((d) => {
     if (d.year % 20 === 0 || d.year === 1) {
@@ -291,8 +282,7 @@ function drawRomerGraph() {
     .attr("y", y(romerData[T_MAX - 1].Y))
     .append("xhtml:body")
     .style("font-size", "0.75em")
-    .html(`<div class="romer-visualization-y"></div>`);
-  katex.render("log_{10}Y", document.querySelector(".romer-visualization-y"));
+    .html(`\\(log_{10}Y\\)`);
 
   updateRomerTable(romerData);
 }
@@ -398,11 +388,7 @@ function drawRomerlGraph() {
     .attr("y", y(romerData[0].Y))
     .append("xhtml:body")
     .style("font-size", "0.6em")
-    .html(`<div class="romer-changel-before"></div>`);
-  katex.render(
-    `\\bar{l}_0=${l_}`,
-    document.querySelector(".romer-changel-before"),
-  );
+    .html(`\\(\\bar{l}_0=${l_}\\)`);
 
   svg
     .append("foreignObject")
@@ -412,11 +398,7 @@ function drawRomerlGraph() {
     .attr("y", y(romerData[t0].Y))
     .append("xhtml:body")
     .style("font-size", "0.6em")
-    .html(`<div class="romer-changel-after"></div>`);
-  katex.render(
-    `\\bar{l}_1=${l}`,
-    document.querySelector(".romer-changel-after"),
-  );
+    .html(`\\(\\bar{l}_1=${l}\\)`);
 
   svg
     .append("foreignObject")
@@ -426,8 +408,7 @@ function drawRomerlGraph() {
     .attr("y", y(romerData[T_MAX - 1].Y))
     .append("xhtml:body")
     .style("font-size", "0.75em")
-    .html(`<div class="romer-changel-y"></div>`);
-  katex.render("log_{10}Y", document.querySelector(".romer-changel-y"));
+    .html(`\\(log_{10}Y\\)`);
 }
 
 function calculateRomerSolowData(
@@ -552,11 +533,7 @@ function drawRomerSolowGraph() {
     .attr("y", y(romerSolowData[T_MAX - 1].Y))
     .append("xhtml:body")
     .style("font-size", "0.75em")
-    .html(`<div class="romer-solow-visualization-y"></div>`);
-  katex.render(
-    "log_{10}Y",
-    document.querySelector(".romer-solow-visualization-y"),
-  );
+    .html(`\\(log_{10}Y\\)`);
 }
 
 function drawRomerSolowChangeGraph() {
@@ -666,11 +643,7 @@ function drawRomerSolowChangeGraph() {
     .attr("y", y(romerSolowData[T_MAX - 1].Y))
     .append("xhtml:body")
     .style("font-size", "0.75em")
-    .html(`<div class="romer-solow-change-visualization-y"></div>`);
-  katex.render(
-    "log_{10}Y",
-    document.querySelector(".romer-solow-change-visualization-y"),
-  );
+    .html(`\\(log_{10}Y\\)`);
 }
 
 document.addEventListener("DOMContentLoaded", function () {
