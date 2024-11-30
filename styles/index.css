@@ -1,43 +1,9 @@
-html,
-body {
-  display: flex;
-  flex-direction: column;
-}
-
-header,
-footer {
-  font-size: 1.5em;
-  display: flex;
-  align-items: center;
-}
-
-header {
-  justify-content: space-between;
-}
-footer {
-  justify-content: flex-end;
-}
-
-.main {
-  flex: 1;
-  display: flex;
-}
-
-.header-links a,
-.footer-links a {
-  margin-left: 25px;
+main {
+  overflow: hidden;
 }
 
 ul {
   list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.content {
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
 }
 
 .topics {
@@ -47,11 +13,6 @@ ul {
 
 .topics {
   font-size: 3em;
-}
-
-.post {
-  font-style: italic;
-  margin-bottom: 25px;
 }
 
 .topic a {

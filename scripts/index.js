@@ -42,7 +42,7 @@ function typechars(e) {
       } else {
         typing = false;
 
-        window.location.replace(`/posts/${topic.toLowerCase()}/index.html`)
+        window.location.href = `/posts/${topic.toLowerCase()}/index.html`;
       }
     }
 
@@ -84,4 +84,45 @@ document.addEventListener("DOMContentLoaded", function () {
       topic.style.color = getTopicColor(topicName);
     });
   });
+});
+
+function loadMarkdown(filePath) {
+  fetch(filePath)
+    .then((response) => response.text())
+    .then((markdown) => {
+      const post = document.querySelector(".post");
+      post.innerHTML = marked.parse(markdown);
+
+      renderMathInElement(post, {
+        delimiters: [
+          { left: "$$", right: "$$", display: true },
+          { left: "$", right: "$", display: false },
+          { left: "\\(", right: "\\)", display: false },
+          { left: "\\[", right: "\\]", display: true },
+        ],
+        throwOnError: false,
+      });
+    })
+    .catch((error) => {
+      console.error("Error fetching markdown:", error);
+    });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const path = window.location.pathname;
+  const pathParts = path.split("/").filter((part) => part !== "");
+
+  if (pathParts.length >= 3 && pathParts[0] === "posts") {
+    const topic = pathParts[1];
+    let pageName = pathParts[2].replace(".html", "");
+
+    const markdownPath = `/posts/${topic}/${pageName}.md`;
+
+    loadMarkdown(markdownPath);
+
+    -document.documentElement.style.setProperty(
+      "--topic-color",
+      getTopicColor(urlToTopic()),
+    );
+  }
 });

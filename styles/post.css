@@ -1,55 +1,17 @@
-html,
-body {
-  font-family: "Signifier", serif;
-  margin: 0;
-  padding: 0;
-  height: 100%;
-}
-
-header {
-  font-size: 1.5em;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-ul {
-  list-style: unset;
-}
-
-li {
-  margin: 5px 0;
-}
-
-.main {
-  display: flex;
-  justify-content: center;
-}
-
-.post-header {
-  padding: 0;
-}
-
-.post-container {
+.post {
   width: 80%;
+  margin: 0 auto;
 }
 
-.post-meta {
-  font-style: italic;
-  /* space between date and title */
-  margin-left: 100px;
-}
-
-.post-title {
+.post h1 {
   font-weight: normal;
-  font-size: 2.2em;
-  margin: 50px 0;
   width: 100%;
   position: relative;
   display: inline-block;
+  margin-top: 0;
 }
 
-.post-title::before {
+.post h1::before {
   content: "";
   position: absolute;
   background-color: var(--topic-color);
@@ -59,7 +21,7 @@ li {
   left: -20px;
 }
 
-.post-title::after {
+.post h1::after {
   content: "";
   position: absolute;
   background-color: var(--topic-color);
@@ -67,45 +29,4 @@ li {
   height: 2px;
   bottom: -10px;
   left: -20px;
-}
-
-.post-article {
-  font-size: 1.5em;
-  line-height: 1.3em;
-  padding-bottom: 50px;
-}
-
-.post-article h2 {
-  font-weight: normal;
-  font-style: italic;
-}
-
-.post-article h3 {
-  font-weight: normal;
-}
-
-.post-article a {
-  text-decoration: underline;
-}
-
-.post-code {
-  display: flex;
-  justify-content: center;
-}
-
-.language-python,
-.language-cpp {
-  /* override prism.js styles */
-  font-size: 0.85em !important;
-}
-
-.fold {
-  position: relative;
-}
-
-.fold-toggle {
-  font-family: monospace;
-  position: absolute;
-  cursor: pointer;
-  left: -25px;
 }

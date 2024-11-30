@@ -5,28 +5,41 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="/styles/common.css" />
-    <link rel="stylesheet" href="/styles/index.css" />
+    <link rel="stylesheet" href="/styles/post.css" />
     <link rel="icon" type="image/webp" href="/public/logo.webp" />
-    <!-- insert any cdns necessary here -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css"
+      crossorigin="anonymous"
+    />
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.js"
+    ></script>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/contrib/auto-render.min.js"
+      crossorigin="anonymous"
+    ></script>
     <title>Barrett Ruth</title>
   </head>
   <body class="graph-background">
     <header>
-      <a href="/" onclick="refresh(event)">
+      <a
+        href="/"
+        style="text-decoration: none; color: inherit"
+        onclick="goHome(event)"
+      >
         <div class="terminal-container">
-          <span class="terminal-prompt">barrett@ruth:~/economics$</span>
+          <span class="terminal-prompt">barrett@ruth:~$ /economics</span>
           <span class="terminal-cursor"></span>
         </div>
       </a>
-      <div class="header-links">
-        <a target="_blank" href="/public/resume.pdf">Resume</a>
-        <a target="_blank" href="/public/transcript.pdf">Transcript</a>
-      </div>
     </header>
     <main class="main">
-      <div class="content">
-        <!-- insert fetching markdown here -->
-      </div>
+      <div class="post"></div>
+    </main>
     <footer>
       <div class="footer-links">
         <a target="_blank" href="https://github.com/barrett-ruth/">GitHub</a>
@@ -36,9 +49,7 @@
         <a target="_blank" href="mailto:br.barrettruth@gmail.com">Email</a>
       </div>
     </footer>
-    <!-- markdown logic here -->
-    <script src="scripts/markdown.js"></script>
-    <script src="scripts/common.js"></script>
-    <script src="scripts/index.js"></script>
+    <script src="/scripts/common.js"></script>
+    <script src="/scripts/index.js"></script>
   </body>
 </html>
