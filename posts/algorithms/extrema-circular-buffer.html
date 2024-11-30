@@ -115,44 +115,7 @@
               operations. The minimum/maximum element must be found via a linear
               scan in \(O(n)\) time, certainly far from optimal.
             </p>
-            <pre><code class="language-cpp">#include &lt;algorithm&gt;
-#include &lt;deque&gt;
-#include &lt;stdexcept&gt;
-
-class ExtremaCircularBuffer {
-public:
-  ExtremaCircularBuffer(size_t capacity) : capacity(capacity) {}
-
-  void push_back(double value) {
-    if (prices.size() == capacity) {
-      prices.pop_front();
-    }
-
-    prices.push_back(value);
-  }
-
-  void pop_front() {
-    if (prices.empty()) {
-      throw std::out_of_range("Cannot pop_front() from empty buffer");
-    }
-
-    prices.pop_front();
-  }
-
-  size_t size() const { return prices.size(); }
-
-  double get() const {
-    if (prices.empty()) {
-      throw std::out_of_range("Cannot find max() of empty buffer");
-    }
-
-    return *std::max_element(prices.begin(), prices.end());
-  }
-
-private:
-  std::deque&lt;double&gt; prices;
-  size_t capacity;
-};</code></pre>
+            <div class="code" data-file="naive.cpp"</div>
           </div>
           <h3>optimizing the approach</h3>
           <div class="problem-content">
@@ -174,9 +137,7 @@ private:
               <a
                 target="blank"
                 href="https://en.cppreference.com/w/cpp/container/map"
-                ><span class="inline-code"
-                  ><code>std::map&lt;double, size_t&gt;</code></span
-                ></a
+                >std::map</a
               >
               allows us to do all of this.
             </p>
@@ -184,62 +145,7 @@ private:
               Now, we can access extrema instantly. Insertion and deletion take
               \(O(log(n))\) time thanks to the map&mdash;but we can do better.
             </p>
-            <pre><code class="language-cpp">#include &lt;deque&gt;
-#include &lt;map&gt;
-#include &lt;stdexcept&gt;
-
-class ExtremaCircularBuffer {
-public:
-  ExtremaCircularBuffer(size_t capacity) : capacity(capacity) {}
-
-  void push_back(double value) {
-    if (prices.size() == capacity) {
-      double front = prices.front();
-
-      if (--sorted_prices[front] == 0)
-        sorted_prices.erase(front);
-      prices.pop_front();
-    }
-
-    prices.push_back(value);
-    ++sorted_prices[value];
-  }
-
-  void pop_front() {
-    if (prices.empty()) {
-      throw std::out_of_range("Cannot pop_front() from empty buffer");
-    }
-
-    double front = prices.front();
-
-    if (--sorted_prices[front] == 0)
-      sorted_prices.erase(front);
-    prices.pop_front();
-  }
-
-  size_t size() const { return prices.size(); }
-
-  double get_max() const {
-    if (prices.empty()) {
-      throw std::out_of_range("Cannot find max() of empty buffer");
-    }
-
-    return sorted_prices.rbegin()-&gt;first;
-  }
-
-  double get_min() const {
-    if (prices.empty()) {
-      throw std::out_of_range("Cannot find min() of empty buffer");
-    }
-
-    return sorted_prices.begin()-&gt;first;
-  }
-
-private:
-  std::deque&lt;double&gt; prices;
-  std::map&lt;double, size_t&gt; sorted_prices;
-  size_t capacity;
-};</code></pre>
+            <div class="code" data-file="map.cpp"></div>
           </div>
           <h3>monotonic <s>queues</s> deques</h3>
           <div class="problem-content">
@@ -298,71 +204,7 @@ private:
               once; across a sequence of \(n\) operations, \(n\) total \(O(1)\)
               operations will be executed).
             </p>
-            <pre><code class="language-cpp">#include &lt;deque&gt;
-#include &lt;stdexcept&gt;
-#include &lt;utility&gt;
-
-class ExtremaCircularBuffer {
-public:
-  explicit ExtremaCircularBuffer(size_t capacity) : capacity(capacity) {}
-
-  void push_back(double value) {
-    if (prices.size() == capacity) {
-      double front_value = prices.front();
-      pop_max(front_value);
-      prices.pop_front();
-    }
-
-    prices.push_back(value);
-    push_max(value);
-  }
-
-  void pop_front() {
-    if (prices.empty()) {
-      throw std::out_of_range("Cannot pop_front() from empty buffer");
-    }
-
-    double front_value = prices.front();
-    pop_max(front_value);
-    prices.pop_front();
-  }
-
-  size_t size() const { return prices.size(); }
-
-  double get_max() const {
-    if (prices.empty()) {
-      throw std::out_of_range("Cannot find max() of empty buffer");
-    }
-
-    return maxs.front().first;
-  }
-
-private:
-  void push_max(double value) {
-    size_t popped = 0;
-
-    while (!maxs.empty() &amp;&amp; maxs.back().first &lt; value) {
-      popped += maxs.back().second + 1;
-      maxs.pop_back();
-    }
-
-    maxs.emplace_back(value, popped);
-  }
-
-  void pop_max(double value) {
-    size_t popped = maxs.front().second;
-
-    if (popped == 0) {
-      maxs.pop_front();
-    } else {
-      --maxs.front().second;
-    }
-  }
-
-  std::deque&lt;double&gt; prices;
-  std::deque&lt;std::pair&lt;double, size_t&gt;&gt; maxs;
-  size_t capacity;
-};</code></pre>
+            <div class="code" data-file="monotonic.cpp"></div>
             <h3>further improvements</h3>
             <ol>
               <li>
