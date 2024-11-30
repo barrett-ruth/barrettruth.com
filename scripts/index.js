@@ -15,14 +15,12 @@ const postMapping = new Map([
       // { name: "in the aggregate" },
     ],
   ],
-  ["Trading", [{ name: "InteractiveBrokers TWS" }, { name: "valuation" }]],
   [
-    "Algorithms",
-    [
-      { name: "leetcode daily", link: "leetcode-daily" },
-      { name: "extrema circular buffer", link: "extrema-circular-buffer" },
-    ],
+    "Trading",
+    [{ name: "extrema circular buffer", link: "extrema-circular-buffer" }],
+    // { name: "InteractiveBrokers TWS" }, { name: "valuation" }]],
   ],
+  ["Algorithms", [{ name: "leetcode daily", link: "leetcode-daily" }]],
 ]);
 
 function refresh(e) {
