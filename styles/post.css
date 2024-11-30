@@ -49,10 +49,11 @@ li {
   display: inline-block;
 }
 
-code {
+:not(pre) > code {
   font-family: "Courier New", Courier, monospace;
   background-color: #f4f4f4;
   padding: 2px 4px;
+  margin: 0 5px;
   border: 1px solid #e1e1e1;
   border-radius: 4px;
   font-size: 0.95em;
