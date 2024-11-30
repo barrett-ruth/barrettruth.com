@@ -77,7 +77,6 @@ li {
 
 .post-article h2 {
   font-weight: normal;
-  font-style: italic;
 }
 
 .post-article h3 {
@@ -97,15 +96,4 @@ li {
 .language-cpp {
   /* override prism.js styles */
   font-size: 0.85em !important;
-}
-
-.fold {
-  position: relative;
-}
-
-.fold-toggle {
-  font-family: monospace;
-  position: absolute;
-  cursor: pointer;
-  left: -25px;
 }
