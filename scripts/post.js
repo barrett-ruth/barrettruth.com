@@ -22,7 +22,11 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll(".code").forEach(loadCode);
+  document.querySelectorAll(".code").forEach((e) => {
+    e.style.display = "flex";
+    e.style["justify-content"] = "center";
+    loadCode(e);
+  });
 });
 
 async function loadCode(e) {
