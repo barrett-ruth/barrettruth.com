@@ -4,8 +4,6 @@
 
 class ExtremaCircularBuffer {
 public:
-  explicit ExtremaCircularBuffer(size_t capacity) : capacity(capacity) {}
-
   void push_back(double value) {
     if (prices.size() == capacity) {
       double front_value = prices.front();
@@ -26,8 +24,6 @@ public:
     pop_max(front_value);
     prices.pop_front();
   }
-
-  size_t size() const { return prices.size(); }
 
   double get_max() const {
     if (prices.empty()) {
@@ -59,7 +55,5 @@ private:
     }
   }
 
-  std::deque<double> prices;
-  std::deque<std::pair<double, size_t>> maxs;
-  size_t capacity;
+  /* methods & fields omitted for brevity */
 };

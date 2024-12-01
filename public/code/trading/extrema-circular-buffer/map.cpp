@@ -4,8 +4,6 @@
 
 class ExtremaCircularBuffer {
 public:
-  ExtremaCircularBuffer(size_t capacity) : capacity(capacity) {}
-
   void push_back(double value) {
     if (prices.size() == capacity) {
       double front = prices.front();
@@ -49,8 +47,5 @@ public:
     return sorted_prices.begin()->first;
   }
 
-private:
-  std::deque<double> prices;
-  std::map<double, size_t> sorted_prices;
-  size_t capacity;
+  /* methods & fields omitted for brevity */
 };
