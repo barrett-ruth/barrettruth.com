@@ -200,19 +200,19 @@
             </p>
             <div class="code" data-file="monotonic.cpp"></div>
             <h3>further improvements</h3>
+            <p>
+              The final implementation utilized in the TRB includes the
+              following features:
+            </p>
             <ol>
               <li>
-                The class could leverage templates to take in a comparator
-                <span><code>std::less&lt;double&gt;</code></span>
-                ) to easily specify a minimum/maximum
-                <span><code>ExtremaCircularBuffer</code></span>
-                as well as a value type to support all operations.
+                A ringbuffer a statically-allocated <code>std::array</code>, as
+                any fix-sized queue can be supplanted with one
               </li>
+              <li>A templatized value type and comparator for flexibility</li>
               <li>
-                As it stands, the class also only maintains one of either
-                extrema, and using two monotonic deques, while still
-                <i>theoretically</i> optimal, doesn&apos;t give me a good
-                feeling. The second map-based approach might be favorable here.
+                C++ specific optimizations (rule of 5, smart pointers, and an
+                STL-compliant API)
               </li>
             </ol>
           </div>
