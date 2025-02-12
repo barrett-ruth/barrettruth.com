@@ -9,18 +9,19 @@ const postMapping = new Map([
   ],
   [
     "Economics",
-    [
-      { name: "models of production", link: "models-of-production" },
-      // { name: "the short run" },
-      // { name: "in the aggregate" },
-    ],
+    [{ name: "models of production", link: "models-of-production" }],
   ],
   [
     "Trading",
     [{ name: "extrema circular buffer", link: "extrema-circular-buffer" }],
-    // { name: "InteractiveBrokers TWS" }, { name: "valuation" }]],
   ],
-  ["Algorithms", [{ name: "leetcode daily", link: "leetcode-daily" }]],
+  [
+    "Algorithms",
+    [
+      { name: "leetcode daily", link: "leetcode-daily" },
+      { name: "cp log", link: "cp-log" },
+    ],
+  ],
 ]);
 
 function refresh(e) {
