@@ -36,23 +36,158 @@
         </header>
         <article class="post-article">
           <h2>the beginning&mdash;12/2/2025</h2>
+          <div>
+            <p>
+              This marks the (true) beginning of my competitive programming
+              journey. By "true" I mean intentional, focused, daily practice.
+              Driven by my admiration for competitive programmers, love of
+              challenge, and desire for a decent new-grad job, I'm excited to
+              start putting in the work.
+            </p>
+            <p>
+              This webpage will be an archive of everything related to this
+              process, including my practice strategies, setup, shortcomings,
+              logs, and more. For now, I'll be practicing on
+              <a href="https://codeforces.com" target="_blank">CodeForces</a>
+              (account
+              <a href="https://codeforces.com/profile/sigill" target="_blank"
+                >sigill</a
+              >) and <a href="https://cses.fi" target="_blank">CSES</a>, using
+              the
+              <a href="https://cses.fi/book/book.pdf" target="_blank"
+                >CP Handbook</a
+              >
+              and browsing by related problem tags with ever-increasing
+              difficulty.
+            </p>
+          </div>
+          <h2>
+            <a href="https://codeforces.com/contest/1955" target="_blank"
+              >938 (div. 3)</a
+            >&mdash;15/2/2025
+          </h2>
+          <div class="fold">
+            <p>
+              What would've been my best contest. Unfortunately, CodeForces
+              decided to go down for TREE[3] centuries, which absolutely ruined
+              my groove in the contest and terminated my virtual. No excuses,
+              though, as I set a timer and finished up later.
+            </p>
+          </div>
+          <h3>A</h3>
+          <p>Brute-forced it but it still took me a few minutes.</p>
+          <ul>
+            <li>Read (and exploit) problem constraints</li>
+            <li>
+              Go back and derive the linear optimization (choosing the one with
+              better marginal utility)
+            </li>
+            <li>If you have a (simple enough) solution, just go with it.</li>
+          </ul>
+          <h3>B</h3>
           <p>
-            This marks the (true) beginning of my competitive programming
-            journey. By "true" I mean intentional, focused, daily practice.
-            Driven by my admiration for competitive programmers, love of
-            challenge, and desire for a decent new-grad job, I'm excited to
-            start putting in the work.
+            Easily recognized how to form the matrix (i.e. smallest element
+            first with positive integers \(c,d\)) but tripped up on the
+            implementation.
           </p>
+          <ul>
+            <li>
+              Flesh out the steps before coding (i.e. walk through iterations in
+              head, transitions, edge cases on the rows and columns, i.e.
+              checking if <code>i==n-1</code>) <i>especially</i> on
+              implementation-heavy problems
+            </li>
+          </ul>
+          <h3>C</h3>
           <p>
-            This webpage will be an archive of everything related to this
-            process, including my practice strategies, setup, shortcomings, logs, and
-            more. For now, I'll be practicing on
-            <a href="https://codeforces.com" target="_blank">CodeForces</a> (account
-            <a href="https://codeforces.com/profile/sigill" target="_blank">sigill</a>) and
-            <a href="https://cses.fi" target="_blank">CSES</a>, using the
-            <a href="https://cses.fi/book/book.pdf" target="_blank">CP Handbook</a> and browsing by related problem tags with
-            ever-increasing difficulty.
+            Did a horrific (but correct) binary search solution. Tripped up by
+            specifics of <code>std::{upper,lower}_bound</code> regardless.
+            Technically, generating the prefix and postfix arrays takes two
+            passes and two binary searches to find the answer but this is still
+            more inefficient than the trivial linear scan.
           </p>
+          <ul>
+            <li>THE INT OVERFLOW INCIDENT</li>
+            <li>
+              Deepen understanding of binary search & STL functions to the point
+              that it is second nature
+            </li>
+            <li>Consider simple solutions first.</li>
+          </ul>
+          <h3>D</h3>
+          <p>
+            Instantly recognized sliding window but struggled with minor details
+            (i.e. keeping track of match count) by rushing to the solution.
+          </p>
+          <ul>
+            <li>
+              Problem statement took a long time to grasp. Look at examples and
+              just read through slower (don't rush!)
+            </li>
+            <li>
+              Sliding window grasp isn't <i>rigorous</i>&mdash;improve this
+              later
+            </li>
+            <li>
+              When you don't remember 100% of how an algorithm works,
+              <b>mentally walk through a few iterations</b>
+            </li>
+            <li>Improve PBDS API familiarity (practice)</li>
+          </ul>
+          <h3>E</h3>
+          <p>
+            I had mentally tapped out by this point (I submitted a TLE \(O(n^2k)
+            solution without using my brain\). I solved F first, then took a
+            look at G <i>before</i> coming back to E, robbing me of 10 minutes
+            that could've been the difference between another solve.
+          </p>
+          <ul>
+            <li>
+              You're not like that. Solve problems in order (most of the time,
+              although skipping to F first was a wise decision).
+            </li>
+            <li>
+              Consider ideas <i>fully</i> before dropping them. I considered the
+              difference array, then <i>discarded</i> it, erroneously believing
+              a boolean was sufficient and completely forgetting that the
+              concept of ranges complicates flipping.
+            </li>
+            <li>
+              Formalize constraints more clearly to help form a solution. For
+              example, the idea that flipping things twice makes no difference,
+              permitting the use of a boolean difference array.
+            </li>
+            <li>
+              Prove correctness. I didn't prove that iterating left to right,
+              toggling a range of k actually would always give a correct answer.
+            </li>
+          </ul>
+          <h3>F</h3>
+          <p>
+            Had the solution quickly but overcomplicated the implementation.
+            Walked through the examples and took my time.
+          </p>
+          <ul>
+            <li>
+              Failed to formalize the answer to the problem. I noticed patterns
+              but should've strictly defined the following rule: "Every even
+              count of a number contributes one to the score. Further, one
+              triple of 1, 2, 3 also contributes one." Ultimately, I ended up
+              submitting something I wasn't certain would be correct.
+            </li>
+          </ul>
+          <h3>G</h3>
+          <p>
+            Wasted time believing this was primitive DP, when it totally wasn't.
+          </p>
+          <ul>
+            <li>You're not that guy (yet >:))</li>
+            <li>
+              Prove optimal substructure and overlapping subproblems before
+              using DP & walk through the test cases. In this case, test case 3
+              immediately disproves dp.
+            </li>
+          </ul>
         </article>
       </div>
     </main>
