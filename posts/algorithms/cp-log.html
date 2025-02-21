@@ -66,14 +66,12 @@
               >938 (div. 3)</a
             >&mdash;15/2/2025
           </h2>
-          <div class="fold">
-            <p>
-              What would've been my best contest. Unfortunately, CodeForces
-              decided to go down for TREE[3] centuries, which absolutely ruined
-              my groove in the contest and terminated my virtual. No excuses,
-              though, as I set a timer and finished up later.
-            </p>
-          </div>
+          <p>
+            What would've been my best contest. Unfortunately, CodeForces
+            decided to go down for TREE[3] centuries, which absolutely ruined my
+            groove in the contest and terminated my virtual. No excuses, though,
+            as I set a timer and finished up later.
+          </p>
           <h3>A</h3>
           <p>Brute-forced it but it still took me a few minutes.</p>
           <ul>
@@ -136,10 +134,10 @@
           </ul>
           <h3>E</h3>
           <p>
-            I had mentally tapped out by this point (I submitted a TLE \(O(n^2k)\)
-            solution without using my brain). I solved F first, then took a
-            look at G <i>before</i> coming back to E, robbing me of 10 minutes
-            that could've been the difference between another solve.
+            I had mentally tapped out by this point (I submitted a TLE
+            \(O(n^2k)\) solution without using my brain). I solved F first, then
+            took a look at G <i>before</i> coming back to E, robbing me of 10
+            minutes that could've been the difference between another solve.
           </p>
           <ul>
             <li>
@@ -188,6 +186,102 @@
               immediately disproves dp.
             </li>
           </ul>
+          <h2>cses&mdash;21/2/2025</h2>
+          <p>
+            Everyone recommends CSES so I started with it, doing the first 8
+            problems.
+          </p>
+          <h3>
+            <a href="https://cses.fi/problemset/task/1068" target="_blank"
+              >weird algorithm</a
+            >
+          </h3>
+          <p>Trivial, but I forgot to print 1 at the end.</p>
+          <p>
+            <b>Return the exactly correct answer.</b>
+          </p>
+          <h3>
+            <a href="https://cses.fi/problemset/task/1083" target="_blank">
+              missing number
+            </a>
+          </h3>
+          <p>N/A</p>
+          <h3>
+            <a href="https://cses.fi/problemset/task/1069" target="_blank">
+              repetitions
+            </a>
+          </h3>
+          <p>Use invariants.</p>
+          <h3>
+            <a href="https://cses.fi/problemset/task/1094" target="_blank">
+              increasing array
+            </a>
+          </h3>
+          <p>
+            Run through one iteration of the algorithm. Here, I erroneously
+            added <code>x - last</code> to a quantity,
+            <i>after manipulating <code>x</code></i
+            >.
+          </p>
+          <h3>
+            <a href="https://cses.fi/problemset/task/1070/" target="_blank"
+              >permutations</a
+            >
+          </h3>
+          <p>
+            I'd seen this problem before yet struggled.
+            <b>Fully understand the problem constraints</b>. In this case, While
+            I understood the definition of a permissible permutation, I didn't
+            fully internalize that you could place number <i>wherever</i> you
+            want. Instead, I was locked in on placing some <code>x</code> at
+            <code>i, i + 2, i + 4, ...</code>. Further, the fact that I didn't
+            immediately recognize this solution means I need to improve at
+            <b>upsolving and reviewing problems</b>.
+          </p>
+          <h3>
+            <a href="https://cses.fi/problemset/task/1071" target="_blank"
+              >permutations</a
+            >
+          </h3>
+          <p>
+            Absolutely disastrous. I continually just f*dged with the offsets I
+            was adding to my strategy until I happened to get the answer right.
+            <b>Don't guess</b>. Also,
+            <b
+              >don't be lazy&mdash;if an algorithm works, focus, write it out,
+              and enjoy being correct</b
+            >.
+          </p>
+          <h3>
+            <a href="https://cses.fi/problemset/task/1072" target="_blank"
+              >two knights</a
+            >
+          </h3>
+          <p>
+            Required 2 hints from Sam Altman. <b>git gud at combinatorics</b>.
+            Use the paradigm "count good, remove bad." Lock in less on counting
+            specifics&mdash;instead, consider what objects
+            <i>mean in aggregate</i>. In this case, a \(2\times3\) grid
+            represents an "area" of attack, contributing 2 bad knight pairs.
+            This is much easier to digest then attempting to remove overcounting
+            per-knight. Fundamentally, the problem involves placing 2 knights,
+            so breaking it down 2 knights at a time is the most intuitive take.
+          </p>
+          <h3>
+            <a href="https://cses.fi/problemset/task/1092" target="_blank"
+              >two sets</a
+            >
+          </h3>
+          <p>
+            <b>Don't lock in on one approach</b>. Here, this is dp. The fact
+            that I knew the idea of partitioning the first \(n\) numbers into
+            two groups of size \(\frac{n(n+1)}{4}\) but failed to recognize the
+            greedy approach means I didn't grasp the fundamental arithmetic of
+            the problem, nor the greedy idea: every number must go into a set.
+            If you add the largest number possible to set 1 to not exceed the
+            target, this number can always be formed in the other set by
+            choosing \(1\) and \(x-1\). <b>git gud at greedy</b>.
+          </p>
         </article>
       </div>
     </main>
