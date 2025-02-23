@@ -15,6 +15,7 @@ header {
 
 ul {
   list-style: unset;
+  list-style-type: "- ";
 }
 
 li {
