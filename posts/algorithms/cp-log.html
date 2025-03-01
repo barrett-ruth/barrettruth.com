@@ -35,6 +35,117 @@
           <h1 class="post-title">Competitive Programming Log</h1>
         </header>
         <article class="post-article">
+          <h2>cses (range queries, sorting and searching)&mdash;1/3/2025</h2>
+          <div>
+            <p>
+              A good review and challenge of data strucures. I've become even
+              more of a fan of CSES. On codeforces, the application of fenwick
+              trees and segment trees are usually on problems out of my reach,
+              where I'm battling both the problem and the data structures.
+            </p>
+            <ol>
+              <li>
+                static range minimum queries: sparse table. copy-pasted from
+                template, should be able to derive
+              </li>
+              <li>
+                range update queries: fenwick tree difference array.
+                <b
+                  >understanding of fenwick trees fundamentally flawed. "guessed
+                  and checked" on the ranges to update.</b
+                >
+              </li>
+              <li>
+                forest queries: inclusion-exclusion principles.
+                <b>think before implement.</b>
+              </li>
+              <li>
+                hotel queries: fun question, derived segment tree
+                <code>{lower,upper}_bound</code> (a "walk", apparently).
+              </li>
+              <li>
+                list removals: overcomplicated it a lot. Note that an index can
+                be interpreted as a relative position into an array, so an
+                indexed set works perfectly fine.
+                <b>Reinterpret problem constraints.</b>
+                <b>Extreme lack of familiarity with PBDS/STL APIs</b>. I
+                constantly confuse <code>find_by_order</code>,
+                <code>order_of_key</code>, <code>erase(*it)</code> vs.
+                <code>erase(it)</code>.
+              </li>
+              <li>
+                traffic lights: destroyed. I'm at the point where I thought "oh,
+                there's no way I'd need two data structures. Too complicated,
+                let me see the solution."
+                <b
+                  >Trust your intuition a bit more, especially if you know your
+                  solution will lead to a right answer</b
+                >. The offline solution also fully went over my head, in which
+                answering queries backwards presents a 4x (performance-wise)
+                faster solution.
+                <b
+                  >Answer the question&mdash;you can do so by any means
+                  necessary</b
+                >. In this case, reinterpreting the key insight that adding a
+                traffic like can only shrink intervals to removing a traffic
+                light can only increase them isn't only enough. I knew handling
+                the first case simply was too hard but I needed to
+                <b>dig deeper into ideas</b>. In this case, asking "ok, well is
+                it easier to answer the queries in reverse order? Well, yes,
+                because removing the <code>i</code>th light can either create a
+                larger gap around it, which I can easily find, or its the same
+                gap as before" would've saved me.
+              </li>
+            </ol>
+          </div>
+          <h2>
+            <a href="https://codeforces.com/contest/2072" target="_blank"
+              >1006 (div. 3)&mdash;25/2/2025</a
+            >
+          </h2>
+          <div>
+            <ol>
+              <li>A: easy, messed up on the math a bit for a second</li>
+              <li>
+                B: for the second contest in a row, missed a B and solved E or
+                later. Solved ~2 min after the contest ended.
+                <b>Prove mathematical correctness.</b> Here, I did not and still
+                don&apos;t fully understand why a configuration like:
+                &ldquo;hyphens...underscores...hyphens>&rdquo; is even
+                optimal...
+                <b
+                  >Still, I was mad that I couldn&apos;t get it and submitted
+                  solutions that I had nowhere near certainty of their
+                  correctness. If you aren&apos;t sure, you&apos;re better off
+                  skipping it</b
+                >. Fortunately, in this case, maximizing your codeforces ranking
+                also coincides wiht optimal problem-solving: don&apos;t guess.
+              </li>
+              <li>
+                C: knew a solution almost instantly but got held up nearly 30
+                minutes on small implementation details and edge cases. Ended up
+                submitted something I wasn&apos;t certain was correct. Taking an
+                explicit extra minute to consider: &ldquo;what do I print for
+                the last case? I must maximize the MEX and ensure the bitwise OR
+                equals x. If the MEX hits x, then print it. Otherwise, print
+                x&rdquo; would&apos;ve saved me upwards of 10 minutes.
+              </li>
+              <li>
+                E: masterclass in throwing. I knew the algorithm pretty much
+                immediately (manhattan distances and euclidean distances must be
+                equals means at least one coordinate must be the same between
+                each point). I then broke it down into building pairs
+                column-wise, the correct approach. Then, I simply
+                <b
+                  >forgot to check a core constraint of the problem: place
+                  \(\leq500\) staffs</b
+                >. I decided to brute force the last pairs rather than repeat
+                the strategy, which actually runs in logarithmic time (I also
+                didn&apos;t prove this). The final product was elegant, at
+                least.
+              </li>
+            </ol>
+          </div>
           <h2>sorting and searching&mdash;24/2/2025</h2>
           <p>
             A lot of these problems I&apos;d seen before but this is good
@@ -304,6 +415,10 @@
                 Formalize constraints more clearly to help form a solution. For
                 example, the idea that flipping things twice makes no
                 difference, permitting the use of a boolean difference array.
+              </li>
+              <li>
+                Didn't get it, still don't get it, don't know why. Way easier
+                than D.
               </li>
               <li>
                 Prove correctness. I didn't prove that iterating left to right,
