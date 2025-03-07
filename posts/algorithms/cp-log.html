@@ -35,6 +35,85 @@
           <h1 class="post-title">Competitive Programming Log</h1>
         </header>
         <article class="post-article">
+          <h2>
+            <a href="https://codeforces.com/contest/1857/" target="_blank"
+              >891 (div. 3)</a
+            >&mdash;{6,7}/5/2025
+          </h2>
+          <div>
+            <p>
+              Solved partially on the plane and at home. Best round in terms of
+              acceptance rate. After bombing another codeforces contest & more
+              CSES work, it's clear that my biggest weakness is
+              <b>algorithmic correctness and certainty</b>. To remedy:
+            </p>
+            <ul>
+              <li>Test edge cases (boundary + tricky)</li>
+              <li>Don't submit unless you're <i>certain</i> you're right</li>
+              <li>In analysis, leave no stone unturned (be thorough)</li>
+              <li>
+                Don't rely on the given test cases as proof of correctness.
+              </li>
+            </ul>
+            <ol>
+              <li>
+                A: ironically, although I got AC in ~1 minute, this is exactly
+                where I go wrong. I did not check the actual correctness of my
+                parity checks but submitted anyway.
+              </li>
+              <li>
+                B: AC once again but <b>implementation is still a weakness</b>.
+                In this case, it was due to a lack of problem understanding,
+                i.e. rounding up sets all right digits to 0, but carries can
+                still affect the number after that.
+              </li>
+              <li>
+                C: skipped and came back later. The idea of sorting came up but
+                I was overwhelmed. My end solution was a bit overcomplicated but
+                still logically sound. I'm getting better at making
+                observations, in this case explicitly identifying the fact that
+                the largest element must have one more element greater than or
+                equal to itself, permitting you to build the answer in reverse
+                order. <b>Did not prove the correctness of this</b>.
+              </li>
+              <li>
+                D: skipped and came back later. Given the large amount of
+                vertices I did a good job of rephrasing the data (thanks
+                <a
+                  href="https://www.google.com/search?q=how+to+solve+it"
+                  target="_blank"
+                  >George Pólya</a
+                >) and <b>proving</b> the correctness with
+                transitivity/contradiction. Initial solution
+                complex&mdash;ponder implementation before going at it.
+              </li>
+              <li>
+                E: took me a while (I believe) because I was on a plane without
+                a notebook and visualizing was hard. Good mathematical
+                formulation, but initially returned the answer in wrong order.
+                <b
+                  >Relied on the test cases to save me&mdash;ensure you're
+                  solving the actual problem</b
+                >
+                (in this case, returning the queries in the right order).
+              </li>
+              <li>
+                F: Quadratic equation flew over my head. I was unsure but
+                should've just played with the numbers&mdash;if you plug them
+                in, you derive the quadratic equation relevant to the problem. I
+                then (maybe) could've gotten an answer. Instead, I was
+                intimidated because I thought I needed some fancy
+                DSA/dp/two-pointers/two-sum thing. Just have to build more
+                intuition. Also, totally did not know how to count number of
+                distinct pairs \(i, j\) with \(i\lt j\) for two elements. I
+                missed the case when the elements are equal and, yes, seriously
+                forgot it is just the product (I do not want to talk about it
+                but thanks Deepseek).
+                <b>Overflow, again. rly dude?</b>
+              </li>
+              <li>F: doing this later, got the core insight of the minimal weight edge path. Once again, for surveying path </li>
+            </ol>
+          </div>
           <h2>cses (range queries, sorting and searching)&mdash;1/3/2025</h2>
           <div>
             <p>
