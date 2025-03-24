@@ -662,3 +662,19 @@ document.addEventListener("DOMContentLoaded", function () {
   drawRomerSolowChangeGraph();
   window.onresize = drawRomerSolowChangeGraph();
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+  MathJax.typeset()
+  document.querySelectorAll(".sliders").forEach((slidersDiv) => {
+    slidersDiv.addEventListener("input", function (event) {
+      const graphDiv = slidersDiv.previousElementSibling;
+      if (graphDiv && graphDiv.querySelector("svg")) {
+        const svg = graphDiv.querySelector("svg");
+        svg.querySelectorAll("foreignObject body").forEach((body) => {
+          MathJax.typesetPromise([body]);
+        });
+      }
+    });
+  });
+});
+
