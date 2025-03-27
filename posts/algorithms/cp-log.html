@@ -36,6 +36,75 @@
         </header>
         <article class="post-article">
           <h2>
+            <a href="https://codeforces.com/contest/1872/" target="_blank"
+              >895 (div. 3)</a
+            >&mdash;26/3/2025
+          </h2>
+          <div>
+            <p>Decent.</p>
+            <ul>
+              <li>
+                A: math intuition building. Jumped to assuming the problem
+                statement but it was much simpler.
+                <b>Answer the problem only.</b>
+              </li>
+              <li>
+                B: textbook simple problem that I struggle to mathematically
+                quantify being distracted by many components. In retrospect, I
+                should interpret the problem simply like:
+                <blockquote>
+                  Each trap has a known time I must return by. The answer is
+                  therefore the minimum of these.
+                </blockquote>
+                I also just plug in \(ceil\) and \(floor\) until I find the
+                right answer (I'm not lying). Instead, note that for
+                \(s,k\in\mathbb{Z}\),
+                \[\frac{s}{2}>k\leftrightarrow\lfloor\frac{s-1}{2}\rfloor\geq
+                k\]. This simply "edges out" the fractional term to line up
+                cleanly with the divisor.
+              </li>
+              <li>C: cooked. <b>Practice number theory.</b></li>
+              <li>
+                D: took me a while because I was distracted with the moving
+                parts. Specifically, I forgot that I could choose the
+                permutation and that the question was merely asking to pick the
+                largest/smallest numbers on \(x\)/\(y\) slots respectively. End
+                solution was expressive and elegant.
+                <b
+                  >Express the question and reframe the constraints in simple
+                  but accurate terms</b
+                >.
+              </li>
+              <li>
+                E: Black-boxed a lazy segment tree (with the help of AI, I must
+                admit&mdash;I need to make a template).
+                <blockquote>
+                  <i
+                    >Everything I did here was wrong and this problem showed an
+                    embarrassingly fundamental flaw in my practice strategy.</i
+                  >
+                </blockquote>
+                Namely, I should divide up practice time into:
+                <ol>
+                  <li>Contests, emphasizing speed and implementation</li>
+                  <li>
+                    Single problems, emphasizing specific learning objectives
+                  </li>
+                </ol>
+              </li>
+              In this problem, I immediately saw the application of the lazy
+              segment tree but decided to hold off on it, failing to find the
+              simpler prefix-XOR solution. Therefore, I not only wasted my time,
+              but also cemented in unrealistic practice (I would never do this
+              in a real contest) and worsened my virtual contest performance. As
+              for the prefix-XOR solution, focusing on just one/zero
+              corresponding elements and
+              <b>walking through small examples</b>
+              (i.e. "what happens when \(l=r\)?") would've help me pick up the
+              pattern.
+            </ul>
+          </div>
+          <h2>
             <a href="https://codeforces.com/contest/2091" target="_blank"
               >1013 (div. 3)</a
             >&mdash;25/3/2025
