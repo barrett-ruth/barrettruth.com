@@ -36,6 +36,95 @@
         </header>
         <article class="post-article">
           <h2>
+            <a href="https://codeforces.com/contest/1892/" target="_blank"
+              >871 (div. 4)</a
+            >&mdash;28/3/2025
+          </h2>
+          <div>
+            Div. 4 to practice implemenation skills + mathematical observations
+            thanks to
+            <a
+              href="http://www.gang.umass.edu/~franz/Paul_Zeitz_The_Art_and_Craft_of_Problem_SolvingBookosorg.pdf"
+              target="_blank"
+              >Paul Zeitz</a
+            >. From now on, I will only note useful problems.
+          </div>
+          <ul>
+            <li>
+              B: typo, costing a few minutes. Go slower. Declare variables.
+              Think consistently through approach.
+            </li>
+            <li>
+              C: paused an found a general implementation as Zeitz advises
+              (starting with a general, non-mathematical solution: "The solution
+              is the earliest to get either both 1s at once or each over two
+              strings"). <b>I still rushed</b>, incorrectly computing the result
+              as
+              <code>min(first, second)</code>
+              instead of
+              <code>first + second</code>.
+            </li>
+            <li>
+              D: I looked up the recurrence relation \(T(n)=T(n/3)+T(2n/3)\) to
+              ensure it was sub-linear time.
+              <blockquote style="font-style: italic">
+                Gain the mathematical skills to both analyze and derive (i.e. if
+                you forget) recurrence relations.
+              </blockquote>
+            </li>
+            <li>
+              E: spent <i>forever</i> fanagling with my Disjoint Set Union
+              template. I made countless errors including:
+              <ol>
+                <li>
+                  Not inserting nodes into the data structure before joining
+                  them
+                </li>
+                <li>
+                  Joining zero/non-zero nodes, corrupting the component graph
+                </li>
+                <li>
+                  Erroneously updating component sums by double counting (i.e.
+                  using a mutated value).
+                </li>
+              </ol>
+              <blockquote>
+                Understand data structures before you use them. Despite what
+                Colin Galen says, black-boxed knowledge often isn't enough.
+                Improve knowledge of Fenwick Trees, Segment Trees, and Union
+                Find.
+              </blockquote>
+            </li>
+            <li>
+              F: elegant approach and reduction, eliminating the need for a
+              graph traversal.
+            </li>
+            <li>
+              G: <i>intentionally</i> chose the mathematical/indexing method to
+              improve my skills. I'd also like to use
+              <code>{upper,lower}_bound</code> more often with a lambda than
+              manually code binary search.
+              <b
+                >Once again, I practiced in a fundamentally flawed way, choosing
+                an approach I knew would be error prone and difficult</b
+              >.
+              <blockquote>
+                Don't be scared if you initilly can't find an easy
+                implementation.
+                <i>Reconceptualize, visualize, and reframe</i> until something
+                comes up. Sometimes, this takes too long&mdash;however, my
+                threshold for that realization is MUCH too low.
+                <b
+                  >Spend a longer time developing/considering approaches even if
+                  you already know a feasible solution</b
+                >. Here, I spent ~5 minutes developing a solution, then 20
+                minutes coding it. Instead, another 5 minute allocation of time
+                could lead me to the prefix sum solution, likely saving ~10
+                minutes.
+              </blockquote>
+            </li>
+          </ul>
+          <h2>
             <a href="https://codeforces.com/contest/1872/" target="_blank"
               >895 (div. 3)</a
             >&mdash;26/3/2025
