@@ -36,9 +36,9 @@ li {
 }
 
 .post-meta {
-  font-style: italic;
   /* space between date and title */
   margin-left: 100px;
+  font-size: 1.3em;
 }
 
 .post-title {

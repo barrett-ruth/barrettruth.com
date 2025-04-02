@@ -39,7 +39,13 @@ const getTopicColor = (topicName) => {
       return "#d50032";
     case "algorithms":
       return "#6a0dad";
+    default:
+      return "#000000";
   }
 };
 
-const urlToTopic = () => window.location.pathname.split("/")[2];
+const urlToTopic = () => {
+  const pathname = window.location.pathname.split("/");
+  if (pathname.length < 3) return "DNE";
+  return pathname[2];
+};
