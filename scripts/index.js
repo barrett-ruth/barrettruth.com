@@ -18,8 +18,8 @@ const postMapping = new Map([
   [
     "Algorithms",
     [
+      { name: "competitive programming log", link: "competitive-programming-log" },
       { name: "leetcode daily", link: "leetcode-daily" },
-      { name: "cp log", link: "cp-log" },
     ],
   ],
 ]);
