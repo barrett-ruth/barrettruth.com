@@ -36,6 +36,59 @@
         </header>
         <article class="post-article">
           <h2>
+            <a href="https://codeforces.com/contest/1873/" target="_blank"
+              >898 (div. 4)</a
+            >&mdash;3/4/2025
+          </h2>
+          <div>
+            Placed top 2000 but did not learn much. Was distracted (thinking
+            about writing this post itself) and was not taking the problems
+            seriously because they were not that challenging in the first place.
+            <blockquote>
+              Take problems seriously or you're wasting your time.
+            </blockquote>
+            . I was also continually nervous/pressuring myself and thought about
+            my own thought process. The time for analysis is after, not during.
+            <blockquote>Pressure ruins performance.</blockquote>
+          </div>
+          <ul>
+            <li>
+              A: couldn't come up with the extensible solution and checked all
+              permutations. Step back and use explicit criteria, i.e. "what
+              qualifies being able to make it in one swap?" (at most 2
+              characters being off).
+            </li>
+            <li>B: good math proof WLOG. Learning.</li>
+            <li>
+              Took a step back to architect the easiest way to count the score.
+              However,
+              <b
+                >only after erroneously calculating the score with an approach I
+                had already deemed incorrect</b
+              >.
+            </li>
+            <li>C: Trivial but should've been more patient.</li>
+            <li>D: binary search took me a second, but ok.</li>
+            <li>
+              E: sliding window but erroneously checked \(a[\{l,r-1\}] \%
+              a[\{l+1,r\}]\neq0\) <i>without</i> confirming it was in the
+              sliding window first. Err on the side of caution (i.e. if checks,
+              explicit edge cases, etc). Debugging could be
+              improved&mdash;target the likely differences between what you
+              <i>think</i> you're doing and what you're <i>actually</i> doing.
+            </li>
+            <li>
+              G: tried and didn't fully invest my time. For some reason my
+              subconscious still thinks getting lucky is a valid option.
+            </li>
+            <li>
+              H: <i>much</i> easier than G. Formulated the solution formally
+              before coding, allowing me to implicitly catch a lot of edge
+              cases: "whether V can get to the node closest to it in the graph's
+              cycle strictly before M."
+            </li>
+          </ul>
+          <h2>
             <a href="https://codeforces.com/contest/1892/" target="_blank"
               >871 (div. 4)</a
             >&mdash;28/3/2025
