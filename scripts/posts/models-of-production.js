@@ -664,17 +664,33 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 document.addEventListener("DOMContentLoaded", function () {
-  MathJax.typeset()
-  document.querySelectorAll(".sliders").forEach((slidersDiv) => {
-    slidersDiv.addEventListener("input", function (event) {
-      const graphDiv = slidersDiv.previousElementSibling;
-      if (graphDiv && graphDiv.querySelector("svg")) {
-        const svg = graphDiv.querySelector("svg");
-        svg.querySelectorAll("foreignObject body").forEach((body) => {
-          MathJax.typesetPromise([body]);
-        });
-      }
-    });
-  });
-});
+  // wait for mathjax
+  if (typeof MathJax !== "undefined") {
+    MathJax.typeset();
+    initSliderEvents();
+  } else {
+    window.MathJax = {
+      startup: {
+        pageReady: function () {
+          return MathJax.startup.defaultPageReady().then(function () {
+            initSliderEvents();
+          });
+        },
+      },
+    };
+  }
 
+  function initSliderEvents() {
+    document.querySelectorAll(".sliders").forEach((slidersDiv) => {
+      slidersDiv.addEventListener("input", function (event) {
+        const graphDiv = slidersDiv.previousElementSibling;
+        if (graphDiv && graphDiv.querySelector("svg")) {
+          const svg = graphDiv.querySelector("svg");
+          svg.querySelectorAll("foreignObject body").forEach((body) => {
+            MathJax.typesetPromise([body]);
+          });
+        }
+      });
+    });
+  }
+});
