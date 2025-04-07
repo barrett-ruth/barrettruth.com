@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="/styles/common.css" />
+    <link rel="stylesheet" href="/styles/post.css" />
+    <link rel="icon" type="image/webp" href="/public/logo.webp" />
+    <link href="/public/prism/prism.css" rel="stylesheet" />
+    <link href="/public/prism/prism-theme.css" rel="stylesheet" />
+    <script defer src="/public/prism/prism.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"
+      async
+    ></script>
+    <title>Barrett Ruth</title>
+  </head>
+  <body class="graph-background">
+    <header>
+      <a
+        href="/"
+        style="text-decoration: none; color: inherit"
+        onclick="goHome(event)"
+      >
+        <div class="terminal-container">
+          <span class="terminal-prompt">barrett@ruth:~$ /algorithms</span>
+          <span class="terminal-cursor"></span>
+        </div>
+      </a>
+    </header>
+    <main class="main">
+      <div class="post-container">
+        <header class="post-header">
+          <h1 class="post-title">Practice Makes Perfect</h1>
+          <p class="post-meta">
+            <time datetime="2024-06-22">05/07/2024</time>
+          </p>
+        </header>
+        <article class="post-article">
+          <div>
+            Today I improved my implementation skills with
+            <a
+              href="https://codeforces.com/contest/1833/problem/G"
+              target="_blank"
+              >Codeforces Round 874 Div. 3 Problem G</a
+            >. Despite not solving the problem after a full 45 minutes, I came
+            across to the following realizations:
+          </div>
+          <ol>
+            <li>
+              Don't jump into coding. <i>Fully</i> flesh out your implementation
+              in your head before you begin. This is tempting to do, especially
+              in a "competitive" environment. I tend to do this to avoid
+              thinking about troublesome aspects of the problem that I
+              <i>know</i> I'll have to face later. Going into problems with a
+              plan makes things much easier when coding but much harder up
+              front. It is easy (for me) to get lost in the black-boxing four layers deep. Write it out, visualize it, and practice practice practice.
+              <blockquote>
+                Considering my solution would've led to me uncover my core
+                misinterpretation of the problem:
+                <b>the tree does not have to binary</b>. I developed a solution
+                for binary trees but the greedy logic cannot be extended to
+                trees.
+              </blockquote>
+            </li>
+            <li>
+              Complex problems are, well, hard. You <i>have</i> to practice to
+              internalize patterns so you can focus on the <i>crux</i> of the
+              problem.
+              <blockquote>
+                I spent 10 minutes debugging retrieving the leaves of a tree
+                before even beginning to code the actual algorithm.
+                <b>1800 is out of my skill range</b> (for now!).
+              </blockquote>
+            </li>
+            <li>
+              <b>Do not let a single thought/assertion/fact go unturned</b>. I
+              made a litany of erroneous assertions in my time thinking about
+              this problem, some of which include:
+            </li>
+            <ul>
+              <li>The tree has to be binary (it does not).</li>
+              <li>
+                I can gather the leaves in arbitrary order (once again, this
+                doesn't generalize to trees).
+              </li>
+              <li>
+                Ignore all cuts between identical nodes&mdash;it's fine! (I
+                didn't know why this was the case)
+              </li>
+              <li>
+                A set shouldn't be needed to track visited nodes in a
+                tree&mdash; slap it on anyway (this was superfluous and
+                should've immediately set off red flags that my parent-ignoring
+                policy in my BFS was wrong).
+              </li>
+              <li>
+                When processing a node in the "child-parent-child" pattern, just
+                pop off the next node from the queue (within binary/n-ary trees,
+                this is wrong&mdash;the leaves are gathered by <i>level</i>, so
+                the next node in the queue is not guaranteed to be the current's
+                sibling).
+              </li>
+            </ul>
+            <li>
+              Just because the solution passes the test cases does not mean it
+              is right. This specifically applies to problems near/outside your
+              skill range&mdash;create your own test cases.
+            </li>
+          </ol>
+        </article>
+      </div>
+    </main>
+    <script src="/scripts/common.js"></script>
+    <script src="/scripts/post.js"></script>
+  </body>
+</html>

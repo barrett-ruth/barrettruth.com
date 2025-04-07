@@ -19,6 +19,7 @@ const postMapping = new Map([
     "Algorithms",
     [
       { name: "competitive programming log", link: "competitive-programming-log" },
+      { name: "practice makes perfect", link: "practice-makes-perfect" },
       { name: "leetcode daily", link: "leetcode-daily" },
     ],
   ],
