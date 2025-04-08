@@ -36,6 +36,75 @@
         </header>
         <article class="post-article">
           <h2>
+            <a href="https://codeforces.com/contest/2093" target="_blank"
+              >1016 (div. 3)</a
+            >&mdash;8/4/2025
+          </h2>
+          <div>
+            Horrendous competition but I refrain from cringing for the sake of
+            improvement.
+          </div>
+          <ul>
+            <li>A: trivial</li>
+            <li>
+              B: took me a while and I still don't get the proof. Good
+              resilience in trying to formally prove it then detecting a pattern
+              (remove all non-zero/zero digits after/before the last non-zero
+              digit).
+            </li>
+            <li>
+              C:
+              <b>math skills remain weak but pattern recognition is improving</b
+              >. I "guess and checked" that any \(x+x\) is not prime when
+              \(x\neq1\). However,
+              <b
+                >after catching 2 edge cases \(x=k=1\), \(k=1\), I gave up,
+                ignoring \(x=1,k=2\),</b
+              >
+              causing a WA. This is the downside of lacking a formal
+              proof/understanding the math&mdash;while in retrospect I can say
+              "consider a few more edge cases," I can't tell when to stop
+              investigating. Still, I should've separated out cases \(k=1\),
+              \(k\neq1\) and exhaustively proved \(k=1\), which is remarkably
+              facile.
+              <b
+                >I still don't know how to factorize numbers in
+                \(O(\sqrt{n})\)</b
+              >
+              and copy from AI (allegedly).
+            </li>
+            <li>
+              D: got the idea but it was very abstract. Rushed to
+              implementation, wasted time&mdash;same old story. Got it after
+              contest.
+              <b
+                >After failing to implement for a long time, abandon the
+                approach and start from scratch&mdash;99% of the time you're not
+                going to get it.</b
+              >
+            </li>
+            <li>
+              E: failed implementation. At least I saw binary search after
+              stepping back. I tried to find an upper bound on \(x\) by creating
+              <i>exactly</i> \(k\) groups but for ease of implementation I
+              should've went for \(\geq k\) since any sequence with MEX \(x\)
+              can be extended to have MEX \(\geq x\) with the addition of any
+              number.
+              <blockquote>
+                Specifically define <i>everything</i>. What am I binary
+                searching over (in this case, forming some \(x\) with
+                <i>at least</i> \(k\) groups)? What are the bounds? Is the
+                search space monotonic? Why?
+              </blockquote>
+            </li>
+            <li>
+              F: I had seen a bitwise trie before and didn't review the problem.
+              I didn't upsolve then, so I couldn't upsolve now, and getting this
+              problem right would've made a massive difference in my
+              performance. These are the consequences&mdash;<b>upsolving is goated</b>.
+            </li>
+          </ul>
+          <h2>
             <a href="https://codeforces.com/contest/1873/" target="_blank"
               >898 (div. 4)</a
             >&mdash;3/4/2025
