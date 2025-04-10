@@ -36,6 +36,104 @@
         </header>
         <article class="post-article">
           <h2>
+            <a href="https://codeforces.com/contest/1692" target="_blank"
+              >799 (div. 4)</a
+            >&mdash;10/4/2025
+          </h2>
+          <div>
+            Improvement is marginal. My desire for rating is unquenchable
+            (joke). Really, though, I'm improving slower than I like. 1400
+            performance, my best yet&mdash;I'll do one more Div. 4 then I need
+            to upgrade to Div. {2,3}. I think the most core realization I made
+            after this contest was:
+            <blockquote>
+              Separate what your code does from what you think it should do.
+              Conceptualize an approach, then put it aside. Implement exactly
+              what the approach says to do (not what you think it should say).
+              If the approach left something out,
+              <i
+                >step away from implementing, reconsider the approach, then
+                resume implementing</i
+              >. <b>Never reconsider and alter your strategy while coding.</b>
+            </blockquote>
+          </div>
+          <ol>
+            <li>
+              B: realized parity-based removal immediately. Still, I once again
+              didn't initially do what the problem asked (i.e. I returned the
+              number of operations, not array length).
+            </li>
+            <blockquote>
+              Never run code until you're confident it does what you want.
+            </blockquote>
+            <li>
+              C: Blindly plugged in incorrect deltas to detect the "X" pattern
+              of "#" characters before getting the right answer.
+              <blockquote>
+                I consistently tune out when I'm bored/think I've discovered the
+                insight/done the problem before. This results in me solving a
+                different problem, expressing right ideas incorrectly, or
+                expressing wrong ideas correctly&mdash;for example, thinking I
+                find a core insight, believing it sounds right, and just
+                <i>not checking its validity</i>. I don't know what to say
+                besides progressively overload your discipline and focus.
+              </blockquote>
+            </li>
+            <li>
+              D: my proof that the time must repeat was complete garbage and
+              complex. I've been reading AOPS and wanted to go with a math-y
+              approach. However, consider the following simple proof:
+              <blockquote>
+                The current time is \(s\) and you look at the clock every \(x\)
+                minutes. \(1440 \cdot x\equiv 0\pmod{1400}\), so the time must
+                repeat after at most 1440 looks.
+              </blockquote>
+              This is enough to brute force. There are alternative easier
+              approaches to brute-force, but for an easy problem like this speed
+              comes above all else (special case).
+            </li>
+            <li>
+              E: <b>Submitted and hoped for correctness multiple times</b>. I
+              was lazy and didn't want to implement the binary search approach.
+              Ironically, after turning my brain on, I quickly found a
+              \(\Theta(n)\) solution. However, I rushed to code it up thinking
+              about the time I had wasted and frustration from WA (more from
+              myself than from WA). This caused me to forget invariants and
+              implement what I thought was right, not the algorithm I designed
+              (forgetting invariants). Walking through an example (as I advised
+              myself yesterday) reminded me to iterate the right pointer past
+              any zeroes. Good, specific improvement from yesterday, but I still
+              should've slowed down and asked "where should the right pointer
+              move? what are the invariants? why? what about if if goes off the
+              end of the array?" <b>Only look forward</b>.
+            </li>
+            <li>
+              F: Came up with fancy equations because I'm taking the wrong core
+              lessons from AOPS. The example problems there are complex, while
+              these are simple&mdash;therefore, I should prioritize simplicity.
+              Concretely, the following phrasing massively simplifies this
+              problem:
+              <blockquote>
+                I'm looking for 3 numbers \(a[i],a[j],a[k], i\neq j\neq k\) such
+                that \(a[i]+a[j]+a[k]\equiv 3\pmod{10}\). WLOG, assume \(i\lt
+                j,k\). We only want a pair of remainders that satisfy the above
+                inequality. Since there are only 10 unique remainders, brute
+                force all 100 remaining modulo pairs. If such a pair exists in
+                \(a[i+1:]\forall\) \(i\in\{1,...n-2\}\), the answer is yes. This
+                can be calculated with a postfix frequency map of remainders,
+                with special care taken for when the remainders are equal.
+              </blockquote>
+            </li>
+            <li>
+              G: good deduction and simplicity but I once again read the
+              instructions too fast and skipped that the array is size \(k+1\).
+              Also,
+              <b>my sliding window implementation ability is horrendous</b>. I
+              spent nearly 10 minutes just debugging a "right" idea because I
+              couldn't code up a basic thing.
+            </li>
+          </ol>
+          <h2>
             <a href="https://codeforces.com/contest/1791" target="_blank"
               >849 (div. 4)</a
             >&mdash;9/4/2025
@@ -75,7 +173,8 @@
                 >Did not read the problem statement and answered a similar (but
                 very different) problem I'd done in the past</b
               >. By the time I saw this after impatiently submitting ~5 WA, I
-              had lost mental focus. Never submit and hope for a correct answer&mdash;<i>know it</i>.
+              had lost mental focus. Never submit and hope for a correct
+              answer&mdash;<i>know it</i>.
             </li>
             <li>
               F: Then, I let my previous failure carry through to the next
