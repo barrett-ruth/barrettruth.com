@@ -1,7 +1,3 @@
 # barrettruth.com
 
-My portfolio website
-
-## todo
-
-- Mobile support
+my portfolio
