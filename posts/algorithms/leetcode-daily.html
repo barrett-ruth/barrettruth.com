@@ -38,6 +38,45 @@
           <h2>
             <a
               target="blank"
+              href="https://leetcode.com/problems/count-good-numbers/submissions/1605647445/?envType=daily-question&envId=2025-04-13"
+              >count good numbers</a
+            >
+            &mdash; 13/13/24
+          </h2>
+          <div class="problem-content">
+            <h3>understanding the problem</h3>
+            <p>
+              p is a combinatoric problem at heart. You have some slots for
+              evens and some for primes, with a limited number of choices for
+              each. Leverage the multiplication rule, which states that if you
+              have \(n\) slots with \(x\) choices, you get \(x^n\) possible
+              outcomes.
+            </p>
+            <h3>doing it</h3>
+            <p>
+              So, what's the answer? If we know which slots we have and the
+              number of choices for them, we're done. Since this is leetcode,
+              they don't let you think&mdash;they just give you the answer. You
+              have 2 types of slots (even and odd indices) with 5
+              (\(\{0,2,4,6,8\}\)) and 4 (\(\{2,3,5,7\}\)) choices respectively.
+              Therefore, the answer is: \(5^{\text{# even slots}}\cdot4^{\text{#
+              odd slots}}\) By counting or with small cases, we have
+              \(\lceil\frac{n}{2}\rceil\) even slots and
+              \(\lfloor\frac{n}{2}\rfloor\) odd slots. Let's submit it!
+            </p>
+            <p>
+              And.... TLE. Checking <i>everything</i> when you submit your
+              code&mdash;in this case, constraint \(n\leq 10^{16}\) informs us
+              of something suspect. In the worst case, \(\frac{n}{2}\approx
+              n^14\). This is far too many multiplications, so we can leverage
+              binary exponentiation instead (and probably should've been the
+              whole time!). Don't forget the mod.
+            </p>
+            <div class="code" data-file="cgn.cpp"></div>
+          </div>
+          <h2>
+            <a
+              target="blank"
               href="https://leetcode.com/problems/minimum-number-of-operations-to-make-elements-in-array-distinc"
               >minimum number of operations to make array distinct</a
             >
@@ -54,10 +93,10 @@
             <h3>solution: rephrase the question</h3>
             <p>
               Definitionally, you remove the <i>last</i> duplicate. If such
-              duplicate is at 0-indexed <code>i</code>, it belongs to the \(\lceil
-              \frac{i + 1}{3}\rceil\)th chunk of 3 (i.e. operation). Find the last
-              duplicate by leveraging a frequency map and iterating backwards
-              through the input.
+              duplicate is at 0-indexed <code>i</code>, it belongs to the
+              \(\lceil \frac{i + 1}{3}\rceil\)th chunk of 3 (i.e. operation).
+              Find the last duplicate by leveraging a frequency map and
+              iterating backwards through the input.
             </p>
             <div class="code" data-file="mnootmad.cpp"></div>
             <h3>asymptotic complexity</h3>
