@@ -49,11 +49,8 @@ li {
 }
 
 .graph-background {
-  background-image: linear-gradient(
-      to right,
-      rgba(200, 200, 200, 0.4) 1px,
-      transparent 1px
-    ),
+  background-image:
+    linear-gradient(to right, rgba(200, 200, 200, 0.4) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(200, 200, 200, 0.4) 1px, transparent 1px);
   background-size: 3vw 3vw;
 }
