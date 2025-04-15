@@ -5,7 +5,6 @@ std::vector<int> maximumBeauty(std::vector<std::vector<int>>& items, std::vector
   std::sort(items.begin(), items.end());
   std::vector<std::pair<int, int>> sorted_queries;
   sorted_queries.reserve(queries.size());
-  // couple queries with their indices
   for (size_t i = 0; i < queries.size(); ++i) {
     sorted_queries.emplace_back(queries[i], i);
   }
@@ -20,9 +19,8 @@ std::vector<int> maximumBeauty(std::vector<std::vector<int>>& items, std::vector
         beauty = std::max(beauty, items[i][1]);
         ++i;
     }
-    // invariant: items[i - 1] is the rightmost considerable item
     ans[index] = i > 0 && items[i - 1][0] <= query ? beauty : 0;
   }
 
-  return std::move(ans);
+  return ans;
 }

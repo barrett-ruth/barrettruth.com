@@ -1,7 +1,6 @@
 const TERMINAL_PROMPT = "barrett@ruth:~$ ";
 let clearing = false;
 
-// Define the Header component
 class SiteHeader extends HTMLElement {
   connectedCallback() {
     const path = window.location.pathname;
@@ -40,7 +39,6 @@ class SiteHeader extends HTMLElement {
   }
 }
 
-// Define the Footer component
 class SiteFooter extends HTMLElement {
   connectedCallback() {
     this.innerHTML = `
@@ -56,13 +54,10 @@ class SiteFooter extends HTMLElement {
   }
 }
 
-// Register the custom elements
 customElements.define("site-header", SiteHeader);
 customElements.define("site-footer", SiteFooter);
 
-// Add styles once when DOM is loaded
 document.addEventListener("DOMContentLoaded", function () {
-  // Add dynamic styles if they don't exist
   if (!document.querySelector("style#dynamic-styles")) {
     const style = document.createElement("style");
     style.id = "dynamic-styles";

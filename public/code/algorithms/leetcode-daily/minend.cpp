@@ -4,7 +4,6 @@ long long minEnd(int n, long long x) {
 
   while (bits_to_distribute > 0) {
     if ((x & mask) == 0) {
-      // if the bit should be set, set it-otherwise, leave it alone
       if ((bits_to_distribute & 1) == 1)
         x |= mask;
       bits_to_distribute >>= 1;
