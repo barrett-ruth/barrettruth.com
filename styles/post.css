@@ -36,9 +36,14 @@ li {
 }
 
 .post-meta {
-  /* space between date and title */
   margin-left: 100px;
   font-size: 1.3em;
+}
+
+h2 .post-meta {
+  float: right;
+  margin-left: 20px;
+  font-size: 1em;
 }
 
 .post-title {
