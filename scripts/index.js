@@ -2,6 +2,7 @@ const postMapping = new Map([
   [
     "software",
     [
+      "my cp setup",
       "from github pages to aws",
       "designing this website",
       // "working in the terminal",
