@@ -10,48 +10,24 @@
     <title>Barrett Ruth</title>
   </head>
   <body class="graph-background">
-    <header>
-      <a href="/" onclick="refresh(event)">
-        <div class="terminal-container">
-          <span class="terminal-prompt">barrett@ruth:~$</span>
-          <span class="terminal-cursor"></span>
-        </div>
-      </a>
-      <div class="header-links">
-        <a target="_blank" href="/public/resume.pdf">Resume</a>
-        <a target="_blank" href="/public/transcript.pdf">Transcript</a>
-        <a target="_blank" href="/about.html">About</a>
-      </div>
-    </header>
+    <site-header></site-header>
     <main class="main">
       <div class="content">
         <ul class="topics">
-          <li class="topic software">
-            <a href="/software" onclick="typechars(event)">Software</a>
+          <li class="topic algorithms">
+            <a href="/algorithms" onclick="typechars(event)">Algorithms</a>
           </li>
           <li class="topic economics">
             <a href="/economics" onclick="typechars(event)">Economics</a>
           </li>
-          <li class="topic trading">
-            <a href="/trading" onclick="typechars(event)">Trading</a>
-          </li>
-          <li class="topic algorithms">
-            <a href="/algorithms" onclick="typechars(event)">Algorithms</a>
+          <li class="topic software">
+            <a href="/software" onclick="typechars(event)">Software</a>
           </li>
         </ul>
         <div class="posts" id="posts"></div>
       </div>
     </main>
-    <footer>
-      <span class="greek-delta">&Delta;</span>
-      <div class="footer-links">
-        <a target="_blank" href="https://github.com/barrett-ruth/">GitHub</a>
-        <a target="_blank" href="https://www.linkedin.com/in/barrett-ruth/"
-          >LinkedIn</a
-        >
-        <a target="_blank" href="mailto:br.barrettruth@gmail.com">Email</a>
-      </div>
-    </footer>
+    <site-footer></site-footer>
     <script src="scripts/common.js"></script>
     <script src="scripts/index.js"></script>
   </body>

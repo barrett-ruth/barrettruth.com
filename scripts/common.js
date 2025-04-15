@@ -1,73 +1,72 @@
 const TERMINAL_PROMPT = "barrett@ruth:~$ ";
 let clearing = false;
 
-document.addEventListener("DOMContentLoaded", function () {
-  const header = document.querySelector("header");
-  if (header) {
-    let headerLinks = header.querySelector(".header-links");
-    if (!headerLinks) {
-      headerLinks = document.createElement("div");
-      headerLinks.className = "header-links";
-      header.appendChild(headerLinks);
+// Define the Header component
+class SiteHeader extends HTMLElement {
+  connectedCallback() {
+    const path = window.location.pathname;
+    const isHome = path === "/" || path === "/index.html";
+    const topic = this.getTopic();
+    
+    const promptText = isHome 
+      ? "barrett@ruth:~$" 
+      : `barrett@ruth:~$ ${topic}`;
+    
+    const clickHandler = isHome 
+      ? "refresh(event)" 
+      : "goHome(event)";
+    
+    this.innerHTML = `
+      <header>
+        <a href="/" style="text-decoration: none; color: inherit" onclick="${clickHandler}">
+          <div class="terminal-container">
+            <span class="terminal-prompt">${promptText}</span>
+            <span class="terminal-cursor"></span>
+          </div>
+        </a>
+        <div class="header-links">
+          <a target="_blank" href="/public/resume.pdf">Resume</a>
+          <a target="_blank" href="/public/transcript.pdf">Transcript</a>
+          <a href="/about.html">About</a>
+        </div>
+      </header>
+    `;
+  }
+  
+  getTopic() {
+    const pathname = window.location.pathname.split("/");
+    if (pathname.includes("about.html")) {
+      return "/about";
+    } else if (pathname.length >= 3) {
+      return `/${pathname[1]}`;
     }
-
-    headerLinks.innerHTML = "";
-
-    const resumeLink = document.createElement("a");
-    resumeLink.href = "/public/resume.pdf";
-    resumeLink.target = "_blank";
-    resumeLink.textContent = "Resume";
-    headerLinks.appendChild(resumeLink);
-
-    const transcriptLink = document.createElement("a");
-    transcriptLink.href = "/public/transcript.pdf";
-    transcriptLink.target = "_blank";
-    transcriptLink.textContent = "Transcript";
-    headerLinks.appendChild(transcriptLink);
-
-    const aboutLink = document.createElement("a");
-    aboutLink.href = "/about.html";
-    aboutLink.textContent = "About";
-    headerLinks.appendChild(aboutLink);
+    return "";
   }
+}
 
-  const existingFooter = document.querySelector("footer");
-  if (existingFooter) {
-    existingFooter.remove();
+// Define the Footer component
+class SiteFooter extends HTMLElement {
+  connectedCallback() {
+    this.innerHTML = `
+      <footer>
+        <span class="greek-delta">&Delta;</span>
+        <div class="footer-links">
+          <a target="_blank" href="https://github.com/barrett-ruth/">GitHub</a>
+          <a target="_blank" href="https://www.linkedin.com/in/barrett-ruth/">LinkedIn</a>
+          <a target="_blank" href="mailto:br.barrettruth@gmail.com">Email</a>
+        </div>
+      </footer>
+    `;
   }
+}
 
-  const footer = document.createElement("footer");
+// Register the custom elements
+customElements.define('site-header', SiteHeader);
+customElements.define('site-footer', SiteFooter);
 
-  const deltaSpan = document.createElement("span");
-  deltaSpan.className = "greek-delta";
-  deltaSpan.innerHTML = "&Delta;";
-
-  const footerLinks = document.createElement("div");
-  footerLinks.className = "footer-links";
-
-  const githubLink = document.createElement("a");
-  githubLink.href = "https://github.com/barrett-ruth/";
-  githubLink.target = "_blank";
-  githubLink.textContent = "GitHub";
-  footerLinks.appendChild(githubLink);
-
-  const linkedinLink = document.createElement("a");
-  linkedinLink.href = "https://www.linkedin.com/in/barrett-ruth/";
-  linkedinLink.target = "_blank";
-  linkedinLink.textContent = "LinkedIn";
-  footerLinks.appendChild(linkedinLink);
-
-  const emailLink = document.createElement("a");
-  emailLink.href = "mailto:br.barrettruth@gmail.com";
-  emailLink.target = "_blank";
-  emailLink.textContent = "Email";
-  footerLinks.appendChild(emailLink);
-
-  footer.appendChild(deltaSpan);
-  footer.appendChild(footerLinks);
-
-  document.body.appendChild(footer);
-
+// Add styles once when DOM is loaded
+document.addEventListener("DOMContentLoaded", function () {
+  // Add dynamic styles if they don't exist
   if (!document.querySelector("style#dynamic-styles")) {
     const style = document.createElement("style");
     style.id = "dynamic-styles";
@@ -129,8 +128,6 @@ const getTopicColor = (topicName) => {
       return "#0073e6";
     case "economics":
       return "#009975";
-    case "trading":
-      return "#d50032";
     case "algorithms":
       return "#6a0dad";
     default:

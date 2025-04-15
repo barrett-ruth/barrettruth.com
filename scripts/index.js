@@ -12,10 +12,6 @@ const postMapping = new Map([
     [{ name: "models of production", link: "models-of-production" }],
   ],
   [
-    "Trading",
-    [{ name: "extrema circular buffer", link: "extrema-circular-buffer" }],
-  ],
-  [
     "Algorithms",
     [
       {
@@ -24,6 +20,7 @@ const postMapping = new Map([
       },
       { name: "leetcode daily", link: "leetcode-daily" },
       { name: "practice makes perfect", link: "practice-makes-perfect" },
+      { name: "extrema circular buffer", link: "extrema-circular-buffer" },
     ],
   ],
 ]);
