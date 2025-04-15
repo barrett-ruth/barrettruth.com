@@ -7,7 +7,7 @@ class SiteHeader extends HTMLElement {
     const isHome = path === "/" || path === "/index.html";
     const topic = this.getTopic();
 
-    const promptText = isHome ? "barrett@ruth:~$" : `barrett@ruth:~$ ${topic}`;
+    const promptText = topic ? `barrett@ruth:~$ ${topic}` : "barrett@ruth:~$";
 
     const clickHandler = isHome ? "refresh(event)" : "goHome(event)";
 
@@ -20,9 +20,9 @@ class SiteHeader extends HTMLElement {
           </div>
         </a>
         <div class="header-links">
-          <a target="_blank" href="/public/resume.pdf">Resume</a>
-          <a target="_blank" href="/public/transcript.pdf">Transcript</a>
-          <a href="/about.html">About</a>
+          <a target="_blank" href="/public/resume.pdf">resume</a>
+          <a target="_blank" href="/public/transcript.pdf">transcript</a>
+          <a href="/about.html">about</a>
         </div>
       </header>
     `;
@@ -30,10 +30,11 @@ class SiteHeader extends HTMLElement {
 
   getTopic() {
     const pathname = window.location.pathname.split("/");
-    if (pathname.includes("about.html")) {
-      return "/about";
+
+    if (pathname.length === 2 && pathname[1].endsWith(".html")) {
+      return "/" + pathname[1].replace(".html", "");
     } else if (pathname.length >= 3) {
-      return `/${pathname[1]}`;
+      return "/" + pathname.slice(2, -1).join("/").replace(".html", "");
     }
     return "";
   }
@@ -45,9 +46,9 @@ class SiteFooter extends HTMLElement {
       <footer>
         <span class="greek-delta">&Delta;</span>
         <div class="footer-links">
-          <a target="_blank" href="https://github.com/barrett-ruth/">GitHub</a>
-          <a target="_blank" href="https://www.linkedin.com/in/barrett-ruth/">LinkedIn</a>
-          <a target="_blank" href="mailto:br.barrettruth@gmail.com">Email</a>
+          <a target="_blank" href="https://github.com/barrett-ruth/">github</a>
+          <a target="_blank" href="https://www.linkedin.com/in/barrett-ruth/">linkedin</a>
+          <a target="_blank" href="mailto:br.barrettruth@gmail.com">email</a>
         </div>
       </footer>
     `;
@@ -69,12 +70,12 @@ document.addEventListener("DOMContentLoaded", function () {
         align-items: center;
         justify-content: space-between;
       }
-      
+
       .greek-delta {
         font-family: "Times New Roman", Times, serif;
         font-size: 1.5em;
       }
-      
+
       .header-links a,
       .footer-links a {
         margin-left: 25px;
@@ -117,7 +118,7 @@ const getTopicColor = (topicName) => {
   switch (topicName) {
     case "software":
       return "#0073e6";
-    case "economics":
+    case "operating-systems":
       return "#009975";
     case "algorithms":
       return "#6a0dad";

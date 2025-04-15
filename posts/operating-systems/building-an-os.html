@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="/styles/common.css" />
+    <link rel="stylesheet" href="/styles/post.css" />
+    <link rel="icon" type="image/webp" href="/public/logo.webp" />
+    <link href="/public/prism/prism.css" rel="stylesheet" />
+    <link href="/public/prism/prism-theme.css" rel="stylesheet" />
+    <script defer src="/public/prism/prism.js"></script>
+    <title>building an os</title>
+  </head>
+  <body class="graph-background">
+    <site-header></site-header>
+    <main class="main">
+      <div class="post-container">
+        <header class="post-header">
+          <h1 class="post-title">building an os</h1>
+          <p class="post-meta">
+            <time datetime="2025-04-15">15/04/2025</time>
+          </p>
+        </header>
+        <article class="post-article">
+          <p></p>
+          <h2>introduction</h2>
+          <div>
+            <p>
+              Building an operating system requires understanding of both hardware and software fundamentals.
+              This post will cover the basics of boot process, memory management, and process scheduling.
+            </p>
+          </div>
+          <h2>boot process</h2>
+          <div>
+            <h3>bootloader</h3>
+            <div>
+              <p>
+                The bootloader is the first piece of code executed when a computer starts up.
+                It's responsible for loading the operating system kernel into memory.
+              </p>
+            </div>
+            <h3>kernel initialization</h3>
+            <div>
+              <p>
+                After the bootloader loads the kernel, the kernel initializes various hardware components
+                and sets up memory management, interrupt handling, and other core services.
+              </p>
+            </div>
+          </div>
+          <h2>memory management</h2>
+          <div>
+            <p>
+              Memory management is a critical component of any operating system.
+              It involves tracking and allocating memory to processes, handling virtual memory,
+              and implementing paging or segmentation.
+            </p>
+          </div>
+          <h2>process scheduling</h2>
+          <div>
+            <p>
+              Process scheduling determines how CPU time is allocated to different processes.
+              Various scheduling algorithms like round-robin, priority-based, and shortest job first
+              can be implemented depending on the use case.
+            </p>
+          </div>
+        </article>
+      </div>
+    </main>
+    <site-footer></site-footer>
+    <script src="/scripts/common.js"></script>
+    <script src="/scripts/post.js"></script>
+  </body>
+</html>

@@ -1,26 +1,21 @@
 const postMapping = new Map([
   [
-    "Software",
+    "software",
     [
-      { name: "from github pages to aws", link: "from-github-pages-to-aws" },
-      { name: "designing this website", link: "designing-this-website" },
-      // { name: "working in the terminal" },
+      "from github pages to aws",
+      "designing this website",
+      // "working in the terminal",
     ],
   ],
+  ["operating systems", ["building an os"]],
   [
-    "Economics",
-    [{ name: "models of production", link: "models-of-production" }],
-  ],
-  [
-    "Algorithms",
+    "algorithms",
     [
-      {
-        name: "competitive programming log",
-        link: "competitive-programming-log",
-      },
-      { name: "leetcode daily", link: "leetcode-daily" },
-      { name: "practice makes perfect", link: "practice-makes-perfect" },
-      { name: "extrema circular buffer", link: "extrema-circular-buffer" },
+      "competitive programming log",
+      "leetcode daily",
+      "practice makes perfect",
+      "extrema circular buffer",
+      "models of production",
     ],
   ],
 ]);
@@ -44,14 +39,29 @@ function renderPosts(topic) {
   const posts = document.getElementById("posts");
   posts.innerHTML = "";
 
-  postMapping.get(topic).forEach(({ name: postName, link: postLink }) => {
+  // Normalize topic for lookup (in case it has spaces, like "operating systems")
+  const normalizedTopic = topic.trim();
+  
+  // Get posts for this topic
+  const topicPosts = postMapping.get(normalizedTopic);
+  
+  if (!topicPosts) {
+    console.error(`No posts found for topic: ${normalizedTopic}`);
+    return;
+  }
+
+  topicPosts.forEach((postName) => {
+    if (typeof postName !== "string") return;
+
     const post = document.createElement("div");
     post.classList.add("post");
 
     const link = document.createElement("a");
-    link.href = postLink
-      ? `/posts/${topic.toLowerCase()}/${postLink}.html`
-      : `/wip.html`;
+    const postLink = postName.toLowerCase().replace(/\s+/g, "-");
+    
+    // Convert topic to URL-friendly format
+    const topicSlug = normalizedTopic.toLowerCase().replace(/\s+/g, "-");
+    link.href = `/posts/${topicSlug}/${postLink}.html`;
     link.textContent = postName;
 
     link.style.textDecoration = "underline";
@@ -71,7 +81,7 @@ function typechars(e) {
   typing = true;
 
   const topic = e.target.textContent;
-  const terminalText = ` ${topic.toLowerCase()}/`;
+  const terminalText = ` /${topic.toLowerCase()}`;
   const terminalPrompt = document.querySelector(".terminal-prompt");
   const delay =
     terminalPrompt.innerHTML.length > TERMINAL_PROMPT.length ? 250 : 500;
