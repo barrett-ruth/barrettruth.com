@@ -123,7 +123,7 @@ const getTopicColor = (topicName) => {
     case "algorithms":
       return "#6a0dad";
     default:
-      return "#000000";
+      return "#d50032";
   }
 };
 
