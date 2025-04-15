@@ -7,15 +7,11 @@ class SiteHeader extends HTMLElement {
     const path = window.location.pathname;
     const isHome = path === "/" || path === "/index.html";
     const topic = this.getTopic();
-    
-    const promptText = isHome 
-      ? "barrett@ruth:~$" 
-      : `barrett@ruth:~$ ${topic}`;
-    
-    const clickHandler = isHome 
-      ? "refresh(event)" 
-      : "goHome(event)";
-    
+
+    const promptText = isHome ? "barrett@ruth:~$" : `barrett@ruth:~$ ${topic}`;
+
+    const clickHandler = isHome ? "refresh(event)" : "goHome(event)";
+
     this.innerHTML = `
       <header>
         <a href="/" style="text-decoration: none; color: inherit" onclick="${clickHandler}">
@@ -32,7 +28,7 @@ class SiteHeader extends HTMLElement {
       </header>
     `;
   }
-  
+
   getTopic() {
     const pathname = window.location.pathname.split("/");
     if (pathname.includes("about.html")) {
@@ -61,8 +57,8 @@ class SiteFooter extends HTMLElement {
 }
 
 // Register the custom elements
-customElements.define('site-header', SiteHeader);
-customElements.define('site-footer', SiteFooter);
+customElements.define("site-header", SiteHeader);
+customElements.define("site-footer", SiteFooter);
 
 // Add styles once when DOM is loaded
 document.addEventListener("DOMContentLoaded", function () {
