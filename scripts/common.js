@@ -121,9 +121,9 @@ const getTopicColor = (topicName) => {
     case "operating-systems":
       return "#009975";
     case "algorithms":
-      return "#6a0dad";
-    default:
       return "#d50032";
+    default:
+      return "#000000";
   }
 };
 
