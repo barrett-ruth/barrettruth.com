@@ -25,6 +25,68 @@
         </header>
         <article class="post-article">
           <h2>
+            <a href="https://usaco.guide/bronze/intro-complete" target="_blank"
+              >usaco bronze: (basic) complete search</a
+            >
+            <span class="post-meta">
+              <time datetime="2025-04-27">04/27/2025</time>
+            </span>
+          </h2>
+          <p>
+            Implementation wise, two-pointers boundary conditions trip me up.
+            Spend more time on problems statements and go for the easiest
+            solution.
+          </p>
+          <p>
+            <a href="" target="_blank">cowntact tracing</a> was the absolute
+            worst. I misinterpreted the problem constraints (i.e. thought hoof
+            shakes in last \(k\) time units, not last \(k\) shakes) then failed
+            to identify <i>all</i> parts of my code that had erroneous logic.
+            Then I did this 3 times over.
+          </p>
+          <blockquote>
+            Once a crux observation/error is realized, reexamine all parts of
+            the code/plan and see how they're impacted.
+          </blockquote>
+          <h2>
+            <a href="https://usaco.guide/bronze/simulation" target="_blank"
+              >usaco bronze: simulation</a
+            >
+            <span class="post-meta">
+              <time datetime="2025-04-26">04/26/2025</time>
+            </span>
+          </h2>
+          <p>
+            These problems are relatively easy but exposed my poor
+            implementation abilities. A lack of implementation implies a lack of
+            understanding. Specifically, I encountered the following problems:
+          </p>
+          <ul>
+            <li>
+              Base cases and calculations&mdash;initializing state and
+              transitions along with exit conditions. Oftentimes I simply
+              <i>misinterpret</i> the simulation (<b>take your time</b>), fail
+              to outline specific criteria, and don't walk through edge cases.
+              For example,
+              <a
+                href="https://usaco.org/index.php?page=viewproblem2&cpid=568"
+                target="_blank"
+                >speeding ticket</a
+              >
+              took me forever (>20 minutes) to model the ideal \(O(n)\)
+              solution. Initial states and base cases took me forever, when I
+              should've just modeled the transitions explicitly, considering
+              start/end states separately rather than getting overwhelmed by
+              everything at once.
+            </li>
+            <li>
+              Overcomplicating/wasting time on solutions that aren't
+              necessitated by lax constraints. I further get confused (although
+              my black-box ability is improving) on problems with many moving
+              parts.
+            </li>
+          </ul>
+          <h2>
             <a href="https://codeforces.com/contest/2106" target="_blank"
               >1020 (div. 3)</a
             >
