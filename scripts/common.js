@@ -46,7 +46,7 @@ class SiteFooter extends HTMLElement {
       <footer>
         <span class="greek-delta">&Delta;</span>
         <div class="footer-links">
-          <a target="_blank" href="https://github.com/barrett-ruth/">github</a>
+          <a target="_blank" href="https://git.barrettruth.com">git</a>
           <a target="_blank" href="https://www.linkedin.com/in/barrett-ruth/">linkedin</a>
           <a target="_blank" href="mailto:br.barrettruth@gmail.com">email</a>
         </div>
