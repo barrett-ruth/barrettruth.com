@@ -33,6 +33,47 @@
             </span>
           </h2>
           <p>
+            First contest in a while. Implementation lacked heavily but solving
+            harder problems made easier problems easier.
+          </p>
+          <ul>
+            <li>
+              A: rust immediately showed with the brute force. Since \(n\cdot
+              m\leq 25\), at most \(\lceil\log_2(25)\rceil=5\) concatenations
+              need to be made. <b>Slow down and consider constrains</b>.
+            </li>
+            <li>
+              B: Similarly, mathematical insight and just
+              <i>playing with parameters</i>/quantifying the effects of
+              operations is important.
+              <b>Test your conjectures, they may be right/helpful</b> (ie. "I
+              must maintain the shortest length thread").
+            </li>
+            <li>
+              C: implementation weak. Simplify, step back, simplify,
+              continuously. I stopped considering altering the grid and used a
+              pair of coordinates but deriving the others inline,
+              <i>if you trust your mathematics</i>, is way simpler.
+            </li>
+            <li>
+              D: formalize your answer better. Understand prime factorization
+              more. Improve/memorize asymptotic bounds of factoring and prime
+              counting. Don't overcomplicate the problem&mdash;here, I
+              erroneously thought it was asking for minimum operations, not
+              possibility. In reality, all this problem asks is:
+              <blockquote>
+                "Are the total number of each factor greater than one divisible
+                by \(n\)?"
+              </blockquote>
+            </li>
+            <li>
+              E: dp rust. Simplify your thought process&mdash;look back into
+              SRTBOT (i.e. define the subproblem). If the subproblems depend
+              rightward, iterate right to left. That simple.
+            </li>
+            <li>F: coming back for you!</li>
+          </ul>
+          <p>
             I must heed the advice of Colin Galen. I rush trivial problems
             because they're boring, then forget an edge case. I get overwhelmed
             by hard problems because I don't know how to think. I've been
@@ -54,8 +95,8 @@
             "this works"\(\rightarrow\) "let's simplify" \(\rightarrow\) "that
             doesn't work" \(\rightarrow ...\) over and over again...
             <i>even when the right solution comes across my mind</i>. In this
-            case, choosing an invariant was just overwhelming. <b>The simplest
-              correct solution is always the right one</b>.
+            case, choosing an invariant was just overwhelming.
+            <b>The simplest correct solution is always the right one</b>.
           </p>
           <h2>
             <a href="https://usaco.guide/bronze/intro-complete" target="_blank"
