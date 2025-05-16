@@ -19,6 +19,7 @@ const postMapping = new Map([
       "models of production",
     ],
   ],
+  ["meditations", ["the problem with cs curricula"]],
 ]);
 
 function refresh(e) {
@@ -42,10 +43,10 @@ function renderPosts(topic) {
 
   // Normalize topic for lookup (in case it has spaces, like "operating systems")
   const normalizedTopic = topic.trim();
-  
+
   // Get posts for this topic
   const topicPosts = postMapping.get(normalizedTopic);
-  
+
   if (!topicPosts) {
     console.error(`No posts found for topic: ${normalizedTopic}`);
     return;
@@ -59,7 +60,7 @@ function renderPosts(topic) {
 
     const link = document.createElement("a");
     const postLink = postName.toLowerCase().replace(/\s+/g, "-");
-    
+
     // Convert topic to URL-friendly format
     const topicSlug = normalizedTopic.toLowerCase().replace(/\s+/g, "-");
     link.href = `/posts/${topicSlug}/${postLink}.html`;
