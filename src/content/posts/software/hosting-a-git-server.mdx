@@ -1,6 +1,6 @@
 ---
 title: "hosting a git server"
-date: "2025-05-07"
+date: "07/05/2025"
 ---
 
 ## why
@@ -28,7 +28,45 @@ I detail self-hosting a git server on an AWS t2.micro instance ("free" for 1 yea
     2.  `sudo chgrp -R apache /srv/git`
 9.  To deal with "dubious ownership" issues when cloning with HTTPS, I needed to add **exactly** the following configuration to `/etc/gitconfig`. _No group permission finagling will work_! Git only allows cloning repositories that are owned by the user. If you wish to clone via SSH with, say, user A, this same user must also be employed by your HTTP server to clone the files (customize HTTPD/whatever you're using accordingly).
 
+```gitconfig
+[safe]
+        directory = *
+```
+
 10. Security-wise, set up TLS/HTTPS with [Let's Encrypt](https://letsencrypt.org/). Further, only allow authorized people to actually _push_ to the server. The following is my HTTPD configuration file `/etc/apache/conf.d/git-server.conf` hosting the web ui at the root and clone urls at `/git`:
+
+```apacheconf
+<VirtualHost *:443>
+    ServerName <servername>
+
+    SSLEngine on
+    SSLCertificateFile /etc/letsencrypt/live/<servername>/fullchain.pem
+    SSLCertificateKeyFile /etc/letsencrypt/live/<servername>/privkey.pem
+
+    SetEnv GIT_PROJECT_ROOT /srv/git
+    SetEnv REMOTE_USER $REDIRECT_REMOTE_USER
+
+    ScriptAlias /git/ /usr/libexec/git-core/git-http-backend/
+
+    <Directory "/usr/libexec/git-core">
+        Options +ExecCGI -MultiViews +SymLinksIfOwnerMatch
+        Require all granted
+        AllowOverride None
+    </Directory>
+
+    <Files "git-http-backend">
+        AuthType Basic
+        AuthName "Git Access"
+        AuthUserFile /srv/git/.htpasswd
+        Require expr !(%{QUERY_STRING} -strmatch '*service=git-receive-pack*' || %{REQUEST_URI} =~ m#/git-receive-pack$#)
+        Require valid-user
+    </Files>
+    ProxyPassMatch ^/git/ !
+    ProxyPreserveHost On
+    ProxyPass        /  http://127.0.0.1:8000/
+    ProxyPassReverse /  http://127.0.0.1:8000/
+</VirtualHost>
+```
 
 11. There are a variety of choices for web ui, including [cgit](https://git.zx2c4.com/cgit/), [gitweb](https://git-scm.com/docs/gitweb) (I do not recommend this—the scripts are ancient and require manual tuning), and some even heavier options that allow for further customization. I am not a fan of viewing code on the web, so you cannot in [my custom ui](https://git.barrettruth.com). I spin up a simple python server to walk the projects in `/srv/git` and configured a systemd service to run it in the ec2 box:
 

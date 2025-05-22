@@ -1,21 +1,28 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
+import { getTopicColor } from "../utils/colors.js";
 
 const title = "Barrett Ruth";
 
 const allPosts = await getCollection("posts");
 const postsByCategory = allPosts.reduce((acc, post) => {
-  const category = post.id.split('/')[0];
+  const category = post.id.split("/")[0];
   if (!acc[category]) acc[category] = [];
   acc[category].push(post);
   return acc;
 }, {});
 
-Object.keys(postsByCategory).forEach(category => {
+Object.keys(postsByCategory).forEach((category) => {
   postsByCategory[category].sort((a, b) => {
-    const dateA = a.data.date ? new Date(a.data.date) : new Date(0);
-    const dateB = b.data.date ? new Date(b.data.date) : new Date(0);
+    const parseEuroDate = (dateStr) => {
+      if (!dateStr) return new Date(0);
+      const [day, month, year] = dateStr.split("/");
+      return new Date(year, month - 1, day);
+    };
+
+    const dateA = parseEuroDate(a.data.date);
+    const dateB = parseEuroDate(b.data.date);
     return dateB.getTime() - dateA.getTime();
   });
 });
@@ -45,8 +52,6 @@ Object.keys(postsByCategory).forEach(category => {
       switch (topicName) {
         case "software":
           return "#0073e6";
-        case "operating-systems":
-          return "#009975";
         case "algorithms":
           return "#d50032";
         case "meditations":
@@ -55,24 +60,25 @@ Object.keys(postsByCategory).forEach(category => {
           return "#000000";
       }
     }
-    
+
     const TERMINAL_PROMPT = "barrett@ruth:~$ ";
     let typing = false;
     let clearing = false;
-    
+
     function clearPrompt(delay, callback) {
       if (clearing) return;
       clearing = true;
-    
+
       const terminalPrompt = document.querySelector(".terminal-prompt");
       if (!terminalPrompt) {
         clearing = false;
         return;
       }
-      
-      const topicLength = terminalPrompt.innerHTML.length - TERMINAL_PROMPT.length;
+
+      const topicLength =
+        terminalPrompt.innerHTML.length - TERMINAL_PROMPT.length;
       let i = 0;
-    
+
       function removeChar() {
         if (i++ < topicLength) {
           terminalPrompt.textContent = terminalPrompt.textContent.slice(0, -1);
@@ -83,33 +89,33 @@ Object.keys(postsByCategory).forEach(category => {
           callback && callback();
         }
       }
-    
+
       removeChar();
     }
-    
+
     function typechars(e) {
       e.preventDefault();
-    
+
       const topicElement = e.target;
       if (topicElement.classList.contains("active")) return;
       if (typing) return;
       typing = true;
-    
+
       const topic = topicElement.dataset.topic;
       const terminalText = ` /${topic.toLowerCase()}`;
       const terminalPrompt = document.querySelector(".terminal-prompt");
       const delay =
         terminalPrompt.innerHTML.length > TERMINAL_PROMPT.length ? 250 : 500;
-    
+
       const topics = document.querySelectorAll(".topic a");
       topics.forEach((t) => {
         t.classList.remove("active");
         t.style.color = "";
       });
-      
+
       topicElement.classList.add("active");
       topicElement.style.color = getTopicColor(topic);
-    
+
       clearPrompt(delay, () => {
         let i = 0;
         function typechar() {
@@ -124,56 +130,59 @@ Object.keys(postsByCategory).forEach(category => {
         typechar();
       });
     }
-    
+
     function renderPosts(topic) {
       const posts = document.getElementById("posts");
       posts.innerHTML = "";
-    
+
       const categoryPosts = postsByCategory[topic];
-    
+
       if (!categoryPosts) {
         console.error(`No posts found for topic: ${topic}`);
         return;
       }
-    
+
       categoryPosts.forEach((post) => {
         const postDiv = document.createElement("div");
         postDiv.classList.add("post");
-    
+
         const link = document.createElement("a");
-        const slug = post.id.split('/').pop().replace(/\.mdx?$/, '');
-        
+        const slug = post.id
+          .split("/")
+          .pop()
+          .replace(/\.mdx?$/, "");
+
         link.href = `/posts/${topic}/${slug}`;
         link.textContent = post.data.title;
         link.style.textDecoration = "underline";
-    
+
         postDiv.appendChild(link);
         posts.appendChild(postDiv);
       });
     }
-    
-    document.addEventListener('DOMContentLoaded', function() {
-      const topics = document.querySelectorAll('.topic a');
-      
-      topics.forEach(topic => {
-        topic.addEventListener('click', typechars);
-        
+
+    document.addEventListener("DOMContentLoaded", function () {
+      const topics = document.querySelectorAll(".topic a");
+
+      topics.forEach((topic) => {
+        topic.addEventListener("click", typechars);
+
         const topicName = topic.dataset.topic;
-        
-        topic.addEventListener('mouseenter', () => {
+
+        topic.addEventListener("mouseenter", () => {
           const color = getTopicColor(topicName);
           topic.style.color = color;
         });
-        
-        topic.addEventListener('mouseleave', () => {
-          if (!topic.classList.contains('active')) {
+
+        topic.addEventListener("mouseleave", () => {
+          if (!topic.classList.contains("active")) {
             topic.style.color = "";
           }
         });
       });
-      
-      window.addEventListener('beforeunload', () => {
-        const terminalPrompt = document.querySelector('.terminal-prompt');
+
+      window.addEventListener("beforeunload", () => {
+        const terminalPrompt = document.querySelector(".terminal-prompt");
         if (terminalPrompt) {
           terminalPrompt.innerHTML = TERMINAL_PROMPT;
         }

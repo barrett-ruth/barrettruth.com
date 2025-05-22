@@ -5,7 +5,7 @@ const isHome = path === "/" || path === "/index.html";
 // Determine topic from path
 function getTopic() {
   const pathname = path.split("/");
-  
+
   if (pathname.length === 2 && pathname[1].endsWith(".html")) {
     return "/" + pathname[1].replace(".html", "");
   } else if (pathname.length >= 3) {
@@ -47,8 +47,9 @@ const promptText = topic ? `barrett@ruth:~$ ${topic}` : "barrett@ruth:~$";
       clearing = false;
       return;
     }
-    
-    const topicLength = terminalPrompt.innerHTML.length - TERMINAL_PROMPT.length;
+
+    const topicLength =
+      terminalPrompt.innerHTML.length - TERMINAL_PROMPT.length;
     let i = 0;
 
     function removeChar() {
@@ -69,19 +70,19 @@ const promptText = topic ? `barrett@ruth:~$ ${topic}` : "barrett@ruth:~$";
     e.preventDefault();
     clearPrompt(500, () => (window.location.href = "/"));
   }
-  
-  document.addEventListener('DOMContentLoaded', () => {
+
+  document.addEventListener("DOMContentLoaded", () => {
     window.TERMINAL_PROMPT = TERMINAL_PROMPT;
     window.clearPrompt = clearPrompt;
     window.goHome = goHome;
-    
+
     const homeLink = document.querySelector('header a[href="/"]');
     if (homeLink) {
       const path = window.location.pathname;
       const isHome = path === "/" || path === "/index.html";
-      
+
       if (isHome) {
-        homeLink.addEventListener('click', (e) => {
+        homeLink.addEventListener("click", (e) => {
           e.preventDefault();
           const topics = document.querySelectorAll(".topic a");
           topics.forEach((topic) => {
@@ -92,7 +93,7 @@ const promptText = topic ? `barrett@ruth:~$ ${topic}` : "barrett@ruth:~$";
           clearPrompt(500);
         });
       } else {
-        homeLink.addEventListener('click', goHome);
+        homeLink.addEventListener("click", goHome);
       }
     }
   });

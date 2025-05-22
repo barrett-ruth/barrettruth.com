@@ -54,3 +54,9 @@ li {
 .terminal-container {
   font-family: "Courier New", monospace;
 }
+
+pre {
+  font-feature-settings:
+    "liga" 0,
+    "calt" 0;
+}

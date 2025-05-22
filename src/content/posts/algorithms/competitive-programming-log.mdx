@@ -1,6 +1,6 @@
 ---
 title: "competitive programming log"
-date: "2025-05-14"
+date: "14/05/2025"
 useKatex: true
 ---
 
@@ -9,7 +9,7 @@ useKatex: true
 First contest in a while. Implementation lacked heavily but solving harder problems made easier problems easier.
 
 - A: rust immediately showed with the brute force. Since $n\cdot m\leq 25$, at most $\lceil\log_2(25)\rceil=5$ concatenations need to be made. **Slow down and consider constrains**.
-- B: Similarly, mathematical insight and just *playing with parameters*/quantifying the effects of operations is important. **Test your conjectures, they may be right/helpful** (ie. "I must maintain the shortest length thread").
+- B: Similarly, mathematical insight and just _playing with parameters_/quantifying the effects of operations is important. **Test your conjectures, they may be right/helpful** (ie. "I must maintain the shortest length thread").
 - C: implementation weak. Simplify, step back, simplify, continuously. I stopped considering altering the grid and used a pair of coordinates but deriving the others inline, _if you trust your mathematics_, is way simpler.
 - D: formalize your answer better. Understand prime factorization more. Improve/memorize asymptotic bounds of factoring and prime counting. Don't overcomplicate the problem—here, I erroneously thought it was asking for minimum operations, not possibility. In reality, all this problem asks is: "Are the total number of each factor greater than one divisible by $n$?"
 - E: dp rust. Simplify your thought process—look back into SRTBOT (i.e. define the subproblem). If the subproblems depend rightward, iterate right to left. That simple.
@@ -61,7 +61,7 @@ From now on, prioritize actually _learning_ and problem-solving in a pressurized
 
 ~1300 performance. Consistently finishing E, getting F occasionally.
 
--  B: took me way too long because I just wanted to code. Wasted 5 minutes when I know better—patience and a formula got me there in 30 seconds.
+- B: took me way too long because I just wanted to code. Wasted 5 minutes when I know better—patience and a formula got me there in 30 seconds.
 
 > Impatience is holding me back. Lack of discipline and focus is holding me back. It doesn't just harm my ranking problem-solving ability but it _prevents me from improving_.
 
@@ -69,7 +69,7 @@ From now on, prioritize actually _learning_ and problem-solving in a pressurized
 - D: misunderstood the problem statement twice. Polya and Zeitz both advise to fully understand exactly what the problem statement is asking, whether through direct analysis or examples. Then, I messed up the brute force. However, I did notice that raw recursion would not TLE based on the fact that each number can be divided in only a few ways.
 - E: I knew a number didn't have that many divisors but the implementation took me too long. **Pay closer attention to the constraints and just solve the problem.**. Spend a bit more time on implementation, _even if you know a way that works_. Here, I knew an approach to code but it was easily error-prone. Immediately came up with the idea but was unable to express it in code. This means I did not fully understand the problem, namely with some core mistakes:1. The tree it not necessarily binary
 - C's cannot have children, so tracking depth/available nodes to fill per level is crucial
-    Coming up with the expression $a=c+1$ (and ensuring the input conforms to that) is a lot easier than cusotm coding logic to ensure levels are filled out properly. The core problem is that I lack the mathematical prowess to be certain of what exactly I need to check after I make that assertion and why. In this case, it means that the number of C's is appropriate, _so I never even need to check them_—I just need to make sure that the rest of the solution is valid.
+  Coming up with the expression $a=c+1$ (and ensuring the input conforms to that) is a lot easier than cusotm coding logic to ensure levels are filled out properly. The core problem is that I lack the mathematical prowess to be certain of what exactly I need to check after I make that assertion and why. In this case, it means that the number of C's is appropriate, _so I never even need to check them_—I just need to make sure that the rest of the solution is valid.
 
 ## [1017 (div. 4)](https://codeforces.com/contest/2094) 14/04/2025
 
@@ -77,8 +77,8 @@ Decent contest. Lost focus near the end and was not paying attention at the star
 
 1. D: submitted what I knew to be incorrect. Can't account for laziness.
 2. E: long long overflow. Laziness.
-    F: lost focus here and did not prove the correctness. Was confused by the grid—simply breaking down and _experimenting_ in terms of simple patterns would help isolate that a mutation after $m%K==0$ is key. Then, a subsequent rigorous proof of the modulo shift would help.4. G: gave up after a few insights and did not persevere to find the simple mathematical equation for updating the score on reversal although I got the deque intution. **Sometimes, there's nothing to learn besides improving your discipline.**
-    My math intuition needs to improve. I see something hard (i.e. dividing out a number repeatedly) then think "this is impossible" rather than "this seems hard, but is it feasible? Is it computationally practical?" In this case, I know the solution rests on the fact of only a logarithmic (?) amount of numbers can end up dividing $a$i$$. Time to upsolve later.
+   F: lost focus here and did not prove the correctness. Was confused by the grid—simply breaking down and _experimenting_ in terms of simple patterns would help isolate that a mutation after $m%K==0$ is key. Then, a subsequent rigorous proof of the modulo shift would help.4. G: gave up after a few insights and did not persevere to find the simple mathematical equation for updating the score on reversal although I got the deque intution. **Sometimes, there's nothing to learn besides improving your discipline.**
+   My math intuition needs to improve. I see something hard (i.e. dividing out a number repeatedly) then think "this is impossible" rather than "this seems hard, but is it feasible? Is it computationally practical?" In this case, I know the solution rests on the fact of only a logarithmic (?) amount of numbers can end up dividing $a$i$$. Time to upsolve later.
 
 ## [799 (div. 4)](https://codeforces.com/contest/1692) 10/04/2025
 
@@ -145,7 +145,7 @@ Div. 4 to practice implemenation skills + mathematical observations thanks to [P
 
 - B: typo, costing a few minutes. Go slower. Declare variables. Think consistently through approach.
 - C: paused an found a general implementation as Zeitz advises (starting with a general, non-mathematical solution: "The solution is the earliest to get either both 1s at once or each over two strings"). **I still rushed**, incorrectly computing the result as `min(first, second)` instead of `first + second`.
--  D: I looked up the recurrence relation $T(n)=T(n/3)+T(2n/3)$ to ensure it was sub-linear time.
+- D: I looked up the recurrence relation $T(n)=T(n/3)+T(2n/3)$ to ensure it was sub-linear time.
 
 Gain the mathematical skills to both analyze and derive (i.e. if you forget) recurrence relations.
 
@@ -178,10 +178,10 @@ I also just plug in $ceil$ and $floor$ until I find the right answer (I'm not ly
 
 _Everything I did here was wrong and this problem showed an embarrassingly fundamental flaw in my practice strategy._
 
-  Namely, I should divide up practice time into:
+Namely, I should divide up practice time into:
 
-  1.  Contests, emphasizing speed and implementation
-  2.  Single problems, emphasizing specific learning objectives
+1.  Contests, emphasizing speed and implementation
+2.  Single problems, emphasizing specific learning objectives
 
 In this problem, I immediately saw the application of the lazy segment tree but decided to hold off on it, failing to find the simpler prefix-XOR solution. Therefore, I not only wasted my time, but also cemented in unrealistic practice (I would never do this in a real contest) and worsened my virtual contest performance. As for the prefix-XOR solution, focusing on just one/zero corresponding elements and **walking through small examples** (i.e. "what happens when $l=r$?") would've help me pick up the pattern.
 
