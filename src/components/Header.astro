@@ -31,7 +31,7 @@ const promptText = topic ? `barrett@ruth:~$ ${topic}` : "barrett@ruth:~$";
   <div class="header-links">
     <a target="_blank" href="/resume.pdf">resume</a>
     <a target="_blank" href="/transcript.pdf">transcript</a>
-    <a href="/about/">about</a>
+    <a href="/about.html">about</a>
   </div>
 </header>
 
@@ -85,7 +85,7 @@ const promptText = topic ? `barrett@ruth:~$ ${topic}` : "barrett@ruth:~$";
           terminalPrompt.innerHTML += terminalText.charAt(i++);
           setTimeout(typechar, delay / terminalText.length);
         } else {
-          window.location.href = "/about/";
+          window.location.href = "/about.html";
         }
       }
       typechar();
@@ -118,7 +118,7 @@ const promptText = topic ? `barrett@ruth:~$ ${topic}` : "barrett@ruth:~$";
       }
     }
 
-    const aboutLink = document.querySelector('header a[href="/about/"]');
+    const aboutLink = document.querySelector('.header-links a[href="/about.html"]');
     if (aboutLink) {
       const path = window.location.pathname;
       const isHome = path === "/" || path === "/index.html";
