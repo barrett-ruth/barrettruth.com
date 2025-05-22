@@ -55,7 +55,7 @@ const topicColor = getTopicColor(category);
   </div>
 
   <slot name="scripts" slot="scripts">
-    <script src="/scripts/dateHeadings.js" is:inline></script>
+    <script src="/scripts/centerKatex.js" is:inline></script>
     {frontmatter.scripts?.map(script => (
       <script src={script} type="module"></script>
     ))}
