@@ -1,34 +1,5 @@
-html,
-body {
-  font-family: "Signifier", serif;
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
-header {
-  font-size: 1.5em;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-ul {
-  list-style: unset;
-  list-style-type: "- ";
-}
-
 li {
   margin: 5px 0;
-}
-
-.main {
-  display: flex;
-  justify-content: center;
-  flex: 1;
 }
 
 .post-header {
@@ -51,7 +22,7 @@ li {
 .post-title::before {
   content: "";
   position: absolute;
-  background-color: var(--topic-color, #000);
+  background-color: var(--topic-color, black);
   height: 30px;
   width: 2px;
   bottom: -10px;
@@ -61,7 +32,7 @@ li {
 .post-title::after {
   content: "";
   position: absolute;
-  background-color: var(--topic-color, #000);
+  background-color: var(--topic-color, black);
   width: 200px;
   height: 2px;
   bottom: -10px;
@@ -70,7 +41,7 @@ li {
 
 .post-meta {
   font-size: 1.3em;
-  color: #000;
+  color: black;
   margin-left: 100px;
 }
 

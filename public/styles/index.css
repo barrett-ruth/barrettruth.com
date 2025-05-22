@@ -2,41 +2,10 @@ html,
 body {
   display: flex;
   flex-direction: column;
-}
-
-header,
-footer {
-  font-size: 1.5em;
+  overscroll-behavior: none;
+  min-height: 100vh;
   display: flex;
-  align-items: center;
-}
-
-header {
-  justify-content: space-between;
-}
-footer {
-  justify-content: space-between;
-}
-
-.main {
-  flex: 1;
-  display: flex;
-}
-
-.header-links a,
-.footer-links a {
-  margin-left: 25px;
-}
-
-.greek-delta {
-  font-family: "Times New Roman", Times, serif;
-  font-size: 1.5em;
-}
-
-ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+  flex-direction: column;
 }
 
 .content {
@@ -67,6 +36,10 @@ a {
 
 .post {
   margin-bottom: 25px;
+}
+
+ul {
+  list-style: none;
 }
 
 .topic a {
