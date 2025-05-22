@@ -20,9 +20,6 @@ const filePath = post?.id || "";
 const category = filePath.split("/")[0];
 
 const topicColor = getTopicColor(category);
-
-console.log(frontmatter)
-
 ---
 
 <BaseLayout title={title} description={description} useKatex={useKatex}, useD3={useD3}>

@@ -40,8 +40,6 @@ function drawSolowGraph() {
   const width = container.clientWidth - margin.left - margin.right;
   const height = container.clientHeight - margin.top - margin.bottom;
 
-  console.log(width, height);
-
   container.innerHTML = "";
 
   const svg = d3
@@ -103,7 +101,7 @@ function drawSolowGraph() {
     .attr("y", y(outputData[K_MAX - 1].Y))
     .append("xhtml:body")
     .style("font-size", "0.75em")
-    .html(`\\(Y\\)`);
+    .text("Y");
 
   const depreciationData = Array.from({ length: K_MAX }, (_, k) => ({
     K: k,
@@ -132,7 +130,7 @@ function drawSolowGraph() {
     .append("xhtml:body")
     .style("font-size", "0.75em")
     .append("xhtml:div")
-    .html("\\(\\bar{d}K\\)");
+    .text("dK");
 
   const investmentData = outputData.map((d) => ({
     K: d.K,
@@ -152,34 +150,12 @@ function drawSolowGraph() {
         .y((d) => y(d.Y)),
     );
 
-  const labelFO = svg
-    .append("foreignObject")
-    .attr("width", 16)
-    .attr("height", 20)
+  svg
+    .append("text")
     .attr("x", x(K_MAX))
     .attr("y", y(investmentData[K_MAX - 1].Y))
-    .append("xhtml:span")
-    .attr("class", "latex-label");
-
-  function renderLabel() {
-
-    katex.render("I", labelFO.node(), {
-      displayMode: false,
-      throwOnError: false,
-    });
-  }
-
-  renderLabel();
-
-  // svg
-  //   .append("foreignObject")
-  //   .attr("width", "1em")
-  //   .attr("height", "2em")
-  //   .attr("x", x(K_MAX))
-  //   .attr("y", y(investmentData[K_MAX - 1].Y))
-  //   .append("xhtml:body")
-  //   .style("font-size", "0.75em")
-  //   .html("\\(I\\)");
+    .style("font-size", "0.75em")
+    .text("I");
 
   const k_star = L * Math.pow((s * A) / d, 1 / (1 - alpha));
   svg
@@ -194,14 +170,11 @@ function drawSolowGraph() {
 
   const y_star = solowOutput(k_star);
   svg
-    .append("foreignObject")
-    .attr("width", "20em")
-    .attr("height", "2em")
+    .append("text")
     .attr("x", x(k_star) - 40)
     .attr("y", y(y_star) - 40)
-    .append("xhtml:body")
     .style("font-size", "0.75em")
-    .html(`(${k_star.toFixed(0)}, ${y_star.toFixed(0)})`);
+    .text(`(${k_star.toFixed(0)}, ${y_star.toFixed(0)})`);
 }
 
 const formatNumber = (num) => {
@@ -305,14 +278,11 @@ function drawRomerGraph() {
     );
 
   svg
-    .append("foreignObject")
-    .attr("width", "4em")
-    .attr("height", "2em")
+    .append("text")
     .attr("x", x(T_MAX))
     .attr("y", y(romerData[T_MAX - 1].Y))
-    .append("xhtml:body")
     .style("font-size", "0.75em")
-    .html(`\\(log_{10}Y\\)`);
+    .text("log10(Y)");
 
   updateRomerTable(romerData);
 }
@@ -411,34 +381,25 @@ function drawRomerlGraph() {
     .attr("stroke-dasharray", "4");
 
   svg
-    .append("foreignObject")
-    .attr("width", "5em")
-    .attr("height", "2em")
+    .append("text")
     .attr("x", x(0) + 15)
     .attr("y", y(romerData[0].Y))
-    .append("xhtml:body")
     .style("font-size", "0.6em")
-    .html(`\\(\\bar{l}_0=${l_}\\)`);
+    .text(`l0=${l_}`);
 
   svg
-    .append("foreignObject")
-    .attr("width", "5em")
-    .attr("height", "2em")
+    .append("text")
     .attr("x", x(t0) + 15)
     .attr("y", y(romerData[t0].Y))
-    .append("xhtml:body")
     .style("font-size", "0.6em")
-    .html(`\\(\\bar{l}_1=${l}\\)`);
+    .text(`l1=${l}`);
 
   svg
-    .append("foreignObject")
-    .attr("width", "4em")
-    .attr("height", "2em")
+    .append("text")
     .attr("x", x(T_MAX))
     .attr("y", y(romerData[T_MAX - 1].Y))
-    .append("xhtml:body")
     .style("font-size", "0.75em")
-    .html(`\\(log_{10}Y\\)`);
+    .text("log10(Y)");
 }
 
 function calculateRomerSolowData(
@@ -556,14 +517,11 @@ function drawRomerSolowGraph() {
     );
 
   svg
-    .append("foreignObject")
-    .attr("width", "4em")
-    .attr("height", "2em")
+    .append("text")
     .attr("x", x(T_MAX))
     .attr("y", y(romerSolowData[T_MAX - 1].Y))
-    .append("xhtml:body")
     .style("font-size", "0.75em")
-    .html(`\\(log_{10}Y\\)`);
+    .text("log10(Y)");
 }
 
 function drawRomerSolowChangeGraph() {
@@ -666,14 +624,11 @@ function drawRomerSolowChangeGraph() {
     .attr("stroke-dasharray", "4");
 
   svg
-    .append("foreignObject")
-    .attr("width", "4em")
-    .attr("height", "2em")
+    .append("text")
     .attr("x", x(T_MAX))
     .attr("y", y(romerSolowData[T_MAX - 1].Y))
-    .append("xhtml:body")
     .style("font-size", "0.75em")
-    .html(`\\(log_{10}Y\\)`);
+    .text("log10(Y)");
 }
 
 document.addEventListener("DOMContentLoaded", function () {
