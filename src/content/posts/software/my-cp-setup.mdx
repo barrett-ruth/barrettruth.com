@@ -1,0 +1,38 @@
+---
+title: "my cp setup"
+date: "2025-04-15"
+---
+
+Source code [here](https://github.com/barrett-ruth/dots/blob/main/nvim/lua/cp.lua).
+
+## my goals
+
+I wanted the following features in my competitive programming (cp) setup:
+
+- Flexibility: support various environments (codeforces, USACO, cses, etc.) with ease
+- Speed: instantaneous, non-blocking running/debugging; automatic environment configuration and easy code testing
+- Editor-Agnostic: while I do provide first-in-class NeoVim integration for my setup, it should be easily portable to _any_ os/editor
+
+## the solution
+
+Some (POSIX-compliant, of course) scripts and a `makefile` are more than enough. I created the following intuitive way to interact with my CP setup:
+
+1.  `make setup`: populate the environment with configurations in `~/.config/cp-template` for `clang-format` and `clangd`
+2.  `make run file`
+3.  `make debug file`
+4.  `make clean`
+
+That's it. The `makefile` relies on some scripts that compile code and run the corresponding executables.
+
+## neovim integration
+
+![screenshot of my neovim competitive programming setup](/public/posts/my-cp-setup/cp-setup.webp)
+
+Leveraging [LuaSnip](https://github.com/L3MON4D3/LuaSnip), a custom `CP` user command, and some scripting for window management and asynchronous jobs, I'm able to:
+
+- Asynchronously format, run, and debug code (`:h vim.system`)
+- Use a three-window (input, output, and code) view
+- Toggle between problems instantly (yes, the windows update)
+- Automatically populate my coding buffers with competition-specific templates (i.e. USACO, CSES, etc.)
+- Run the code from the CLI in less than a second
+- Easily tweak and change the setup—there's absolutely nothing fancy.

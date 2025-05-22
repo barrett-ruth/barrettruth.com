@@ -1,0 +1,25 @@
+---
+title: "practice makes perfect"
+date: "2025-05-07"
+useKatex: true
+---
+
+Today I improved my implementation skills with [Codeforces Round 874 Div. 3 Problem G](https://codeforces.com/contest/1833/problem/G). Despite not solving the problem after a full 45 minutes, I came across to the following realizations:
+
+1.  Don't jump into coding. _Fully_ flesh out your implementation in your head before you begin. This is tempting to do, especially in a "competitive" environment. I tend to do this to avoid thinking about troublesome aspects of the problem that I _know_ I'll have to face later. Going into problems with a plan makes things much easier when coding but much harder up front. It is easy (for me) to get lost in the black-boxing four layers deep. Write it out, visualize it, and practice practice practice.
+
+    > Considering my solution would've led to me uncover my core misinterpretation of the problem: **the tree does not have to binary**. I developed a solution for binary trees but the greedy logic cannot be extended to trees.
+
+2.  Complex problems are, well, hard. You _have_ to practice to internalize patterns so you can focus on the _crux_ of the problem.
+
+    > I spent 10 minutes debugging retrieving the leaves of a tree before even beginning to code the actual algorithm. **1800 is out of my skill range** (for now!).
+
+3.  **Do not let a single thought/assertion/fact go unturned**. I made a litany of erroneous assertions in my time thinking about this problem, some of which include:
+
+- The tree has to be binary (it does not).
+- I can gather the leaves in arbitrary order (once again, this doesn't generalize to trees).
+- Ignore all cuts between identical nodes—it's fine! (I didn't know why this was the case)
+- A set shouldn't be needed to track visited nodes in a tree— slap it on anyway (this was superfluous and should've immediately set off red flags that my parent-ignoring policy in my BFS was wrong).
+- When processing a node in the "child-parent-child" pattern, just pop off the next node from the queue (within binary/n-ary trees, this is wrong—the leaves are gathered by _level_, so the next node in the queue is not guaranteed to be the current's sibling).
+
+5.  Just because the solution passes the test cases does not mean it is right. This specifically applies to problems near/outside your skill range—create your own test cases.

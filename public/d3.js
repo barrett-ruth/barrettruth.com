@@ -1,4 +1,3 @@
-// https://d3js.org v7.9.0 Copyright 2010-2023 Mike Bostock
 !(function (t, n) {
   "object" == typeof exports && "undefined" != typeof module
     ? n(exports)

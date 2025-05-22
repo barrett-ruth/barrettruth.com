@@ -1,0 +1,30 @@
+---
+title: "designing this website"
+date: "2024-06-18"
+---
+
+## HTML, JavaScript, and CSS
+
+That's all there is to it.
+
+I thought about using the following frameworks:
+
+1.  [React.js](https://react.dev/)
+2.  [Next.js](https://nextjs.org/)
+3.  [Hugo](https://gohugo.io/)
+4.  [Astro](https://astro.build/)
+
+But I did not actually _need_ any of them to make this site look decent.
+
+## What I've Learned
+
+Of course, most people build simple websites like these to learn a new technology or framework, not to use an optimal tool. That's actually why I [hosted this website on AWS](/posts/software/from-github-pages-to-aws.html).
+
+Building this website with truly bare-bones technologies has made me appreciate _why_ these web frameworks have emerged.
+
+- Writing JavaScript to manipulate the DOM works just fine but lacks the readability and composability that many JavaScript frameworks bring to the table.
+- Re-using code is odd. For example, I created a "common.js" with general utilities—there is zero indication (both to me and my language servers) that these functions are exposed to other scripts included by the same HTML file.
+- JSX is great. Dynamically inserting HTML as raw strings or writing them line by line with the DOM is a pain, and a verbose one at that.
+- Similarly, CSS styling (inline/stylesheet) works at the small scale. However, with styles being completely divorced from the HTML itself, much is left to be desired.
+- Reusing HTML, styles, and JavaScript feels extremely fragile. Innovative type-safe, optimized, and composable solutions definitely have their place in the web.
+- **You can be efficient with HTML, JS, and CSS.** My iteration speed on on this site versus other React.js/MDX blogs I have worked on is the same if not faster. While this may be a testament to my lack of JavaScript experience, I think people conclude too early that their task is beyond the technologies that form the foundation of the web today.

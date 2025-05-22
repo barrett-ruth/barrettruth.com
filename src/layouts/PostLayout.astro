@@ -1,0 +1,62 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import path from 'path';
+
+interface Props {
+  frontmatter: {
+    title: string;
+    description?: string;
+    date?: string;
+    useKatex?: boolean;
+  };
+}
+
+const { frontmatter, post } = Astro.props;
+const { 
+  title, 
+  description, 
+  useKatex = false,
+ 
+} = frontmatter;
+
+const filePath = post?.id || '';
+const category = filePath.split('/')[0];
+
+function getTopicColor(category: string) {
+  switch (category) {
+    case 'algorithms':
+      return '#d50032';
+    case 'software':
+      return '#0073e6';
+    case 'operating-systems':
+      return '#009975';
+    case 'meditations':
+      return '#6a0dad';
+    default:
+      return '#000000';
+  }
+}
+
+const topicColor = getTopicColor(category);
+---
+
+<BaseLayout title={title} description={description} useKatex={useKatex}>
+  <slot name="head" slot="head">
+    <link rel="stylesheet" href="/styles/post.css" />
+    <link rel="stylesheet" href="/styles/mdx.css" />
+    {useKatex && (
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css" integrity="sha384-5TcZemv2l/9On385z///+d7MSYlvIEw9FuZTIdZ14vJLqWphw7e7ZPuOiCHJcFCP" crossorigin="anonymous" />
+    )}
+  </slot>
+
+  <div class="post-container" style={`--topic-color: ${topicColor};`}>
+    <header class="post-header">
+      <h1 class="post-title">{title}</h1>
+      <!-- Date removed from title as requested -->
+    </header>
+
+    <article class="post-article">
+      <slot />
+    </article>
+  </div>
+</BaseLayout>

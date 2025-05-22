@@ -6,5 +6,5 @@ if [ -z "$1" ]; then
 fi
 
 aws cloudfront create-invalidation \
-  --distribution-id YOUR_DISTRIBUTION_ID \
+  --distribution-id "$1" \
   --paths "/*"

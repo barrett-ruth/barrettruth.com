@@ -1,0 +1,337 @@
+---
+title: "competitive programming log"
+date: "2025-05-14"
+useKatex: true
+---
+
+## [903 (div. 3)](https://usaco.guide/bronze/intro-sorting) 14/05/2025
+
+First contest in a while. Implementation lacked heavily but solving harder problems made easier problems easier.
+
+- A: rust immediately showed with the brute force. Since $n\cdot m\leq 25$, at most $\lceil\log_2(25)\rceil=5$ concatenations need to be made. **Slow down and consider constrains**.
+- B: Similarly, mathematical insight and just *playing with parameters*/quantifying the effects of operations is important. **Test your conjectures, they may be right/helpful** (ie. "I must maintain the shortest length thread").
+- C: implementation weak. Simplify, step back, simplify, continuously. I stopped considering altering the grid and used a pair of coordinates but deriving the others inline, _if you trust your mathematics_, is way simpler.
+- D: formalize your answer better. Understand prime factorization more. Improve/memorize asymptotic bounds of factoring and prime counting. Don't overcomplicate the problem—here, I erroneously thought it was asking for minimum operations, not possibility. In reality, all this problem asks is: "Are the total number of each factor greater than one divisible by $n$?"
+- E: dp rust. Simplify your thought process—look back into SRTBOT (i.e. define the subproblem). If the subproblems depend rightward, iterate right to left. That simple.
+- F: coming back for you!
+
+I must heed the advice of Colin Galen. I rush trivial problems because they're boring, then forget an edge case. I get overwhelmed by hard problems because I don't know how to think. I've been working on my discipline and thinking but I need to improve a lot.
+
+These problems are (mostly) easy but they help me prefer convenient implementation. It is time to be done with bronze.
+
+Implementation, loops, invariants. I still struggle to get a grasp.I struggled with [this problem](https://usaco.org/index.php?page=viewproblem2&cpid=592) just figuring out how to do the loops and invariants. I do a loop of "this works"$\rightarrow$ "let's simplify" $\rightarrow$ "that doesn't work" $\rightarrow ...$ over and over again... _even when the right solution comes across my mind_. In this case, choosing an invariant was just overwhelming. **The simplest correct solution is always the right one**.
+
+## [usaco bronze: complete search](https://usaco.guide/bronze/intro-complete) 04/27/2025
+
+Implementation wise, two-pointers boundary conditions trip me up. Spend more time on problems statements and go for the easiest solution.
+
+cowntact tracing was the absolute worst. I misinterpreted the problem constraints (i.e. thought hoof shakes in last $k$ time units, not last $k$ shakes) then failed to identify _all_ parts of my code that had erroneous logic. Then I did this 3 times over.
+
+Once a crux observation/error is realized, reexamine all parts of the code/plan and see how they're impacted.
+
+## [usaco bronze: simulation](https://usaco.guide/bronze/simulation) 26/04/2025
+
+These problems are relatively easy but exposed my poor implementation abilities. A lack of implementation implies a lack of understanding. Specifically, I encountered the following problems:
+
+Base cases and calculations—initializing state and transitions along with exit conditions. Oftentimes I simply _misinterpret_ the simulation (**take your time**), fail to outline specific criteria, and don't walk through edge cases. For example, [speeding ticket](https://usaco.org/index.php?page=viewproblem2&cpid=568) took me forever (>20 minutes) to model the ideal $O(n)$ solution. Initial states and base cases took me forever, when I should've just modeled the transitions explicitly, considering start/end states separately rather than getting overwhelmed by everything at once. Overcomplicating/wasting time on solutions that aren't necessitated by lax constraints. I further get confused (although my black-box ability is improving) on problems with many moving parts.
+
+## [1020 (div. 3)](https://codeforces.com/contest/2106) 25/04/2025
+
+Unfortunately, the moment this contest started I'd already given up. In contest my main weakness is that I just rush and panic. If my next contest results in me wasting 2 hours I'm going to take a step back and just do intentional practice.
+
+I learned nothing. I didn't read problem statements nor prove my answers.
+
+## [970 (div. 3)](https://codeforces.com/contest/2008) 21/04/2025
+
+~1450 performance. OK contest, not very exhilirating. Hedonistic treadmill at work with me solving A-F on Div. 3 when a 2 weeks ago I couldn't even do that on Div. 4. Definitely need to upsolve this to improve my ability at expressing ideas simply.
+
+From now on, prioritize actually _learning_ and problem-solving in a pressurized format (we all die eventually, everything is under pressure).
+
+- Never report rating in these logs
+- Implement all dsa from scratch (modular arithmetic, data structures, etc.)
+
+- A: somehow got a wrong answer. unbelievable, brute forced it. math is poor. why reason/be ensure when you can brute force?
+- B: didn't outline a simple strategy and got cooked. For example, I didn't check that the grid was a square after redoing my implementation for the third time.
+- C: trivial
+- D: tried a dsu approach before realizing the graph is not direction. DP + DFS + DSU weakness all combined to confuse me. In retrospect, just think about solving the problem in one way. Model it as a graph, do tortoise and hare, or do DP. **One approach at a time**. I tangibly need to improve my reasoning on harder problems when there are many moving parts. However, I'm unsure of how to move forward here because I'm fighting an uphill battle against a) my basic understanding of algorithms and b) my actual reasoning ability. I need to improve both the basics and my ability to think when facing _new_ problems/frameworks—that's the sign of a good problem-solver.
+- E: realized the greedy approach + pref/post-fix greedy on deletion but implementation absolutely annahilated me here. Further, **my exchange argument/greedy proofs are nightmarishly bad** and I resulted in just "trusting" the two-max greedy approach. This also harms my ability/intuition for dp/not doing dp. Work on this.
+- F: easy, counting pairs and modular arithmetic. However, I had to copy the modular arithmetic online. My grasp of this is still not good enough because I haven't practiced enough number theory.
+
+## [937 (div. 4)](https://codeforces.com/contest/2094) 16/04/16/2025
+
+~1300 performance. Consistently finishing E, getting F occasionally.
+
+-  B: took me way too long because I just wanted to code. Wasted 5 minutes when I know better—patience and a formula got me there in 30 seconds.
+
+> Impatience is holding me back. Lack of discipline and focus is holding me back. It doesn't just harm my ranking problem-solving ability but it _prevents me from improving_.
+
+- C: submitted without rigorously checking all edge cases.
+- D: misunderstood the problem statement twice. Polya and Zeitz both advise to fully understand exactly what the problem statement is asking, whether through direct analysis or examples. Then, I messed up the brute force. However, I did notice that raw recursion would not TLE based on the fact that each number can be divided in only a few ways.
+- E: I knew a number didn't have that many divisors but the implementation took me too long. **Pay closer attention to the constraints and just solve the problem.**. Spend a bit more time on implementation, _even if you know a way that works_. Here, I knew an approach to code but it was easily error-prone. Immediately came up with the idea but was unable to express it in code. This means I did not fully understand the problem, namely with some core mistakes:1. The tree it not necessarily binary
+- C's cannot have children, so tracking depth/available nodes to fill per level is crucial
+    Coming up with the expression $a=c+1$ (and ensuring the input conforms to that) is a lot easier than cusotm coding logic to ensure levels are filled out properly. The core problem is that I lack the mathematical prowess to be certain of what exactly I need to check after I make that assertion and why. In this case, it means that the number of C's is appropriate, _so I never even need to check them_—I just need to make sure that the rest of the solution is valid.
+
+## [1017 (div. 4)](https://codeforces.com/contest/2094) 14/04/2025
+
+Decent contest. Lost focus near the end and was not paying attention at the start (I was working on my makefile). This is a telltale sign that Div. 4 is a bit too easy. F & G should've been lightwork.
+
+1. D: submitted what I knew to be incorrect. Can't account for laziness.
+2. E: long long overflow. Laziness.
+    F: lost focus here and did not prove the correctness. Was confused by the grid—simply breaking down and _experimenting_ in terms of simple patterns would help isolate that a mutation after $m%K==0$ is key. Then, a subsequent rigorous proof of the modulo shift would help.4. G: gave up after a few insights and did not persevere to find the simple mathematical equation for updating the score on reversal although I got the deque intution. **Sometimes, there's nothing to learn besides improving your discipline.**
+    My math intuition needs to improve. I see something hard (i.e. dividing out a number repeatedly) then think "this is impossible" rather than "this seems hard, but is it feasible? Is it computationally practical?" In this case, I know the solution rests on the fact of only a logarithmic (?) amount of numbers can end up dividing $a$i$$. Time to upsolve later.
+
+## [799 (div. 4)](https://codeforces.com/contest/1692) 10/04/2025
+
+Improvement is marginal. My desire for rating is unquenchable (joke). Really, though, I'm improving slower than I like. 1400 performance, my best yet—I'll do one more Div. 4 then I need to upgrade to Div. {2,3}. I think the most core realization I made after this contest was:
+
+Separate what your code does from what you think it should do. Conceptualize an approach, then put it aside. Implement exactly what the approach says to do (not what you think it should say). If the approach left something out, _step away from implementing, reconsider the approach, then resume implementing_. **Never reconsider and alter your strategy while coding.**
+
+1.  B: realized parity-based removal immediately. Still, I once again didn't initially do what the problem asked (i.e. I returned the number of operations, not array length).
+
+> Never run code until you're confident it does what you want.
+
+3.  C: Blindly plugged in incorrect deltas to detect the "X" pattern of "#" characters before getting the right answer.
+
+I consistently tune out when I'm bored/think I've discovered the insight/done the problem before. This results in me solving a different problem, expressing right ideas incorrectly, or expressing wrong ideas correctly—for example, thinking I find a core insight, believing it sounds right, and just _not checking its validity_. I don't know what to say besides progressively overload your discipline and focus.
+
+D: my proof that the time must repeat was complete garbage and complex. I've been reading AOPS and wanted to go with a math-y approach. However, consider the following simple proof:The current time is $s$ and you look at the clock every $x$ minutes. $1440 \cdot x\equiv 0\pmod{1400}$, so the time must repeat after at most 1440 looks.This is enough to brute force. There are alternative easier approaches to brute-force, but for an easy problem like this speed comes above all else (special case).E: **Submitted and hoped for correctness multiple times**. I was lazy and didn't want to implement the binary search approach. Ironically, after turning my brain on, I quickly found a $\Theta(n)$ solution. However, I rushed to code it up thinking about the time I had wasted and frustration from WA (more from myself than from WA). This caused me to forget invariants and implement what I thought was right, not the algorithm I designed (forgetting invariants). Walking through an example (as I advised myself yesterday) reminded me to iterate the right pointer past any zeroes. Good, specific improvement from yesterday, but I still should've slowed down and asked "where should the right pointer move? what are the invariants? why? what about if if goes off the end of the array?" **Only look forward**.F: Came up with fancy equations because I'm taking the wrong core lessons from AOPS. The example problems there are complex, while these are simple—therefore, I should prioritize simplicity. Concretely, the following phrasing massively simplifies this problem:I'm looking for 3 numbers $a$i$,a$j$,a$k$, i\neq j\neq k$ such that $a$i$+a$j$+a$k$\equiv 3\pmod{10}$. WLOG, assume $i\lt j,k$. We only want a pair of remainders that satisfy the above inequality. Since there are only 10 unique remainders, brute force all 100 remaining modulo pairs. If such a pair exists in $a$i+1:$\forall$ $i\in\{1,...n-2\}$, the answer is yes. This can be calculated with a postfix frequency map of remainders, with special care taken for when the remainders are equal.G: good deduction and simplicity but I once again read the instructions too fast and skipped that the array is size $k+1$. Also, **my sliding window implementation ability is horrendous**. I spent nearly 10 minutes just debugging a "right" idea because I couldn't code up a basic thing.
+
+## [849 (div. 4)](https://codeforces.com/contest/1791) 04/09/2025
+
+Defeating. My speed is improving but I completely wasted my focus. Div. 4 is too easy for me to take seriously now. This itself, though, is a problem with discipline.
+
+I only practice for 2 hours a day. There's no point in practicing problems and not trying—just go do something else.
+
+- A = B = trivial
+- C: lost focus on what was being asked, returning the number of removals rather than the minimal length of the string. I want to write code that works first try—**validate your code is actually doing what you're saying before running, both conceptually and in the fine-grained details**. I move too fast. Still, I justified $l\lt r$ instead of $l\leq r$, a small improvement.
+- D: Instantly saw the solution but rushed the implementation. Eventually I slowed down and then considered the valid split indices. **Consider edge cases first. Go through one iteration in your head before coding.**
+- E: Utter disaster. **Did not read the problem statement and answered a similar (but very different) problem I'd done in the past**. By the time I saw this after impatiently submitting ~5 WA, I had lost mental focus. Never submit and hope for a correct answer—_know it_.
+- F: Then, I let my previous failure carry through to the next problem. This happened in my last contest but I also dealt with it well:
+
+When you're done with a problem (in contest), whether because you solved it or simply gave up, forget about it. Don't obsess about a better solution or put yourself down. Ceaselessly move forward with confidence at all times.
+
+## [1016 (div. 3)](https://codeforces.com/contest/2093) 04/08/2025
+
+Horrendous competition but I refrain from cringing for the sake of improvement.
+
+- A: trivial
+- B: took me a while and I still don't get the proof. Good resilience in trying to formally prove it then detecting a pattern (remove all non-zero/zero digits after/before the last non-zero digit).
+- C: **math skills remain weak but pattern recognition is improving**. I "guess and checked" that any $x+x$ is not prime when $x\neq1$. However, after catching 2 edge cases $x=k=1$, $k=1$, I gave up, ignoring $x=1,k=2$, causing a WA. This is the downside of lacking a formal proof/understanding the math—while in retrospect I can say "consider a few more edge cases," I can't tell when to stop investigating. Still, I should've separated out cases $k=1$, $k\neq1$ and exhaustively proved $k=1$, which is remarkably facile. I still don't know how to factorize numbers in $O(\sqrt{n})$ and copy from AI (allegedly).
+- D: got the idea but it was very abstract. Rushed to implementation, wasted time—same old story. Got it after contest. **After failing to implement for a long time, abandon the approach and start from scratch—99% of the time you're not going to get it.**
+- E: failed implementation. At least I saw binary search after stepping back. I tried to find an upper bound on $x$ by creating _exactly_ $k$ groups but for ease of implementation I should've went for $\geq k$ since any sequence with MEX $x$ can be extended to have MEX $\geq x$ with the addition of any number.Specifically define _everything_. What am I binary searching over (in this case, forming some $x$ with _at least_ $k$ groups)? What are the bounds? Is the search space monotonic? Why?
+- F: I had seen a bitwise trie before and didn't review the problem. I didn't upsolve then, so I couldn't upsolve now, and getting this problem right would've made a massive difference in my performance. These are the consequences—**upsolving is goated**.
+
+## [898 (div. 4)](https://codeforces.com/contest/1873/) 04/03/2025
+
+Placed top 2000 but did not learn much. Was distracted (thinking about writing this post itself) and was not taking the problems seriously because they were not that challenging in the first place.
+
+Take problems seriously or you're wasting your time.
+
+I was also continually nervous/pressuring myself and thought about my own thought process. The time for analysis is after, not during.
+
+Pressure ruins performance.
+
+- A: couldn't come up with the extensible solution and checked all permutations. Step back and use explicit criteria, i.e. "what qualifies being able to make it in one swap?" (at most 2 characters being off).
+- B: good math proof WLOG. Learning. Took a step back to architect the easiest way to count the score. However, **only after erroneously calculating the score with an approach I had already deemed incorrect**.
+- C: Trivial but should've been more patient.
+- D: binary search took me a second, but ok.
+- E: sliding window but erroneously checked $a$\{l,r-1\}$ \% a$\{l+1,r\}$\neq0$ _without_ confirming it was in the sliding window first. Err on the side of caution (i.e. if checks, explicit edge cases, etc). Debugging could be improved—target the likely differences between what you _think_ you're doing and what you're _actually_ doing.
+- G: tried and didn't fully invest my time. For some reason my subconscious still thinks getting lucky is a valid option.
+- H: _much_ easier than G. Formulated the solution formally before coding, allowing me to implicitly catch a lot of edge cases: "whether V can get to the node closest to it in the graph's cycle strictly before M."
+
+## [871 (div. 4)](https://codeforces.com/contest/1892/) 03/28/2025
+
+Div. 4 to practice implemenation skills + mathematical observations thanks to [Paul Zeitz](http://www.gang.umass.edu/~franz/Paul_Zeitz_The_Art_and_Craft_of_Problem_SolvingBookosorg.pdf). From now on, I will only note useful problems.
+
+- B: typo, costing a few minutes. Go slower. Declare variables. Think consistently through approach.
+- C: paused an found a general implementation as Zeitz advises (starting with a general, non-mathematical solution: "The solution is the earliest to get either both 1s at once or each over two strings"). **I still rushed**, incorrectly computing the result as `min(first, second)` instead of `first + second`.
+-  D: I looked up the recurrence relation $T(n)=T(n/3)+T(2n/3)$ to ensure it was sub-linear time.
+
+Gain the mathematical skills to both analyze and derive (i.e. if you forget) recurrence relations.
+
+- E: spent _forever_ fanagling with my Disjoint Set Union template. I made countless errors including:
+
+  1.  Not inserting nodes into the data structure before joining them
+  2.  Joining zero/non-zero nodes, corrupting the component graph
+  3.  Erroneously updating component sums by double counting (i.e. using a mutated value).
+
+Understand data structures before you use them. Despite what Colin Galen says, black-boxed knowledge often isn't enough. Improve knowledge of Fenwick Trees, Segment Trees, and Union Find.
+
+- F: elegant approach and reduction, eliminating the need for a graph traversal.
+- G: _intentionally_ chose the mathematical/indexing method to improve my skills. I'd also like to use `{upper,lower}_bound` more often with a lambda than manually code binary search. **Once again, I practiced in a fundamentally flawed way, choosing an approach I knew would be error prone and difficult**.
+
+Don't be scared if you initilly can't find an easy implementation. _Reconceptualize, visualize, and reframe_ until something comes up. Sometimes, this takes too long—however, my threshold for that realization is MUCH too low. **Spend a longer time developing/considering approaches even if you already know a feasible solution**. Here, I spent ~5 minutes developing a solution, then 20 minutes coding it. Instead, another 5 minute allocation of time could lead me to the prefix sum solution, likely saving ~10 minutes.
+
+## [895 (div. 3)](https://codeforces.com/contest/1872/) 03/26/2025
+
+Decent.
+
+- A: math intuition building. Jumped to assuming the problem statement but it was much simpler. **Answer the problem only.**
+- B: textbook simple problem that I struggle to mathematically quantify being distracted by many components. In retrospect, I should interpret the problem simply like:
+
+Each trap has a known time I must return by. The answer is therefore the minimum of these.
+
+I also just plug in $ceil$ and $floor$ until I find the right answer (I'm not lying). Instead, note that for $s,k\in\mathbb{Z}$, $\frac{s}{2}>k\leftrightarrow\lfloor\frac{s-1}{2}\rfloor\geq k$. This simply "edges out" the fractional term to line up cleanly with the divisor.
+
+- C: cooked. **Practice number theory.**
+- D: took me a while because I was distracted with the moving parts. Specifically, I forgot that I could choose the permutation and that the question was merely asking to pick the largest/smallest numbers on $x$/$y$ slots respectively. End solution was expressive and elegant. **Express the question and reframe the constraints in simple but accurate terms**.\_ E: Black-boxed a lazy segment tree (with the help of AI, I must admit—I need to make a template).
+
+_Everything I did here was wrong and this problem showed an embarrassingly fundamental flaw in my practice strategy._
+
+  Namely, I should divide up practice time into:
+
+  1.  Contests, emphasizing speed and implementation
+  2.  Single problems, emphasizing specific learning objectives
+
+In this problem, I immediately saw the application of the lazy segment tree but decided to hold off on it, failing to find the simpler prefix-XOR solution. Therefore, I not only wasted my time, but also cemented in unrealistic practice (I would never do this in a real contest) and worsened my virtual contest performance. As for the prefix-XOR solution, focusing on just one/zero corresponding elements and **walking through small examples** (i.e. "what happens when $l=r$?") would've help me pick up the pattern.
+
+## [1013 (div. 3)](https://codeforces.com/contest/2091) 03/25/2025
+
+Solved in a coffee shop. More locked in than before. My best performance yet. I'm changing my philosophy in these contests—I want to be able to code nearly everything (except for, for example, a lazy-propagation segment tree) from scratch. These contests should test my ability to _code_ and I mean the whole package. Lastly, my skills in math and implementation are improving bit by bit. No stopping here.
+
+- A: rushed and panicked for no reason. Took me a few minutes to realize the triviality of the solution. **Calm down!**
+- B: failed to prove solution before testing, resulting in a time waste of around 10 minutes. Collected myself and proved it, though **rigor could be improved**.
+- C: noticed a pattern in the examples after rotating them and instantly submitted. **Risky decision!** The problem is, I'm unsure if I am even capable of proving the validity of the solution in the first place.
+- D: afk for ~45 minutes but still heavily struggled with the solution, _even after reducing the problem_ to maximally spreading out $\lceil\frac{k}{n}\rceil$ columns. Recollected myself and came up with a solution that worked for me in minutes.
+- E: played with the numbers and realized the prime reduction. **Number theory very weak**—this is most likely the hardest problem in the category I've ever solved. Still had to google sieve of eratosthenes (is this cheating?) (**contest as a test of implementation skills**).
+
+## [900 (div. 3)](https://codeforces.com/contest/1878/) 03/22/2025
+
+Solved in a coffee shop. Used AI for smaller things (otherwise I'd have no idea).
+
+- A: Solved a much harder problem related to majority element paths on tree—realized the solution after a minute.
+- B: was confused for about 7 minutes but realized some properties of divisibility and odd numbers. **Math is still a weakness. Take simpler approaches to complex constraints, such as considering parity.**
+  Went off of gut instinct that it is always possible to form the given $x$ if encompassed in the range of numbers. **Failed to prove this mathematical validity but had fair intuition** (i.e. just "take off one" if too big/small). This is acceptable, though not perfect.
+- D: cooked. Solved E first and had mentally given up by this point. **If you've given up, just stop trying and take a break/do something else. You're wasting your time.**
+- E: incredibly easy with segtree. Realized the lower bound/walk solution after 2-3 minutes. Binary search indexing can be improved (i.e. which pointer to return?) as well as realizing one binary search is necessary across both arrays. Good mathematical deduction to realize relationship between input arrays. Revisit sparse table + simpler solution—_don't be content with an advanced solution when a simpler/elegant idea also suffices_.
+
+## [891 (div. 3)](https://codeforces.com/contest/1857/) 05/06/2025
+
+Solved partially on the plane and at home. Best round in terms of acceptance rate. After bombing another codeforces contest & more CSES work, it's clear that my biggest weakness is **algorithmic correctness and certainty**. To remedy:
+
+- Test edge cases (boundary + tricky)
+- Don't submit unless you're _certain_ you're right
+- In analysis, leave no stone unturned (be thorough)
+- Don't rely on the given test cases as proof of correctness.
+
+- A: ironically, although I got AC in ~1 minute, this is exactly where I go wrong. I did not check the actual correctness of my parity checks but submitted anyway.
+- B: AC once again but **implementation is still a weakness**. In this case, it was due to a lack of problem understanding, i.e. rounding up sets all right digits to 0, but carries can still affect the number after that.
+- C: skipped and came back later. The idea of sorting came up but I was overwhelmed. My end solution was a bit overcomplicated but still logically sound. I'm getting better at making observations, in this case explicitly identifying the fact that the largest element must have one more element greater than or equal to itself, permitting you to build the answer in reverse order. **Did not prove the correctness of this**.
+- D: skipped and came back later. Given the large amount of vertices I did a good job of rephrasing the data (thanks [George Pólya](https://www.google.com/search?q=how+to+solve+it)) and **proving** the correctness with transitivity/contradiction. Initial solution complex—ponder implementation before going at it.
+- E: took me a while (I believe) because I was on a plane without a notebook and visualizing was hard. Good mathematical formulation, but initially returned the answer in wrong order. **Relied on the test cases to save me—ensure you're solving the actual problem** (in this case, returning the queries in the right order).
+- F: Quadratic equation flew over my head. I was unsure but should've just played with the numbers—if you plug them in, you derive the quadratic equation relevant to the problem. I then (maybe) could've gotten an answer. Instead, I was intimidated because I thought I needed some fancy DSA/dp/two-pointers/two-sum thing. Just have to build more intuition. Also, totally did not know how to count number of distinct pairs $i, j$ with $i\lt j$ for two elements. I missed the case when the elements are equal and, yes, seriously forgot it is just the product (I do not want to talk about it but thanks Deepseek). **Overflow, again. rly dude?**
+- G: doing this later, got the core insight of the minimal weight edge path. Once again, for surveying path
+
+## cses (range queries, sorting and searching) 03/01/2025
+
+A good review and challenge of data strucures. I've become even more of a fan of CSES. On codeforces, the application of fenwick trees and segment trees are usually on problems out of my reach, where I'm battling both the problem and the data structures.
+
+1.  static range minimum queries: sparse table. copy-pasted from template, should be able to derive
+2.  range update queries: fenwick tree difference array. **understanding of fenwick trees fundamentally flawed. "guessed and checked" on the ranges to update.**
+3.  forest queries: inclusion-exclusion principles. **think before implement.**
+4.  hotel queries: fun question, derived segment tree `{lower,upper}_bound` (a "walk", apparently).
+5.  list removals: overcomplicated it a lot. Note that an index can be interpreted as a relative position into an array, so an indexed set works perfectly fine. **Reinterpret problem constraints.** **Extreme lack of familiarity with PBDS/STL APIs**. I constantly confuse `find_by_order`, `order_of_key`, `erase(*it)` vs. `erase(it)`.
+6.  traffic lights: destroyed. I'm at the point where I thought "oh, there's no way I'd need two data structures. Too complicated, let me see the solution." **Trust your intuition a bit more, especially if you know your solution will lead to a right answer**. The offline solution also fully went over my head, in which answering queries backwards presents a 4x (performance-wise) faster solution. **Answer the question—you can do so by any means necessary**. In this case, reinterpreting the key insight that adding a traffic like can only shrink intervals to removing a traffic light can only increase them isn't only enough. I knew handling the first case simply was too hard but I needed to **dig deeper into ideas**. In this case, asking "ok, well is it easier to answer the queries in reverse order? Well, yes, because removing the `i`th light can either create a larger gap around it, which I can easily find, or its the same gap as before" would've saved me.
+
+## [1006 (div. 3)](https://codeforces.com/contest/2072) 02/25/2025
+
+- A: easy, messed up on the math a bit for a second
+- B: for the second contest in a row, missed a B and solved E or later. Solved ~2 min after the contest ended. **Prove mathematical correctness.** Here, I did not and still don't fully understand why a configuration like: “hyphens...underscores...hyphens>” is even optimal... **Still, I was mad that I couldn't get it and submitted solutions that I had nowhere near certainty of their correctness. If you aren't sure, you're better off skipping it**. Fortunately, in this case, maximizing your codeforces ranking also coincides wiht optimal problem-solving: don't guess.
+- C: knew a solution almost instantly but got held up nearly 30 minutes on small implementation details and edge cases. Ended up submitted something I wasn't certain was correct. Taking an explicit extra minute to consider: “what do I print for the last case? I must maximize the MEX and ensure the bitwise OR equals x. If the MEX hits x, then print it. Otherwise, print x” would've saved me upwards of 10 minutes.
+- E: masterclass in throwing. I knew the algorithm pretty much immediately (manhattan distances and euclidean distances must be equals means at least one coordinate must be the same between each point). I then broke it down into building pairs column-wise, the correct approach. Then, I simply forgot to check a core constraint of the problem: place $\leq500$ staffs. I decided to brute force the last pairs rather than repeat the strategy, which actually runs in logarithmic time (I also didn't prove this). The final product was elegant, at least.
+
+## sorting and searching 02/24/2025
+
+A lot of these problems I'd seen before but this is good practice anyway. This really is a great problem set. After being stuck on implementation details, I took less time banging my head against the wall and just looked at the solution.
+
+- [distinct numbers](https://cses.fi/problemset/task/1621): unordered classes are exploitable and nearly always tle. Keep it simple, use a map or PBDS.
+- [apartments](https://cses.fi/problemset/task/1084): distracted working on this during class but figured it out. **prove statements and use descriptive variable names.**
+- [ferris wheel](https://cses.fi/problemset/task/1090): leetcode copy from people fitting in boats. Can't say much because I already did it.
+- [concert tickets](https://cses.fi/problemset/task/1091): totally used PBDS, which is most likely way overkill. **if it works, it works**.
+- [restaurant customers](https://cses.fi/problemset/task/1619): already seen it (line sweep)
+- [movie festival](https://cses.fi/problemset/task/1629): already seen it but **improve greedy/exchange arguments**
+- [missing coin sum](https://cses.fi/problemset/task/2216): **I still don't get this. Write it out.**
+- [collecting numbers ii](https://cses.fi/problemset/task/2217): I had the exactly correct idea but I thought it was too complex. Practice will improve me developing my better sense of this. Still, I didn't _completely_ understand my idea, which lowered my confidence.
+
+## more cses 02/22/2025
+
+- [gray code](https://cses.fi/problemset/task/2205): Missed the pattern + **gave up too _late_**
+- [towers of hanoi](https://cses.fi/problemset/task/2165): **Recursive grasp is limp**—missed the idea. **Math/proof grasp too**—still don't understand how its $2^n$.
+- [apple division](https://cses.fi/problemset/task/1623): I got distracted by the idea that it was NP-hard. Even when Sam Altman told me it was DP, I failed to simplify it to "add every element either to one or the other set".
+- [digit queries](https://cses.fi/problemset/task/2431): got the idea + time complexity quickly, but the **math-based implementation is weak**. Jumped into the code _before_ outlining a strict plan.
+
+## cses 02/21/2025
+
+Everyone recommends CSES so I started with it, doing the first 8 problems.
+
+1.  [weird algorithm](https://cses.fi/problemset/task/1068): Trivial, but I forgot to print 1 at the end. **Return the exactly correct answer.**
+2.  [missing number](https://cses.fi/problemset/task/1083) : N/A
+3.  [repetitions](https://cses.fi/problemset/task/1069) : Use invariants.
+4.  [increasing array](https://cses.fi/problemset/task/1094) : Run through one iteration of the algorithm. Here, I erroneously added `x - last` to a quantity, _after manipulating `x`_.
+5.  [permutations](https://cses.fi/problemset/task/1070/): I'd seen this problem before yet struggled. **Fully understand the problem constraints**. In this case, While I understood the definition of a permissible permutation, I didn't fully internalize that you could place number _wherever_ you want. Instead, I was locked in on placing some `x` at `i, i + 2, i + 4, ...`. Further, the fact that I didn't immediately recognize this solution means I need to improve at **upsolving and reviewing problems**.
+6.  [permutations](https://cses.fi/problemset/task/1071): Absolutely disastrous. I continually just f\*dged with the offsets I was adding to my strategy until I happened to get the answer right. **Don't guess**. Also, **don't be lazy—if an algorithm works, focus, write it out, and enjoy being correct**.
+    [two knights](https://cses.fi/problemset/task/1072): Required 2 hints from Sam Altman. **git gud at combinatorics**. Use the paradigm "count good, remove bad." Lock in less on counting specifics—instead, consider what objects _mean in aggregate_. In this case, a $2\times3$ grid represents an "area" of attack, contributing 2 bad knight pairs. This is much easier to digest then attempting to remove overcounting per-knight. Fundamentally, the problem involves placing 2 knights, so breaking it down 2 knights at a time is the most intuitive take.[two sets](https://cses.fi/problemset/task/1092): **Don't lock in on one approach**. Here, this is dp. The fact that I knew the idea of partitioning the first $n$ numbers into two groups of size $\frac{n(n+1)}{4}$ but failed to recognize the greedy approach means I didn't grasp the fundamental arithmetic of the problem, nor the greedy idea: every number must go into a set. If you add the largest number possible to set 1 to not exceed the target, this number can always be formed in the other set by choosing $1$ and $x-1$. **git gud at greedy**.
+
+## [938 (div. 3)](https://codeforces.com/contest/1955) 02/15/2025
+
+What would've been my best contest. Unfortunately, CodeForces decided to go down for TREE$3$ centuries, which absolutely ruined my groove in the contest and terminated my virtual. No excuses, though, as I set a timer and finished up later.
+
+### A
+
+Brute-forced it but it still took me a few minutes.
+
+1.  Read (and exploit) problem constraints
+2.  Go back and derive the linear optimization (choosing the one with better marginal utility)
+3.  If you have a (simple enough) solution, just go with it.
+
+### B
+
+Easily recognized how to form the matrix (i.e. smallest element first with positive integers $c,d$) but tripped up on the implementation.
+
+1.  Flesh out the steps before coding (i.e. walk through iterations in head, transitions, edge cases on the rows and columns, i.e. checking if `i==n-1`) _especially_ on implementation-heavy problems
+
+### C
+
+Did a horrific (but correct) binary search solution. Tripped up by specifics of `std::{upper,lower}_bound` regardless. Technically, generating the prefix and postfix arrays takes two passes and two binary searches to find the answer but this is still more inefficient than the trivial linear scan.
+
+1.  THE INT OVERFLOW INCIDENT
+2.  Deepen understanding of binary search & STL functions to the point that it is second nature
+3.  Consider simple solutions first.
+
+### D
+
+Instantly recognized sliding window but struggled with minor details (i.e. keeping track of match count) by rushing to the solution.
+
+1.  Problem statement took a long time to grasp. Look at examples and just read through slower (don't rush!)
+2.  Sliding window grasp isn't _rigorous_—improve this later
+3.  When you don't remember 100% of how an algorithm works, **mentally walk through a few iterations**
+4.  Improve PBDS API familiarity (practice)
+
+### E
+
+I had mentally tapped out by this point (I submitted a TLE $O(n^2k)$ solution without using my brain). I solved F first, then took a look at G _before_ coming back to E, robbing me of 10 minutes that could've been the difference between another solve.
+
+1.  You're not like that. Solve problems in order (most of the time, although skipping to F first was a wise decision).
+2.  Consider ideas _fully_ before dropping them. I considered the difference array, then _discarded_ it, erroneously believing a boolean was sufficient and completely forgetting that the concept of ranges complicates flipping.
+3.  Formalize constraints more clearly to help form a solution. For example, the idea that flipping things twice makes no difference, permitting the use of a boolean difference array.
+4.  Didn't get it, still don't get it, don't know why. Way easier than D.
+5.  Prove correctness. I didn't prove that iterating left to right, toggling a range of k actually would always give a correct answer.
+
+### F
+
+Had the solution quickly but overcomplicated the implementation. Walked through the examples and took my time.
+
+1.  Failed to formalize the answer to the problem. I noticed patterns but should've strictly defined the following rule: "Every even count of a number contributes one to the score. Further, one triple of 1, 2, 3 also contributes one." Ultimately, I ended up submitting something I wasn't certain would be correct.
+
+### G
+
+Wasted time believing this was primitive DP, when it totally wasn't.
+
+1.  You're not that guy (yet >:))
+2.  Prove optimal substructure and overlapping subproblems before using DP & walk through the test cases. In this case, test case 3 immediately disproves dp.
+
+## the beginning 02/12/2025
+
+This marks the (true) beginning of my competitive programming journey. By "true" I mean intentional, focused, daily practice. Driven by my admiration for competitive programmers, love of challenge, and desire for a decent new-grad job, I'm excited to start putting in the work.
+
+This webpage will be an archive of everything related to this process, including my practice strategies, setup, shortcomings, logs, and more. For now, I'll be practicing on [CodeForces](https://codeforces.com) (account [frozenpipe](https://codeforces.com/profile/frozenpipe)) and [CSES](https://cses.fi), using the [CP Handbook](https://cses.fi/book/book.pdf) and browsing by related problem tags with ever-increasing difficulty.

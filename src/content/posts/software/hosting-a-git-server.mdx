@@ -1,0 +1,38 @@
+---
+title: "hosting a git server"
+date: "2025-05-07"
+---
+
+## why
+
+No reason. Perhaps to host personal files in the future. AWS's micro free tier is great, too.
+
+## what
+
+- Write my own git web ui
+- Support clones from my own website
+- Host private files on my git ui
+
+## the process
+
+I detail self-hosting a git server on an AWS t2.micro instance ("free" for 1 year) as of May 2025. [Git's instructions](https://git-scm.com/book/en/v2/Git-on-the-Server-The-Protocols) were vastly outdated so hopefully this saves a lucky reader some time.
+
+2.  Create the ec2 instance with setup wizard and add \{in,out\}bound rules for \{SSH,HTTP,HTTPS,your ip\} in the wizard security group.
+3.  Use an elastic ip (free) to address public ip reassigning—this is a bother when ssh'ing (new verb?) into the box locally and/or configuring an Apache HTTP server.
+4.  Understand bare git repositories and the ssh protocol.
+5.  Configure an keypair and ssh in (the official instructions are fine for this). I moved it to `~/.ssh` and added an alias in `~/.ssh/config` for convenience. Clone a repo on the server to test.
+6.  Set up a git daemon for `git://` protocol cloning at your own risk.
+7.  Set up an Apache HTTPD server.
+8.  Configure file permissions for the new user:
+    1.  `sudo chown -R git:git /srv/git`
+    2.  `sudo chgrp -R apache /srv/git`
+9.  To deal with "dubious ownership" issues when cloning with HTTPS, I needed to add **exactly** the following configuration to `/etc/gitconfig`. _No group permission finagling will work_! Git only allows cloning repositories that are owned by the user. If you wish to clone via SSH with, say, user A, this same user must also be employed by your HTTP server to clone the files (customize HTTPD/whatever you're using accordingly).
+
+10. Security-wise, set up TLS/HTTPS with [Let's Encrypt](https://letsencrypt.org/). Further, only allow authorized people to actually _push_ to the server. The following is my HTTPD configuration file `/etc/apache/conf.d/git-server.conf` hosting the web ui at the root and clone urls at `/git`:
+
+11. There are a variety of choices for web ui, including [cgit](https://git.zx2c4.com/cgit/), [gitweb](https://git-scm.com/docs/gitweb) (I do not recommend this—the scripts are ancient and require manual tuning), and some even heavier options that allow for further customization. I am not a fan of viewing code on the web, so you cannot in [my custom ui](https://git.barrettruth.com). I spin up a simple python server to walk the projects in `/srv/git` and configured a systemd service to run it in the ec2 box:
+
+## lessons
+
+- **It feels great to do things yourself**: I used GPT-4o for linux server command help, that was about it
+- **Always ask "what is this?" before using something**: this would've saved me hours of realizing a 12 year old perl script should not have been running my git ui.

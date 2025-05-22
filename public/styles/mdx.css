@@ -1,0 +1,63 @@
+article h1, article h2, article h3,
+.post-article h1, .post-article h2, .post-article h3 {
+  font-weight: normal;
+  position: relative;
+}
+
+article h1, .post-article h1 {
+  padding-left: 1.5em;
+}
+
+article h2, .post-article h2 {
+  padding-left: 2em;
+}
+
+article h3, .post-article h3 {
+  padding-left: 2.5em;
+}
+
+article h1::before, .post-article h1::before {
+  content: "#";
+}
+
+article h2::before, .post-article h2::before {
+  content: "##";
+}
+
+article h3::before, .post-article h3::before {
+  content: "###";
+}
+
+article h1::before, article h2::before, article h3::before,
+.post-article h1::before, .post-article h2::before, .post-article h3::before {
+  position: absolute;
+  left: 0;
+  color: var(--topic-color, #000);
+  margin-right: 0.5em;
+}
+
+article img {
+  display: block;
+  margin: 2rem auto;
+  max-width: 100%;
+  height: auto;
+}
+
+article pre {
+  padding: 1rem;
+  overflow-x: auto;
+}
+
+/* Heading with date styling */
+article h2.heading-with-date, article h3.heading-with-date {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+article h2.heading-with-date .date, article h3.heading-with-date .date {
+  font-size: 0.8em;
+  color: #000;
+  font-weight: normal;
+  margin-left: 1rem;
+}
