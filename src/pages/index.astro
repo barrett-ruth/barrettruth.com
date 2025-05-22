@@ -152,7 +152,7 @@ Object.keys(postsByCategory).forEach((category) => {
           .pop()
           .replace(/\.mdx?$/, "");
 
-        link.href = `/posts/${topic}/${slug}`;
+        link.href = `/posts/${topic}/${slug}/`;
         link.textContent = post.data.title;
         link.style.textDecoration = "underline";
 
