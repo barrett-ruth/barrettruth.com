@@ -139,3 +139,14 @@ pre * {
 .astro-code {
   font-size: 0.8em !important;
 }
+
+.post-article h1:has(.date) {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.post-article h1 .date {
+  font-weight: normal;
+}
+

@@ -1,10 +1,10 @@
 ---
 title: "leetcode daily"
-date: "04/13/2024"
+date: "11/9/2024"
 useKatex: true
 ---
 
-# [count good numbers](https://leetcode.com/problems/count-good-numbers/submissions/1605647445/?envType=daily-question&envId=2025-04-13) 04/13/2024
+# [count good numbers](https://leetcode.com/problems/count-good-numbers) <span class="date">13/12/2024</span>
 
 ## understanding the problem
 
@@ -12,7 +12,7 @@ This is a combinatoric problem at heart. You have some slots for evens and some 
 
 ## doing it
 
-So, what's the answer? If we know which slots we have and the number of choices for them, we're done. Since this is leetcode, they don't let you think—they just give you the answer. You have 2 types of slots (even and odd indices) with 5 (${0,2,4,6,8}$) and 4 (${2,3,5,7}$) choices respectively. Therefore, the answer is: $5^{\text{# even slots}}\cdot4^{\text{# odd slots}}$ By counting or with small cases, we have $\lceil\frac{n}{2}\rceil$ even slots and $\lfloor\frac{n}{2}\rfloor$ odd slots. Let's submit it!
+So, what's the answer? If we know which slots we have and the number of choices for them, we're done. Since this is leetcode, they don't let you think—they just give you the answer. You have 2 types of slots (even and odd indices) with 5 (${0,2,4,6,8}$) and 4 (${2,3,5,7}$) choices respectively. Therefore, the answer is: $5^\text{\# even slots}\cdot 4^\text{\# odd slots}$. By counting or with small cases, we have $\lceil\frac{n}{2}\rceil$ even slots and $\lfloor\frac{n}{2}\rfloor$ odd slots. Let's submit it!
 
 And.... TLE. Checking _everything_ when you submit your code—in this case, constraint $n\leq 10^{16}$ informs us of something suspect. In the worst case, $\frac{n}{2}\approx n^{14}$. This is far too many multiplications, so we can leverage binary exponentiation instead (and probably should've been the whole time!). Don't forget the mod.
 
@@ -38,7 +38,7 @@ public:
 };
 ```
 
-# [minimum number of operations to make array distinct](https://leetcode.com/problems/minimum-number-of-operations-to-make-elements-in-array-distinc) 04/09/2024
+# [minimum number of operations to make array distinct](https://leetcode.com/problems/minimum-number-of-operations-to-make-elements-in-array-distinc) <span class="date">04/10/2024</span>
 
 ## understanding the problem
 
@@ -55,7 +55,7 @@ The solution is optimal, considering the least amount of elements possible in:
 - <u>Time Complexity</u>: $O(n)$
 - <u>Space Complexity</u>: $\Theta(1)$
 
-# [count the number of fair pairs](https://leetcode.com/problems/count-the-number-of-fair-pairs/) 09/13/2024
+# [count the number of fair pairs](https://leetcode.com/problems/count-the-number-of-fair-pairs/) <span class="date">10/12/2024</span>
 
 ## problem statement
 
@@ -145,7 +145,7 @@ The second approach is _asymptotically_ equivalent. However, it's still worth co
   respect to the second approach.
 - <u>Space Complexity</u>: $\Theta(1)$ for both.
 
-# [most beautiful item for each query](https://leetcode.com/problems/most-beautiful-item-for-each-query/description/) 09/12/2024
+# [most beautiful item for each query](https://leetcode.com/problems/most-beautiful-item-for-each-query/description/) <span class="date">09/12/2024</span>
 
 ## problem statement
 
@@ -212,7 +212,7 @@ Let `n=len(items)` and `m=len(queries)`. There may be more items than queries, o
   allocated. If `queries`/`items` cannot be modified in-place, increase the
   space complexity by $m$/$n$ respectively.
 
-# [shortest subarray with or at least k ii](https://leetcode.com/problems/shortest-subarray-with-or-at-least-k-ii/description/) 09/11/2024
+# [shortest subarray with or at least k ii](https://leetcode.com/problems/shortest-subarray-with-or-at-least-k-ii/description/) <span class="date">09/11/2024</span>
 
 ## problem statement
 
@@ -285,7 +285,7 @@ Note that the size of the frequency map is bounded by $lg_{2}({10^9})\approx30$.
   considered at least once and takes $O(1)$ work each to find the element-wise
   bitwise OR.
 
-# [minimum array end](https://leetcode.com/problems/minimum-array-end/) 09/10/2024
+# [minimum array end](https://leetcode.com/problems/minimum-array-end/) <span class="date">09/10/2024</span>
 
 ## problem statement
 

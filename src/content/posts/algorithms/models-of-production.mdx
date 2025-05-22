@@ -2,6 +2,8 @@
 title: "models of production"
 date: "22/06/2024"
 useKatex: true
+useD3: true
+scripts: ["/scripts/models-of-production.js"]
 ---
 
 This post offers a basic introduction to the Solow, Romer, and Romer-Solow economic models, as taught by [Vladimir Smirnyagin](https://www.vladimirsmirnyagin.com/) and assisted by [Donghyun Suh](https://www.donghyunsuh.com/) in Intermediate Macroeconomics (ECON 3020) during the Spring semester of 2024 at the University of Virginia.
@@ -43,7 +45,75 @@ $$Y_t=F(K_t,L_t)=\bar{A}K_t^{\frac{1}{3}} \bar{L}^{\frac{2}{3}}$$
 
 Utilizing this simplification and its graphical representation below, output is clearly characterized by the cube root of capital:
 
-$\bar{A}:$ 1.00 $\bar{d}:$ 0.50 $\bar{s}:$ 0.50 $\alpha:$ 0.33
+<div class="graph">
+  <div id="solow-visualization"></div>
+</div>
+<div class="sliders">
+  <div style="padding-right: 20px">
+    <ul>
+      <li>
+        <div class="slider">
+          <label for="sliderSA">$\bar{A}:$</label>
+          <span id="outputSA">1.00</span>
+          <input
+            type="range"
+            id="sliderSA"
+            min="0.1"
+            max="2"
+            step="0.01"
+            value="1"
+          />
+        </div>
+      </li>
+      <li>
+        <div class="slider">
+          <label for="sliderSd">$\bar{d}:$</label>
+          <span id="outputSd">0.50</span>
+          <input
+            type="range"
+            id="sliderSd"
+            min="0.01"
+            max="0.99"
+            step="0.01"
+            value="0.50"
+          />
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div style="padding-left: 20px">
+    <ul start="3">
+      <li>
+        <div class="slider">
+          <label for="sliderSs">$\bar{s}:$</label>
+          <span id="outputSs">0.50</span>
+          <input
+            type="range"
+            id="sliderSs"
+            min="0.01"
+            max="0.99"
+            step="0.01"
+            value="0.50"
+          />
+        </div>
+      </li>
+      <li>
+        <div class="slider">
+          <label for="sliderSalpha">$\alpha:$</label>
+          <span id="outputSalpha">0.33</span>
+          <input
+            type="range"
+            id="sliderSalpha"
+            min="0.01"
+            max="0.99"
+            step="0.01"
+            value="0.33"
+          />
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
 
 When investment is completely disincentivized by depreciation (in other words, $sY_t=\bar{d}K_t$), the economy equilibrates at a so-called "steady-state" with equilibrium $(K_t,Y_t)=(K_t^*,Y_t^*)$.
 
@@ -122,9 +192,89 @@ Finally, we have a model:
 
 A visualization of the Romer Model shows that the economy grows exponentially—production knows no bounds ([_ceteris paribus_](https://en.wikipedia.org/wiki/Ceteris_paribus), of course). A graph of $log_{10}(Y_t)$ can be seen below:
 
-$\bar{z}:$ 0.50 $\bar{L}:$ 505 $\bar{l}:$ 0.50 $\bar{A}_0:$ 500
+<div class="graph">
+  <div id="romer-visualization"></div>
+</div>
+<div class="sliders">
+  <div style="padding-right: 20px">
+    <ul>
+      <li>
+        <div class="slider">
+          <label for="sliderRz">$\bar{z}:$</label>
+          <span id="outputRz">0.50</span>
+          <input
+            type="range"
+            id="sliderRz"
+            min="0.1"
+            max="0.99"
+            step="0.01"
+            value="0.50"
+          />
+        </div>
+      </li>
+      <li>
+        <div class="slider">
+          <label for="sliderRL">$\bar{L}:$</label>
+          <span id="outputRL">505</span>
+          <input
+            type="range"
+            id="sliderRL"
+            min="10"
+            max="1000"
+            step="19"
+            value="505"
+          />
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div style="padding-left: 20px">
+    <ul start="3">
+      <li>
+        <div class="slider">
+          <label for="sliderRl">$\bar{l}:$</label>
+          <span id="outputRl">0.50</span>
+          <input
+            type="range"
+            id="sliderRl"
+            min="0.01"
+            max="0.99"
+            step="0.01"
+            value="0.50"
+          />
+        </div>
+      </li>
+      <li>
+        <div class="slider">
+          <label for="sliderRA0">$\bar{A}_0:$</label>
+          <span id="outputRA0">500</span>
+          <input
+            type="range"
+            id="sliderRA0"
+            min="0"
+            max="1000"
+            step="100"
+            value="500"
+          />
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
 
 Playing with the sliders, this graph may seem underwhelming in comparison to the Solow Model. However, on a logarithmic scale, small changes in the parameters lead to massive changes in the growth rate of ideas and economices:
+
+<div class="romer-table-container">
+  <table id="romer-table">
+    <thead>
+      <tr id="romer-table-header"></tr>
+    </thead>
+    <tbody>
+      <tr id="row-A_t"></tr>
+      <tr id="row-Y_t"></tr>
+    </tbody>
+  </table>
+</div>
 
 ### solving the model
 
@@ -152,7 +302,47 @@ Further, all economy continually and perpetually grow along a constant "Balanced
 
 Changes in the growth rate of ideas, then, alter the growth rate of output itself—in this case, parameters $\bar{l}, \bar{z}$, and $\bar{L}$. This is best exemplified by comparing the growth rate before and and after a parameter changes. In the below example, a larger $\bar{l}$ initially drops output due to less workers being allocated to production. Soon after, though, output recovers along a "higher" Balanced Growth Path.
 
-$\bar{l}_1:$ 0.50 $t_0:$ 50
+<div class="graph">
+  <div id="romer-lchange-visualization"></div>
+</div>
+<div class="sliders">
+  <div style="padding-right: 20px">
+    <ul>
+      <li>
+        <div class="slider">
+          <label for="sliderlChange">$\bar{l}_1:$</label>
+          <span id="outputlChange">0.50</span>
+          <input
+            type="range"
+            id="sliderlChange"
+            min="0.1"
+            max="0.99"
+            step="0.01"
+            value="0.50"
+          />
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div style="padding-left: 20px">
+    <ul start="3">
+      <li>
+        <div class="slider">
+          <label for="slidert0">$t_0:$</label>
+          <span id="outputt0">50</span>
+          <input
+            type="range"
+            id="slidert0"
+            min="1"
+            max="99"
+            step="1"
+            value="50"
+          />
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
 
 Notably, while both the Romer and Solow Models help to analyze growth across countries, they both are unable to resolve one question: why can and do investment rates and TFP differ across contries? This is a more fundamental economic question involving culture, institutions, and social dynamics—one day I hope we'll have an answer.
 
@@ -169,11 +359,21 @@ would certainly be more pragmatic. The Solow Model's capital dynamics do, in som
 
 Combining the dynamics of the Romer Model's ideas and the Solow Model's capital stock could yield the desired result. Intuitively, incorporating capital into output via the Solow Model's production function, as well as including the Law of Capital Motion seems like one way to legitimately create this so-called "Romer-Solow" model:
 
-1. $Y_t=A_t K_t^\alpha L_{yt}^{1-\alpha}$
-2. $\Delta K_{t+1}=\bar{s}Y_t-\bar{d}K_t$
-3. $\Delta A_{t+1} = \bar{z}A_tL_{at}$
-4. $L_{yt}+L_{at}=\bar{L}$
-5. $L_{at}=\bar{l}\bar{L}$
+<div style="display: flex; justify-content: center">
+  <div style="padding-right: 50px">
+    <ol>
+      <li>$Y_t=A_t K_t^\alpha L_{yt}^{1-\alpha}$</li>
+      <li>$\Delta K_{t+1}=\bar{s}Y_t-\bar{d}K_t$</li>
+      <li>$\Delta A_{t+1} = \bar{z}A_tL_{at}$</li>
+    </ol>
+  </div>
+  <div style="padding-left: 50px">
+    <ol start="4">
+      <li>$L_{yt}+L_{at}=\bar{L}$</li>
+      <li>$L_{at}=\bar{l}\bar{L}$</li>
+    </ol>
+  </div>
+</div>
 
 ### solving the model
 
@@ -222,7 +422,117 @@ Expectedly, output has a positive relationship with the savings rate and a negat
 
 Using the visualization below, we see a growth pattern similar to that of the Romer Model. However, the Romer-Solow economy indeed grows at a faster rate than the Romer model—I had to cap $\bar{L}$ at $400$ and $\alpha$ at $0.4$ because output would be _too large_ for JavaScript to contain in a number (the graph would disappear).
 
-$\bar{z}:$ 0.50 $A_0:$ 500 $\bar{d}:$ 0.50 $\bar{s}:$ 0.50 $\alpha:$ 0.33 $\bar{l}:$ 0.50 $\bar{L}:$ 200
+<div class="graph">
+  <div id="romer-solow-visualization"></div>
+</div>
+<div class="sliders">
+  <div style="padding-right: 20px">
+    <ul>
+      <li>
+        <div class="slider">
+          <label for="sliderRSz">$\bar{z}:$</label>
+          <span id="outputRSz">0.50</span>
+          <input
+            type="range"
+            id="sliderRSz"
+            min="0.1"
+            max="0.99"
+            step="0.01"
+            value="0.50"
+          />
+        </div>
+      </li>
+      <li>
+        <div class="slider">
+          <label for="sliderRSA0">$A_0:$</label>
+          <span id="outputRSA0">500</span>
+          <input
+            type="range"
+            id="sliderRSA0"
+            min="0"
+            max="1000"
+            step="10"
+            value="500"
+          />
+        </div>
+      </li>
+      <li>
+        <div class="slider">
+          <label for="sliderRSd">$\bar{d}:$</label>
+          <span id="outputRSd">0.50</span>
+          <input
+            type="range"
+            id="sliderRSd"
+            min="0.01"
+            max="0.99"
+            step="0.01"
+            value="0.50"
+          />
+        </div>
+      </li>
+      <li>
+        <div class="slider">
+          <label for="sliderRSs">$\bar{s}:$</label>
+          <span id="outputRSs">0.50</span>
+          <input
+            type="range"
+            id="sliderRSs"
+            min="0.01"
+            max="0.99"
+            step="0.01"
+            value="0.50"
+          />
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div style="padding-left: 20px">
+    <ul start="3">
+      <li>
+        <div class="slider">
+          <label for="sliderRSalpha">$\alpha:$</label>
+          <span id="outputRSalpha">0.33</span>
+          <input
+            type="range"
+            id="sliderRSalpha"
+            min="0.01"
+            max="0.40"
+            step="0.01"
+            value="0.33"
+          />
+        </div>
+      </li>
+      <li>
+        <div class="slider">
+          <label for="sliderRSl">$\bar{l}:$</label>
+          <span id="outputRSl">0.50</span>
+          <input
+            type="range"
+            id="sliderRSl"
+            min="0.01"
+            max="0.99"
+            step="0.01"
+            value="0.50"
+          />
+        </div>
+      </li>
+      <li>
+        <div class="slider">
+          <label for="sliderRSL">$\bar{L}:$</label>
+          <span id="outputRSL">200</span>
+          <input
+            type="range"
+            id="sliderRSL"
+            min="0"
+            max="400"
+            step="10"
+            value="200"
+          />
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
 
 Playing with the parameters, the previous mathematical findings are validated. For example, because $g_Y^*=\frac{\bar{z}\bar{l}\bar{L}}{1-\alpha}$, only changes in parameters $\alpha,\bar{z},\bar{l}$, and $\bar{L}$ affect the growth rate of output, manifesting as the y-axis scaling up/down on a ratio scale.
 
@@ -230,6 +540,88 @@ However, do economics grow _faster_/_slower_ the further _below_/_above_ they ar
 
 The graph below illustrates the transition dynamics of Romer-Solow Model. Namely, $(\bar{z}, \bar{l}, \bar{L}, \alpha)=(0.5, 0.5, 100, 0.33)\forall t<t_0$, then update to the slider values when $t>t_0$.
 
-$\bar{z}_0:$ 0.50 $\alpha_0:$ 0.33 $\bar{L}_0:$ 100 $\bar{l}_0:$ 0.50 $t_0:$ 50
+<div class="graph">
+  <div id="romer-solow-change-visualization"></div>
+</div>
+<div class="sliders">
+  <div style="padding-right: 20px">
+    <ul>
+      <li>
+        <div class="slider">
+          <label for="sliderRSCz0">$\bar{z}_0:$</label>
+          <span id="outputRSCz0">0.50</span>
+          <input
+            type="range"
+            id="sliderRSCz0"
+            min="0.1"
+            max="0.99"
+            step="0.01"
+            value="0.50"
+          />
+        </div>
+      </li>
+      <li>
+        <div class="slider">
+          <label for="sliderRSCalpha0">$\alpha_0:$</label>
+          <span id="outputRSCalpha0">0.33</span>
+          <input
+            type="range"
+            id="sliderRSCalpha0"
+            min="0.01"
+            max="0.54"
+            step="0.01"
+            value="0.33"
+          />
+        </div>
+      </li>
+      <li>
+        <div class="slider">
+          <label for="sliderRSCL0">$\bar{L}_0:$</label>
+          <span id="outputRSCL0">100</span>
+          <input
+            type="range"
+            id="sliderRSCL0"
+            min="0"
+            max="200"
+            step="10"
+            value="100"
+          />
+        </div>
+      </li>
+    </ul>
+  </div>
+  <div style="padding-left: 20px">
+    <ul start="3">
+      <li>
+        <div class="slider">
+          <label for="sliderRSCl0">$\bar{l}_0:$</label>
+          <span id="outputRSCl0">0.50</span>
+          <input
+            type="range"
+            id="sliderRSCl0"
+            min="0.01"
+            max="0.99"
+            step="0.01"
+            value="0.50"
+          />
+        </div>
+      </li>
+      <li>
+        <div class="slider">
+          <label for="sliderRSCt0">$t_0:$</label>
+          <span id="outputRSCt0">50</span>
+          <input
+            type="range"
+            id="sliderRSCt0"
+            min="0"
+            max="100"
+            step="1"
+            value="50"
+          />
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
 
 Finally, it is clear that economies converge to their Balanced Growth Path as desired—something slightly more convoluted to prove from the complex expression for $Y^*$ derived earlier. For example, with an increase in $\alpha_0$, output grows at an increasing rate after the change, then increases at a decreasing rate as it converges to the new higher Balanced Growth Path. Increasing parameters $\bar{z},\bar{l},\bar{L}$ yield similar results, although the changes are visually less obvious.

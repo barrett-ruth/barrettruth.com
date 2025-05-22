@@ -7,6 +7,8 @@ const postsCollection = defineCollection({
     description: z.string().optional(),
     date: z.string().optional(),
     useKatex: z.boolean().optional().default(false),
+    useD3: z.boolean().optional().default(false),
+    scripts: z.array(z.string()).optional(),
   }),
 });
 

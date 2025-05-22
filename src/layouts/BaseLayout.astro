@@ -2,17 +2,9 @@
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 
-interface Props {
-  title: string;
-  description?: string;
-  useKatex?: boolean;
-  bodyClass?: string;
-}
-
 const {
   title,
   description = "Barrett Ruth's personal website",
-  useKatex = false,
   bodyClass = "graph-background",
 } = Astro.props;
 ---

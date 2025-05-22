@@ -8,21 +8,27 @@ interface Props {
     description?: string;
     date?: string;
     useKatex?: boolean;
+    useD3?: boolean;
+    scripts?: string[];
   };
 }
 
 const { frontmatter, post } = Astro.props;
-const { title, description, useKatex = false } = frontmatter;
+const { title, description, useKatex = false, useD3 = false } = frontmatter;
 
 const filePath = post?.id || "";
 const category = filePath.split("/")[0];
 
 const topicColor = getTopicColor(category);
+
+console.log(frontmatter)
+
 ---
 
-<BaseLayout title={title} description={description} useKatex={useKatex}>
+<BaseLayout title={title} description={description} useKatex={useKatex}, useD3={useD3}>
   <slot name="head" slot="head">
     <link rel="stylesheet" href="/styles/posts.css" />
+    <link rel="stylesheet" href="/styles/graph.css" />
     {
       useKatex && (
         <link
@@ -31,6 +37,11 @@ const topicColor = getTopicColor(category);
           integrity="sha384-5TcZemv2l/9On385z///+d7MSYlvIEw9FuZTIdZ14vJLqWphw7e7ZPuOiCHJcFCP"
           crossorigin="anonymous"
         />
+      )
+    }
+    {
+      useD3 && (
+        <script src="https://d3js.org/d3.v7.min.js"></script>
       )
     }
   </slot>
@@ -48,5 +59,8 @@ const topicColor = getTopicColor(category);
 
   <slot name="scripts" slot="scripts">
     <script src="/scripts/dateHeadings.js" is:inline></script>
+    {frontmatter.scripts?.map(script => (
+      <script src={script} type="module"></script>
+    ))}
   </slot>
 </BaseLayout>
