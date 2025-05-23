@@ -1,5 +1,3 @@
-import { getTopicColor } from "../../src/utils/colors.js";
-
 const TERMINAL_PROMPT = "barrett@ruth:~$ ";
 let typing = false;
 let clearing = false;
@@ -108,7 +106,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const topicName = topic.dataset.topic;
 
     topic.addEventListener("mouseenter", () => {
-      const color = getTopicColor(topicName);
+      const color = window.getTopicColor(topicName);
       topic.style.color = color;
     });
 

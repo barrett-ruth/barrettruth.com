@@ -1,5 +1,3 @@
-import { getTopicColor } from "../../src/utils/colors.js";
-
 function urlToTopic() {
   const path = window.location.pathname;
   const pathParts = path.split("/");
@@ -84,7 +82,7 @@ function drawSolowGraph() {
     .append("path")
     .datum(outputData)
     .attr("fill", "none")
-    .attr("stroke", getTopicColor(urlToTopic()))
+    .attr("stroke", window.getTopicColor(urlToTopic()))
     .attr("stroke-width", 2)
     .attr(
       "d",
@@ -267,7 +265,7 @@ function drawRomerGraph() {
     .append("path")
     .datum(romerData)
     .attr("fill", "none")
-    .attr("stroke", getTopicColor(urlToTopic()))
+    .attr("stroke", window.getTopicColor(urlToTopic()))
     .attr("stroke-width", 2)
     .attr(
       "d",
@@ -360,7 +358,7 @@ function drawRomerlGraph() {
     .append("path")
     .datum(romerData)
     .attr("fill", "none")
-    .attr("stroke", getTopicColor(urlToTopic()))
+    .attr("stroke", window.getTopicColor(urlToTopic()))
     .attr("stroke-width", 2)
     .attr(
       "d",
@@ -506,7 +504,7 @@ function drawRomerSolowGraph() {
     .append("path")
     .datum(romerSolowData)
     .attr("fill", "none")
-    .attr("stroke", getTopicColor(urlToTopic()))
+    .attr("stroke", window.getTopicColor(urlToTopic()))
     .attr("stroke-width", 2)
     .attr(
       "d",
@@ -603,7 +601,7 @@ function drawRomerSolowChangeGraph() {
     .append("path")
     .datum(romerSolowData)
     .attr("fill", "none")
-    .attr("stroke", getTopicColor(urlToTopic()))
+    .attr("stroke", window.getTopicColor(urlToTopic()))
     .attr("stroke-width", 2)
     .attr(
       "d",

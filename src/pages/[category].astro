@@ -91,14 +91,10 @@ const capitalizedCategory =
 </style>
 
 <script define:vars={{ category }}>
-  import { getTopicColor } from "../utils/colors.js";
-
   document.addEventListener("DOMContentLoaded", function () {
     document.documentElement.style.setProperty(
       "--topic-color",
-      getTopicColor(category),
+      window.getTopicColor(category),
     );
-
-    window.getTopicColor = getTopicColor;
   });
 </script>
