@@ -1,0 +1,131 @@
+---
+title: "multithreading a gui"
+date: "28/05/2025"
+---
+
+# the problem
+
+On the [Cavalier Autonomous Racing](https://autonomousracing.dev) team at my school, we have a pretty ~~useless~~ cool basestation acting as a real-time telemetry visualization tool. We want to expand this GUI significantly, including tabulated windows for each sub-team.
+
+Leveraging concurrency is vital for keeping things efficient and data up-to-date but this is easier said than done. Consider the original design:
+
+# original architecture
+
+Originally, the GUI followed the traditional QtC++ ROS single-threaded pattern. The GUI event loop ran on one thread, the main one:
+
+```cpp
+
+void spin_node(basestation::Gui* gui, ...) {
+    ...
+
+    rclcpp::executors::SingleThreadedExecutor executor;
+    rclcpp::Node::SharedPtr node = std::make_shared<basestation::GuiNode>(init_gui);
+
+    executor.add_node(node);
+    while (init_gui->is_running) {
+        executor.spin_once(timeout);
+    }
+}
+```
+
+All of 30+ topic callbacks were registered on this thread:
+
+```cpp
+GuiNode::GuiNode(basestation::Gui* init_gui) : Node("uva_gui") {
+    this->gui = init_gui;
+
+    rclcpp::QoS best_effort_qos = rclcpp::QoS(rclcpp::QoSInitialization(RMW_QOS_POLICY_HISTORY_KEEP_LAST, 1));
+    best_effort_qos.best_effort();
+
+    this->pubDesVel_ = create_publisher<std_msgs::msg::Float32>("vehicle/set_desired_velocity", 1);
+    ...
+    this->subAutonomy_ = create_subscription<deep_orange_msgs::msg::Autonomy>("/telemetry/autonomy", 1, std::bind(&GuiNode::receiveAutonomy, this, std::placeholders::_1));
+}
+```
+
+The Qt Framework is quite complex and beyond the scope of this post. Big picture, the GUI controls a bunch of data-independent visualizations that are handled on this GUI thread.
+
+How do we optimize this? It is necessary to take a step back and observe the structure of the entire application:
+
+![single-threaded-design](/public/posts/multithreading-a-gui/single-threaded-design.webp)
+
+Many flaws are now clear:
+
+- Single, high-frequency topics can flood the GUI, causing stale data for other Widgets
+- Data races in which multiple callbacks modify shared data are especially difficult to handle
+- Poor separation of responsibility: the `MainWindow` is responsible for too much&mdash;it should not need first-hand knowledge of every Widget's API
+
+Luckily, we're far from the first (and the last) to encounter a problem such as this. Enter ROS's exhaustive suite of concurrency tools.
+
+# multi-threaded architecture
+
+First, let's pin down what exactly can be parallelized.
+
+1. Subscriptions: group subscription callbacks[^1] according to the displayed widgets. For the CAR, this was three `Vehicle`, `Trajectory`, and `Perception` groups. Now, widgets can be updated as dependent data is received.
+2. Visualizations: now that data is handled independently, GUI widgets can be updated (with care) as well.
+
+> Just kidding. Because of ROS, all gui widgets can only be updated on the main GUI thread.
+
+This lead me to the follow structure:
+
+![single-threaded-design](/public/posts/multithreading-a-gui/multi-threaded-implementation.webp)
+
+- Three callback groups are triggered at differing intervals according to their urgency on the GUI node
+    - A thread-safe queue[^2] processes all ingested data for each callback group
+- Every 10ms, the GUI is updated, highest to lowest urgency messages first
+- The `MainWindow` houses the visualization widgets as before&mdash;however, the GUI thread actually performs the update logic
+- GUI Widgets were re-implemented to be thread-safe with basic locking, a small amount of overhead to ensure safe memory access
+
+# retrospective
+
+Looking back, this GUI should've been implemented with a modern web framework such as [React](https://react.dev/) with [react-ros](https://github.com/flynneva/react-ros?tab=readme-ov-file). CAR needs high-speed, reactive data, and QtC++ is simply not meant for this level of complexity.
+
+The lack of concurrent GUI updates was a major buzzkill, providing a limit to the ultimate amount I could parallelize this application. While it ran *much* faster than before, more sophisticated solutions such as batching and timestamping would likely improve accuracy and keep lower priority visualizations more up to date. However, I see this as a non-issue&mdash;the source of the problem is truly ROS's lack of support for concurrency.
+
+[^1]: See [the ROS documentation](https://docs.ros.org/en/foxy/How-To-Guides/Using-callback-groups.onhtml) to learn more. The CAR publishes various topic-related data at set rates, so I'm looking to run various groups of mutually exclusive callbacks at a set interval (i.e. `MutuallyExclusive`)
+[^2]: The simplest implementation did the job:
+
+    ```cpp
+    ...
+    template <typename T>
+    class ThreadSafeQueue {
+       public:
+        void push(const T& item) {
+            std::lock_guard<std::mutex> lock(mutex_);
+            queue_.push(item);
+            condition_.notify_one();
+        }
+
+        bool pop(T& item, std::chrono::milliseconds timeout = std::chrono::milliseconds(0)) {
+            std::unique_lock<std::mutex> lock(mutex_);
+            if (timeout.count() > 0) {
+                if (!condition_.wait_for(lock, timeout, [this] { return !queue_.empty(); })) {
+                    return false;
+                }
+            } else if (queue_.empty()) {
+                return false;
+            }
+
+            item = queue_.front();
+            queue_.pop();
+            return true;
+        }
+
+        bool empty() const {
+            std::lock_guard<std::mutex> lock(mutex_);
+            return queue_.empty();
+        }
+
+        size_t size() const {
+            std::lock_guard<std::mutex> lock(mutex_);
+            return queue_.size();
+        }
+
+        void clear() {
+            std::lock_guard<std::mutex> lock(mutex_);
+            std::queue<T> empty;
+            std::swap(queue_, empty);
+        }
+    ...
+    };
+    ```
