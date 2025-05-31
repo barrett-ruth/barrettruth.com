@@ -4,7 +4,7 @@ date: "30/07/2024"
 useKatex: true
 ---
 
-## context
+# context
 
 While working for [TRB Capital Management](https://trbcap.com/), certain strategies necessitated finding the minimum and maximum of a moving window of prices.
 
@@ -19,11 +19,11 @@ Design a data structure supporting the following operations:
 - `size_t size()` : return the number of prices in the data structure
 - `double get()` : return the extrema (min or max)
 
-## solution
+# solution
 
 Try to solve it yourself first. The point of this exercise it to create the most theoretically optimal solution you can, not brute-force and move on.
 
-### naïve solution
+## naïve solution
 
 One can design a data structure meeting these requirements through simulating the operations directly with a [`std::deque<double>`](https://en.cppreference.com/w/cpp/container/deque).
 
@@ -70,7 +70,7 @@ private:
 };
 ```
 
-### optimizing the approach
+# optimizing the approach
 
 Rather than bear the brunt of the work finding extrema in calls to `get()`, we can distribute it across the data structure as it is built.
 
@@ -134,7 +134,7 @@ public:
 };
 ```
 
-### monotonic queues deques
+## monotonic ~~queues~~ deques
 
 Thinking a bit deeper about the problem constraints, it is clear that:
 
@@ -215,7 +215,7 @@ private:
 };
 ```
 
-### further improvements
+## further improvements
 
 The final implementation utilized in the TRB includes the following features:
 
