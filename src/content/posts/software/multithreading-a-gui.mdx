@@ -64,23 +64,74 @@ First, let's pin down what exactly can be parallelized.
 1. Subscriptions: group subscription callbacks[^1] according to the displayed widgets. For the CAR, this was three `Vehicle`, `Trajectory`, and `Perception` groups. Now, widgets can be updated as dependent data is received.
 2. Visualizations: now that data is handled independently, GUI widgets can be updated (with care) as well.
 
-> Just kidding. Because of ROS, all gui widgets can only be updated on the main GUI thread.
+> Just kidding. Because of ROS, all GUI widgets can only be updated on the main GUI thread.
 
 This lead me to the follow structure:
 
-![single-threaded-design](/public/posts/multithreading-a-gui/multi-threaded-implementation.webp)
+![multi-threaded-design](/public/posts/multithreading-a-gui/multi-threaded-implementation.webp)
 
 - Three callback groups are triggered at differing intervals according to their urgency on the GUI node
     - A thread-safe queue[^2] processes all ingested data for each callback group
 - Every 10ms, the GUI is updated, highest to lowest urgency messages first
 - The `MainWindow` houses the visualization widgets as before&mdash;however, the GUI thread actually performs the update logic
-- GUI Widgets were re-implemented to be thread-safe with basic locking, a small amount of overhead to ensure safe memory access
+- GUI Widgets were re-implemented to be thread-safe with basic locking, a small amount of overhead for safe memory access
+
+## \*actual\* multi-threaded implementation
+
+Sounds good, right? Well, I should've done my research first. The Qt framework has *already internalized* the logic for this entire paradigm of multithreaded code. Turns out all I need are:
+
+- [Signals/slots](https://doc.qt.io/qt-6/signalsandslots.html) and a `Qt::QueuedConnection`
+- Running the GUI with `MultithreadedExecutor`
+
+As it turns out, signals and slots *automatically* leverage ROS's internal thread-safe message queue, ensuring deserialization one at a time.
+
+The following (final) design employs two threads:
+
+1. Main GUI Thread (Qt Event Loop): handles UI rendering + forward signals/slots to executor
+2. Executor Thread: runs callbacks and publishes messages
+
+The executor is simply spawned in the main thread:
+
+```cpp
+std::thread ros_thread([this]() {
+    executor.spin();
+});
+```
+
+Data flows from a called subscription &rightarrow; queued signal &rightarrow; signal connected to a slot &rightarrow; slot runs the GUI]widget when scheduled.
+
+```cpp
+// 1. Subscribe to a topic
+this->subAutonomy_ = create_subscription<...>("/telemetry/autonomy", 1, std::bind(&GuiNode::receiveAutonomy, ...));
+
+// 2. Queue a signal to the emitter
+void GuiNode::receiveAutonomy(deep_orange_msgs::msg::Autonomy::SharedPtr msg) {
+    this->des_vel = msg->desired_velocity_readout;
+    signal_emitter->autonomyReceived(msg);
+}
+
+// 3. Signal connects to slot (registered in initialization)
+QObject::connect(signal_emitter, &GuiSignalEmitter::autonomyReceived,
+                 window, &MainWindow::receiveAutonomy, Qt::QueuedConnection);
+
+// 4. Slot-performed logic when ROS runs thread
+void MainWindow::receiveAutonomy(
+    const deep_orange_msgs::msg::Autonomy::SharedPtr msg) {
+  ...
+}
+```
+
+Elegantly, registering a signal/slot with `Qt::QueuedConnection` does *all of the hard work*:
+
+- Queueing messages in the target thread's loop
+- Actual slot execution happens in the GUI thread
+- Prevents cross-thread memory access/critical sections
+- Qt event-level synchronization
 
 # retrospective
 
-Looking back, this GUI should've been implemented with a modern web framework such as [React](https://react.dev/) with [react-ros](https://github.com/flynneva/react-ros?tab=readme-ov-file). CAR needs high-speed, reactive data, and QtC++ is simply not meant for this level of complexity.
+Looking back, this GUI should've been implemented with a modern web framework such as [React](https://react.dev/) with [react-ros](https://github.com/flynneva/react-ros?tab=readme-ov-file). CAR needs high-speed, reactive data, and a QtC++ front-end is simply not meant for this level of complexity. I made it a lot harder than it needed to be with my lack of due diligence, but the single-threaded GUI event loop in ROS is more harm than help.
 
-The lack of concurrent GUI updates was a major buzzkill, providing a limit to the ultimate amount I could parallelize this application. While it ran *much* faster than before, more sophisticated solutions such as batching and timestamping would likely improve accuracy and keep lower priority visualizations more up to date. However, I see this as a non-issue&mdash;the source of the problem is truly ROS's lack of support for concurrency.
 
 [^1]: See [the ROS documentation](https://docs.ros.org/en/foxy/How-To-Guides/Using-callback-groups.onhtml) to learn more. The CAR publishes various topic-related data at set rates, so I'm looking to run various groups of mutually exclusive callbacks at a set interval (i.e. `MutuallyExclusive`)
 [^2]: The simplest implementation did the job:
@@ -128,4 +179,3 @@ The lack of concurrent GUI updates was a major buzzkill, providing a limit to th
         }
     ...
     };
-    ```
