@@ -121,7 +121,7 @@ void MainWindow::receiveAutonomy(
 }
 ```
 
-Elegantly, registering a signal/slot with `Qt::QueuedConnection` does *all of the hard work*:
+Elegantly, registering a signal/slot with `Qt::QueuedConnection` does all of the hard work:
 
 - Queueing messages in the target thread's loop
 - Actual slot execution happens in the GUI thread
