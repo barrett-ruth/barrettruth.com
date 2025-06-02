@@ -71,3 +71,13 @@ ul {
   width: 100%;
   right: 0;
 }
+
+@media (max-width: 768px) {
+  .topics {
+    font-size: 1.8em;
+  }
+
+  .posts {
+    font-size: 1.2em;
+  }
+}

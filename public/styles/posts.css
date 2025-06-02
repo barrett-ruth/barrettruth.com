@@ -150,3 +150,16 @@ pre * {
   font-weight: normal;
 }
 
+@media (max-width: 768px) {
+  .post-title {
+    font-size: 1.8em;
+  }
+
+  .post-meta {
+    font-size: 1.2em;
+  }
+
+  .post-article {
+    font-size: 1em;
+  }
+}
