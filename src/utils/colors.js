@@ -6,6 +6,8 @@ export function getTopicColor(topicName) {
       return "#d50032";
     case "meditations":
       return "#6a0dad";
+    case "autonomous-racing":
+      return "#009975";
     default:
       return "#000000";
   }
