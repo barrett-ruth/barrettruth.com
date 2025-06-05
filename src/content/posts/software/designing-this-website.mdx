@@ -3,7 +3,7 @@ title: "designing this website"
 date: "18/06/2024"
 ---
 
-# Update: Port to Astro (22/05/2025)
+## update: port to astro <span class="date">22/05/2025</span>
 
 I'm expanding my website to include more detailed algorithms, implementations, write-ups, and low-level optimization case studies.
 
@@ -42,7 +42,7 @@ I thought about using the following frameworks:
 
 But I did not actually _need_ any of them to make this site look decent.
 
-# What I've Learned
+## what i've learned
 
 Of course, most people build simple websites like these to learn a new technology or framework, not to use an optimal tool. That's actually why I [hosted this website on AWS](/posts/software/from-github-pages-to-aws.html).
 
@@ -54,3 +54,30 @@ Building this website with truly bare-bones technologies has made me appreciate 
 - Similarly, CSS styling (inline/stylesheet) works at the small scale. However, with styles being completely divorced from the HTML itself, much is left to be desired.
 - Reusing HTML, styles, and JavaScript feels extremely fragile. Innovative type-safe, optimized, and composable solutions definitely have their place in the web.
 - **You can be efficient with HTML, JS, and CSS.** My iteration speed on on this site versus other React.js/MDX blogs I have worked on is the same if not faster. While this may be a testament to my lack of JavaScript experience, I think people conclude too early that their task is beyond the technologies that form the foundation of the web today.
+
+## the setup <span class="date">15/06/2024</span>
+
+This website is pure HTML, CSS, and JavaScript.
+
+AWS-wise, I use:
+
+- S3, to host the content (static for now)
+- CloudFront, to serve and cache said content
+- Route53, to manage routing
+- GoDaddy, to reserve [barrettruth.com](https://barrettruth.com)
+
+A user request can be modelled as follows:
+
+1.  A user accesses the website by typing barrettruth.com in their browser.
+2.  GoDaddy's DNS servers are queried, which translating the domain name to my Route53's IP address.
+3.  Route53 then routes to the request to my CloudFront distribution associated with my S3 bucket.
+4.  CloudFront checks its edge caches for the requested content. If the content is stale or not cached, CloudFront fetches the content from S3. Otherwise, it uses the cached content from an edge server.
+5.  CloudFront returns the content to the user's browser.
+
+![system design of my portfolio website](/posts/designing-this-website/website-design.webp)
+
+## difficulties
+
+The hardest part of hosting this website was interfacing with GoDaddy.
+
+For example, configuring SSL certificates with GoDaddy is needlessly challenging. Follow [AWS's guide](https://docs.aws.amazon.com/amplify/latest/userguide/to-add-a-custom-domain-managed-by-godaddy.html) if you really want to. Otherwise, [configure your GoDaddy nameservers](https://www.godaddy.com/help/edit-my-domain-nameservers-664) and point them to your own DNS service (like Route53) instead.

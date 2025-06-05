@@ -140,15 +140,18 @@ pre * {
   font-size: 0.8em !important;
 }
 
-.post-article h1:has(.date) {
+.post-article h1:has(.date),
+.post-article h2:has(.date) {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
 }
 
-.post-article h1 .date {
+.post-article h1 .date,
+.post-article h2 .date {
   font-weight: normal;
 }
+
 
 @media (max-width: 768px) {
   .post-title {
