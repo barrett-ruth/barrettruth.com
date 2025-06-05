@@ -47,7 +47,7 @@ The Qt Framework is quite complex and beyond the scope of this post. Big picture
 
 How do we optimize this? It is necessary to take a step back and observe the structure of the entire application:
 
-![single-threaded-design](/public/posts/multithreading-a-gui/single-threaded-design.webp)
+![single-threaded-design](/posts/multithreading-a-gui/single-threaded-design.webp)
 
 Many flaws are now clear:
 
@@ -68,7 +68,7 @@ First, let's pin down what exactly can be parallelized.
 
 This lead me to the follow structure:
 
-![multi-threaded-design](/public/posts/multithreading-a-gui/multi-threaded-implementation.webp)
+![multi-threaded-design](/posts/multithreading-a-gui/multi-threaded-implementation.webp)
 
 - Three callback groups are triggered at differing intervals according to their urgency on the GUI node
     - A thread-safe queue[^2] processes all ingested data for each callback group
