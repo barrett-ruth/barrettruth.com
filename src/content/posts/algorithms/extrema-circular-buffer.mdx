@@ -140,7 +140,7 @@ Thinking a bit deeper about the problem constraints, it is clear that:
 
 - If an extrema is pushed onto the data structure, all previously pushed elements are irrelevant to any further operations.
 
-Elements are processed in FIFO order, enabling this observation to be exploited. This is the foundationl idea of the [monotone priority queue](https://www.wikiwand.com/en/Monotone_priority_queue) data structure. So, for maintaining a minimum/maximum, the data structure will store a monotonically increasing/decreasing double-ended queue.
+Elements are processed in FIFO order, enabling this observation to be exploited. This is the foundational idea of the [monotone priority queue](https://www.wikiwand.com/en/Monotone_priority_queue) data structure. So, for maintaining a minimum/maximum, the data structure will store a monotonically increasing/decreasing double-ended queue.
 
 This solution does not satisfy a circular buffer inherently. If an arbitrary number of elements are removed from the data structure when an extrema is added, it is certainly not possible to maintain a window of fixed size.
 
@@ -219,6 +219,6 @@ private:
 
 The final implementation utilized in the TRB includes the following features:
 
-1.  A ringbuffer a statically-allocated `std::array`, as any fix-sized queue can be supplanted with one
+1.  A ringbuffer using a statically-allocated `std::array`, as any fix-sized queue can be supplanted with one
 2.  A templatized value type and comparator for flexibility
 3.  C++ specific optimizations (rule of 5, smart pointers, and an STL-compliant API)

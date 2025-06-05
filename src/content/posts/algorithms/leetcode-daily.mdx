@@ -164,7 +164,7 @@ Great. Now we need to find the item with the largest beauty. Naïvely considerin
 
 Consider alternative approaches to responding to our queries. It is clear that answering them in-order yields no benefit (i.e. we have to consider each item all over again, per query)—could we answer them in another order to save computations?
 
-Visualizing our items from left-to-right, we's interested in both increasing beauty and prices. If we can scan our items left to right, we can certainly “accumulate” a running maximal beauty. We can leverage sorting once again to answer our queries left-to-right, then re-order them appropriately before returning a final answer. Sorting both `queries` and `items` with a linear scan will take $O(nlg(n))$ time, meeting the constraints.
+Visualizing our items from left-to-right, we're interested in both increasing beauty and prices. If we can scan our items left to right, we can certainly “accumulate” a running maximal beauty. We can leverage sorting once again to answer our queries from left to right, then re-order them appropriately before returning a final answer. Sorting both `queries` and `items` with a linear scan will take $O(nlg(n))$ time, meeting the constraints.
 
 ## carrying out the plan
 
@@ -224,11 +224,11 @@ Another convoluted, uninspired bitwise-oriented daily.
 
 Anways, we're looking for a subarray that satisfies a condition. Considering all subarrays with `len(nums)`$\leq2\times10^5$ is impractical according to the common rule of $\approx10^8$ computations per second on modern CPUs.
 
-Say we's building some array `xs`. Adding another element `x` to this sequence can only increase or element-wise bitwise OR. Of course, it makes sense to do this. However, consider `xs` after—it is certainly possible that including `x` finally got us to at least `k`. However, not all of the elements in the array are useful now; we should remove some.
+Say we're building some array `xs`. Adding another element `x` to this sequence can only increase or element-wise bitwise OR. Of course, it makes sense to do this. However, consider `xs` after—it is certainly possible that including `x` finally got us to at least `k`. However, not all of the elements in the array are useful now; we should remove some.
 
 Which do we remove? Certainly not any from the middle—we'd no longer be considering a subarray. We can only remove from the beginning.
 
-Now, how many times do we remove? While the element-wise bitwise OR of `xs` is $\geq k$, we can naïvely remove from the start of `xs` to find the smallest subarray.Lastly, what' the state of `xs` after these removals? Now, we (may) have an answer and the element-wise bitwise OR of `xs` is guaranteed to be $\lt k$. Inductively, expand the array to search for a better answer.
+Now, how many times do we remove? While the element-wise bitwise OR of `xs` is $\geq k$, we can naïvely remove from the start of `xs` to find the smallest subarray.Lastly, what's the state of `xs` after these removals? Now, we (may) have an answer and the element-wise bitwise OR of `xs` is guaranteed to be $\lt k$. Inductively, expand the array to search for a better answer.
 
 This approach is generally called a variable-sized “sliding window”. Every element of `nums` is only added (considered in the element-wise bitwise OR) or removed (discard) one time, yielding an asymptotically linear time complexity. In other words, this is a realistic approach for our constraints.
 

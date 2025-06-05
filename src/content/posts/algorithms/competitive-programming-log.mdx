@@ -8,7 +8,7 @@ useKatex: true
 
 First contest in a while. Implementation lacked heavily but solving harder problems made easier problems easier.
 
-- A: rust immediately showed with the brute force. Since $n\cdot m\leq 25$, at most $\lceil\log_2(25)\rceil=5$ concatenations need to be made. **Slow down and consider constrains**.
+- A: rust immediately showed with the brute force. Since $n\cdot m\leq 25$, at most $\lceil\log_2(25)\rceil=5$ concatenations need to be made. **Slow down and consider constraints**.
 - B: Similarly, mathematical insight and just _playing with parameters_/quantifying the effects of operations is important. **Test your conjectures, they may be right/helpful** (ie. "I must maintain the shortest length thread").
 - C: implementation weak. Simplify, step back, simplify, continuously. I stopped considering altering the grid and used a pair of coordinates but deriving the others inline, _if you trust your mathematics_, is way simpler.
 - D: formalize your answer better. Understand prime factorization more. Improve/memorize asymptotic bounds of factoring and prime counting. Don't overcomplicate the problem—here, I erroneously thought it was asking for minimum operations, not possibility. In reality, all this problem asks is: "Are the total number of each factor greater than one divisible by $n$?"
@@ -19,7 +19,7 @@ I must heed the advice of Colin Galen. I rush trivial problems because they're b
 
 These problems are (mostly) easy but they help me prefer convenient implementation. It is time to be done with bronze.
 
-Implementation, loops, invariants. I still struggle to get a grasp.I struggled with [this problem](https://usaco.org/index.php?page=viewproblem2&cpid=592) just figuring out how to do the loops and invariants. I do a loop of "this works"$\rightarrow$ "let's simplify" $\rightarrow$ "that doesn't work" $\rightarrow ...$ over and over again... _even when the right solution comes across my mind_. In this case, choosing an invariant was just overwhelming. **The simplest correct solution is always the right one**.
+Implementation, loops, invariants. I still struggle to get a grasp. I struggled with [this problem](https://usaco.org/index.php?page=viewproblem2&cpid=592) just figuring out how to do the loops and invariants. I do a loop of "this works"$\rightarrow$ "let's simplify" $\rightarrow$ "that doesn't work" $\rightarrow ...$ over and over again... _even when the right solution comes across my mind_. In this case, choosing an invariant was just overwhelming. **The simplest correct solution is always the right one**.
 
 ## [usaco bronze: complete search](https://usaco.guide/bronze/intro-complete) 04/27/2025
 
@@ -43,21 +43,21 @@ I learned nothing. I didn't read problem statements nor prove my answers.
 
 ## [970 (div. 3)](https://codeforces.com/contest/2008) 21/04/2025
 
-~1450 performance. OK contest, not very exhilirating. Hedonistic treadmill at work with me solving A-F on Div. 3 when a 2 weeks ago I couldn't even do that on Div. 4. Definitely need to upsolve this to improve my ability at expressing ideas simply.
+~1450 performance. OK contest, not very exhilarating. Hedonistic treadmill at work with me solving A-F on Div. 3 when a 2 weeks ago I couldn't even do that on Div. 4. Definitely need to upsolve this to improve my ability at expressing ideas simply.
 
 From now on, prioritize actually _learning_ and problem-solving in a pressurized format (we all die eventually, everything is under pressure).
 
 - Never report rating in these logs
 - Implement all dsa from scratch (modular arithmetic, data structures, etc.)
 
-- A: somehow got a wrong answer. unbelievable, brute forced it. math is poor. why reason/be ensure when you can brute force?
+- A: somehow got a wrong answer. unbelievable, brute forced it. math is poor. why reason/ensure when you can brute force?
 - B: didn't outline a simple strategy and got cooked. For example, I didn't check that the grid was a square after redoing my implementation for the third time.
 - C: trivial
 - D: tried a dsu approach before realizing the graph is not direction. DP + DFS + DSU weakness all combined to confuse me. In retrospect, just think about solving the problem in one way. Model it as a graph, do tortoise and hare, or do DP. **One approach at a time**. I tangibly need to improve my reasoning on harder problems when there are many moving parts. However, I'm unsure of how to move forward here because I'm fighting an uphill battle against a) my basic understanding of algorithms and b) my actual reasoning ability. I need to improve both the basics and my ability to think when facing _new_ problems/frameworks—that's the sign of a good problem-solver.
-- E: realized the greedy approach + pref/post-fix greedy on deletion but implementation absolutely annahilated me here. Further, **my exchange argument/greedy proofs are nightmarishly bad** and I resulted in just "trusting" the two-max greedy approach. This also harms my ability/intuition for dp/not doing dp. Work on this.
+- E: realized the greedy approach + pref/post-fix greedy on deletion but implementation absolutely annihilated me here. Further, **my exchange argument/greedy proofs are nightmarishly bad** and I resulted in just "trusting" the two-max greedy approach. This also harms my ability/intuition for dp/not doing dp. Work on this.
 - F: easy, counting pairs and modular arithmetic. However, I had to copy the modular arithmetic online. My grasp of this is still not good enough because I haven't practiced enough number theory.
 
-## [937 (div. 4)](https://codeforces.com/contest/2094) 16/04/16/2025
+## [937 (div. 4)](https://codeforces.com/contest/2094) 16/04/2025
 
 ~1300 performance. Consistently finishing E, getting F occasionally.
 
@@ -67,9 +67,9 @@ From now on, prioritize actually _learning_ and problem-solving in a pressurized
 
 - C: submitted without rigorously checking all edge cases.
 - D: misunderstood the problem statement twice. Polya and Zeitz both advise to fully understand exactly what the problem statement is asking, whether through direct analysis or examples. Then, I messed up the brute force. However, I did notice that raw recursion would not TLE based on the fact that each number can be divided in only a few ways.
-- E: I knew a number didn't have that many divisors but the implementation took me too long. **Pay closer attention to the constraints and just solve the problem.**. Spend a bit more time on implementation, _even if you know a way that works_. Here, I knew an approach to code but it was easily error-prone. Immediately came up with the idea but was unable to express it in code. This means I did not fully understand the problem, namely with some core mistakes:1. The tree it not necessarily binary
+- E: I knew a number didn't have that many divisors but the implementation took me too long. **Pay closer attention to the constraints and just solve the problem.**. Spend a bit more time on implementation, _even if you know a way that works_. Here, I knew an approach to code but it was easily error-prone. Immediately came up with the idea but was unable to express it in code. This means I did not fully understand the problem, namely with some core mistakes:1. The tree is not necessarily binary
 - C's cannot have children, so tracking depth/available nodes to fill per level is crucial
-  Coming up with the expression $a=c+1$ (and ensuring the input conforms to that) is a lot easier than cusotm coding logic to ensure levels are filled out properly. The core problem is that I lack the mathematical prowess to be certain of what exactly I need to check after I make that assertion and why. In this case, it means that the number of C's is appropriate, _so I never even need to check them_—I just need to make sure that the rest of the solution is valid.
+  Coming up with the expression $a=c+1$ (and ensuring the input conforms to that) is a lot easier than custom coding logic to ensure levels are filled out properly. The core problem is that I lack the mathematical prowess to be certain of what exactly I need to check after I make that assertion and why. In this case, it means that the number of C's is appropriate, _so I never even need to check them_—I just need to make sure that the rest of the solution is valid.
 
 ## [1017 (div. 4)](https://codeforces.com/contest/2094) 14/04/2025
 
