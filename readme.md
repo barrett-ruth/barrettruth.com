@@ -1,3 +1,0 @@
-# barrettruth.com
-
-my portfolio
