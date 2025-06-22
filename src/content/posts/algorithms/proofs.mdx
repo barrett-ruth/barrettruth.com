@@ -214,7 +214,7 @@ $\blacksquare$
 - Let $prefix=\text{Submatrix-Sum}(\text{Prefix},x_1,y_1,x_2,y_2)$
 - Let $rowsum=\text{Submatrix-Sum}(\text{Rowwise},x_1,y_1,x_2,y_2)$
 - Let $colsum=\text{Submatrix-Sum}(\text{Colwise},x_1,y_1,x_2,y_2)$
-- Return $\text{prefix}+w\cdot(rowsum - x_1\cdot \text{prefix})+(colsum-y_1\cdot\text{prefix})$
+- Return $w\cdot rowsum+colsum-(x_1+y_1-1)\cdot \text{prefix}$
 
 ---
 
@@ -248,10 +248,11 @@ $$
 Mathematically formulated:
 
 $$
-\begin{align}
-\sum_{i}i\cdot A_i=\sum_{i=x_1}^{x_2}\sum_{j=y_1}^{y_2}(i+(y_2-y_1+1)\cdot j)\cdot M_{i,j} \\
-= \sum_{i=x_1}^{x_2}\sum_{j=y_1}^{y_2}M_{i,j}\cdot i+(y_2-y_1+1)\sum_{i=x_1}^{x_2}\sum_{j=y_1}^{y_2} M_{i,j}\cdot j
-\end{align}
+\begin{align*}
+\sum_{i}i\cdot A_i
+&= \sum_{i=x_1}^{x_2}\sum_{j=y_1}^{y_2}(i+(y_2-y_1+1)\cdot j)\cdot M_{i,j} \\
+&= \sum_{i=x_1}^{x_2}\sum_{j=y_1}^{y_2}M_{i,j}\cdot i+(y_2-y_1+1)\sum_{i=x_1}^{x_2}\sum_{j=y_1}^{y_2} M_{i,j}\cdot j
+\end{align*}
 $$
 
-Where the first term is $\text{Colwise}$ and the second $\text{Rowwise}$. Because the query matrix is offset by $x_1$ rows and $y_1$ cols, the algorithm avoids double-counting by subtracting $\text{rowsum}$ matrix sum $x_1$ times and $\text{colsum}$ matrix sum $y_1$ times.
+Where the first term is $\text{Colwise}$ and the second $\text{Rowwise}$. Because the query matrix is offset by $x_1$ rows and $y_1$ cols, the algorithm avoids double-counting by subtracting $\text{prefix}$ matrix sum $x_1+y_1$.
