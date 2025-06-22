@@ -1,0 +1,149 @@
+---
+title: "proofs"
+date: "13/06/2025"
+useKatex: true
+useD3: true
+---
+
+import Pseudocode from '@components/Pseudocode.astro';
+
+A computer science student attempting to learn proofs.
+
+# 993
+
+## A
+
+Count-Pairs($n$):
+1. Return $n-1$
+
+---
+
+*Proof.*
+
+For some choice of $a$ there is only one
+choice of $b$: $a=n-b\rightarrow b=n-a$. Consider all $a$ from $1,2,\cdots,n$. There are
+$n$ such pairs:
+
+$$(1,n-1),(2,n-2),...,(n,0)$$
+
+Excluding the last pair formed when $a=n\rightarrow b=0$, there are $n-1$ possible
+ordered pairs.
+
+$\blacksquare$
+
+## B
+
+Mirror-String($s$):
+1. Reverse $s$
+2. For each character $c$ in $s$:
+  - If $c$ is "w": Print($c$)
+  - If $c$ is "p": Print($q$)
+  - If $c$ is "q": Print($p$)
+
+---
+
+*Proof.*
+
+The string appears fipped on the y-axis from within the score due to the perspective
+shifting. Structurally, it is read right-to-left. "p"/"q"/"w" appear as "q"/"p"/"w" when flipped on its y-axis.
+when flipped on its y-axis:
+
+$\blacksquare$
+
+## C
+
+Seat-Monkeys($a$, $b$, $c$, $m$):
+1. Return $min(m, a)+min(m, b)+min(c, 2\cdot m-(min(m, a) + min(m, b)))$
+
+---
+
+*Proof.*
+
+Consider an assignment of monkeys $S$ that sits the $a$ and $b$ monkeys in the first and second row and then fills the remaining seats with the $c$ monkeys.
+
+Assume there exists a more optimal assignment of monkeys $S^{'}$. WLOG, assume $S^{'}$ sits $a$ and $b$ monkeys first in their respective rows.
+
+$S^{'}$ can only differ from $S$ as follows:
+
+1. Seats a $c$ monkey in row 1 instead of an $a$ monkey
+  - $S^{'}$ leaves an $a$ monkey unseated. $S$ seats this monkey instead--the same number of monkeys are seated $S$.
+2. Seats a $c$ monkey in row 2 instead of a $b$ monkey
+  - $S^{'}$ leaves a $b$ monkey unseated. $S$ seats this monkey instead--the same number of monkeys are seated in $S$.
+3. Does not seat a monkey where $S$ has
+  - $S$ seats more than $S^{'}$.
+
+In all cases, $S^{'}$ is no better than S, therefore $S$ is optimal.
+
+$\blacksquare$
+
+## D
+
+Construct-B($a$):
+1. Let $b$ be an array of size $n=Length(a)$ and $X$ be the set of numbers in $a$.
+2. For each element $x$ of $a$ at index $i$:
+- If $x\in X$:
+  - $b[i]:=x$
+  - $X:=X \backslash \{x\}$
+3. Let $Y=\{1,2,\cdots,n\}\backslash X$
+4. For each element $x$ of $b$ at index $i$:
+- If $a[i]\in X$:
+  - $b[i]:=\text{first-element}(Y)$
+  - $Y:=Y\backslash\{\text{first-element}{(Y)}\}$
+5. Return $b$
+
+---
+
+*Proof.*
+
+Consider the array $b$ from Construct-B.
+
+For each index $1\leq i\leq n$:
+1. If $i$ is the first occurrence of $a[i]$, it is assigned to $b[i]$.
+2. Otherwise, $a[i]$ is present in $a[:i]$. By the pigeonhole principle, there must be an unused integer $x\in\{1,2,\cdots,n\}.x\notin a[:i]\land x\notin b[:i]$.
+
+Therefore, all elements of $b$ are unique; every element of $b$ is a mode.
+
+$\blacksquare$
+
+## E
+
+Count-Pairs($l_1$, $l_2$, $r_1$, $r_2$, $k$):
+1. Let $A:=\lfloor log_k(r_2/l_1)\rfloor$
+2. Let $B:=\lfloor max(0, log_k(l_2/r_1))\rfloor$
+3. Let $\text{total}:=0$
+4. For each $A\leq i\leq B$:
+- Let $r=\lfloor r_2/ k^n\rfloor$
+- Let $l=\lfloor l_2/k^n\rfloor$
+- $\text{total} := \text{total} + max(0, r - l + 1)$
+5. Return $\text{total}$
+---
+
+*Proof.*
+
+Each value of $n$ corresponds to a line with slope $k^n$ because $y/x=k^n\leftrightarrow y=x\cdot k^n$. The problem can be visualized as follows:
+
+![graph of problem](/posts/proofs/graph.webp)
+
+It is sufficient to count the number of ordered $(x,y)$ pairs for all valid $n$. Because $y=x\cdot k^n\leftrightarrow n=log_k(y/x)$, $n\in [log_k(l_2/r_1), log_k(r_2/l_1)]$.
+
+For each $n_0$ in this range, the smallest $x$ satisfying $y=x\cdot k^n$ is $\lceil l_2/k^n\rceil$ and the largest $\lfloor r_2/k^n\rfloor$, so $n_0$ contributes $max(0, \lfloor r_2/k^n\rfloor - \lceil l_2/k^n\rceil + 1)$ ordered pairs.
+
+## F
+
+1. Let $A=\sum a$ and $B=\sum b$.
+2. For each query with requested beauty $q$:
+- If $\exists (i,j)\in(\{1,2,\cdots,n\},\{1,2,\cdots,m\}):(A-a[i])\cdot(B-b[j])=x$, print "YES"
+- Otherwise, print "NO"
+
+---
+
+*Proof.*
+
+The beauty of the grid equals $B=\sum_i \sum_j M_{i,j}=\sum_i\sum_j a_i\cdot b_j=\sum_i(a_i\cdot \sum_j b_j)=(\sum_i a_i)\cdot (\sum_j b_j)$.
+
+Formulating setting row $i$ and column $j$ to zero, the new beauty is:
+
+$q=B-(b_j\cdot(\sum_i a_i)+a_i\cdot(\sum_j b_j)-a_i\cdot b_j)$
+$=((\sum_i a_i)-a_i)\cdot((\sum_j b_j)-b_j)$
+
+If such $a_i$ and $b_j$ exist, the operation can be performed.
