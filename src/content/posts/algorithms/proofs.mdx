@@ -71,7 +71,7 @@ $\blacksquare$
 ## D
 
 Construct-B($a$):
-1. Let $b$ be an array of size $n=Length(a)$ and $X$ be the set of numbers in $a$.
+1. Let $b$ be an array of size $n=\#a$ and $X$ be the set of numbers in $a$.
 2. For each element $x$ of $a$ at index $i$:
 - If $x\in X$:
   - $b[i]:=x$
@@ -89,11 +89,11 @@ Construct-B($a$):
 
 Consider the array $b$ from Construct-B.
 
-For each index $1\leq i\leq n$:
-1. If $i$ is the first occurrence of $a[i]$, it is assigned to $b[i]$.
-2. Otherwise, $a[i]$ is present in $a[:i]$. By the pigeonhole principle, there must be an unused integer $x\in\{1,2,\cdots,n\}.x\notin a[:i]\land x\notin b[:i]$.
+If there are $x$ unique elements in $a$, the algorithm assigns each of those to the first $x$ positions in $b$. There are $n-x$ duplicate elements in $a$ and $n-x$ remaining positions in $b$.
 
-Therefore, all elements of $b$ are unique; every element of $b$ is a mode.
+Since $\forall a\in A:1\leq a\leq n$, there are $n-x$ unused unique elements in $\{1,2,\cdots,n\}$, each of which is assigned a unique position in $b$.
+
+Therefore, all elements of $b$ are unique and thus a mode. As every unique element in $a$ is assigned to an index no later in $b$, all $a_i$ is a mode in $b[i+1:]$.
 
 $\blacksquare$
 
@@ -135,7 +135,71 @@ The beauty of the grid equals $B=\sum_i \sum_j M_{i,j}=\sum_i\sum_j a_i\cdot b_j
 
 Formulating setting row $i$ and column $j$ to zero, the new beauty is:
 
-$q=B-(b_j\cdot(\sum_i a_i)+a_i\cdot(\sum_j b_j)-a_i\cdot b_j)$
-$=((\sum_i a_i)-a_i)\cdot((\sum_j b_j)-b_j)$
+$q=B-(b_j\cdot(\sum a)+a_i\cdot(\sum b)-a_i\cdot b_j)$
+$=((\sum a)-a_i)\cdot((\sum b)-b_j)$
 
 If such $a_i$ and $b_j$ exist, the operation can be performed.
+
+## G1
+
+1. Let $G$ be the input graph
+2. Let $\text{ans}=0$
+3. For each component $C$ in $G$:
+  - Let $\text{cycle}$ be the set of nodes in the cycle of $C$
+  - Let $d=max_{u\in \text{cycle}}\text{Distance-To-Cycle(C, u)}$
+  - $\text{ans}:=max(\text{ans}, d)$
+4. Return $\text{ans}$
+
+---
+
+*Proof.*
+
+WLOG, consider some $v_i\in V$. There must exist an edge $e=(v_i,v_j),i\neq j$. Following this path from $v_i$, the each edge must map to a previously seen node, forming a cycle, or a new node. Because the graph is finite, the path starting any $v_i$ must contain a cycle. Thus, G is a graph of components with one cycle each.
+
+WLOG, consider some component $C\in G$. For every spider $v_i$ in $C$:
+
+- If $v_i$ is in the cycle:
+  - The cycle itself will always be stable. Every spider has a plushie and each spider will give and receive a plushie.
+- Otherwise, $v_i$ is not in the cycle.
+  - Let $v_j$ be the furthest spider on a path with a plushie containing $v_i$ to the cycle. When $v_j$ gives a plushie to its child, the graph is unstable because $v_j$ transitions from state $0$ to $1$. However, the path containing $v_j$ and its ancestors become stable the next year because they never receive or give a plushie again. The path takes $d_j$ years to become stable, the distance from $v_j$ to the path.
+
+Therefore, $C$ becomes stable in $d_C:=max_{v_j\in C}(d_j)$ time.
+
+The entire graph becomes stable when each component becomes stable, which is the longest time any component takes to become stable. Thus, the graph becomes stable in $max_{C\in G}d_C$ years.
+
+$\blacksquare$
+
+## G2
+
+1. Let $G$ be the input graph
+2. Let $\text{ans}=0$
+3. For each component $C$ in $G$:
+  - Let $U$ be the set of all nodes not in the cycle of $C$
+  - Let $\text{count}$ be the number of plushies each spider has
+  - Let $\text{par}$ be the set of parents for each spider
+  - Run a multi-source BFS simulating the state transitions on $U$. For each iteration at year $y$:
+    - $\text{count[u]}:=\text{count[u]}+\sum_{p\in \text{par[u]}}\text{count[p]}$
+    - $\text{ans}:=max(\text{ans}, \text{count[u]} - $y$)$
+    - $y:=y+1$
+4. Return $\text{ans}$
+
+---
+
+*Proof.*
+
+WLOG, consider some $v_i\in V$. There must exist an edge $e=(v_i,v_j),i\neq j$. Following this path from $v_i$, the each edge must map to a previously seen node, forming a cycle, or a new node. Because the graph is finite, the path starting any $v_i$ must contain a cycle. Thus, G is a graph of components with one cycle each.
+
+WLOG, consider some component $C\in G$. For every spider $v_i$ in $C$:
+
+- If $v_i$ is in the cycle:
+  - The cycle itself will always be stable. If a spider has $x$ plushies in year $y$, it will give and receive one plushie and have $x$ in the next year as well.
+- Otherwise, $v_i$ is not in the cycle.
+  - Let $v_j$ be the furthest spider on a path containing $v_i$ to the cycle. When $v_j$ gives a plushie to its child, the graph is unstable because $v_j$ transitions from state $0$ to $1$. However, the path containing $v_j$ and its ancestors become stable the next year because they never receive or give a plushie again.
+  - However, the child may have more than one plushie next year. If the child had $x_0$ plushies the on year $y$ received $x_1$ plushies the next, it must ultimately give $x_0+x_1$ plushies taking $x_0+x_1-y$ years. The path becomes stable in the maximum time it takes any spider on the path to give its plushies, $d_i$. The algorithm gathers the $x_1$ term by considering all parents of the child and propagates the plushie counts by simulation.
+
+Therefore, $C$ becomes stable in $d_C:=max_{v_i\in C}(d_i)$ time.
+
+The entire graph becomes stable when each component becomes stable, which is the longest time any component takes to become stable. Thus, the graph becomes stable in $max_{C\in G}d_C$ years.
+
+$\blacksquare$
+
