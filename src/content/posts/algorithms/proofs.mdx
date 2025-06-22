@@ -20,14 +20,7 @@ Count-Pairs($n$):
 
 *Proof.*
 
-For some choice of $a$ there is only one
-choice of $b$: $a=n-b\rightarrow b=n-a$. Consider all $a$ from $1,2,\cdots,n$. There are
-$n$ such pairs:
-
-$$(1,n-1),(2,n-2),...,(n,0)$$
-
-Excluding the last pair formed when $a=n\rightarrow b=0$, there are $n-1$ possible
-ordered pairs.
+Suppose $(a,b)\in\mathbb{N}^2$. Because $a=n-b$ and $a\geq1$, it follows that $1\leq b\leq n-1$. Each choice of $b$ yields a unique $a=n-b$, so there are $n-1$ unique solutions.
 
 $\blacksquare$
 
@@ -46,7 +39,6 @@ Mirror-String($s$):
 
 The string appears fipped on the y-axis from within the score due to the perspective
 shifting. Structurally, it is read right-to-left. "p"/"q"/"w" appear as "q"/"p"/"w" when flipped on its y-axis.
-when flipped on its y-axis:
 
 $\blacksquare$
 
