@@ -58,7 +58,7 @@ Assume there exists a more optimal assignment of monkeys $S^{'}$. WLOG, assume $
 $S^{'}$ can only differ from $S$ as follows:
 
 1. Seats a $c$ monkey in row 1 instead of an $a$ monkey
-  - $S^{'}$ leaves an $a$ monkey unseated. $S$ seats this monkey instead--the same number of monkeys are seated $S$.
+  - $S^{'}$ leaves an $a$ monkey unseated. $S$ seats this monkey instead--the same number of monkeys are seated in $S$.
 2. Seats a $c$ monkey in row 2 instead of a $b$ monkey
   - $S^{'}$ leaves a $b$ monkey unseated. $S$ seats this monkey instead--the same number of monkeys are seated in $S$.
 3. Does not seat a monkey where $S$ has
@@ -78,7 +78,7 @@ Construct-B($a$):
   - $X:=X \backslash \{x\}$
 3. Let $Y=\{1,2,\cdots,n\}\backslash X$
 4. For each element $x$ of $b$ at index $i$:
-- If $a[i]\in X$:
+- If $b[i]$ is NIL:
   - $b[i]:=\text{first-element}(Y)$
   - $Y:=Y\backslash\{\text{first-element}{(Y)}\}$
 5. Return $b$
@@ -154,9 +154,9 @@ If such $a_i$ and $b_j$ exist, the operation can be performed.
 
 *Proof.*
 
-WLOG, consider some $v_i\in V$. There must exist an edge $e=(v_i,v_j),i\neq j$. Following this path from $v_i$, the each edge must map to a previously seen node, forming a cycle, or a new node. Because the graph is finite, the path starting any $v_i$ must contain a cycle. Thus, G is a graph of components with one cycle each.
+Consider some $v_i\in V$. There must exist an edge $e=(v_i,v_j),i\neq j$. Following this path from $v_i$, the each edge must map to a previously seen node, forming a cycle, or a new node. Because the graph is finite, the path starting any $v_i$ must contain a cycle. Thus, G is a graph of components with one cycle each.
 
-WLOG, consider some component $C\in G$. For every spider $v_i$ in $C$:
+Next, consider some component $C\in G$. For every spider $v_i$ in $C$:
 
 - If $v_i$ is in the cycle:
   - The cycle itself will always be stable. Every spider has a plushie and each spider will give and receive a plushie.
@@ -187,9 +187,9 @@ $\blacksquare$
 
 *Proof.*
 
-WLOG, consider some $v_i\in V$. There must exist an edge $e=(v_i,v_j),i\neq j$. Following this path from $v_i$, the each edge must map to a previously seen node, forming a cycle, or a new node. Because the graph is finite, the path starting any $v_i$ must contain a cycle. Thus, G is a graph of components with one cycle each.
+Consider some $v_i\in V$. There must exist an edge $e=(v_i,v_j),i\neq j$. Following this path from $v_i$, the each edge must map to a previously seen node, forming a cycle, or a new node. Because the graph is finite, the path starting any $v_i$ must contain a cycle. Thus, G is a graph of components with one cycle each.
 
-WLOG, consider some component $C\in G$. For every spider $v_i$ in $C$:
+Next, consider some component $C\in G$. For every spider $v_i$ in $C$:
 
 - If $v_i$ is in the cycle:
   - The cycle itself will always be stable. If a spider has $x$ plushies in year $y$, it will give and receive one plushie and have $x$ in the next year as well.
@@ -203,3 +203,55 @@ The entire graph becomes stable when each component becomes stable, which is the
 
 $\blacksquare$
 
+## H
+
+- Let $\text{Prefix}$ be the 2D-prefix sum matrix of $A$
+- Let $\text{Colwise}$ be the column-wise 2D-prefix coefficient sum matrix of $A$
+- Let $\text{Rowwise}$ be the row-wise 2D-prefix coefficient sum matrix of $A$
+- Let $\text{Submatrix-Sum}(x_1,y_1,x_2,y_2)$ compute the sum of the submatrix of $M$ bounded by $(x_1,y_1)$ and $(x_2,y_2)$ via the inclusion-exclusion principle
+1. For each query $x_1,x_2,y_1,y_2$:
+- Let $w=y_2-y_1+1$
+- Let $prefix=\text{Submatrix-Sum}(\text{Prefix},x_1,y_1,x_2,y_2)$
+- Let $rowsum=\text{Submatrix-Sum}(\text{Rowwise},x_1,y_1,x_2,y_2)$
+- Let $colsum=\text{Submatrix-Sum}(\text{Colwise},x_1,y_1,x_2,y_2)$
+- Return $\text{prefix}+w\cdot(rowsum - x_1\cdot \text{prefix})+(colsum-y_1\cdot\text{prefix})$
+
+---
+
+*Proof.*
+
+In terms of their coefficients, the matrices appear as follows:
+
+$$
+\text{Prefix} = \begin{pmatrix}
+1 & 1 & \cdots & 1 \\
+1 & 1 & \cdots & 1 \\
+\vdots & \vdots & \ddots & \vdots \\
+1 & 1 & \cdots & 1
+\end{pmatrix}
+
+\text{Rowwise} = \begin{pmatrix}
+0 & 0 & \cdots & 0 \\
+1 & 1 & \cdots & 1 \\
+\vdots & \vdots & \ddots & \vdots \\
+n-1 & n-1 & \cdots & n-1
+\end{pmatrix}
+
+\text{Colwise} = \begin{pmatrix}
+0 & 1 & \cdots & n-1 \\
+0 & 1 & \cdots & n-1 \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & 1 & \cdots & n-1
+\end{pmatrix}
+$$
+
+Mathematically formulated:
+
+$$
+\begin{align}
+\sum_{i}i\cdot A_i=\sum_{i=x_1}^{x_2}\sum_{j=y_1}^{y_2}(i+(y_2-y_1+1)\cdot j)\cdot M_{i,j} \\
+= \sum_{i=x_1}^{x_2}\sum_{j=y_1}^{y_2}M_{i,j}\cdot i+(y_2-y_1+1)\sum_{i=x_1}^{x_2}\sum_{j=y_1}^{y_2} M_{i,j}\cdot j
+\end{align}
+$$
+
+Where the first term is $\text{Colwise}$ and the second $\text{Rowwise}$. Because the query matrix is offset by $x_1$ rows and $y_1$ cols, the algorithm avoids double-counting by subtracting $\text{rowsum}$ matrix sum $x_1$ times and $\text{colsum}$ matrix sum $y_1$ times.
