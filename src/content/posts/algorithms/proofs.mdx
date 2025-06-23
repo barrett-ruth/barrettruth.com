@@ -118,7 +118,7 @@ Each value of $n$ corresponds to a line with slope $k^n$ because $y/x=k^n\leftri
 
 It is sufficient to count the number of ordered $(x,y)$ pairs for all valid $n$. Because $y=x\cdot k^n\leftrightarrow n=log_k(y/x)$, $n\in [log_k(l_2/r_1), log_k(r_2/l_1)]$.
 
-For each $n_0$ in this range, the smallest $x$ satisfying $y=x\cdot k^n$ is $\lceil l_2/k^n\rceil$ and the largest $\lfloor r_2/k^n\rfloor$, so $n_0$ contributes $max(0, \lfloor r_2/k^n\rfloor - \lceil l_2/k^n\rceil + 1)$ ordered pairs.
+For each $n_0$ in_0 this range, the smallest $x$ satisfying $y=x\cdot k^n_0$ is $\lceil l_2/k^n_0\rceil$ and the largest $\lfloor r_2/k^n_0\rfloor$, so $n_0$ contributes $max(0, \lfloor r_2/k^n_0\rfloor - \lceil l_2/k^n_0\rceil + 1)$ ordered pairs.
 
 ## F
 
@@ -135,8 +135,12 @@ The beauty of the grid equals $B=\sum_i \sum_j M_{i,j}=\sum_i\sum_j a_i\cdot b_j
 
 Formulating setting row $i$ and column $j$ to zero, the new beauty is:
 
-$q=B-(b_j\cdot(\sum a)+a_i\cdot(\sum b)-a_i\cdot b_j)$
-$=((\sum a)-a_i)\cdot((\sum b)-b_j)$
+$$
+\begin{align*}
+q&=B-(b_j\cdot(\sum a)+a_i\cdot(\sum b)-a_i\cdot b_j) \\
+&=((\sum a)-a_i)\cdot((\sum b)-b_j)
+\end{align*}
+$$
 
 If such $a_i$ and $b_j$ exist, the operation can be performed.
 
@@ -179,7 +183,7 @@ $\blacksquare$
   - Let $\text{par}$ be the set of parents for each spider
   - Run a multi-source BFS simulating the state transitions on $U$. For each iteration at year $y$:
     - $\text{count[u]}:=\text{count[u]}+\sum_{p\in \text{par[u]}}\text{count[p]}$
-    - $\text{ans}:=max(\text{ans}, \text{count[u]} - $y$)$
+    - $\text{ans}:=max(\text{ans}, \text{count[u]})$
     - $y:=y+1$
 4. Return $\text{ans}$
 
@@ -195,7 +199,7 @@ Next, consider some component $C\in G$. For every spider $v_i$ in $C$:
   - The cycle itself will always be stable. If a spider has $x$ plushies in year $y$, it will give and receive one plushie and have $x$ in the next year as well.
 - Otherwise, $v_i$ is not in the cycle.
   - Let $v_j$ be the furthest spider on a path containing $v_i$ to the cycle. When $v_j$ gives a plushie to its child, the graph is unstable because $v_j$ transitions from state $0$ to $1$. However, the path containing $v_j$ and its ancestors become stable the next year because they never receive or give a plushie again.
-  - However, the child may have more than one plushie next year. If the child had $x_0$ plushies the on year $y$ received $x_1$ plushies the next, it must ultimately give $x_0+x_1$ plushies taking $x_0+x_1-y$ years. The path becomes stable in the maximum time it takes any spider on the path to give its plushies, $d_i$. The algorithm gathers the $x_1$ term by considering all parents of the child and propagates the plushie counts by simulation.
+  - However, the child may have more than one plushie next year. If the child had $x_0$ plushies the on year $y$ received $x_1$ plushies the next, it must ultimately give $x_0+x_1$ plushies taking $x_0+x_1y$. The path becomes stable in the maximum time it takes any spider on the path to give its plushies, $d_i$. The algorithm gathers the $x_1$ term by considering all parents of the child and propagates the plushie counts by simulation.
 
 Therefore, $C$ becomes stable in $d_C:=max_{v_i\in C}(d_i)$ time.
 
