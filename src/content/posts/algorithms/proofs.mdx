@@ -208,7 +208,7 @@ $\blacksquare$
 - Let $\text{Prefix}$ be the 2D-prefix sum matrix of $A$
 - Let $\text{Colwise}$ be the column-wise 2D-prefix coefficient sum matrix of $A$
 - Let $\text{Rowwise}$ be the row-wise 2D-prefix coefficient sum matrix of $A$
-- Let $\text{Submatrix-Sum}(x_1,y_1,x_2,y_2)$ compute the sum of the submatrix of $M$ bounded by $(x_1,y_1)$ and $(x_2,y_2)$ via the inclusion-exclusion principle
+- Let $\text{Submatrix-Sum}(x_1,y_1,x_2,y_2)$ compute the sum of the submatrix of $M$ bounded by $(x_1,y_1)$ and $(x_2,y_2)$
 1. For each query $x_1,x_2,y_1,y_2$:
 - Let $w=y_2-y_1+1$
 - Let $prefix=\text{Submatrix-Sum}(\text{Prefix},x_1,y_1,x_2,y_2)$
@@ -220,39 +220,17 @@ $\blacksquare$
 
 *Proof.*
 
-In terms of their coefficients, the matrices appear as follows:
-
-$$
-\text{Prefix} = \begin{pmatrix}
-1 & 1 & \cdots & 1 \\
-1 & 1 & \cdots & 1 \\
-\vdots & \vdots & \ddots & \vdots \\
-1 & 1 & \cdots & 1
-\end{pmatrix}
-
-\text{Rowwise} = \begin{pmatrix}
-0 & 0 & \cdots & 0 \\
-1 & 1 & \cdots & 1 \\
-\vdots & \vdots & \ddots & \vdots \\
-n-1 & n-1 & \cdots & n-1
-\end{pmatrix}
-
-\text{Colwise} = \begin{pmatrix}
-0 & 1 & \cdots & n-1 \\
-0 & 1 & \cdots & n-1 \\
-\vdots & \vdots & \ddots & \vdots \\
-0 & 1 & \cdots & n-1
-\end{pmatrix}
-$$
-
 Mathematically formulated:
 
 $$
 \begin{align*}
 \sum_{i}i\cdot A_i
 &= \sum_{i=x_1}^{x_2}\sum_{j=y_1}^{y_2}(i+(y_2-y_1+1)\cdot j)\cdot M_{i,j} \\
-&= \sum_{i=x_1}^{x_2}\sum_{j=y_1}^{y_2}M_{i,j}\cdot i+(y_2-y_1+1)\sum_{i=x_1}^{x_2}\sum_{j=y_1}^{y_2} M_{i,j}\cdot j
+&= \sum_{i=x_1}^{x_2}\sum_{j=y_1}^{y_2}M_{i,j}\cdot i+(y_2-y_1+1)\sum_{i=x_1}^{x_2}\sum_{j=y_1}^{y_2} M_{i,j}\cdot j \\
+&= \sum_{i=1}^{x_2} \sum_{j=1}^{y_2} i\cdot M_{i,j} + (y_2-y_1+1)\cdot\sum_{i=1}^{x_2} \sum_{j=1}^{y_2}j\cdot M_{i,j} - ( x_1 + y_1 - 1 ) \sum_{i=x_1}^{x_2} \sum_{j=y_1}^{y_2} M_{i,j}
 \end{align*}
 $$
 
-Where the first term is $\text{Colwise}$ and the second $\text{Rowwise}$. Because the query matrix is offset by $x_1$ rows and $y_1$ cols, the algorithm avoids double-counting by subtracting $\text{prefix}$ matrix sum $x_1+y_1$.
+Where the first term is $\text{Colwise}$ and the second $\text{Rowwise}$. Because the query matrix is offset by $x_1$ rows and $y_1$ cols, the algorithm avoids double-counting by subtracting $\text{prefix}$ matrix sum $x_1+y_1-1$.
+
+$\blacksquare$
