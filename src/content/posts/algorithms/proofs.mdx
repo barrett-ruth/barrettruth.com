@@ -45,6 +45,52 @@ $\blacksquare$
 
 ---
 
+## G
+
+Maximize-F(s):
+
+1. Compute the prefix sum of zeroes $Z$ and ones $O$ in $s$
+2. Concatenate and sort $Z$ and $O$ into array $S$
+3. Let $first:=\sum_{1\leq i\leq n}i\cdot(n-i+1)$, computed in $O(|s|)$ time
+4. Let $second:=\sum_{1\leq i\leq n}S_i\cdot (2\cdot i-n)$, computed in $O(|s|)$ time
+5. Return $\frac{first+second}{2}$
+
+---
+
+*Proof.*
+
+Let $X$ and $Y$ be the number of occurrences of zeroes and ones in the substring $p$ of $s$. Then, $f(p)=max(X, Y)=\frac{X+Y+|X-Y|}{2}$. The goal is to compute:
+
+$$
+\begin{align*}
+\sum_{1\leq r\leq n}\sum_{1\leq l<r} f(s[l:r+1])&=\sum_{1\leq r\leq n}\sum_{1\leq l<r} \frac{X+Y+|X-Y|}{2}
+&=\frac{1}{2}(\sum_{1\leq r\leq n}\sum_{1\leq l<r} X+Y+\sum_{1\leq r\leq n}\sum_{1\leq l<r} |X-Y|)
+\end{align*}
+$$
+
+Consider the first term, which counts the number of occurrences of ones and zeroes across all one-indexed bounds $l,r$.
+Rather than enumerate all $n^2$ subarrays, consider how much each index $1\leq i\leq n$ contributes to the sum.
+Exactly $i$ substrings start at or before $i$, including the character, each doing so $n-i+1$ times.
+Thus, the character contributes $i\cdot(n-i+1)$ to the term.
+So, the first term aggregates this quantity across all indices and can be computed in linear time: $\sum_{1\leq i\leq n}i\cdot(n-i+1)$.
+
+For the second term, consider the sum more abstractly--it computes $|X-Y|$, the absolute difference of the number of zeroes and ones in the substring across all index pairs.
+Because $|a-b|=|b-a|$, we are free to rearrange $X$ and $Y$ as we see fit.
+Sort all $X$ and $Y$ values into some array $S$ and compute the difference across all pairs.
+As $S_i<S_{j>i}$, $|S_{j>i}-S_i|=S_{j>i}-S_i$--the sum is unchanged. Rewriting the second term:
+
+$$
+\begin{align*}
+\sum_{1\leq r\leq n}\sum_{1\leq l<r} X-Y &=\sum_{1\leq r\leq n}\sum_{1\leq l<r}S_r-\sum_{1\leq r\leq n}\sum_{1\leq l<r}S_l
+&=\sum_{1\leq r\leq n}r\cdot S_r-\sum_{1\leq l<r\leq n} S_l
+&=\sum_{1\leq r\leq n}r\cdot S_r-\sum_{1\leq r\leq n} (n-r)\cdot S_r
+\end{align*}
+$$
+
+which can be computed in linear time.
+
+$\blacksquare$
+
 # 993
 
 ## A
