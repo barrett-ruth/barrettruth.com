@@ -9,6 +9,42 @@ import Pseudocode from '@components/Pseudocode.astro';
 
 A computer science student attempting to learn proofs.
 
+# 1032
+
+## E
+
+Minimize-Digit-Diff($l, r$):
+1. Initialize $ans=18$, the largest possible value of $f(l, x) + f(x, r)$ with $l \leq r\leq 10^9$
+2. For $i:=1$ to $200:
+  - Let $x$ be a random sample from the open interval $[l, r]$
+  - Let $cost:=f(l, x) + f(x, r)$, computed in $O(1)$ time
+  - $ans:=min(ans,cost)$
+3. Return $ans$
+
+---
+
+*Proof.*
+
+We are interested in minimizing the expected probability of failure over $t\leq10^4$ tests. Firstly, consider a single test (i.e. a single $(l,r)$ input):
+
+An $n$ digit candidate $x$ has a $\frac{1}{10}\cdot 2=\frac{1}{5}$ possibility of colliding with the corresponding digit from $l$ or $r$[^1].
+Thus, a digit has approximately a $1-\frac{1}{5}=\frac{4}{5}$ probability of minimizing the score for a digit.
+It follows that the candidate then has roughly a $(\frac{4}{5})^9\approx13\%$ chance of minimizing the entire score $f(l,x)+f(x,r)$.
+So, one random sample $x$ has a $100-13\approx87\%$ chance of being a suboptimal candidate.
+
+
+Consider sampling $n$ times--the probability of all random samples being suboptimal is $0.87^n$. Let's only settle for a probability of failure near $1/10^{10}$ and solve for our number of trials:
+
+$$
+0.87^n=1/10^{10}\rightarrow n\ln(0.87)=\ln(1/10^{10})\rightarrow n=\frac{\ln(1/10^{10})}{\ln(0.87)}\rightarrow n\approx165
+$$
+
+We are interested in the probability of failure over $t\leq10^4$ tests. The probability all tests succeed is $(1-1/10^{10})^{10^4}$, so the probability that at least one test fails is $1-((1-1/10^{10})^{10^4})\approx 9.99\cdot10^{-7}$.
+
+$\blacksquare$
+
+---
+
 # 993
 
 ## A
@@ -238,3 +274,5 @@ $$
 Where the first term is $\text{Colwise}$ and the second $\text{Rowwise}$. Because the query matrix is offset by $x_1$ rows and $y_1$ cols, the algorithm avoids double-counting by subtracting $\text{prefix}$ matrix sum $x_1+y_1-1$.
 
 $\blacksquare$
+
+[^1]: This is a massive and inaccurate simplification made for pedagogical purposes. In reality, there are many less candidates, and thus optimal solutions, then all permutations of 10 digits between some $l$ and $r$. However, because the computation is so lightweight, one may increase the number of trials to 1000 or even 10000. While not rigorous, given that only $n=165$ candidates can provide a probability of failure of $10^{-7}$, running an order of magnitude greater number of trials is nearly certain to pass all test cases.
