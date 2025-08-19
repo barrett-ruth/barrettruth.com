@@ -39,7 +39,7 @@ $$
 0.87^n=1/10^{10}\rightarrow n\ln(0.87)=\ln(1/10^{10})\rightarrow n=\frac{\ln(1/10^{10})}{\ln(0.87)}\rightarrow n\approx165
 $$
 
-We are interested in the probability of failure over $t\leq10^4$ tests. The probability all tests succeed is $(1-1/10^{10})^{10^4}$, so the probability that at least one test fails is $1-((1-1/10^{10})^{10^4})\approx 9.99\cdot10^{-7}$.
+The probability all tests succeed is $(1-1/10^{10})^{10^4}$, so the probability that at least one test fails is $1-((1-1/10^{10})^{10^4})\approx 9.99\cdot10^{-7}$.
 
 $\blacksquare$
 
@@ -200,7 +200,7 @@ Each value of $n$ corresponds to a line with slope $k^n$ because $y/x=k^n\leftri
 
 It is sufficient to count the number of ordered $(x,y)$ pairs for all valid $n$. Because $y=x\cdot k^n\leftrightarrow n=log_k(y/x)$, $n\in [log_k(l_2/r_1), log_k(r_2/l_1)]$.
 
-For each $n_0$ in_0 this range, the smallest $x$ satisfying $y=x\cdot k^n_0$ is $\lceil l_2/k^n_0\rceil$ and the largest $\lfloor r_2/k^n_0\rfloor$, so $n_0$ contributes $max(0, \lfloor r_2/k^n_0\rfloor - \lceil l_2/k^n_0\rceil + 1)$ ordered pairs.
+For each $n_0$ in this range, the smallest $x$ satisfying $y=x\cdot k^n_0$ is $\lceil l_2/k^n_0\rceil$ and the largest $\lfloor r_2/k^n_0\rfloor$, so $n_0$ contributes $max(0, \lfloor r_2/k^n_0\rfloor - \lceil l_2/k^n_0\rceil + 1)$ ordered pairs.
 
 ## F
 
