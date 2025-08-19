@@ -15,7 +15,7 @@ A computer science student attempting to learn proofs.
 
 Minimize-Digit-Diff($l, r$):
 1. Initialize $ans=18$, the largest possible value of $f(l, x) + f(x, r)$ with $l \leq r\leq 10^9$
-2. For $i:=1$ to $200:
+2. For $i:=1$ to $200$:
   - Let $x$ be a random sample from the open interval $[l, r]$
   - Let $cost:=f(l, x) + f(x, r)$, computed in $O(1)$ time
   - $ans:=min(ans,cost)$
