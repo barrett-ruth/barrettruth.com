@@ -70,6 +70,27 @@ I detail self-hosting a git server on an AWS t2.micro instance ("free" for 1 yea
 
 11. There are a variety of choices for web ui, including [cgit](https://git.zx2c4.com/cgit/), [gitweb](https://git-scm.com/docs/gitweb) (I do not recommend this—the scripts are ancient and require manual tuning), and some even heavier options that allow for further customization. I am not a fan of viewing code on the web, so you cannot in [my custom ui](https://git.barrettruth.com). I spin up a simple python server to walk the projects in `/srv/git` and configured a systemd service to run it in the ec2 box:
 
+```systemd
+[Unit]
+Description=Git Server UI
+After=network.target
+
+[Service]
+User=apache
+WorkingDirectory=/srv/git/git-server-ui
+ExecStart=/usr/local/bin/gunicorn --workers 3 --bind 0.0.0.0:8000 --chdir /srv/git/git-server-ui wsgi:app
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+````
+
+12. I use the name `main` instead of `master` as my default branch (it's less letters, ok?)--set this up on the server too:
+
+```console
+$ sudo git config --system init.defaultBranch main
+```
+
 # lessons
 
 - **It feels great to do things yourself**: I used GPT-4o for linux server command help, that was about it
