@@ -9,20 +9,24 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 </BaseLayout>
 
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const terminalText = " /not-found";
-    const terminalPrompt = document.querySelector(".terminal-prompt");
-    const delay = 250;
+  if (!location.pathname.endsWith("/404.html")) {
+    document.addEventListener("DOMContentLoaded", function () {
+      const terminalText = " /not-found";
+      const terminalPrompt = document.querySelector(".terminal-prompt");
+      const delay = 250;
 
-    let i = 0;
-    function typechar() {
-      if (i < terminalText.length) {
-        terminalPrompt.innerHTML += terminalText.charAt(i++);
-        setTimeout(typechar, delay / terminalText.length);
+      if (!terminalPrompt) return;
+
+      let i = 0;
+      function typechar() {
+        if (i < terminalText.length) {
+          terminalPrompt.innerHTML += terminalText.charAt(i++);
+          setTimeout(typechar, delay / terminalText.length);
+        }
       }
-    }
-    typechar();
-  });
+      typechar();
+    });
+  }
 </script>
 
 <style>
