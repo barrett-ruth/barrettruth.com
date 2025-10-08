@@ -1,12 +1,11 @@
----
-
----
-
 <footer>
   <span>ʕ •ᴥ•ʔ</span>
   <div class="footer-links">
-    <a target="_blank" href="https://barrettruth.com/git.html">git</a>
-    <a target="_blank" href="https://www.linkedin.com/in/barrett-ruth/"
+    <a id="gist-link" target="_blank">gist</a>
+    <a id="git-link" target="_blank">git</a>
+    <a
+      target="_blank"
+      href="https://www.linkedin.com/in/barrett-ruth/"
       >linkedin</a
     >
     <a target="_blank" href="mailto:br.barrettruth@gmail.com">email</a>
@@ -27,3 +26,17 @@
     text-decoration: none;
   }
 </style>
+
+<script>
+  const host = window.location.hostname;
+  const gitLink = document.getElementById("git-link");
+  const gistLink = document.getElementById("gist-link");
+
+  if (host.includes("localhost") || host.includes("127.0.0.1")) {
+    gistLink.href = "http://localhost:4321/gist.html";
+    gitLink.href = "http://localhost:4321/git.html";
+  } else {
+    gistLink.href = "https://barrettruth.com/gist.html";
+    gitLink.href = "https://barrettruth.com/git.html";
+  }
+</script>
