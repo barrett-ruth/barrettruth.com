@@ -1,28 +1,17 @@
 .clone-line {
   font-family: 'Apercu Mono', monospace !important;
-  font-size: 1.3em;
-  font-weight: 400;
+  font-size: 1.2em;
   margin: 0 1em;
   text-align: left;
   user-select: all;
-  color: inherit;
 }
 
 .clone-line code {
   all: unset;
   font-family: 'Apercu Mono', monospace !important;
-  font-size: 1em;
+  white-space: normal !important;
+  word-break: break-word;       
+  overflow-wrap: anywhere;     
   line-height: 1.5;
-  white-space: nowrap;
   cursor: text;
-  background: transparent !important;
-  color: inherit;
 }
-
-.clone-line .prompt {
-  user-select: none;
-  opacity: 0.8;
-  margin-right: 0.3em;
-  color: inherit;
-}
-

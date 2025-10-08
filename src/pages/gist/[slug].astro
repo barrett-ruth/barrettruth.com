@@ -12,13 +12,8 @@ export async function getStaticPaths() {
 
 const { gist } = Astro.props;
 const { Content } = await gist.render();
-const pageTitle = `${gist.slug}`;
 ---
 
 <PostLayout frontmatter={gist.data} post={gist}>
-  <Fragment slot="head">
-    <title>{pageTitle}</title>
-    <script type="module" src="/scripts/index.js"></script>
-  </Fragment>
   <Content />
 </PostLayout>

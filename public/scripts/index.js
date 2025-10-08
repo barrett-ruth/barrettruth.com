@@ -43,14 +43,6 @@
   function currentDisplayPath() {
     return normalizeDisplayPath(location.pathname);
   }
-  function setDocTitleForPath(displayPath) {
-    if (!displayPath) {
-      document.title = "Barrett Ruth";
-      return;
-    }
-    document.title = displayPath.slice(1);
-  }
-
   function animateToDisplayPath(displayPath, totalMs, done) {
     if (typing) return;
     typing = true;
@@ -195,7 +187,7 @@
           t.classList.remove("active");
           t.style.color = "";
         });
-        setDocTitleForPath("");
+        document.title = "";
       });
     } else {
       persistPrompt();
@@ -209,7 +201,6 @@
     const initial = currentDisplayPath();
     if (initial) setPromptTailImmediate(" " + initial);
     else setPromptTailImmediate("");
-    if (initial) setDocTitleForPath(initial);
 
     document.body.addEventListener("click", (e) => {
       if (e.target.closest(".home-link")) return handleHomeClick(e);

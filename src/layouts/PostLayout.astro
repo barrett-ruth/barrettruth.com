@@ -10,17 +10,40 @@ interface Props {
     useKatex?: boolean;
     useD3?: boolean;
     scripts?: string[];
+    category?: string;
   };
-  post?: { id?: string };
+  post?: {
+    id?: string;
+    collection?: string;
+    slug?: string;
+  };
 }
 
 const { frontmatter, post } = Astro.props as Props;
 const { title, description, useKatex = false, useD3 = false } = frontmatter;
 
+const filePath = post?.id ?? "";
+const categoryFromId = (filePath.split("/")[0] ?? "").replace(
+  /\.(mdx?|MDX?)$/,
+  "",
+);
+const category =
+  (frontmatter.category ?? post?.collection ?? categoryFromId) || "";
+
+let documentTitle = title;
+if (post?.collection === "git" && post?.slug) {
+  documentTitle = `${post.slug}.git`;
+} else if (
+  (post?.collection === "gists" || post?.collection === "gist") &&
+  post?.slug
+) {
+  documentTitle = `${post.slug}`;
+}
+
 const topicColor = getTopicColor(post.collection);
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout title={documentTitle} description={description}>
   <Fragment slot="head">
     <link rel="stylesheet" href="/styles/posts.css" />
     <link rel="stylesheet" href="/styles/graph.css" />
