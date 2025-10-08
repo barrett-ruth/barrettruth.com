@@ -2,12 +2,6 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
 
-export async function getStaticPaths() {
-  const posts = await getCollection("posts");
-  const categories = Array.from(new Set(posts.map((p) => p.id.split("/")[0])));
-  return categories.map((category) => ({ params: { category } }));
-}
-
 const category = Astro.params.category;
 const title = "Barrett Ruth";
 

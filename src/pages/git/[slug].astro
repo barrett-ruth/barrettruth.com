@@ -1,43 +1,24 @@
 ---
-import { getEntry } from "astro:content";
-import GitLayout from "../../layouts/GitLayout.astro";
+import { getCollection } from "astro:content";
+import PostLayout from "../../layouts/PostLayout.astro";
 
 export async function getStaticPaths() {
-  const res = await fetch("https://git.barrettruth.com/api/repositories");
-  const json = res.ok ? await res.json() : { repositories: [] };
-  const repos = (json.repositories || []).map((r) => r.replace(/\.git$/, ""));
-  return repos.map((slug) => ({ params: { slug } }));
+  const repos = await getCollection("git");
+  return repos.map((repo) => ({
+    params: { slug: repo.slug },
+    props: { repo },
+  }));
 }
 
-const { slug } = Astro.params;
-const entry = await getEntry("git", slug);
-if (!entry) return Astro.redirect("/404");
-
-const { Content } = await entry.render();
-
-const repoName = `${slug}.git`;
-let cloneCommand = "";
-try {
-  const res = await fetch("https://git.barrettruth.com/api/repositories");
-  const json = res.ok ? await res.json() : { repositories: [] };
-  const exists = json.repositories?.includes(repoName);
-  if (exists)
-    cloneCommand = `git clone https://git.barrettruth.com/${repoName}`;
-} catch {}
-
-const pageTitle = `git/${entry.data.title ?? slug}`;
+const { repo } = Astro.props;
+const { Content } = await repo.render();
+const pageTitle = `git/${repo.data.title ?? repo.slug}`;
 ---
 
-<GitLayout frontmatter={entry.data} post={entry}>
+<PostLayout frontmatter={repo.data} post={repo}>
   <Fragment slot="head">
     <title>{pageTitle}</title>
+    <script type="module" src="/scripts/index.js"></script>
   </Fragment>
-  {
-    cloneCommand && (
-      <div class="clone-line">
-        <code>&gt; {cloneCommand}</code>
-      </div>
-    )
-  }
   <Content />
-</GitLayout>
+</PostLayout>

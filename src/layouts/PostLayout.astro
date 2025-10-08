@@ -11,19 +11,17 @@ interface Props {
     useD3?: boolean;
     scripts?: string[];
   };
+  post?: { id?: string };
 }
 
-const { frontmatter, post } = Astro.props;
+const { frontmatter, post } = Astro.props as Props;
 const { title, description, useKatex = false, useD3 = false } = frontmatter;
 
-const filePath = post?.id || "";
-const category = filePath.split("/")[0];
-
-const topicColor = getTopicColor(category);
+const topicColor = getTopicColor(post.collection);
 ---
 
-<BaseLayout title={title} description={description} useKatex={useKatex}, useD3={useD3}>
-  <slot name="head" slot="head">
+<BaseLayout title={title} description={description}>
+  <Fragment slot="head">
     <link rel="stylesheet" href="/styles/posts.css" />
     <link rel="stylesheet" href="/styles/graph.css" />
     {
@@ -36,12 +34,8 @@ const topicColor = getTopicColor(category);
         />
       )
     }
-    {
-      useD3 && (
-        <script src="https://d3js.org/d3.v7.min.js"></script>
-      )
-    }
-  </slot>
+    <slot name="head" />
+  </Fragment>
 
   <div class="post-container" style={`--topic-color: ${topicColor};`}>
     <header class="post-header">
@@ -54,11 +48,10 @@ const topicColor = getTopicColor(category);
     </article>
   </div>
 
-  <slot name="scripts" slot="scripts">
-    <script src="/scripts/index.js" is:inline></script>
+  <Fragment slot="scripts">
+    <script type="module" src="/scripts/index.js"></script>
     <script src="/scripts/centerKatex.js" is:inline></script>
-    {frontmatter.scripts?.map(script => (
-      <script src={script} type="module"></script>
-    ))}
-  </slot>
+    {frontmatter.scripts?.map((src) => <script type="module" src={src} />)}
+    <slot name="scripts" />
+  </Fragment>
 </BaseLayout>

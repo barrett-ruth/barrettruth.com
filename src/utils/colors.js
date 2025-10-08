@@ -1,4 +1,5 @@
 export function getTopicColor(topicName) {
+  console.log(topicName);
   switch (topicName) {
     case "software":
       return "#0073e6";
