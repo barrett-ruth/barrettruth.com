@@ -1,11 +1,11 @@
 ---
 const path = Astro.url.pathname;
-const isHome = path === "/" || path === "/index.html";
 const is404 = path === "/404.html" || path === "/404";
 
-function getTopic() {
+function deriveTopic() {
   if (is404) return "/not-found";
   if (path.startsWith("/about")) return "/about";
+  if (path === "/gist" || path.startsWith("/gist/")) return "/gist";
   if (path === "/git" || path.startsWith("/git/")) return "/git";
   if (path.startsWith("/posts/")) {
     const parts = path.replace(/\/+$/, "").split("/");
@@ -14,132 +14,35 @@ function getTopic() {
   return "";
 }
 
-const topic = getTopic();
+const topic = deriveTopic();
 const promptText = topic ? `barrett@ruth:~$ ${topic}` : "barrett@ruth:~$";
 ---
 
 <header>
-  <a href="/" style="text-decoration: none; color: inherit">
+  <a href="/" class="home-link" style="text-decoration: none; color: inherit">
     <div class="terminal-container">
       <span class="terminal-prompt">{promptText}</span>
       <span class="terminal-cursor"></span>
     </div>
   </a>
   <div class="header-links">
-    <a target="_blank" href="/resume.pdf">resume</a>
-    <a target="_blank" href="/transcript.pdf">transcript</a>
-    <a href="/about.html">about</a>
+    <a href="/resume.pdf" data-topic="resume" target="_blank">resume</a>
+    <a href="/transcript.pdf" data-topic="transcript" target="_blank">transcript</a>
+    <a href="/about" data-topic="about">about</a>
   </div>
 </header>
-
-<script>
-  const TERMINAL_PROMPT = "barrett@ruth:~$ ";
-  let clearing = false;
-
-  function clearPrompt(delay, callback) {
-    if (clearing) return;
-    clearing = true;
-
-    const terminalPrompt = document.querySelector(".terminal-prompt");
-    if (!terminalPrompt) {
-      clearing = false;
-      return;
-    }
-
-    const topicLength =
-      terminalPrompt.innerHTML.length - TERMINAL_PROMPT.length;
-    let i = 0;
-
-    function removeChar() {
-      if (i++ < topicLength) {
-        terminalPrompt.textContent = terminalPrompt.textContent.slice(0, -1);
-        setTimeout(removeChar, delay / topicLength);
-      } else {
-        i = 0;
-        clearing = false;
-        callback && callback();
-      }
-    }
-
-    removeChar();
-  }
-
-  function goHome(e) {
-    e.preventDefault();
-    clearPrompt(500, () => (window.location.href = "/"));
-  }
-
-  function goToAbout(e) {
-    e.preventDefault();
-    const terminalPrompt = document.querySelector(".terminal-prompt");
-    const terminalText = " /about";
-    const delay = 500;
-
-    clearPrompt(delay, () => {
-      let i = 0;
-      function typechar() {
-        if (i < terminalText.length) {
-          terminalPrompt.innerHTML += terminalText.charAt(i++);
-          setTimeout(typechar, delay / terminalText.length);
-        } else {
-          window.location.href = "/about.html";
-        }
-      }
-      typechar();
-    });
-  }
-
-  document.addEventListener("DOMContentLoaded", () => {
-    window.TERMINAL_PROMPT = TERMINAL_PROMPT;
-    window.clearPrompt = clearPrompt;
-    window.goHome = goHome;
-
-    const homeLink = document.querySelector('header a[href="/"]');
-    if (homeLink) {
-      const path = window.location.pathname;
-      const isHome = path === "/" || path === "/index.html";
-
-      if (isHome) {
-        homeLink.addEventListener("click", (e) => {
-          e.preventDefault();
-          const topics = document.querySelectorAll(".topic a");
-          topics.forEach((topic) => {
-            topic.classList.remove("active");
-            topic.style.color = "";
-          });
-          const posts = document.getElementById("posts");
-          if (posts) posts.innerHTML = "";
-          clearPrompt(500);
-        });
-      } else {
-        homeLink.addEventListener("click", goHome);
-      }
-    }
-
-    const aboutLink = document.querySelector('.header-links a[href="/about.html"]');
-    if (aboutLink) {
-      const path = window.location.pathname;
-      const isHome = path === "/" || path === "/index.html";
-      
-      if (isHome) {
-        aboutLink.addEventListener("click", goToAbout);
-      }
-    }
-  });
-</script>
 
 <style>
   .header-links a {
     margin-left: 25px;
     text-decoration: none;
+    cursor: pointer;
   }
-
   @media (max-width: 768px) {
     header {
       flex-direction: column;
       align-items: flex-start;
     }
-    
     .header-links {
       align-self: flex-end;
       display: flex;
@@ -147,10 +50,11 @@ const promptText = topic ? `barrett@ruth:~$ ${topic}` : "barrett@ruth:~$";
       text-align: right;
       gap: 5px;
     }
-
     .header-links a {
       margin-left: 0;
     }
   }
 </style>
+
+<script type="module" src="/scripts/index.js"></script>
 

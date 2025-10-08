@@ -7,12 +7,11 @@ const title = "Git Repositories";
 <BaseLayout title={title}>
   <slot name="head" slot="head">
     <link rel="stylesheet" href="/styles/index.css" />
+    <script type="module" src="/scripts/index.js"></script>
   </slot>
 
   <div class="content">
-    <ul class="topics" id="repo-list">
-      <li class="topic"></li>
-    </ul>
+    <ul class="topics" id="repo-list"></ul>
     <div class="posts" id="posts"></div>
   </div>
 
@@ -31,16 +30,16 @@ const title = "Git Repositories";
         repos.sort((a, b) => a.localeCompare(b));
 
         for (const name of repos) {
-          const label = name.replace(/\.git$/,"");
-          const cls = `repo-${label}`;
+          const label = name.replace(/\.git$/, "");
 
           const li = document.createElement("li");
-          li.className = `topic ${cls}`;
+          li.className = `topic repo-${label}`;
 
           const a = document.createElement("a");
-          a.href = `${window.location.origin}/git/${label}.html`;
+          a.href = `/git/${label}.html`;
           a.textContent = label;
-          a.setAttribute("data-topic", name);
+          a.dataset.topic = "git";
+          a.dataset.repo = label;
 
           li.appendChild(a);
           listEl.appendChild(li);
@@ -51,3 +50,4 @@ const title = "Git Repositories";
     loadRepos();
   </script>
 </BaseLayout>
+
