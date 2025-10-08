@@ -31,14 +31,15 @@ const title = "Git Repositories";
         repos.sort((a, b) => a.localeCompare(b));
 
         for (const name of repos) {
-          const cls = `repo-${name}`;
+          const label = name.replace(/\.git$/,"");
+          const cls = `repo-${label}`;
 
           const li = document.createElement("li");
           li.className = `topic ${cls}`;
 
           const a = document.createElement("a");
-          // a.href = `https://git.barrettruth.com/${name}`;
-          a.textContent = name;
+          a.href = `${window.location.origin}/git/${label}`;
+          a.textContent = label;
           a.setAttribute("data-topic", name);
 
           li.appendChild(a);
