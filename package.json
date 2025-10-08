@@ -6,7 +6,11 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "*.{js,ts,jsx,tsx,astro,html,md,json,yml,yaml}": "prettier --write"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.0",
@@ -16,6 +20,8 @@
   },
   "devDependencies": {
     "@typescript-eslint/parser": "^8.32.1",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.3",
     "prettier": "^3.5.3",
     "prettier-plugin-astro": "^0.14.1",
     "typescript": "^5.8.3"
