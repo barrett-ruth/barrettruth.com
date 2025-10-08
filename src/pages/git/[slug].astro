@@ -31,7 +31,7 @@ try {
 <GitLayout frontmatter={entry.data} post={entry}>
   {cloneCommand && (
     <div class="clone-line">
-      <code>&gt; {cloneCommand}</code>
+      <code><span class="prompt">&gt;&nbsp;</span>{cloneCommand}</code>
     </div>
   )}
   <Content />
