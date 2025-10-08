@@ -232,16 +232,3 @@ pre {
     font-size: 0.9em;
   }
 }
-
-.clone-banner {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: 'Apercu Mono', monospace;
-}
-
-.clone-banner code {
-  font-size: 0.95em;
-  user-select: all;
-  white-space: nowrap;
-}

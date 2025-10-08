@@ -1,6 +1,6 @@
 ---
 import { getEntry } from "astro:content";
-import PostLayout from "../../layouts/PostLayout.astro";
+import GitLayout from "../../layouts/GitLayout.astro";
 
 export async function getStaticPaths() {
   const res = await fetch("https://git.barrettruth.com/api/repositories");
@@ -28,12 +28,11 @@ try {
 } catch {}
 ---
 
-<PostLayout frontmatter={entry.data} post={entry}>
+<GitLayout frontmatter={entry.data} post={entry}>
   {cloneCommand && (
-    <div class="clone-banner">
-      <pre><code class="language-bash">{cloneCommand}</code></pre>
+    <div class="clone-line">
+      <code>&gt; {cloneCommand}</code>
     </div>
   )}
-
   <Content />
-</PostLayout>
+</GitLayout>

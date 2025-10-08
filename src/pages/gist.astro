@@ -1,0 +1,24 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+
+const title = "Gists";
+const gists = await getCollection("gists");
+gists.sort((a, b) => a.slug.localeCompare(b.slug));
+---
+
+<BaseLayout title={title}>
+  <slot name="head" slot="head">
+    <link rel="stylesheet" href="/styles/index.css" />
+  </slot>
+
+  <div class="content">
+    <ul class="topics">
+      {gists.map((gist) => (
+        <li class="topic">
+          <a href={`/gist/${gist.slug}.html`}>{gist.data.title || gist.slug}</a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</BaseLayout>
