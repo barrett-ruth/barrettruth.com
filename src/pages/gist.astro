@@ -2,7 +2,7 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
 
-const title = "Gists";
+const title = "/gists";
 const gists = await getCollection("gists");
 gists.sort((a, b) => a.slug.localeCompare(b.slug));
 ---

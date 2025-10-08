@@ -11,8 +11,9 @@ export async function getStaticPaths() {
 }
 
 const { repo } = Astro.props;
+const { slug } = Astro.params;
 const { Content } = await repo.render();
-const pageTitle = `git/${repo.data.title ?? repo.slug}`;
+const pageTitle = `${slug}.git`;
 ---
 
 <PostLayout frontmatter={repo.data} post={repo}>
