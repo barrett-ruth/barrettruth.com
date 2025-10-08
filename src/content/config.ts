@@ -21,8 +21,17 @@ const gistsCollection = defineCollection({
   }),
 });
 
+const gitsCollection = defineCollection({
+  type: "content",
+  schema: z.object({
+    title: z.string(),
+    date: z.string().optional(),
+  }),
+});
+
 export const collections = {
   posts: postsCollection,
   gists: gistsCollection,
+  gits: gitsCollection,
 };
 
