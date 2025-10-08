@@ -1,18 +1,15 @@
 ---
 const path = Astro.url.pathname;
 const isHome = path === "/" || path === "/index.html";
+const is404 = path === "/404.html" || path === "/404";
 
 function getTopic() {
-if (path.startsWith("/about")) {
-    return "/about";
-  }
-
-  const pathname = path.split("/");
-
-  if (pathname.length === 2 && pathname[1].endsWith(".html")) {
-    return "/" + pathname[1].replace(".html", "");
-  } else if (pathname.length >= 3) {
-    return "/" + pathname.slice(2, -1).join("/").replace(".html", "");
+  if (is404) return "/not-found";
+  if (path.startsWith("/about")) return "/about";
+  if (path === "/git" || path.startsWith("/git/")) return "/git";
+  if (path.startsWith("/posts/")) {
+    const parts = path.replace(/\/+$/, "").split("/");
+    if (parts.length >= 3) return "/" + parts[2];
   }
   return "";
 }
@@ -110,7 +107,8 @@ const promptText = topic ? `barrett@ruth:~$ ${topic}` : "barrett@ruth:~$";
             topic.classList.remove("active");
             topic.style.color = "";
           });
-          document.getElementById("posts").innerHTML = "";
+          const posts = document.getElementById("posts");
+          if (posts) posts.innerHTML = "";
           clearPrompt(500);
         });
       } else {
@@ -155,3 +153,4 @@ const promptText = topic ? `barrett@ruth:~$ ${topic}` : "barrett@ruth:~$";
     }
   }
 </style>
+

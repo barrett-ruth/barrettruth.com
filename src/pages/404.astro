@@ -9,24 +9,29 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 </BaseLayout>
 
 <script>
-  if (!location.pathname.endsWith("/404.html")) {
-    document.addEventListener("DOMContentLoaded", function () {
-      const terminalText = " /not-found";
-      const terminalPrompt = document.querySelector(".terminal-prompt");
-      const delay = 250;
+  document.addEventListener("DOMContentLoaded", function () {
+    const base = (window && window.TERMINAL_PROMPT) || "barrett@ruth:~$ ";
+    const el = document.querySelector(".terminal-prompt");
+    if (!el) return;
 
-      if (!terminalPrompt) return;
-
+    const type = () => {
+      const target = "/not-found";
       let i = 0;
-      function typechar() {
-        if (i < terminalText.length) {
-          terminalPrompt.innerHTML += terminalText.charAt(i++);
-          setTimeout(typechar, delay / terminalText.length);
+      el.textContent = base;
+      (function step() {
+        if (i < target.length) {
+          el.textContent += target.charAt(i++);
+          setTimeout(step, 250 / target.length);
         }
-      }
-      typechar();
-    });
-  }
+      })();
+    };
+
+    if (window && typeof window.clearPrompt === "function") {
+      window.clearPrompt(250, type);
+    } else {
+      type();
+    }
+  });
 </script>
 
 <style>
@@ -45,3 +50,4 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   }
 </style>
 </BaseLayout>
+
