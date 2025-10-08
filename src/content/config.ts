@@ -32,6 +32,5 @@ const gitsCollection = defineCollection({
 export const collections = {
   posts: postsCollection,
   gists: gistsCollection,
-  gits: gitsCollection,
+  git: gitsCollection,
 };
-
