@@ -2,11 +2,9 @@
   font-family: 'Apercu Mono', monospace !important;
   font-size: 1.3em;
   font-weight: 400;
-  margin: 0.5em 0 1em 0;
+  margin: 0 1em;
   text-align: left;
   user-select: all;
-  background: transparent !important;
-  border: none !important;
   color: inherit;
 }
 
@@ -18,7 +16,6 @@
   white-space: nowrap;
   cursor: text;
   background: transparent !important;
-  border: none !important;
   color: inherit;
 }
 
@@ -26,7 +23,6 @@
   user-select: none;
   opacity: 0.8;
   margin-right: 0.3em;
-  background: transparent !important;
   color: inherit;
 }
 
