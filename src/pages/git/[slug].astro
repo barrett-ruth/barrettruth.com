@@ -14,8 +14,26 @@ const entry = await getEntry("git", slug);
 if (!entry) return Astro.redirect("/404");
 
 const { Content } = await entry.render();
+
+const repoName = `${slug}.git`;
+let cloneCommand = "";
+
+try {
+  const res = await fetch("https://git.barrettruth.com/api/repositories");
+  const json = res.ok ? await res.json() : { repositories: [] };
+  const exists = json.repositories?.includes(repoName);
+  if (exists) {
+    cloneCommand = `git clone https://git.barrettruth.com/${repoName}`;
+  }
+} catch {}
 ---
 
 <PostLayout frontmatter={entry.data} post={entry}>
+  {cloneCommand && (
+    <div class="clone-banner">
+      <pre><code class="language-bash">{cloneCommand}</code></pre>
+    </div>
+  )}
+
   <Content />
 </PostLayout>
