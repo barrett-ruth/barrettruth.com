@@ -76,7 +76,10 @@
       const div = document.createElement("div");
       div.className = "post";
       const a = document.createElement("a");
-      const slug = post.id.split("/").pop().replace(/\.mdx?$/, "");
+      const slug = post.id
+        .split("/")
+        .pop()
+        .replace(/\.mdx?$/, "");
       a.href = `/posts/${topic}/${slug}.html`;
       a.textContent = post.data.title;
       a.style.textDecoration = "underline";
@@ -173,7 +176,7 @@
           "";
         if (color) link.style.color = color;
       },
-      true
+      true,
     );
 
     document.body.addEventListener(
@@ -183,7 +186,7 @@
         if (!link) return;
         if (!link.classList.contains("active")) link.style.color = "";
       },
-      true
+      true,
     );
 
     window.addEventListener("beforeunload", () => {
