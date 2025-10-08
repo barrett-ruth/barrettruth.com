@@ -17,22 +17,27 @@ const { Content } = await entry.render();
 
 const repoName = `${slug}.git`;
 let cloneCommand = "";
-
 try {
   const res = await fetch("https://git.barrettruth.com/api/repositories");
   const json = res.ok ? await res.json() : { repositories: [] };
   const exists = json.repositories?.includes(repoName);
-  if (exists) {
+  if (exists)
     cloneCommand = `git clone https://git.barrettruth.com/${repoName}`;
-  }
 } catch {}
+
+const pageTitle = `git/${entry.data.title ?? slug}`;
 ---
 
 <GitLayout frontmatter={entry.data} post={entry}>
-  {cloneCommand && (
-    <div class="clone-line">
-      <code><span class="prompt">&gt;&nbsp;</span>{cloneCommand}</code>
-    </div>
-  )}
+  <Fragment slot="head">
+    <title>{pageTitle}</title>
+  </Fragment>
+  {
+    cloneCommand && (
+      <div class="clone-line">
+        <code>&gt; {cloneCommand}</code>
+      </div>
+    )
+  }
   <Content />
 </GitLayout>

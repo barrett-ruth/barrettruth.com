@@ -7,10 +7,6 @@ function deriveTopic() {
   if (path.startsWith("/about")) return "/about";
   if (path === "/gist" || path.startsWith("/gist/")) return "/gist";
   if (path === "/git" || path.startsWith("/git/")) return "/git";
-  if (path.startsWith("/posts/")) {
-    const parts = path.replace(/\/+$/, "").split("/");
-    if (parts.length >= 3) return "/" + parts[2];
-  }
   return "";
 }
 
@@ -27,7 +23,9 @@ const promptText = topic ? `barrett@ruth:~$ ${topic}` : "barrett@ruth:~$";
   </a>
   <div class="header-links">
     <a href="/resume.pdf" data-topic="resume" target="_blank">resume</a>
-    <a href="/transcript.pdf" data-topic="transcript" target="_blank">transcript</a>
+    <a href="/transcript.pdf" data-topic="transcript" target="_blank"
+      >transcript</a
+    >
     <a href="/about" data-topic="about">about</a>
   </div>
 </header>
@@ -57,4 +55,3 @@ const promptText = topic ? `barrett@ruth:~$ ${topic}` : "barrett@ruth:~$";
 </style>
 
 <script type="module" src="/scripts/index.js"></script>
-

@@ -15,17 +15,18 @@ gists.sort((a, b) => a.slug.localeCompare(b.slug));
 
   <div class="content">
     <ul class="topics">
-      {gists.map((gist) => (
-        <li class="topic">
-          <a
-            href={`/gist/${gist.slug}.html`}
-            data-gist={gist.slug}
-          >
-            {gist.data.title || gist.slug}
-          </a>
-        </li>
-      ))}
+      {
+        gists.map((gist) => (
+          <li class="topic">
+            <a
+              href={`/gist/${gist.slug}.html`}
+              data-topic={`gist/${gist.slug}`}
+            >
+              {gist.data.title || gist.slug}
+            </a>
+          </li>
+        ))
+      }
     </ul>
   </div>
 </BaseLayout>
-

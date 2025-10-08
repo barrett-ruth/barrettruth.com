@@ -4,7 +4,6 @@ import PostLayout from "../../layouts/PostLayout.astro";
 
 export async function getStaticPaths() {
   const gists = await getCollection("gists");
-
   return gists.map((gist) => ({
     params: { slug: gist.slug },
     props: { gist },
@@ -13,9 +12,13 @@ export async function getStaticPaths() {
 
 const { gist } = Astro.props;
 const { Content } = await gist.render();
+const pageTitle = `gist/${gist.data.title ?? gist.slug}`;
 ---
 
 <PostLayout frontmatter={gist.data}>
+  <Fragment slot="head">
+    <title>{pageTitle}</title>
+    <script type="module" src="/scripts/index.js"></script>
+  </Fragment>
   <Content />
 </PostLayout>
-

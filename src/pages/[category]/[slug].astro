@@ -1,0 +1,33 @@
+---
+import { getCollection } from "astro:content";
+import PostLayout from "../../layouts/PostLayout.astro";
+
+export async function getStaticPaths() {
+  const CATS = ["algorithms", "software", "meditations", "autonomous-racing"];
+
+  const entries = [];
+  for (const c of CATS) {
+    const docs = await getCollection(c);
+    for (const d of docs) {
+      entries.push({
+        params: { category: c, slug: d.slug },
+        props: { post: d },
+      });
+    }
+  }
+  return entries;
+}
+
+const { post } = Astro.props;
+const category = Astro.params.category;
+const pageTitle = `${category}/${post.data.title ?? post.slug}`;
+const { Content } = await post.render();
+---
+
+<PostLayout frontmatter={post.data}>
+  <Fragment slot="head">
+    <title>{pageTitle}</title>
+    <script type="module" src="/scripts/index.js"></script>
+  </Fragment>
+  <Content />
+</PostLayout>

@@ -1,7 +1,10 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
 
 const title = "Git Repositories";
+const repos = await getCollection("git");
+repos.sort((a, b) => a.slug.localeCompare(b.slug));
 ---
 
 <BaseLayout title={title}>
@@ -11,43 +14,17 @@ const title = "Git Repositories";
   </slot>
 
   <div class="content">
-    <ul class="topics" id="repo-list"></ul>
+    <ul class="topics" id="repo-list">
+      {
+        repos.map((r) => (
+          <li class="topic">
+            <a href={`/git/${r.slug}.html`} data-topic={`git/${r.slug}`}>
+              {r.data.title || r.slug}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
     <div class="posts" id="posts"></div>
   </div>
-
-  <script slot="scripts" type="module">
-    const listEl = document.getElementById("repo-list");
-
-    async function loadRepos() {
-      try {
-        const res = await fetch("https://git.barrettruth.com/api/repositories", { mode: "cors" });
-        if (!res.ok) throw new Error("HTTP " + res.status);
-        const data = await res.json();
-        const repos = Array.isArray(data?.repositories) ? data.repositories : [];
-
-        listEl.innerHTML = "";
-
-        repos.sort((a, b) => a.localeCompare(b));
-
-        for (const name of repos) {
-          const label = name.replace(/\.git$/, "");
-
-          const li = document.createElement("li");
-          li.className = `topic repo-${label}`;
-
-          const a = document.createElement("a");
-          a.href = `/git/${label}.html`;
-          a.textContent = label;
-          a.dataset.topic = "git";
-          a.dataset.repo = label;
-
-          li.appendChild(a);
-          listEl.appendChild(li);
-        }
-      } catch (_) {}
-    }
-
-    loadRepos();
-  </script>
 </BaseLayout>
-

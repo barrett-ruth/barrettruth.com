@@ -1,0 +1,61 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("posts");
+  const categories = Array.from(new Set(posts.map((p) => p.id.split("/")[0])));
+  return categories.map((category) => ({ params: { category } }));
+}
+
+const category = Astro.params.category;
+const title = "Barrett Ruth";
+
+const allPosts = await getCollection("posts");
+const postsByCategory = allPosts.reduce((acc, post) => {
+  const c = post.id.split("/")[0];
+  (acc[c] ||= []).push(post);
+  return acc;
+}, {});
+
+Object.keys(postsByCategory).forEach((c) => {
+  postsByCategory[c].sort((a, b) => {
+    const parseEuroDate = (dateStr) => {
+      if (!dateStr) return new Date(0);
+      const [day, month, year] = (dateStr || "").split("/");
+      return new Date(year, month - 1, day);
+    };
+    return parseEuroDate(b.data.date) - parseEuroDate(a.data.date);
+  });
+});
+---
+
+<BaseLayout title={title}>
+  <slot name="head" slot="head">
+    <link rel="stylesheet" href="/styles/index.css" />
+  </slot>
+
+  <div class="content">
+    <ul class="topics">
+      <li class="topic algorithms">
+        <a href="/algorithms" data-topic="algorithms">algorithms</a>
+      </li>
+      <li class="topic software">
+        <a href="/software" data-topic="software">software</a>
+      </li>
+      <li class="topic meditations">
+        <a href="/meditations" data-topic="meditations">meditations</a>
+      </li>
+    </ul>
+    <div class="posts" id="posts"></div>
+  </div>
+
+  <script
+    slot="scripts"
+    define:vars={{ postsByCategory, SELECTED_CATEGORY: category }}
+  >
+    window.postsByCategory = postsByCategory;
+    window.SELECTED_CATEGORY = SELECTED_CATEGORY;
+  </script>
+  <script slot="scripts" type="module" src="/scripts/index.js"></script>
+</BaseLayout>

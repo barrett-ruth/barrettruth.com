@@ -1,64 +1,31 @@
 ---
-import BaseLayout from "./BaseLayout.astro";
-import { getTopicColor } from "../utils/colors.js";
-
-interface Props {
-  frontmatter: {
-    title: string;
-    description?: string;
-    date?: string;
-    useKatex?: boolean;
-    useD3?: boolean;
-    scripts?: string[];
-  };
-}
-
 const { frontmatter, post } = Astro.props;
-const { title, description, useKatex = false, useD3 = false } = frontmatter;
-
-const filePath = post?.id || "";
-const category = filePath.split("/")[0];
-
-const topicColor = getTopicColor(category);
 ---
 
-<BaseLayout title={title} description={description} useKatex={useKatex}, useD3={useD3}>
-  <slot name="head" slot="head">
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="/styles/common.css" />
     <link rel="stylesheet" href="/styles/posts.css" />
     <link rel="stylesheet" href="/styles/git.css" />
-    <link rel="stylesheet" href="/styles/graph.css" />
-    {
-      useKatex && (
-        <link
-          rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css"
-          integrity="sha384-5TcZemv2l/9On385z///+d7MSYlvIEw9FuZTIdZ14vJLqWphw7e7ZPuOiCHJcFCP"
-          crossorigin="anonymous"
-        />
-      )
-    }
-    {
-      useD3 && (
-        <script src="https://d3js.org/d3.v7.min.js"></script>
-      )
-    }
-  </slot>
-
-  <div class="post-container" style={`--topic-color: ${topicColor};`}>
+    <slot name="head" />
+    <script type="module" src="/scripts/index.js"></script>
+  </head>
+  <body>
     <header class="post-header">
-      <h1 class="post-title">{title}</h1>
-      {frontmatter.date && <p class="post-meta">{frontmatter.date}</p>}
+      <a class="home-link" href="/">barrettruth.com</a>
+      <h1 class="post-title">{frontmatter.title}</h1>
+      {
+        frontmatter.description && (
+          <p class="post-description">{frontmatter.description}</p>
+        )
+      }
     </header>
-
-    <article class="post-article">
-      <slot />
-    </article>
-  </div>
-
-  <slot name="scripts" slot="scripts">
-    <script src="/scripts/centerKatex.js" is:inline></script>
-    {frontmatter.scripts?.map(script => (
-      <script src={script} type="module"></script>
-    ))}
-  </slot>
-</BaseLayout>
+    <main class="post-container">
+      <article class="post-body">
+        <slot />
+      </article>
+    </main>
+  </body>
+</html>

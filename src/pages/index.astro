@@ -3,34 +3,38 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
 
 const title = "Barrett Ruth";
+const CATS = ["algorithms", "software", "meditations", "autonomous-racing"];
 
-const allPosts = await getCollection("posts");
-const postsByCategory = allPosts.reduce((acc, post) => {
-  const category = post.id.split("/")[0];
-  if (!acc[category]) acc[category] = [];
-  acc[category].push(post);
-  return acc;
-}, {});
+function parseEuroDate(dateStr) {
+  if (!dateStr) return new Date(0);
+  const [d, m, y] = (dateStr || "").split("/");
+  return new Date(Number(y), Number(m) - 1, Number(d));
+}
 
-Object.keys(postsByCategory).forEach((category) => {
-  postsByCategory[category].sort((a, b) => {
-    const parseEuroDate = (dateStr) => {
-      if (!dateStr) return new Date(0);
-      const [day, month, year] = dateStr.split("/");
-      return new Date(year, month - 1, day);
-    };
-
-    const dateA = parseEuroDate(a.data.date);
-    const dateB = parseEuroDate(b.data.date);
-    return dateB.getTime() - dateA.getTime();
-  });
-});
+const postsByCategory = {};
+for (const c of CATS) {
+  const entries = await getCollection(c);
+  entries.sort(
+    (a, b) =>
+      parseEuroDate(b.data.date).getTime() -
+      parseEuroDate(a.data.date).getTime(),
+  );
+  postsByCategory[c] = entries.map((e) => ({
+    id: `${c}/${e.slug}.mdx`,
+    slug: e.slug,
+    data: {
+      title: e.data.title ?? e.slug,
+      date: e.data.date ?? null,
+    },
+  }));
+}
 ---
 
 <BaseLayout title={title}>
   <slot name="head" slot="head">
     <link rel="stylesheet" href="/styles/index.css" />
   </slot>
+
   <div class="content">
     <ul class="topics">
       <li class="topic algorithms">
@@ -41,6 +45,11 @@ Object.keys(postsByCategory).forEach((category) => {
       </li>
       <li class="topic meditations">
         <a href="#meditations" data-topic="meditations">meditations</a>
+      </li>
+      <li class="topic autonomous-racing">
+        <a href="#autonomous-racing" data-topic="autonomous-racing"
+          >autonomous racing</a
+        >
       </li>
     </ul>
     <div class="posts" id="posts"></div>
