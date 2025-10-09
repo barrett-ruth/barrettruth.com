@@ -204,19 +204,22 @@
 
     document.body.addEventListener("click", (e) => {
       if (e.target.closest(".home-link")) return handleHomeClick(e);
-      if (e.target.closest("[data-topic]")) return handleDataTopicClick(e);
+      if (e.target.closest(".topics [data-topic]"))
+        return handleDataTopicClick(e);
     });
 
     document.body.addEventListener(
       "mouseenter",
       (e) => {
-        const link = e.target.closest("[data-topic]");
+        const link = e.target.closest(".topics [data-topic]");
         if (!link) return;
-        const color =
-          (window.getTopicColor &&
-            window.getTopicColor(link.dataset.topic?.toLowerCase() || "")) ||
-          "";
-        if (color) link.style.color = color;
+        const raw = link.dataset.topic || "";
+        const key = raw.split("/")[0].toLowerCase();
+        const color = (window.getTopicColor && window.getTopicColor(key)) || "";
+        if (color) {
+          link.style.color = color;
+          link.style.textDecorationColor = color;
+        }
       },
       true,
     );
@@ -224,9 +227,12 @@
     document.body.addEventListener(
       "mouseleave",
       (e) => {
-        const link = e.target.closest("[data-topic]");
+        const link = e.target.closest(".topics [data-topic]");
         if (!link) return;
-        if (!link.classList.contains("active")) link.style.color = "";
+        if (!link.classList.contains("active")) {
+          link.style.color = "";
+          link.style.textDecorationColor = "";
+        }
       },
       true,
     );

@@ -1,5 +1,5 @@
 export function getTopicColor(topicName) {
-  switch (topicName) {
+  switch ((topicName || "").toLowerCase()) {
     case "software":
       return "#0073e6";
     case "algorithms":
@@ -7,7 +7,9 @@ export function getTopicColor(topicName) {
     case "meditations":
       return "#6a0dad";
     case "autonomous-racing":
-      return "#009975";
+      return "#3d8a44";
+    case "git":
+      return "#e67300";
     default:
       return "#000000";
   }
