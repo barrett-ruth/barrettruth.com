@@ -1,5 +1,5 @@
 .clone-line {
-  font-family: 'Apercu Mono', monospace;
+  font-family: "Apercu Mono", monospace;
   font-size: 1.2em;
   margin: 0 1em;
   text-align: left;
@@ -9,10 +9,10 @@
 .clone-line code {
   background: transparent !important;
   all: unset;
-  font-family: 'Apercu Mono', monospace;
+  font-family: "Apercu Mono", monospace;
   white-space: normal;
-  word-break: break-word;       
-  overflow-wrap: anywhere;     
+  word-break: break-word;
+  overflow-wrap: anywhere;
   line-height: 1.5;
   cursor: text;
 }

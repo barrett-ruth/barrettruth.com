@@ -3,10 +3,9 @@ interface Props {
   code: string;
 }
 
-const lines = Astro.props.code
-  .trim()
-  .split(/\r?\n/);
+const lines = Astro.props.code.trim().split(/\r?\n/);
 ---
+
 <style lang="css">
   .pseudocode-block {
     font-family: "Times New Roman", serif;
@@ -28,7 +27,8 @@ const lines = Astro.props.code
   }
 </style>
 
-<pre class="pseudocode-block">
+<pre
+  class="pseudocode-block">
   {lines.map((line, i) => (
     <div class="pseudocode-line" key={i}>
       <span class="line-number">{i + 1}.</span>
@@ -36,4 +36,3 @@ const lines = Astro.props.code
     </div>
   ))}
 </pre>
-
