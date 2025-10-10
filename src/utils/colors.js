@@ -9,7 +9,7 @@ export function getTopicColor(topicName) {
     case "autonomous-racing":
       return "#3d8a44";
     case "git":
-      return "#e67300";
+      return "#cc5500";
     default:
       return "#000000";
   }
