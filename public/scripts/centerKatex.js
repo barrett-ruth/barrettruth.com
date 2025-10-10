@@ -3,7 +3,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
   katexParagraphs.forEach((p) => {
     const katexSpan = p.querySelector(".katex");
-    if (!katexSpan) return;
+    if (!katexSpan || katexSpan.textContent.indexOf("\\blacksquare") != -1)
+      return;
 
     const clone = p.cloneNode(true);
     clone.querySelector(".katex").remove();
