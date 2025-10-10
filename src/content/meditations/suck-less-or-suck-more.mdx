@@ -14,3 +14,13 @@ After years of use, I've found that suckless software is not built to be compati
 Maybe this is the point. But I can't avoid [foxglove](https://wiki.ros.org/FoxgloveStudio), I can't avoid bloat to work for school and research-related projects. Most importantly, after spending half of my day patching st and having it crash on me, I don't feel like fixing it any longer. **Sadly, suck-ful software is here to stay and I don't have time to fight it right now.**
 
 I've switched to [spectrwm](https://github.com/conformal/spectrwm) (essentially [this](https://github.com/conformal/spectrwm)) and [ghostty](https://ghostty.org/).
+
+# update: goodbye xorg <span class="date">09/10/2025</span>
+
+I am now sick of Xorg and their lack of per-monitor DPI scaling. The new stack is:
+
+- window system protocol: [wayland](https://wayland.freedesktop.org/)
+- compositor: [sway](https://swaywm.org/)
+- dynamic menu: [rofi](https://github.com/davatorium/rofi)
+- screen lock: [swaylock](https://github.com/swaywm/swaylock) triggered by [swayidle](https://github.com/swaywm/swayidle)
+  - [its](https://github.com/swaywm/swaylock/issues/416) [pretty](https://github.com/swaywm/swayidle/issues/169) [bad](https://github.com/swaywm/swaylock/issues/306)
