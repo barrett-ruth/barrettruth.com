@@ -26,7 +26,6 @@ const category = Astro.params.category;
 const { Content } = await post.render();
 const pageTitle = `${category}/${post.data.title ?? post.slug}`;
 
-console.log(Astro.props);
 if (post.data?.redirect) {
   return Astro.redirect(post.data.redirect, 301);
 }
