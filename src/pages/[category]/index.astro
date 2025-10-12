@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
+import { sortItem } from "../../utils/sort.js";
 import * as collections from "../../content/config";
 
 export async function getStaticPaths() {
@@ -15,14 +16,7 @@ const category = Astro.params.category;
 const title = "Barrett Ruth";
 
 const posts = await getCollection(category);
-posts.sort((a, b) => {
-  const parseEuroDate = (dateStr) => {
-    if (!dateStr) return new Date(0);
-    const [day, month, year] = (dateStr || "").split("/");
-    return new Date(year, month - 1, day);
-  };
-  return parseEuroDate(b.data.date) - parseEuroDate(a.data.date);
-});
+posts.sort(sortItem);
 ---
 
 <BaseLayout title={title}>

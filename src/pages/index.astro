@@ -1,24 +1,15 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { sortItem } from "../utils/sort.js";
 import { getCollection } from "astro:content";
 
 const title = "Barrett Ruth";
 const CATS = ["algorithms", "software", "meditations", "autonomous-racing"];
 
-function parseEuroDate(dateStr) {
-  if (!dateStr) return new Date(0);
-  const [d, m, y] = (dateStr || "").split("/");
-  return new Date(Number(y), Number(m) - 1, Number(d));
-}
-
 const postsByCategory = {};
 for (const c of CATS) {
   const entries = await getCollection(c);
-  entries.sort(
-    (a, b) =>
-      parseEuroDate(b.data.date).getTime() -
-      parseEuroDate(a.data.date).getTime(),
-  );
+  entries.sort(sortItem);
   postsByCategory[c] = entries.map((e) => ({
     id: `${c}/${e.slug}.mdx`,
     slug: e.slug,
