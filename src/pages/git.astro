@@ -4,7 +4,14 @@ import { getCollection } from "astro:content";
 
 const title = "git repos";
 const repos = await getCollection("git");
-repos.sort((a, b) => a.slug.localeCompare(b.slug));
+repos.sort((a, b) => {
+  const parseEuroDate = (dateStr) => {
+    if (!dateStr) return new Date(0);
+    const [day, month, year] = (dateStr || "").split("/");
+    return new Date(year, month - 1, day);
+  };
+  return parseEuroDate(b.data.date) - parseEuroDate(a.data.date);
+});
 ---
 
 <BaseLayout title={title}>
