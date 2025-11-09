@@ -7,10 +7,14 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "prepare": "husky"
+    "prepare": "husky",
+    "check": "astro check"
   },
   "lint-staged": {
-    "*.{js,ts,jsx,tsx,astro,html,md,json,yml,yaml}": "prettier --write"
+    "*.{js,ts,jsx,tsx,astro,html,md,json,yml,yaml}": [
+      "prettier --write",
+      "astro check --minimumSeverity warning"
+    ]
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.6",
