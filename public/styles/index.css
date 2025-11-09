@@ -3,9 +3,8 @@ body {
   display: flex;
   flex-direction: column;
   overscroll-behavior: none;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
 }
 
 .content {
@@ -74,10 +73,16 @@ ul {
 
 @media (max-width: 768px) {
   .topics {
-    font-size: 1.8em;
+    font-size: 1.5em;
+    padding: 0 20px;
   }
 
   .posts {
-    font-size: 1.2em;
+    font-size: 1em;
+    padding: 0 20px;
+  }
+
+  .topic a {
+    margin-bottom: 15px;
   }
 }
