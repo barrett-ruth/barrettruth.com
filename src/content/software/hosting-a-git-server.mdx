@@ -98,7 +98,7 @@ $ sudo git config --system init.defaultBranch main
 
 # update: moving to lightsail <span class="date">09/11/2025</span>
 
-Welp, ec2 costed way too much (~$15/mo!). Enter [AWS Lightsail](https://aws.amazon.com/lightsail/): small compute with a flat $5/mo charge. This is a reasonably "scalable" solution for my website&mdash;unfortunately I do not have too much traffic as of now.
+Welp, ec2 costed way too much (~\$15/mo!). Enter [AWS Lightsail](https://aws.amazon.com/lightsail/): small compute with a flat $5/mo charge. This is a reasonably "scalable" solution for my website&mdash;unfortunately I do not have too much traffic as of now.
 
 Anyways, the migration is complete. Everything is nearly identical but my HTTPD config has been minimally updated as follows:
 - Now that I host project descriptions on `https://barrettruth.com/git/<project>.html` and gists on `https://barrettruth.com/gist/<code>`, support redirects for `{git,gist}.barrettruth.com->barrettruth.com/{git,gist}.html`
