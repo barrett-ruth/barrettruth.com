@@ -20,15 +20,7 @@ interface Props {
 }
 
 const { frontmatter, post } = Astro.props as Props;
-const { title, description, useKatex = false, useD3 = false } = frontmatter;
-
-const filePath = post?.id ?? "";
-const categoryFromId = (filePath.split("/")[0] ?? "").replace(
-  /\.(mdx?|MDX?)$/,
-  "",
-);
-const category =
-  (frontmatter.category ?? post?.collection ?? categoryFromId) || "";
+const { title, description, useKatex = false } = frontmatter;
 
 let documentTitle = title;
 if (post?.collection === "git" && post?.slug) {
