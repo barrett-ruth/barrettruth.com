@@ -243,9 +243,9 @@
         const currentTheme =
           document.documentElement.getAttribute("data-theme");
         if (currentTheme === "dark") {
-          themeToggle.textContent = "ʕ•ᴥ•ʔつ☾";
+          themeToggle.textContent = "☾⊂ʕ•ᴥ•ʔ";
         } else {
-          themeToggle.textContent = "ʕ•ᴥ•ʔつ☼";
+          themeToggle.textContent = "☼⊂ʕ•ᴥ•ʔ";
         }
       }
 

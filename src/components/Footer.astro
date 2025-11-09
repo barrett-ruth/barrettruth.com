@@ -1,6 +1,12 @@
 <footer>
-  <span id="theme-toggle">ʕ•ᴥ•ʔつ☼</span>
-  <div class="footer-links">
+  <div class="footer-links-left">
+    <a href="/resume.pdf" data-topic="resume" target="_blank">resume</a>
+    <a href="/transcript.pdf" data-topic="transcript" target="_blank"
+      >transcript</a
+    >
+    <a href="/about.html" data-topic="about">about</a>
+  </div>
+  <div class="footer-links-right">
     <a href="/gist.html" data-topic="gist">gist</a>
     <a href="/git.html" data-topic="git">git</a>
     <a
@@ -13,21 +19,22 @@
 </footer>
 
 <style>
-  footer {
-    padding: 20px;
-    font-size: 1.5em;
+  .footer-links-left,
+  .footer-links-right {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    gap: 25px;
   }
-  #theme-toggle {
-    cursor: pointer;
-    user-select: none;
-  }
-  .footer-links a {
-    margin-left: 25px;
+  .footer-links-left a,
+  .footer-links-right a {
     text-decoration: none;
     cursor: pointer;
+  }
+  @media (max-width: 768px) {
+    .footer-links-left,
+    .footer-links-right {
+      flex-direction: column;
+      gap: 5px;
+    }
   }
 </style>
 

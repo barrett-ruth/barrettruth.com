@@ -21,35 +21,21 @@ const promptText = topic ? `barrett@ruth:~$ ${topic}` : "barrett@ruth:~$";
       <span class="terminal-cursor"></span>
     </div>
   </a>
-  <div class="header-links">
-    <a href="/resume.pdf" data-topic="resume" target="_blank">resume</a>
-    <a href="/transcript.pdf" data-topic="transcript" target="_blank"
-      >transcript</a
-    >
-    <a href="/about.html" data-topic="about">about</a>
-  </div>
+  <span id="theme-toggle">☼⊂ʕ•ᴥ•ʔ</span>
 </header>
 
 <style>
-  .header-links a {
-    margin-left: 25px;
-    text-decoration: none;
+  #theme-toggle {
     cursor: pointer;
+    user-select: none;
   }
   @media (max-width: 768px) {
     header {
       flex-direction: column;
       align-items: flex-start;
     }
-    .header-links {
+    #theme-toggle {
       align-self: flex-end;
-      display: flex;
-      flex-direction: column;
-      text-align: right;
-      gap: 5px;
-    }
-    .header-links a {
-      margin-left: 0;
     }
   }
 </style>
