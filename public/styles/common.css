@@ -264,9 +264,11 @@ pre {
 @media (max-width: 768px) {
   header {
     font-size: 0.9em;
+    padding: 15px;
   }
 
   footer {
     font-size: 0.9em;
+    padding: 15px;
   }
 }
