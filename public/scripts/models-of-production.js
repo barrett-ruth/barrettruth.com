@@ -4,6 +4,12 @@ function urlToTopic() {
   return pathParts[2];
 }
 
+function getTextColor() {
+  return getComputedStyle(document.documentElement)
+    .getPropertyValue("--text")
+    .trim();
+}
+
 function setUpParameters(render, parameters, modelPrefix) {
   parameters.forEach((param) => {
     const slider = document.getElementById(`slider${modelPrefix}${param}`);
@@ -22,7 +28,7 @@ function setUpParameters(render, parameters, modelPrefix) {
 function drawSolowGraph() {
   const L = 150,
     K_MAX = 500,
-    margin = { top: 20, right: 30, bottom: 20, left: 50 };
+    margin = { top: 50, right: 55, bottom: 40, left: 75 };
 
   const [A, d, s, alpha] = setUpParameters(
     drawSolowGraph,
@@ -49,29 +55,29 @@ function drawSolowGraph() {
     .attr("transform", `translate(${margin.left}, ${margin.top})`);
 
   const x = d3.scaleLinear().domain([0, K_MAX]).range([0, width]);
-  svg
+  const xAxis = svg
     .append("g")
     .attr("transform", `translate(0, ${height})`)
-    .call(d3.axisBottom(x))
+    .call(d3.axisBottom(x));
+  xAxis.selectAll("text").style("font-size", "1.5em");
+  xAxis
     .append("text")
-    .attr("fill", "#000")
     .attr("x", width + 10)
     .attr("y", -10)
     .style("text-anchor", "end")
-    .style("font-size", "1.5em")
+    .style("font-size", "2em")
     .text("K");
 
   const Y_MAX = solowOutput(K_MAX) + K_MAX / 10;
   const y = d3.scaleLinear().domain([0, Y_MAX]).range([height, 0]);
-  svg
-    .append("g")
-    .call(d3.axisLeft(y))
+  const yAxis = svg.append("g").call(d3.axisLeft(y));
+  yAxis.selectAll("text").style("font-size", "1.5em");
+  yAxis
     .append("text")
-    .attr("fill", "#000")
     .attr("x", 0)
     .attr("y", -10)
     .style("text-anchor", "start")
-    .style("font-size", "1.5em")
+    .style("font-size", "2em")
     .text("Y");
 
   const outputData = Array.from({ length: K_MAX }, (_, k) => ({
@@ -162,7 +168,6 @@ function drawSolowGraph() {
     .attr("y1", y((d * k_star) / s))
     .attr("x2", x(k_star))
     .attr("y2", y(0))
-    .attr("stroke", "black")
     .attr("stroke-width", 1)
     .attr("stroke-dasharray", "5,5");
 
@@ -201,7 +206,7 @@ const updateRomerTable = (romerData) => {
 
 function drawRomerGraph() {
   const T_MAX = 100,
-    margin = { top: 20, right: 100, bottom: 20, left: 50 };
+    margin = { top: 50, right: 110, bottom: 40, left: 75 };
 
   const [z, L, l, A0] = setUpParameters(
     drawRomerGraph,
@@ -234,31 +239,33 @@ function drawRomerGraph() {
   }
 
   const x = d3.scaleLinear().domain([1, T_MAX]).range([0, width]);
-  svg
+  const xAxis = svg
     .append("g")
     .attr("transform", `translate(0, ${height})`)
-    .call(d3.axisBottom(x))
+    .call(d3.axisBottom(x));
+  xAxis.selectAll("text").style("font-size", "1.5em");
+  xAxis
     .append("text")
-    .attr("fill", "#000")
     .attr("x", width + 10)
     .attr("y", -10)
     .style("text-anchor", "end")
-    .style("font-size", "1.5em")
+    .style("font-size", "2em")
     .text("t");
 
   const y = d3
     .scaleLinear()
     .domain([0, romerData[romerData.length - 1].Y])
     .range([height, 0]);
-  svg
+  const yAxis = svg
     .append("g")
-    .call(d3.axisLeft(y).ticks(10, d3.format(".1s")))
+    .call(d3.axisLeft(y).ticks(10, d3.format(".1s")));
+  yAxis.selectAll("text").style("font-size", "1.5em");
+  yAxis
     .append("text")
-    .attr("fill", "#000")
     .attr("x", 0)
     .attr("y", -10)
     .style("text-anchor", "start")
-    .style("font-size", "1.5em")
+    .style("font-size", "2em")
     .text("log(Y)");
 
   svg
@@ -290,7 +297,7 @@ function drawRomerlGraph() {
     z = 0.01,
     L = 50,
     A0 = 50,
-    margin = { top: 20, right: 100, bottom: 20, left: 50 };
+    margin = { top: 50, right: 110, bottom: 40, left: 75 };
 
   const [l, t0] = setUpParameters(drawRomerlGraph, ["lChange", "t0"], "");
 
@@ -327,31 +334,33 @@ function drawRomerlGraph() {
   }
 
   const x = d3.scaleLinear().domain([1, T_MAX]).range([0, width]);
-  svg
+  const xAxis = svg
     .append("g")
     .attr("transform", `translate(0, ${height})`)
-    .call(d3.axisBottom(x))
+    .call(d3.axisBottom(x));
+  xAxis.selectAll("text").style("font-size", "1.5em");
+  xAxis
     .append("text")
-    .attr("fill", "#000")
     .attr("x", width + 10)
     .attr("y", -10)
     .style("text-anchor", "end")
-    .style("font-size", "1.5em")
+    .style("font-size", "2em")
     .text("t");
 
   const y = d3
     .scaleLinear()
     .domain([0, romerData[romerData.length - 1].Y])
     .range([height, 0]);
-  svg
+  const yAxis = svg
     .append("g")
-    .call(d3.axisLeft(y).ticks(10, d3.format(".1s")))
+    .call(d3.axisLeft(y).ticks(10, d3.format(".1s")));
+  yAxis.selectAll("text").style("font-size", "1.5em");
+  yAxis
     .append("text")
-    .attr("fill", "#000")
     .attr("x", 0)
     .attr("y", -10)
     .style("text-anchor", "start")
-    .style("font-size", "1.5em")
+    .style("font-size", "2em")
     .text("log(Y)");
 
   svg
@@ -374,7 +383,6 @@ function drawRomerlGraph() {
     .attr("y1", y(romerData[T_MAX - 1].Y))
     .attr("x2", x(t0))
     .attr("y2", height)
-    .attr("stroke", "black")
     .attr("stroke-width", 1)
     .attr("stroke-dasharray", "4");
 
@@ -439,7 +447,7 @@ function calculateRomerSolowData(
 
 function drawRomerSolowGraph() {
   const T_MAX = 100,
-    margin = { top: 20, right: 100, bottom: 20, left: 50 };
+    margin = { top: 50, right: 110, bottom: 40, left: 75 };
 
   const [z, l, L, A0, s, d, alpha] = setUpParameters(
     drawRomerSolowGraph,
@@ -473,31 +481,33 @@ function drawRomerSolowGraph() {
   );
 
   const x = d3.scaleLinear().domain([1, T_MAX]).range([0, width]);
-  svg
+  const xAxis = svg
     .append("g")
     .attr("transform", `translate(0, ${height})`)
-    .call(d3.axisBottom(x))
+    .call(d3.axisBottom(x));
+  xAxis.selectAll("text").style("font-size", "1.5em");
+  xAxis
     .append("text")
-    .attr("fill", "#000")
     .attr("x", width + 10)
     .attr("y", -10)
     .style("text-anchor", "end")
-    .style("font-size", "1.5em")
+    .style("font-size", "2em")
     .text("t");
 
   const y = d3
     .scaleLinear()
     .domain([0, romerSolowData[romerSolowData.length - 1].Y])
     .range([height, 0]);
-  svg
+  const yAxis = svg
     .append("g")
-    .call(d3.axisLeft(y).ticks(10, d3.format(".1s")))
+    .call(d3.axisLeft(y).ticks(10, d3.format(".1s")));
+  yAxis.selectAll("text").style("font-size", "1.5em");
+  yAxis
     .append("text")
-    .attr("fill", "#000")
     .attr("x", 0)
     .attr("y", -10)
     .style("text-anchor", "start")
-    .style("font-size", "1.5em")
+    .style("font-size", "2em")
     .text("log(Y)");
 
   svg
@@ -570,31 +580,33 @@ function drawRomerSolowChangeGraph() {
   );
 
   const x = d3.scaleLinear().domain([1, T_MAX]).range([0, width]);
-  svg
+  const xAxis = svg
     .append("g")
     .attr("transform", `translate(0, ${height})`)
-    .call(d3.axisBottom(x))
+    .call(d3.axisBottom(x));
+  xAxis.selectAll("text").style("font-size", "1.5em");
+  xAxis
     .append("text")
-    .attr("fill", "#000")
     .attr("x", width + 10)
     .attr("y", -10)
     .style("text-anchor", "end")
-    .style("font-size", "1.5em")
+    .style("font-size", "2em")
     .text("t");
 
   const y = d3
     .scaleLinear()
     .domain([0, romerSolowData[romerSolowData.length - 1].Y])
     .range([height, 0]);
-  svg
+  const yAxis = svg
     .append("g")
-    .call(d3.axisLeft(y).ticks(10, d3.format(".1s")))
+    .call(d3.axisLeft(y).ticks(10, d3.format(".1s")));
+  yAxis.selectAll("text").style("font-size", "1.5em");
+  yAxis
     .append("text")
-    .attr("fill", "#000")
     .attr("x", 0)
     .attr("y", -10)
     .style("text-anchor", "start")
-    .style("font-size", "1.5em")
+    .style("font-size", "2em")
     .text("log(Y)");
 
   svg
@@ -617,7 +629,6 @@ function drawRomerSolowChangeGraph() {
     .attr("y1", y(romerSolowData[T_MAX - 1].Y))
     .attr("x2", x(t0))
     .attr("y2", height)
-    .attr("stroke", "black")
     .attr("stroke-width", 1)
     .attr("stroke-dasharray", "4");
 
@@ -629,18 +640,27 @@ function drawRomerSolowChangeGraph() {
     .text("log10(Y)");
 }
 
-document.addEventListener("DOMContentLoaded", function () {
+drawSolowGraph();
+drawRomerGraph();
+drawRomerlGraph();
+drawRomerSolowGraph();
+drawRomerSolowChangeGraph();
+
+window.onresize = () => {
   drawSolowGraph();
   drawRomerGraph();
   drawRomerlGraph();
   drawRomerSolowGraph();
   drawRomerSolowChangeGraph();
+};
 
-  window.onresize = () => {
-    drawSolowGraph();
-    drawRomerGraph();
-    drawRomerlGraph();
-    drawRomerSolowGraph();
-    drawRomerSolowChangeGraph();
-  };
+new MutationObserver(() => {
+  drawSolowGraph();
+  drawRomerGraph();
+  drawRomerlGraph();
+  drawRomerSolowGraph();
+  drawRomerSolowChangeGraph();
+}).observe(document.documentElement, {
+  attributes: true,
+  attributeFilter: ["data-theme"],
 });

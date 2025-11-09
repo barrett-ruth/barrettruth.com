@@ -22,7 +22,7 @@ li {
 .post-title::before {
   content: "";
   position: absolute;
-  background-color: var(--topic-color, black);
+  background-color: var(--topic-color, var(--text));
   height: 30px;
   width: 2px;
   bottom: -10px;
@@ -32,7 +32,7 @@ li {
 .post-title::after {
   content: "";
   position: absolute;
-  background-color: var(--topic-color, black);
+  background-color: var(--topic-color, var(--text));
   width: 200px;
   height: 2px;
   bottom: -10px;
@@ -103,7 +103,7 @@ article h3::before,
 .post-article h3::before {
   position: absolute;
   left: 0;
-  color: var(--topic-color, #000);
+  color: var(--topic-color, var(--text));
   margin-right: 0.5em;
 }
 
@@ -118,12 +118,13 @@ article pre {
   padding: 1rem;
   overflow-x: auto;
   border-radius: 4px;
-  background: var(--code-bg) !important;
   border: 1px solid var(--border);
 }
 
-pre * {
-  background: var(--code-bg) !important;
+[data-theme="dark"] .astro-code,
+[data-theme="dark"] .astro-code span {
+  color: var(--shiki-dark) !important;
+  background-color: var(--shiki-dark-bg) !important;
 }
 
 :not(pre) > code {
@@ -133,7 +134,7 @@ pre * {
   white-space: nowrap;
   border: 1px solid var(--border);
   border-radius: 4px;
-  background: var(--code-bg) !important;
+  background: var(--code-bg);
 }
 
 .astro-code {

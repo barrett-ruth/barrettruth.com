@@ -22,14 +22,6 @@ interface Props {
 const { frontmatter, post } = Astro.props as Props;
 const { title, description, useKatex = false, useD3 = false } = frontmatter;
 
-const filePath = post?.id ?? "";
-const categoryFromId = (filePath.split("/")[0] ?? "").replace(
-  /\.(mdx?|MDX?)$/,
-  "",
-);
-const category =
-  (frontmatter.category ?? post?.collection ?? categoryFromId) || "";
-
 let documentTitle = title;
 if (post?.collection === "git" && post?.slug) {
   documentTitle = `${post.slug}.git`;
@@ -40,7 +32,7 @@ if (post?.collection === "git" && post?.slug) {
   documentTitle = `${post.slug}`;
 }
 
-const topicColor = getTopicColor(post.collection);
+const topicColor = getTopicColor(post?.collection);
 ---
 
 <BaseLayout title={documentTitle} description={description}>
@@ -57,10 +49,14 @@ const topicColor = getTopicColor(post.collection);
         />
       )
     }
+    {useD3 && <script src="https://d3js.org/d3.v7.min.js" is:inline />}
     <slot name="head" />
   </Fragment>
 
-  <div class="post-container" style={`--topic-color: ${topicColor};`}>
+  <div
+    class="post-container"
+    style={topicColor ? `--topic-color: ${topicColor};` : ""}
+  >
     <header class="post-header">
       <h1 class="post-title">{title}</h1>
       {frontmatter.date && <p class="post-meta">{frontmatter.date}</p>}
@@ -72,9 +68,9 @@ const topicColor = getTopicColor(post.collection);
   </div>
 
   <Fragment slot="scripts">
-    <script type="module" src="/scripts/index.js"></script>
+    <script src="/scripts/index.js" is:inline></script>
     <script src="/scripts/centerKatex.js" is:inline></script>
-    {frontmatter.scripts?.map((src) => <script type="module" src={src} />)}
+    {frontmatter.scripts?.map((src) => <script src={src} is:inline />)}
     <slot name="scripts" />
   </Fragment>
 </BaseLayout>

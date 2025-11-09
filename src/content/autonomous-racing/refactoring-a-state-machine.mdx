@@ -9,7 +9,7 @@ Given the recent switch to the [Marelli flag system](https://www.racecar-enginee
 
 # the problem
 
-Our original state machine implementation had grown organically over several racing seasons. What started as a simple finite state machine under a more trivial flag system grew vastly more complex as it maladapted to the new flag system. Specifically, the original flag system only had one flag system for the entire track and a few car-specific ones (i.e. request to retire the car after a rules violation). The Marelli flag system has both flag *and* vehicle flags, each of which enforces different requirements.
+Our original state machine implementation had grown organically over several racing seasons. What started as a simple finite state machine under a more trivial flag system grew vastly more complex as it maladapted to the new flag system. Specifically, the original flag system only had one flag system for the entire track and a few car-specific ones (i.e. request to retire the car after a rules violation). The Marelli flag system has both flag _and_ vehicle flags, each of which enforces different requirements.
 
 The state machine worked "fine" for its initial use case:
 
@@ -29,7 +29,7 @@ State_Machine:
 
 2. Subsequently, the code was read in and parsed with a [cpp yaml library](https://github.com/jbeder/yaml-cpp).
 
-3. Since all of this was done at runtime, `state_actions`, `entry_condition`, and `next_states` were *manually parsed*, hard-coded in a sort of custom language encoded in a string. Opening up our codebase, I found this set of foundational structs that the data was converted into:
+3. Since all of this was done at runtime, `state_actions`, `entry_condition`, and `next_states` were _manually parsed_, hard-coded in a sort of custom language encoded in a string. Opening up our codebase, I found this set of foundational structs that the data was converted into:
 
 ```cpp
 struct Action {
@@ -83,9 +83,9 @@ I knew state machines were ubiquitous in software so I explored a few previous a
 1. One big switch: nested conditions (i.e. all combinations of vehicle + track flags) seemed a bit nightmarish to look at as we continue to build out the state machine
 
 2. [Boost SMS](https://www.boost.org/library/latest/msm/): this and other existing libraries looked enticing but three things stopped me:
-    1. Integrating dependencies into our production code is simple but takes time for other members of the team to vet it
-    2. It also bloats our deployment latency and final size because:
-    3. It is overkill and writing things from scratch is more fun
+   1. Integrating dependencies into our production code is simple but takes time for other members of the team to vet it
+   2. It also bloats our deployment latency and final size because:
+   3. It is overkill and writing things from scratch is more fun
 
 3. A minimalist and expressive approach:
 
@@ -120,7 +120,6 @@ enum class StateID { State1, State2, ..., Last };
 ```
 
 A transition has entry and exit conditions which are compositions of state (i.e. just our bitmask) and an arbitrary action (i.e. a lambda). The entry/exit bits must be set/unset in order to enter/exit the state.
-
 
 ```cpp
 struct Transition {

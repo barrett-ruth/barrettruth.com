@@ -11,6 +11,16 @@
   width: 60%;
 }
 
+.graph svg line,
+.graph svg path.domain,
+.graph svg .tick line {
+  stroke: var(--text);
+}
+
+.graph svg text {
+  fill: var(--text);
+}
+
 .slider {
   display: flex;
   align-items: center;
@@ -27,7 +37,7 @@
   appearance: none;
   width: 100%;
   height: 2px;
-  background: black;
+  background: var(--text);
   cursor: pointer;
   outline: none;
   transform: translateY(-50%);
@@ -36,32 +46,39 @@
 
 .slider input::-webkit-slider-thumb {
   -webkit-appearance: none;
-  width: 2px;
-  height: 15px;
-  background: black;
-  cursor: col-resize;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--text);
+  cursor: pointer;
   position: relative;
 }
 
 .slider input::-moz-range-thumb {
-  width: 2px;
-  height: 15px;
-  background: black;
-  cursor: col-resize;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--text);
+  cursor: pointer;
   position: relative;
+  border: none;
 }
 
 .slider input::-webkit-slider-runnable-track,
 .slider input::-moz-range-track {
   width: 100%;
   height: 2px;
-  background: black;
+  background: var(--text);
   border: none;
 }
 
 .sliders {
   display: flex;
   justify-content: center;
+}
+
+.sliders li {
+  list-style: none;
 }
 
 .romer-table-container {
@@ -79,7 +96,7 @@
 
 #romer-table th,
 #romer-table td {
-  border: 1px solid black;
+  border: 1px solid var(--border);
   text-align: center;
   padding: 5px;
 }

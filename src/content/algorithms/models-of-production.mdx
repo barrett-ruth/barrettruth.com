@@ -14,7 +14,9 @@ This post offers a basic introduction to the Solow, Romer, and Romer-Solow econo
 
 The Solow Model is an economic model of production that incorporates the idea of capital accumulation. Based on the [Cobb-Douglas production function](https://en.wikipedia.org/wiki/Cobb%E2%80%93Douglas_production_function), the Solow Model describes production as follows:
 
-$$Y_t=F(K_t,L_t)=\bar{A}K_t^\alpha L_t^{1-\alpha}$$
+$$
+Y_t=F(K_t,L_t)=\bar{A}K_t^\alpha L_t^{1-\alpha}
+$$
 
 With:
 
@@ -41,7 +43,9 @@ Visualizing the model, namely output as a function of capital, provides helpful 
 
 Letting $(L_t,\alpha)=(\bar{L}, \frac{1}{3})$, it follows that:
 
-$$Y_t=F(K_t,L_t)=\bar{A}K_t^{\frac{1}{3}} \bar{L}^{\frac{2}{3}}$$
+$$
+Y_t=F(K_t,L_t)=\bar{A}K_t^{\frac{1}{3}} \bar{L}^{\frac{2}{3}}
+$$
 
 Utilizing this simplification and its graphical representation below, output is clearly characterized by the cube root of capital:
 
@@ -119,17 +123,20 @@ When investment is completely disincentivized by depreciation (in other words, $
 
 Using this equilibrium condition, it follows that:
 
-$$Y_t^*=\bar{A}{K_t^*}^\alpha\bar{L}^{1-\alpha}$$
-
-$$\rightarrow \bar{d}K_t^*=\bar{s}\bar{A}{K_t^*}^\alpha\bar{L}^{1-\alpha}$$
-
-$$\rightarrow K^*=\bar{L}(\frac{\bar{s}\bar{A}}{\bar{d}})^\frac{1}{1-\alpha}$$
-
-$$\rightarrow Y^*=\bar{A}^\frac{1}{1-\alpha}(\frac{\bar{s}}{\bar{d}})^\frac{\alpha}{1-\alpha}\bar{L}$$
+$$
+\begin{align*}
+Y_t^* &= \bar{A}{K_t^*}^\alpha\bar{L}^{1-\alpha} \\
+\bar{d}K_t^* &= \bar{s}\bar{A}{K_t^*}^\alpha\bar{L}^{1-\alpha} \\
+K^* &= \bar{L}(\frac{\bar{s}\bar{A}}{\bar{d}})^\frac{1}{1-\alpha} \\
+Y^* &= \bar{A}^\frac{1}{1-\alpha}(\frac{\bar{s}}{\bar{d}})^\frac{\alpha}{1-\alpha}\bar{L}
+\end{align*}
+$$
 
 Thus, the equilibrium intensive form (output per worker) of both capital and output are summarized as follows:
 
-$$(k^*,y^*)=(\frac{K^*}{\bar{L}},\frac{Y^*}{\bar{L}}) =((\frac{\bar{s}\bar{A}}{\bar{d}})^\frac{1}{1-\alpha}, \bar{A}^\frac{1}{1-\alpha}(\frac{\bar{s}}{\bar{d}})^\frac{\alpha}{1-\alpha})$$
+$$
+(k^*,y^*)=(\frac{K^*}{\bar{L}},\frac{Y^*}{\bar{L}}) =((\frac{\bar{s}\bar{A}}{\bar{d}})^\frac{1}{1-\alpha}, \bar{A}^\frac{1}{1-\alpha}(\frac{\bar{s}}{\bar{d}})^\frac{\alpha}{1-\alpha})
+$$
 
 ### analysis
 
@@ -138,7 +145,6 @@ Using both mathematical intuition and manipulating the visualization above, we f
 - $\bar{A}$ has a positive relationship with steady-state output
 - Capital is influenced by workforce size, TFP, and savings rate
 - Capital output share's $\alpha$ impact on output is twofold:
-
   1. Directly through capital quantity
   2. Indirectly through TFP
 
@@ -147,7 +153,9 @@ Using both mathematical intuition and manipulating the visualization above, we f
 
 Lastly (and perhaps most importantly), exogenous parameters $\bar{s}, \bar{d}$, and $\bar{A}$ all have immense ramifications on economic status. For example, comparing the difference in country $C_1$'s output versus $C_2$'s using the Solow Model, we find that a difference in economic performance can only be explained by these factors:
 
-$$\frac{Y_1}{Y_2}=\frac{\bar{A_1}}{\bar{A_2}}(\frac{\bar{s_1}}{\bar{s_2}})^\frac{\alpha}{1-\alpha}$$
+$$
+\frac{Y_1}{Y_2}=\frac{\bar{A_1}}{\bar{A_2}}(\frac{\bar{s_1}}{\bar{s_2}})^\frac{\alpha}{1-\alpha}
+$$
 
 We see that TFP is more important in explaining the differences in per-capital output ($\frac{1}{1-\alpha}>\frac{\alpha}{1-\alpha},\alpha\in[0,1)$). Notably, the Solow Model does not give any insights into how to alter the most important predictor of output, TFP.
 
@@ -168,7 +176,9 @@ The Model divides the world into two parts:
 
 The Romer Models' production function can be modelled as:
 
-$$Y_t=F(A_t,L_{yt})=A_tL_{yt}$$
+$$
+Y_t=F(A_t,L_{yt})=A_tL_{yt}
+$$
 
 With:
 
@@ -179,7 +189,9 @@ Assuming $L_t=\bar{L}$ people work in the economy, a proportion $\bar{l}$ of the
 
 Further, this economy garners ideas with time at rate $\bar{z}$: the "speed of ideas". Now, we can describe the quantity of ideas tomorrow as function of those of today: <u>the Law of Ideal Motion</u> (I made that up).
 
-$$A_{t+1}=A_t+\bar{z}A_tL_{at}\leftrightarrow\Delta A_{t+1}=\bar{z}A_tL_{at}$$
+$$
+A_{t+1}=A_t+\bar{z}A_tL_{at}\leftrightarrow\Delta A_{t+1}=\bar{z}A_tL_{at}
+$$
 
 Analagously to capital in the solow model, ideas begin in the economy with some $\bar{A}_0\gt0$ and grow at an _exponential_ rate. At its core, this is because ideas are non-rivalrous; more ideas bring about more ideas.
 
@@ -280,19 +292,27 @@ Playing with the sliders, this graph may seem underwhelming in comparison to the
 
 To find the output in terms of exogenous parameters, first note that
 
-$$L_t=\bar{L}\rightarrow L_{yt}=(1-\bar{l})\bar{L}$$
+$$
+L_t=\bar{L}\rightarrow L_{yt}=(1-\bar{l})\bar{L}
+$$
 
 Now, all that remains is to find ideas $A_t$. It is assumed that ideas grow at some rate $g_A$:
 
-$$A_t=A_0(1+g_A)^t$$
+$$
+A_t=A_0(1+g_A)^t
+$$
 
 Using the growth rate formula, we find:
 
-$$g_A=\frac{\Delta A_{t+1}-A_t}{A_t}=\frac{A_t+\bar{z}A_tL_{at}-A_t}{A_t}=\bar{z}L_{at}=\bar{z}\bar{l}\bar{L}$$
+$$
+g_A=\frac{\Delta A_{t+1}-A_t}{A_t}=\frac{A_t+\bar{z}A_tL_{at}-A_t}{A_t}=\bar{z}L_{at}=\bar{z}\bar{l}\bar{L}
+$$
 
 Thus, ideas $A_t=A_0(1+\bar{z}\bar{l}\bar{L})^t$. Finally, output can be solved the production function:
 
-$$Y_t=A_t L_{yt}=A_0(1+\bar{z}\bar{l}\bar{L})^t(1-\bar{l})\bar{L}$$
+$$
+Y_t=A_t L_{yt}=A_0(1+\bar{z}\bar{l}\bar{L})^t(1-\bar{l})\bar{L}
+$$
 
 ### analysis
 
@@ -385,7 +405,9 @@ From previous analysis it was found that $g_A=\bar{z}\bar{l}\bar{L}$.
 
 Based on the Law of Capital Motion,
 
-$$g_K=\frac{\Delta K_{t+1}}{K_t}=\bar{s}\frac{Y_t}{K_t}-\bar{d}$$
+$$
+g_K=\frac{\Delta K_{t+1}}{K_t}=\bar{s}\frac{Y_t}{K_t}-\bar{d}
+$$
 
 Because growth rates are constant on the Balanced Growth Path, $g_K$ must be constant as well. Thus, so is $\bar{s}\frac{Y_t}{K_t}-\bar{d}$; it must be that $g_K^*=g_Y^*$.
 
@@ -393,24 +415,35 @@ The model assumes population is constant, so $g_{\bar{L}}=0\rightarrow g_{\bar{L
 
 Combining these terms, we find:
 
-$$g_Y^*=\bar{z}\bar{l}\bar{L}+\alpha g_Y^*+(1-\alpha)\cdot 0\rightarrow$$
-$$g_Y^*=\frac{\bar{z}\bar{l}\bar{L}}{1-\alpha}$$
+$$
+\begin{align*}
+g_Y^* &= \bar{z}\bar{l}\bar{L}+\alpha g_Y^*+(1-\alpha)\cdot 0 \\
+g_Y^* &= \frac{\bar{z}\bar{l}\bar{L}}{1-\alpha}
+\end{align*}
+$$
 
 Solving for $Y_t^*$ is trivial after discovering $g_K=g_Y$ must hold on a balanced growth path.
 
 Invoking the <u>Law of Capital Motion</u> with magic chants,
 
-$$g_K^*=\bar{s}\frac{Y_t^*}{K_t^*}-\bar{d}=g_Y^*\rightarrow K_t^*=\frac{\bar{s}Y_t^*}{g_Y^*+\bar{d}}$$
+$$
+g_K^*=\bar{s}\frac{Y_t^*}{K_t^*}-\bar{d}=g_Y^*\rightarrow K_t^*=\frac{\bar{s}Y_t^*}{g_Y^*+\bar{d}}
+$$
 
 Isolating $Y_t^*$,
 
-$$Y_t^*=A_t^* (\frac{\bar{s}Y_t^*}{g_Y^*+\bar{d}})^\alpha ({(1-\bar{l})\bar{L}})^{1-\alpha}$$
-
-$$\rightarrow {Y_t^*}^{1-\alpha}=A_t^*(\frac{\bar{s}}{g_Y^*+\bar{d}})^\alpha({(1-\bar{l})\bar{L}})^{1-\alpha}$$
+$$
+\begin{align*}
+Y_t^* &= A_t^* (\frac{\bar{s}Y_t^*}{g_Y^*+\bar{d}})^\alpha ({(1-\bar{l})\bar{L}})^{1-\alpha} \\
+{Y_t^*}^{1-\alpha} &= A_t^*(\frac{\bar{s}}{g_Y^*+\bar{d}})^\alpha({(1-\bar{l})\bar{L}})^{1-\alpha}
+\end{align*}
+$$
 
 Plugging in the known expressions for $A_t^*$ and $g_Y^*$, a final expression for the Balanced Growth Path output as a function of the endogenous parameters and time is obtained:
 
-$$Y_t^*={(A_0(1+\bar{z}\bar{l}\bar{L})^t})^\frac{1}{1-\alpha}(\frac{\bar{s}}{\frac{\bar{z}\bar{l}\bar{L}}{1-\alpha}+\bar{d}})^\frac{\alpha}{1-\alpha}(1-\bar{l})\bar{L}$$
+$$
+Y_t^*={(A_0(1+\bar{z}\bar{l}\bar{L})^t})^\frac{1}{1-\alpha}(\frac{\bar{s}}{\frac{\bar{z}\bar{l}\bar{L}}{1-\alpha}+\bar{d}})^\frac{\alpha}{1-\alpha}(1-\bar{l})\bar{L}
+$$
 
 ### analysis
 

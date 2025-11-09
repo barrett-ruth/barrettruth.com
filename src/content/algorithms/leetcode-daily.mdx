@@ -103,7 +103,7 @@ def countFairPairs(self, nums, lower, upper):
 
 ## optimizing the approach
 
-If we interpret the criteria this way, the above approach is relatively efficient. To improve this approach, we'll need to reinterpret the constraints. Forget about the indexing and consider the constraint in aggregate. We want to find all $i,j$ with $x=nums$i$+nums$j$$ such that $i\neq j,lower\leq x\leq upper$.
+If we interpret the criteria this way, the above approach is relatively efficient. To improve this approach, we'll need to reinterpret the constraints. Forget about the indexing and consider the constraint in aggregate. We want to find all $i,j$ with $x=nums[i]+nums[j]$ such that $i\neq j,lower\leq x\leq upper$.
 
 We _still_ need to reduce the “dimensionality” of the problem—there are just too many moving parts to consider at once. This seems challening. Let's simplify the problem to identify helpful ideas: pretend `lower` does not exist (and, of course, that `nums` is sorted).
 
