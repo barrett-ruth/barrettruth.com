@@ -20,7 +20,7 @@ interface Props {
 }
 
 const { frontmatter, post } = Astro.props as Props;
-const { title, description, useKatex = false } = frontmatter;
+const { title, description, useKatex = false, useD3 = false } = frontmatter;
 
 let documentTitle = title;
 if (post?.collection === "git" && post?.slug) {
@@ -49,6 +49,7 @@ const topicColor = getTopicColor(post?.collection);
         />
       )
     }
+    {useD3 && <script src="https://d3js.org/d3.v7.min.js" is:inline />}
     <slot name="head" />
   </Fragment>
 

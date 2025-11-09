@@ -6,6 +6,7 @@ const base = z.object({
   date: z.string().optional(),
   useKatex: z.boolean().optional(),
   useD3: z.boolean().optional(),
+  scripts: z.array(z.string()).optional(),
   redirect: z.string().optional(),
 });
 

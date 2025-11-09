@@ -629,18 +629,16 @@ function drawRomerSolowChangeGraph() {
     .text("log10(Y)");
 }
 
-document.addEventListener("DOMContentLoaded", function () {
+drawSolowGraph();
+drawRomerGraph();
+drawRomerlGraph();
+drawRomerSolowGraph();
+drawRomerSolowChangeGraph();
+
+window.onresize = () => {
   drawSolowGraph();
   drawRomerGraph();
   drawRomerlGraph();
   drawRomerSolowGraph();
   drawRomerSolowChangeGraph();
-
-  window.onresize = () => {
-    drawSolowGraph();
-    drawRomerGraph();
-    drawRomerlGraph();
-    drawRomerSolowGraph();
-    drawRomerSolowChangeGraph();
-  };
-});
+};
