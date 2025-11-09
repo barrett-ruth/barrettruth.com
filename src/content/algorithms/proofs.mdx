@@ -5,7 +5,7 @@ useKatex: true
 useD3: true
 ---
 
-import Pseudocode from '@components/Pseudocode.astro';
+import Pseudocode from "@components/Pseudocode.astro";
 
 A computer science student attempting to learn proofs.
 
@@ -14,16 +14,19 @@ A computer science student attempting to learn proofs.
 ## E
 
 Minimize-Digit-Diff($l, r$):
+
 1. Initialize $ans=18$, the largest possible value of $f(l, x) + f(x, r)$ with $l \leq r\leq 10^9$
 2. For $i:=1$ to $200$:
-  - Let $x$ be a random sample from the open interval $[l, r]$
-  - Let $cost:=f(l, x) + f(x, r)$, computed in $O(1)$ time
-  - $ans:=min(ans,cost)$
+
+- Let $x$ be a random sample from the open interval $[l, r]$
+- Let $cost:=f(l, x) + f(x, r)$, computed in $O(1)$ time
+- $ans:=min(ans,cost)$
+
 3. Return $ans$
 
 ---
 
-*Proof.*
+_Proof._
 
 We are interested in minimizing the expected probability of failure over $t\leq10^4$ tests. Firstly, consider a single test (i.e. a single $(l,r)$ input):
 
@@ -31,7 +34,6 @@ An $n$ digit candidate $x$ has a $\frac{1}{10}\cdot 2=\frac{1}{5}$ possibility o
 Thus, a digit has approximately a $1-\frac{1}{5}=\frac{4}{5}$ probability of minimizing the score for a digit.
 It follows that the candidate then has roughly a $(\frac{4}{5})^9\approx13\%$ chance of minimizing the entire score $f(l,x)+f(x,r)$.
 So, one random sample $x$ has a $100-13\approx87\%$ chance of being a suboptimal candidate.
-
 
 Consider sampling $n$ times--the probability of all random samples being suboptimal is $0.87^n$. Let's only settle for a probability of failure near $1/10^{10}$ and solve for our number of trials:
 
@@ -57,7 +59,7 @@ Maximize-F(s):
 
 ---
 
-*Proof.*
+_Proof._
 
 Let $X$ and $Y$ be the number of occurrences of zeroes and ones in the substring $p$ of $s$. Then, $f(p)=max(X, Y)=\frac{X+Y+|X-Y|}{2}$. The goal is to compute:
 
@@ -96,11 +98,12 @@ $\blacksquare$
 ## A
 
 Count-Pairs($n$):
+
 1. Return $n-1$
 
 ---
 
-*Proof.*
+_Proof._
 
 Suppose $(a,b)\in\mathbb{N}^2$. Because $a=n-b$ and $a\geq1$, it follows that $1\leq b\leq n-1$. Each choice of $b$ yields a unique $a=n-b$, so there are $n-1$ unique solutions.
 
@@ -109,15 +112,17 @@ $\blacksquare$
 ## B
 
 Mirror-String($s$):
+
 1. Reverse $s$
 2. For each character $c$ in $s$:
-  - If $c$ is "w": Print($c$)
-  - If $c$ is "p": Print($q$)
-  - If $c$ is "q": Print($p$)
+
+- If $c$ is "w": Print($c$)
+- If $c$ is "p": Print($q$)
+- If $c$ is "q": Print($p$)
 
 ---
 
-*Proof.*
+_Proof._
 
 The string appears fipped on the y-axis from within the score due to the perspective
 shifting. Structurally, it is read right-to-left. "p"/"q"/"w" appear as "q"/"p"/"w" when flipped on its y-axis.
@@ -127,11 +132,12 @@ $\blacksquare$
 ## C
 
 Seat-Monkeys($a$, $b$, $c$, $m$):
+
 1. Return $min(m, a)+min(m, b)+min(c, 2\cdot m-(min(m, a) + min(m, b)))$
 
 ---
 
-*Proof.*
+_Proof._
 
 Consider an assignment of monkeys $S$ that sits the $a$ and $b$ monkeys in the first and second row and then fills the remaining seats with the $c$ monkeys.
 
@@ -140,11 +146,16 @@ Assume there exists a more optimal assignment of monkeys $S^{'}$. WLOG, assume $
 $S^{'}$ can only differ from $S$ as follows:
 
 1. Seats a $c$ monkey in row 1 instead of an $a$ monkey
-  - $S^{'}$ leaves an $a$ monkey unseated. $S$ seats this monkey instead--the same number of monkeys are seated in $S$.
+
+- $S^{'}$ leaves an $a$ monkey unseated. $S$ seats this monkey instead--the same number of monkeys are seated in $S$.
+
 2. Seats a $c$ monkey in row 2 instead of a $b$ monkey
-  - $S^{'}$ leaves a $b$ monkey unseated. $S$ seats this monkey instead--the same number of monkeys are seated in $S$.
+
+- $S^{'}$ leaves a $b$ monkey unseated. $S$ seats this monkey instead--the same number of monkeys are seated in $S$.
+
 3. Does not seat a monkey where $S$ has
-  - $S$ seats more than $S^{'}$.
+
+- $S$ seats more than $S^{'}$.
 
 In all cases, $S^{'}$ is no better than S, therefore $S$ is optimal.
 
@@ -153,21 +164,26 @@ $\blacksquare$
 ## D
 
 Construct-B($a$):
+
 1. Let $b$ be an array of size $n=\#a$ and $X$ be the set of numbers in $a$.
 2. For each element $x$ of $a$ at index $i$:
+
 - If $x\in X$:
   - $b[i]:=x$
   - $X:=X \backslash \{x\}$
+
 3. Let $Y=\{1,2,\cdots,n\}\backslash X$
 4. For each element $x$ of $b$ at index $i$:
+
 - If $b[i]$ is NIL:
   - $b[i]:=\text{first-element}(Y)$
   - $Y:=Y\backslash\{\text{first-element}{(Y)}\}$
+
 5. Return $b$
 
 ---
 
-*Proof.*
+_Proof._
 
 Consider the array $b$ from Construct-B.
 
@@ -182,17 +198,21 @@ $\blacksquare$
 ## E
 
 Count-Pairs($l_1$, $l_2$, $r_1$, $r_2$, $k$):
+
 1. Let $A:=\lfloor log_k(r_2/l_1)\rfloor$
 2. Let $B:=\lfloor max(0, log_k(l_2/r_1))\rfloor$
 3. Let $\text{total}:=0$
 4. For each $A\leq i\leq B$:
+
 - Let $r=\lfloor r_2/ k^n\rfloor$
 - Let $l=\lfloor l_2/k^n\rfloor$
 - $\text{total} := \text{total} + max(0, r - l + 1)$
+
 5. Return $\text{total}$
+
 ---
 
-*Proof.*
+_Proof._
 
 Each value of $n$ corresponds to a line with slope $k^n$ because $y/x=k^n\leftrightarrow y=x\cdot k^n$. The problem can be visualized as follows:
 
@@ -206,12 +226,13 @@ For each $n_0$ in this range, the smallest $x$ satisfying $y=x\cdot k^n_0$ is $\
 
 1. Let $A=\sum a$ and $B=\sum b$.
 2. For each query with requested beauty $q$:
+
 - If $\exists (i,j)\in(\{1,2,\cdots,n\},\{1,2,\cdots,m\}):(A-a[i])\cdot(B-b[j])=x$, print "YES"
 - Otherwise, print "NO"
 
 ---
 
-*Proof.*
+_Proof._
 
 The beauty of the grid equals $B=\sum_i \sum_j M_{i,j}=\sum_i\sum_j a_i\cdot b_j=\sum_i(a_i\cdot \sum_j b_j)=(\sum_i a_i)\cdot (\sum_j b_j)$.
 
@@ -231,14 +252,16 @@ If such $a_i$ and $b_j$ exist, the operation can be performed.
 1. Let $G$ be the input graph
 2. Let $\text{ans}=0$
 3. For each component $C$ in $G$:
-  - Let $\text{cycle}$ be the set of nodes in the cycle of $C$
-  - Let $d=max_{u\in \text{cycle}}\text{Distance-To-Cycle(C, u)}$
-  - $\text{ans}:=max(\text{ans}, d)$
+
+- Let $\text{cycle}$ be the set of nodes in the cycle of $C$
+- Let $d=max_{u\in \text{cycle}}\text{Distance-To-Cycle(C, u)}$
+- $\text{ans}:=max(\text{ans}, d)$
+
 4. Return $\text{ans}$
 
 ---
 
-*Proof.*
+_Proof._
 
 Consider some $v_i\in V$. There must exist an edge $e=(v_i,v_j),i\neq j$. Following this path from $v_i$, the each edge must map to a previously seen node, forming a cycle, or a new node. Because the graph is finite, the path starting any $v_i$ must contain a cycle. Thus, G is a graph of components with one cycle each.
 
@@ -260,18 +283,20 @@ $\blacksquare$
 1. Let $G$ be the input graph
 2. Let $\text{ans}=0$
 3. For each component $C$ in $G$:
-  - Let $U$ be the set of all nodes not in the cycle of $C$
-  - Let $\text{count}$ be the number of plushies each spider has
-  - Let $\text{par}$ be the set of parents for each spider
-  - Run a multi-source BFS simulating the state transitions on $U$. For each iteration at year $y$:
-    - $\text{count[u]}:=\text{count[u]}+\sum_{p\in \text{par[u]}}\text{count[p]}$
-    - $\text{ans}:=max(\text{ans}, \text{count[u]})$
-    - $y:=y+1$
+
+- Let $U$ be the set of all nodes not in the cycle of $C$
+- Let $\text{count}$ be the number of plushies each spider has
+- Let $\text{par}$ be the set of parents for each spider
+- Run a multi-source BFS simulating the state transitions on $U$. For each iteration at year $y$:
+  - $\text{count[u]}:=\text{count[u]}+\sum_{p\in \text{par[u]}}\text{count[p]}$
+  - $\text{ans}:=max(\text{ans}, \text{count[u]})$
+  - $y:=y+1$
+
 4. Return $\text{ans}$
 
 ---
 
-*Proof.*
+_Proof._
 
 Consider some $v_i\in V$. There must exist an edge $e=(v_i,v_j),i\neq j$. Following this path from $v_i$, the each edge must map to a previously seen node, forming a cycle, or a new node. Because the graph is finite, the path starting any $v_i$ must contain a cycle. Thus, G is a graph of components with one cycle each.
 
@@ -295,7 +320,9 @@ $\blacksquare$
 - Let $\text{Colwise}$ be the column-wise 2D-prefix coefficient sum matrix of $A$
 - Let $\text{Rowwise}$ be the row-wise 2D-prefix coefficient sum matrix of $A$
 - Let $\text{Submatrix-Sum}(x_1,y_1,x_2,y_2)$ compute the sum of the submatrix of $M$ bounded by $(x_1,y_1)$ and $(x_2,y_2)$
+
 1. For each query $x_1,x_2,y_1,y_2$:
+
 - Let $w=y_2-y_1+1$
 - Let $prefix=\text{Submatrix-Sum}(\text{Prefix},x_1,y_1,x_2,y_2)$
 - Let $rowsum=\text{Submatrix-Sum}(\text{Rowwise},x_1,y_1,x_2,y_2)$
@@ -304,7 +331,7 @@ $\blacksquare$
 
 ---
 
-*Proof.*
+_Proof._
 
 Mathematically formulated:
 

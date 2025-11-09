@@ -71,19 +71,19 @@ This lead me to the follow structure:
 ![multi-threaded-design](/multithreading-a-gui/multi-threaded-implementation.webp)
 
 - Three callback groups are triggered at differing intervals according to their urgency on the GUI node
-    - A thread-safe queue[^2] processes all ingested data for each callback group
+  - A thread-safe queue[^2] processes all ingested data for each callback group
 - Every 10ms, the GUI is updated, highest to lowest urgency messages first
 - The `MainWindow` houses the visualization widgets as before&mdash;however, the GUI thread actually performs the update logic
 - GUI Widgets were re-implemented to be thread-safe with basic locking, a small amount of overhead for safe memory access
 
 ## \*actual\* multi-threaded implementation
 
-Sounds good, right? Well, I should've done my research first. The Qt framework has *already internalized* the logic for this entire paradigm of multithreaded code. Turns out all I need are:
+Sounds good, right? Well, I should've done my research first. The Qt framework has _already internalized_ the logic for this entire paradigm of multithreaded code. Turns out all I need are:
 
 - [Signals/slots](https://doc.qt.io/qt-6/signalsandslots.html) and a `Qt::QueuedConnection`
 - Running the GUI with `MultithreadedExecutor`
 
-As it turns out, signals and slots *automatically* leverage ROS's internal thread-safe message queue, ensuring deserialization one at a time.
+As it turns out, signals and slots _automatically_ leverage ROS's internal thread-safe message queue, ensuring deserialization one at a time.
 
 The following (final) design employs two threads:
 
@@ -132,8 +132,8 @@ Elegantly, registering a signal/slot with `Qt::QueuedConnection` does all of the
 
 Looking back, this GUI should've been implemented with a modern web framework such as [React](https://react.dev/) with [react-ros](https://github.com/flynneva/react-ros?tab=readme-ov-file). CAR needs high-speed, reactive data, and a QtC++ front-end is simply not meant for this level of complexity. I made it a lot harder than it needed to be with my lack of due diligence, but the single-threaded GUI event loop in ROS is more harm than help.
 
-
 [^1]: See [the ROS documentation](https://docs.ros.org/en/foxy/How-To-Guides/Using-callback-groups.onhtml) to learn more. The CAR publishes various topic-related data at set rates, so I'm looking to run various groups of mutually exclusive callbacks at a set interval (i.e. `MutuallyExclusive`)
+
 [^2]: The simplest implementation did the job:
 
     ```cpp
@@ -179,3 +179,4 @@ Looking back, this GUI should've been implemented with a modern web framework su
         }
     ...
     };
+    ```
