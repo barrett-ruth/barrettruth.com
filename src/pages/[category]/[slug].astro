@@ -1,5 +1,5 @@
 ---
-import { getCollection, type CollectionEntry } from "astro:content";
+import { getCollection } from "astro:content";
 import PostLayout from "../../layouts/PostLayout.astro";
 import * as collections from "../../content/config";
 import type { PostCollection, AnyCollectionEntry } from "../../types";
@@ -43,7 +43,7 @@ if (post.data?.redirect) {
 <PostLayout frontmatter={post.data} post={post}>
   <Fragment slot="head">
     <title>{pageTitle}</title>
-    <script type="module" src="/scripts/index.js"></script>
+    <script src="/scripts/index.js"></script>
   </Fragment>
   <Content />
 </PostLayout>
