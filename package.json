@@ -11,7 +11,10 @@
     "check": "astro check"
   },
   "lint-staged": {
-    "*.{js,ts,jsx,tsx,astro,html,md,json,yml,yaml}": "prettier --write"
+    "*.{js,ts,jsx,tsx,astro,html,md,json,yml,yaml}": [
+      "prettier --write",
+      "astro check"
+    ]
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.6",
