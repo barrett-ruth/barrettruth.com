@@ -30,7 +30,7 @@ const lines = Astro.props.code.trim().split(/\r?\n/);
 <pre
   class="pseudocode-block">
   {lines.map((line, i) => (
-    <div class="pseudocode-line" key={i}>
+    <div class="pseudocode-line">
       <span class="line-number">{i + 1}.</span>
       <span class="line-content">{line}</span>
     </div>

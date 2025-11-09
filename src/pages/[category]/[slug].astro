@@ -1,14 +1,19 @@
 ---
-import { getCollection } from "astro:content";
+import { getCollection, type CollectionEntry } from "astro:content";
 import PostLayout from "../../layouts/PostLayout.astro";
 import * as collections from "../../content/config";
+import type { PostCollection, AnyCollectionEntry } from "../../types";
 
 export async function getStaticPaths() {
   const categories = Object.keys(collections.collections).filter(
     (c) => c !== "git" && c !== "gists",
-  );
+  ) as PostCollection[];
 
-  const entries = [];
+  const entries: Array<{
+    params: { category: string; slug: string };
+    props: { post: AnyCollectionEntry };
+  }> = [];
+
   for (const category of categories) {
     const docs = await getCollection(category);
     for (const doc of docs) {
@@ -19,6 +24,10 @@ export async function getStaticPaths() {
     }
   }
   return entries;
+}
+
+interface Props {
+  post: AnyCollectionEntry;
 }
 
 const { post } = Astro.props;

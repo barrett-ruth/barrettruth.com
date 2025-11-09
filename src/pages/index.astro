@@ -1,12 +1,27 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { sortItem } from "../utils/sort.js";
-import { getCollection } from "astro:content";
+import { getCollection, type CollectionEntry } from "astro:content";
+import type { PostCollection } from "../types";
 
 const title = "Barrett Ruth";
-const CATS = ["algorithms", "software", "meditations", "autonomous-racing"];
+const CATS: PostCollection[] = [
+  "algorithms",
+  "software",
+  "meditations",
+  "autonomous-racing",
+];
 
-const postsByCategory = {};
+type PostData = {
+  id: string;
+  slug: string;
+  data: {
+    title: string;
+    date: string | null;
+  };
+};
+
+const postsByCategory: Record<string, PostData[]> = {};
 for (const c of CATS) {
   const entries = await getCollection(c);
   entries.sort(sortItem);

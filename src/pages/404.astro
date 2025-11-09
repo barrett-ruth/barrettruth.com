@@ -10,7 +10,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 <script>
   document.addEventListener("DOMContentLoaded", function () {
-    const base = (window && window.TERMINAL_PROMPT) || "barrett@ruth:~$ ";
+    const base = "barrett@ruth:~$ ";
     const el = document.querySelector(".terminal-prompt");
     if (!el) return;
 
@@ -26,11 +26,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       })();
     };
 
-    if (window && typeof window.clearPrompt === "function") {
-      window.clearPrompt(250, type);
-    } else {
-      type();
-    }
+    type();
   });
 </script>
 
