@@ -237,6 +237,30 @@
       true,
     );
 
+    const themeToggle = document.getElementById("theme-toggle");
+    if (themeToggle) {
+      function updateBearVisual() {
+        const currentTheme =
+          document.documentElement.getAttribute("data-theme");
+        if (currentTheme === "dark") {
+          themeToggle.textContent = "ʕ•ᴥ•ʔつ☾";
+        } else {
+          themeToggle.textContent = "ʕ•ᴥ•ʔつ☼";
+        }
+      }
+
+      updateBearVisual();
+
+      themeToggle.addEventListener("click", () => {
+        const currentTheme =
+          document.documentElement.getAttribute("data-theme");
+        const newTheme = currentTheme === "dark" ? "light" : "dark";
+        document.documentElement.setAttribute("data-theme", newTheme);
+        localStorage.setItem("theme", newTheme);
+        updateBearVisual();
+      });
+    }
+
     window.addEventListener("beforeunload", () => {
       const el = promptEl();
       if (el) el.textContent = TERMINAL_PROMPT;
