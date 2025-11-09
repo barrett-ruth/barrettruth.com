@@ -28,7 +28,7 @@ function setUpParameters(render, parameters, modelPrefix) {
 function drawSolowGraph() {
   const L = 150,
     K_MAX = 500,
-    margin = { top: 80, right: 80, bottom: 60, left: 100 };
+    margin = { top: 50, right: 55, bottom: 40, left: 75 };
 
   const [A, d, s, alpha] = setUpParameters(
     drawSolowGraph,
@@ -206,7 +206,7 @@ const updateRomerTable = (romerData) => {
 
 function drawRomerGraph() {
   const T_MAX = 100,
-    margin = { top: 80, right: 120, bottom: 60, left: 100 };
+    margin = { top: 50, right: 110, bottom: 40, left: 75 };
 
   const [z, L, l, A0] = setUpParameters(
     drawRomerGraph,
@@ -297,7 +297,7 @@ function drawRomerlGraph() {
     z = 0.01,
     L = 50,
     A0 = 50,
-    margin = { top: 80, right: 120, bottom: 60, left: 100 };
+    margin = { top: 50, right: 110, bottom: 40, left: 75 };
 
   const [l, t0] = setUpParameters(drawRomerlGraph, ["lChange", "t0"], "");
 
@@ -447,7 +447,7 @@ function calculateRomerSolowData(
 
 function drawRomerSolowGraph() {
   const T_MAX = 100,
-    margin = { top: 80, right: 120, bottom: 60, left: 100 };
+    margin = { top: 50, right: 110, bottom: 40, left: 75 };
 
   const [z, l, L, A0, s, d, alpha] = setUpParameters(
     drawRomerSolowGraph,
