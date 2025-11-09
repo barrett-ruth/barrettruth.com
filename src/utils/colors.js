@@ -11,6 +11,6 @@ export function getTopicColor(topicName) {
     case "git":
       return "#cc5500";
     default:
-      return "#000000";
+      return null;
   }
 }

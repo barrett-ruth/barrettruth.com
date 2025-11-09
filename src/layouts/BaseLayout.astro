@@ -52,7 +52,9 @@ const {
           case "git":
             return "#cc5500";
           default:
-            return "#000000";
+            return getComputedStyle(document.documentElement)
+              .getPropertyValue("--text")
+              .trim();
         }
       };
     </script>

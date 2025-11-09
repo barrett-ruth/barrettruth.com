@@ -11,6 +11,16 @@
   width: 60%;
 }
 
+.graph svg line,
+.graph svg path.domain,
+.graph svg .tick line {
+  stroke: var(--text);
+}
+
+.graph svg text {
+  fill: var(--text);
+}
+
 .slider {
   display: flex;
   align-items: center;

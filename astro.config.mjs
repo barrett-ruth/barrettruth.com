@@ -14,7 +14,6 @@ const midnight = {
   tokenColors: [
     {
       scope: [
-        "keyword",
         "storage.type",
         "storage.modifier",
         "keyword.control",
@@ -31,7 +30,7 @@ const midnight = {
         "constant.character",
         "number",
       ],
-      settings: { foreground: "#e5c07b" },
+      settings: { foreground: "#98c379" },
     },
   ],
 };
@@ -46,7 +45,6 @@ const daylight = {
   tokenColors: [
     {
       scope: [
-        "keyword",
         "storage.type",
         "storage.modifier",
         "keyword.control",
@@ -63,7 +61,7 @@ const daylight = {
         "constant.character",
         "number",
       ],
-      settings: { foreground: "#996800" },
+      settings: { foreground: "#2d7f3e" },
     },
   ],
 };

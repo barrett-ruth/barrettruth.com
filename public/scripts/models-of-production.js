@@ -4,6 +4,12 @@ function urlToTopic() {
   return pathParts[2];
 }
 
+function getTextColor() {
+  return getComputedStyle(document.documentElement)
+    .getPropertyValue("--text")
+    .trim();
+}
+
 function setUpParameters(render, parameters, modelPrefix) {
   parameters.forEach((param) => {
     const slider = document.getElementById(`slider${modelPrefix}${param}`);
@@ -54,7 +60,6 @@ function drawSolowGraph() {
     .attr("transform", `translate(0, ${height})`)
     .call(d3.axisBottom(x))
     .append("text")
-    .attr("fill", "#000")
     .attr("x", width + 10)
     .attr("y", -10)
     .style("text-anchor", "end")
@@ -67,7 +72,6 @@ function drawSolowGraph() {
     .append("g")
     .call(d3.axisLeft(y))
     .append("text")
-    .attr("fill", "#000")
     .attr("x", 0)
     .attr("y", -10)
     .style("text-anchor", "start")
@@ -162,7 +166,6 @@ function drawSolowGraph() {
     .attr("y1", y((d * k_star) / s))
     .attr("x2", x(k_star))
     .attr("y2", y(0))
-    .attr("stroke", "black")
     .attr("stroke-width", 1)
     .attr("stroke-dasharray", "5,5");
 
@@ -239,7 +242,6 @@ function drawRomerGraph() {
     .attr("transform", `translate(0, ${height})`)
     .call(d3.axisBottom(x))
     .append("text")
-    .attr("fill", "#000")
     .attr("x", width + 10)
     .attr("y", -10)
     .style("text-anchor", "end")
@@ -254,7 +256,6 @@ function drawRomerGraph() {
     .append("g")
     .call(d3.axisLeft(y).ticks(10, d3.format(".1s")))
     .append("text")
-    .attr("fill", "#000")
     .attr("x", 0)
     .attr("y", -10)
     .style("text-anchor", "start")
@@ -332,7 +333,6 @@ function drawRomerlGraph() {
     .attr("transform", `translate(0, ${height})`)
     .call(d3.axisBottom(x))
     .append("text")
-    .attr("fill", "#000")
     .attr("x", width + 10)
     .attr("y", -10)
     .style("text-anchor", "end")
@@ -347,7 +347,6 @@ function drawRomerlGraph() {
     .append("g")
     .call(d3.axisLeft(y).ticks(10, d3.format(".1s")))
     .append("text")
-    .attr("fill", "#000")
     .attr("x", 0)
     .attr("y", -10)
     .style("text-anchor", "start")
@@ -374,7 +373,6 @@ function drawRomerlGraph() {
     .attr("y1", y(romerData[T_MAX - 1].Y))
     .attr("x2", x(t0))
     .attr("y2", height)
-    .attr("stroke", "black")
     .attr("stroke-width", 1)
     .attr("stroke-dasharray", "4");
 
@@ -478,7 +476,6 @@ function drawRomerSolowGraph() {
     .attr("transform", `translate(0, ${height})`)
     .call(d3.axisBottom(x))
     .append("text")
-    .attr("fill", "#000")
     .attr("x", width + 10)
     .attr("y", -10)
     .style("text-anchor", "end")
@@ -493,7 +490,6 @@ function drawRomerSolowGraph() {
     .append("g")
     .call(d3.axisLeft(y).ticks(10, d3.format(".1s")))
     .append("text")
-    .attr("fill", "#000")
     .attr("x", 0)
     .attr("y", -10)
     .style("text-anchor", "start")
@@ -575,7 +571,6 @@ function drawRomerSolowChangeGraph() {
     .attr("transform", `translate(0, ${height})`)
     .call(d3.axisBottom(x))
     .append("text")
-    .attr("fill", "#000")
     .attr("x", width + 10)
     .attr("y", -10)
     .style("text-anchor", "end")
@@ -590,7 +585,6 @@ function drawRomerSolowChangeGraph() {
     .append("g")
     .call(d3.axisLeft(y).ticks(10, d3.format(".1s")))
     .append("text")
-    .attr("fill", "#000")
     .attr("x", 0)
     .attr("y", -10)
     .style("text-anchor", "start")
@@ -617,7 +611,6 @@ function drawRomerSolowChangeGraph() {
     .attr("y1", y(romerSolowData[T_MAX - 1].Y))
     .attr("x2", x(t0))
     .attr("y2", height)
-    .attr("stroke", "black")
     .attr("stroke-width", 1)
     .attr("stroke-dasharray", "4");
 

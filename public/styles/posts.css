@@ -22,7 +22,7 @@ li {
 .post-title::before {
   content: "";
   position: absolute;
-  background-color: var(--topic-color, black);
+  background-color: var(--topic-color, var(--text));
   height: 30px;
   width: 2px;
   bottom: -10px;
@@ -32,7 +32,7 @@ li {
 .post-title::after {
   content: "";
   position: absolute;
-  background-color: var(--topic-color, black);
+  background-color: var(--topic-color, var(--text));
   width: 200px;
   height: 2px;
   bottom: -10px;
@@ -103,7 +103,7 @@ article h3::before,
 .post-article h3::before {
   position: absolute;
   left: 0;
-  color: var(--topic-color, #000);
+  color: var(--topic-color, var(--text));
   margin-right: 0.5em;
 }
 
