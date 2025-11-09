@@ -41,7 +41,7 @@ li {
 
 .post-meta {
   font-size: 1.3em;
-  color: black;
+  color: var(--text);
   margin-left: 100px;
 }
 
@@ -118,12 +118,12 @@ article pre {
   padding: 1rem;
   overflow-x: auto;
   border-radius: 4px;
-  background: #f4f4f4 !important;
-  border: 1px solid #e1e1e1;
+  background: var(--code-bg) !important;
+  border: 1px solid var(--border);
 }
 
 pre * {
-  background: #f4f4f4 !important;
+  background: var(--code-bg) !important;
 }
 
 :not(pre) > code {
@@ -131,9 +131,9 @@ pre * {
   padding: 4px;
   margin: 0 5px;
   white-space: nowrap;
-  border: 1px solid #e1e1e1;
+  border: 1px solid var(--border);
   border-radius: 4px;
-  background: #f4f4f4 !important;
+  background: var(--code-bg) !important;
 }
 
 .astro-code {
