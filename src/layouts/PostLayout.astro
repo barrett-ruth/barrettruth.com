@@ -72,9 +72,9 @@ const topicColor = getTopicColor(post?.collection);
   </div>
 
   <Fragment slot="scripts">
-    <script type="module" src="/scripts/index.js"></script>
+    <script src="/scripts/index.js"></script>
     <script src="/scripts/centerKatex.js" is:inline></script>
-    {frontmatter.scripts?.map((src) => <script type="module" src={src} />)}
+    {frontmatter.scripts?.map((src) => <script src={src} />)}
     <slot name="scripts" />
   </Fragment>
 </BaseLayout>
