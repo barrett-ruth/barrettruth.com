@@ -95,3 +95,72 @@ $ sudo git config --system init.defaultBranch main
 
 - **It feels great to do things yourself**: I used GPT-4o for linux server command help, that was about it
 - **Always ask "what is this?" before using something**: this would've saved me hours of realizing a 12 year old perl script should not have been running my git ui.
+
+# update: moving to lightsail <span class="date">09/11/2025</span>
+
+Welp, ec2 costed way too much (~$15/mo!). Enter [AWS Lightsail](https://aws.amazon.com/lightsail/): small compute with a flat $5/mo charge. This is a reasonably "scalable" solution for my website&mdash;unfortunately I do not have too much traffic as of now.
+
+Anyways, the migration is complete. Everything is nearly identical but my HTTPD config has been minimally updated as follows:
+- Now that I host project descriptions on `https://barrettruth.com/git/<project>.html` and gists on `https://barrettruth.com/gist/<code>`, support `{git,gist}.barrettruth.com->barrettruth.com/{git,gist}.html`
+- Minify and simplify letsencrypt logic for the domain
+
+Here's the updated config:
+
+```apacheconf
+<VirtualHost *:80>
+    ServerName git.barrettruth.com
+    Redirect permanent / https://barrettruth.com/git.html
+</VirtualHost>
+
+<VirtualHost *:80>
+    ServerName gist.barrettruth.com
+    Redirect permanent / https://barrettruth.com/gist.html
+</VirtualHost>
+
+<VirtualHost *:443>
+    ServerName git.barrettruth.com
+
+    SSLEngine on
+    SSLCertificateFile /etc/letsencrypt/live/git.barrettruth.com/fullchain.pem
+    SSLCertificateKeyFile /etc/letsencrypt/live/git.barrettruth.com/privkey.pem
+    Include /etc/letsencrypt/options-ssl-apache.conf
+
+    Redirect "/" "https://barrettruth.com/git.html"
+
+    ErrorLog /var/log/httpd/unified.log
+    CustomLog /var/log/httpd/unified.log combined
+</VirtualHost>
+
+<VirtualHost *:443>
+    ServerName gist.barrettruth.com
+
+    SSLEngine on
+    SSLCertificateFile /etc/letsencrypt/live/git.barrettruth.com/fullchain.pem
+    SSLCertificateKeyFile /etc/letsencrypt/live/git.barrettruth.com/privkey.pem
+    Include /etc/letsencrypt/options-ssl-apache.conf
+
+    Redirect "/" "https://barrettruth.com/gist.html"
+
+    ErrorLog /var/log/httpd/unified.log
+    CustomLog /var/log/httpd/unified.log combined
+</VirtualHost>
+
+<VirtualHost *:443>
+    ServerName barrettruth.com
+
+    SSLEngine on
+    SSLCertificateFile /etc/letsencrypt/live/git.barrettruth.com/fullchain.pem
+    SSLCertificateKeyFile /etc/letsencrypt/live/git.barrettruth.com/privkey.pem
+    Include /etc/letsencrypt/options-ssl-apache.conf
+
+    DocumentRoot /var/www/html
+    <Directory /var/www/html>
+        Options -Indexes +FollowSymLinks
+        AllowOverride All
+        Require all granted
+    </Directory>
+
+    ErrorLog /var/log/httpd/unified.log
+    CustomLog /var/log/httpd/unified.log combined
+</VirtualHost>
+```
