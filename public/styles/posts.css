@@ -40,14 +40,14 @@ li {
 }
 
 .post-meta {
-  font-size: 1.3em;
+  font-size: 1.6em;
   color: var(--text);
   margin-left: 100px;
 }
 
 .post-article {
   font-size: 1.5em;
-  line-height: 1.5em;
+  line-height: 1.25;
   padding-bottom: 50px;
 }
 
@@ -67,11 +67,13 @@ article h3,
 
 article h1,
 .post-article h1 {
+  font-size: 1.8em;
   padding-left: 1.5em;
 }
 
 article h2,
 .post-article h2 {
+  font-size: 1.2em;
   padding-left: 2em;
 }
 
@@ -141,28 +143,16 @@ article pre {
   font-size: 0.8em !important;
 }
 
-.post-article h1:has(.date),
-.post-article h2:has(.date) {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-}
-
-.post-article h1 .date,
-.post-article h2 .date {
-  font-weight: normal;
-}
-
 @media (max-width: 768px) {
   .post-title {
-    font-size: 1.8em;
+    font-size: 3em;
   }
 
   .post-meta {
-    font-size: 1.2em;
+    font-size: 1.6em;
   }
 
   .post-article {
-    font-size: 1em;
+    font-size: 1.3em;
   }
 }
