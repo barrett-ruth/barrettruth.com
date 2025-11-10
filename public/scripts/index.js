@@ -136,13 +136,27 @@
     const delay = 500;
 
     const colorFn = window.getTopicColor || (() => "");
-    document.querySelectorAll("[data-topic]").forEach((t) => {
-      t.classList.remove("active");
-      t.style.color = "";
-    });
-    link.classList.add("active");
-    const c = colorFn(topic);
-    if (c) link.style.color = c;
+    const topicKey = topic.split("/")[0];
+    const willNavigateAway = !(
+      isHome &&
+      topic &&
+      window.postsByCategory &&
+      window.postsByCategory[topic]
+    );
+
+    if (willNavigateAway) {
+      link.classList.add("active");
+      const c = colorFn(topicKey);
+      if (c) link.style.color = c;
+    } else {
+      document.querySelectorAll("[data-topic]").forEach((t) => {
+        t.classList.remove("active");
+        t.style.color = "";
+      });
+      link.classList.add("active");
+      const c = colorFn(topicKey);
+      if (c) link.style.color = c;
+    }
 
     const displayPath = isHome ? `/${topic}` : displayPathFromHref(href);
 
