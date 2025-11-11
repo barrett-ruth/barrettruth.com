@@ -3,16 +3,14 @@ li {
 }
 
 .post-wrapper {
-  display: flex;
   width: 100%;
-  justify-content: center;
-  align-items: flex-start;
   position: relative;
 }
 
 .toc-column {
   position: absolute;
-  left: calc(50% - 400px - 4rem - 200px);
+  left: 2rem;
+  top: 0;
   width: 200px;
   padding-top: 190px;
 }
@@ -24,6 +22,7 @@ li {
 .post-container {
   width: 65%;
   max-width: 800px;
+  margin: 0 auto;
 }
 
 .post-title {
@@ -163,26 +162,24 @@ article pre {
   .toc-column {
     display: none;
   }
-
-  .post-container {
-    width: 80%;
-  }
 }
 
 @media (max-width: 768px) {
+  .post-container {
+    width: 85%;
+  }
+
   .post-title {
-    font-size: 3em;
+    font-size: 1.8em;
+    margin: 30px 0;
   }
 
   .post-meta {
-    font-size: 1.6em;
+    font-size: 1.2em;
+    margin-left: 50px;
   }
 
   .post-article {
-    font-size: 1.3em;
-  }
-
-  .post-container {
-    width: 90%;
+    font-size: 1.1em;
   }
 }

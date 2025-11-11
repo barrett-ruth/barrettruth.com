@@ -217,6 +217,7 @@ footer {
   display: flex;
   justify-content: center;
   flex: 1;
+  width: 100%;
 }
 
 a {
@@ -232,6 +233,14 @@ li {
     linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
     linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
   background-size: 3vw 3vw;
+}
+
+html:has(body.graph-background) {
+  background-image:
+    linear-gradient(to right, var(--grid-color) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
+  background-size: 3vw 3vw;
+  background-color: var(--bg);
 }
 
 .terminal-cursor {
