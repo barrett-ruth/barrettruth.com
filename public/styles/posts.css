@@ -160,22 +160,12 @@ article pre {
 }
 
 @media (max-width: 1200px) {
-  .post-wrapper {
-    grid-template-columns: 1fr;
-    padding: 0 2rem;
-  }
-
   .toc-column {
-    grid-column: 1;
-    justify-self: center;
-    width: 100%;
-    max-width: 800px;
-    padding-top: 0;
+    display: none;
   }
 
   .post-container {
-    grid-column: 1;
-    width: 100%;
+    width: 80%;
   }
 }
 
