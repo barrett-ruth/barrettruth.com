@@ -5,6 +5,7 @@ body {
   overscroll-behavior: none;
   height: 100vh;
   overflow: hidden;
+  overflow-x: hidden;
 }
 
 .content {
@@ -73,12 +74,12 @@ ul {
 
 @media (max-width: 768px) {
   .topics {
-    font-size: 1.8em;
+    font-size: 2em;
     padding: 0 20px;
   }
 
   .posts {
-    font-size: 1.8em;
+    font-size: 1.47em;
     padding: 0 20px;
   }
 
