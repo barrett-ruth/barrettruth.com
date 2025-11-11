@@ -8,9 +8,9 @@ scripts: ["/scripts/models-of-production.js"]
 
 This post offers a basic introduction to the Solow, Romer, and Romer-Solow economic models, as taught by [Vladimir Smirnyagin](https://www.vladimirsmirnyagin.com/) and assisted by [Donghyun Suh](https://www.donghyunsuh.com/) in Intermediate Macroeconomics (ECON 3020) during the Spring semester of 2024 at the University of Virginia.
 
-## solow
+# solow
 
-### introduction
+## introduction
 
 The Solow Model is an economic model of production that incorporates the idea of capital accumulation. Based on the [Cobb-Douglas production function](https://en.wikipedia.org/wiki/Cobb%E2%80%93Douglas_production_function), the Solow Model describes production as follows:
 
@@ -37,7 +37,7 @@ Including the production function, these four ideas encapsulate the Solow Model:
 3. $L_t = \bar{L}$
 4. $I_t = \bar{s} Y_t$
 
-### solving the model
+## solving the model
 
 Visualizing the model, namely output as a function of capital, provides helpful intuition before solving it.
 
@@ -138,7 +138,7 @@ $$
 (k^*,y^*)=(\frac{K^*}{\bar{L}},\frac{Y^*}{\bar{L}}) =((\frac{\bar{s}\bar{A}}{\bar{d}})^\frac{1}{1-\alpha}, \bar{A}^\frac{1}{1-\alpha}(\frac{\bar{s}}{\bar{d}})^\frac{\alpha}{1-\alpha})
 $$
 
-### analysis
+## analysis
 
 Using both mathematical intuition and manipulating the visualization above, we find that:
 
@@ -159,9 +159,9 @@ $$
 
 We see that TFP is more important in explaining the differences in per-capital output ($\frac{1}{1-\alpha}>\frac{\alpha}{1-\alpha},\alpha\in[0,1)$). Notably, the Solow Model does not give any insights into how to alter the most important predictor of output, TFP.
 
-## romer
+# romer
 
-### introduction
+## introduction
 
 How, then, can we address these shortcomings?
 
@@ -288,7 +288,7 @@ Playing with the sliders, this graph may seem underwhelming in comparison to the
   </table>
 </div>
 
-### solving the model
+## solving the model
 
 To find the output in terms of exogenous parameters, first note that
 
@@ -314,7 +314,7 @@ $$
 Y_t=A_t L_{yt}=A_0(1+\bar{z}\bar{l}\bar{L})^t(1-\bar{l})\bar{L}
 $$
 
-### analysis
+## analysis
 
 We see the Romer model exhibits long-run growth because ideas have non-diminishing returns due to their nonrival nature. In this model, capital and income eventually slow but ideas continue to yield increasing, unrestricted returns.
 
@@ -366,9 +366,9 @@ Changes in the growth rate of ideas, then, alter the growth rate of output itsel
 
 Notably, while both the Romer and Solow Models help to analyze growth across countries, they both are unable to resolve one question: why can and do investment rates and TFP differ across contries? This is a more fundamental economic question involving culture, institutions, and social dynamics—one day I hope we'll have an answer.
 
-## romer-solow
+# romer-solow
 
-### introduction
+## introduction
 
 While the Romer Model provides an avenue for long-run economic growth, it is anything but realistic—surely economies due not grow at an ever-increasing blistering rate into perpetuity. A model in which:
 
@@ -395,7 +395,7 @@ Combining the dynamics of the Romer Model's ideas and the Solow Model's capital 
   </div>
 </div>
 
-### solving the model
+## solving the model
 
 Based on the the motivations for creating this model, it is more useful to first analyze the growth rates of equilibrium long run output $Y_t^*$.
 
@@ -445,7 +445,7 @@ $$
 Y_t^*={(A_0(1+\bar{z}\bar{l}\bar{L})^t})^\frac{1}{1-\alpha}(\frac{\bar{s}}{\frac{\bar{z}\bar{l}\bar{L}}{1-\alpha}+\bar{d}})^\frac{\alpha}{1-\alpha}(1-\bar{l})\bar{L}
 $$
 
-### analysis
+## analysis
 
 First looking at the growth rate of output, $g*Y^*=\frac{\bar{z}\bar{l}\bar{L}}{1-\alpha}$, idea-driving factors and an increased allocation of labor to output increase the equilibrium Balanced Growth Path—the \_level\* of long-run growth. Thus, this model captures the influences of both capital and ideas on economic growth.
 
