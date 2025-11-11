@@ -22,7 +22,7 @@ const tocHeadings = headings.filter((h) => h.depth <= 2);
         {tocHeadings.map((heading) => (
           <a
             href={`#${heading.slug}`}
-            class={heading.depth === 2 ? "sub" : "main"}
+            class={heading.depth === 1 ? "h1-link" : "h2-link"}
           >
             {heading.text}
           </a>
@@ -49,6 +49,8 @@ const tocHeadings = headings.filter((h) => h.depth <= 2);
     flex-direction: column;
     gap: 0.3rem;
     align-items: flex-start;
+    margin: 0;
+    padding: 0;
   }
 
   .toc-nav a {
@@ -62,11 +64,11 @@ const tocHeadings = headings.filter((h) => h.depth <= 2);
     text-decoration: underline;
   }
 
-  .toc-nav a.main {
+  .toc-nav a.h1-link {
     padding-left: 0;
   }
 
-  .toc-nav a.sub {
+  .toc-nav a.h2-link {
     padding-left: 1.5rem;
   }
 
