@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
 import { getTopicColor } from "../utils/colors.js";
+import TableOfContents from "../components/TableOfContents.astro";
 
 interface Props {
   frontmatter: {
@@ -11,16 +12,28 @@ interface Props {
     useD3?: boolean;
     scripts?: string[];
     category?: string;
+    showToc?: boolean;
   };
   post?: {
     id?: string;
     collection?: string;
     slug?: string;
   };
+  headings?: Array<{
+    depth: number;
+    slug: string;
+    text: string;
+  }>;
 }
 
-const { frontmatter, post } = Astro.props as Props;
-const { title, description, useKatex = false, useD3 = false } = frontmatter;
+const { frontmatter, post, headings = [] } = Astro.props as Props;
+const {
+  title,
+  description,
+  useKatex = false,
+  useD3 = false,
+  showToc = false,
+} = frontmatter;
 
 let documentTitle = title;
 if (post?.collection === "git" && post?.slug) {
@@ -54,17 +67,27 @@ const topicColor = getTopicColor(post?.collection);
   </Fragment>
 
   <div
-    class="post-container"
+    class="post-wrapper"
     style={topicColor ? `--topic-color: ${topicColor};` : ""}
   >
-    <header class="post-header">
-      <h1 class="post-title">{title}</h1>
-      {frontmatter.date && <p class="post-meta">{frontmatter.date}</p>}
-    </header>
+    {
+      showToc && headings.length > 0 && (
+        <aside class="toc-column">
+          <TableOfContents headings={headings} />
+        </aside>
+      )
+    }
 
-    <article class="post-article">
-      <slot />
-    </article>
+    <div class="post-container">
+      <header class="post-header">
+        <h1 class="post-title">{title}</h1>
+        {frontmatter.date && <p class="post-meta">{frontmatter.date}</p>}
+      </header>
+
+      <article class="post-article">
+        <slot />
+      </article>
+    </div>
   </div>
 
   <Fragment slot="scripts">

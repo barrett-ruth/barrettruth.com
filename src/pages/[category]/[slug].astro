@@ -32,7 +32,7 @@ interface Props {
 
 const { post } = Astro.props;
 const category = Astro.params.category;
-const { Content } = await post.render();
+const { Content, headings } = await post.render();
 const pageTitle = `${category}/${post.data.title ?? post.slug}`;
 
 if (post.data?.redirect) {
@@ -40,7 +40,7 @@ if (post.data?.redirect) {
 }
 ---
 
-<PostLayout frontmatter={post.data} post={post}>
+<PostLayout frontmatter={post.data} post={post} headings={headings}>
   <Fragment slot="head">
     <title>{pageTitle}</title>
     <script src="/scripts/index.js" is:inline></script>
