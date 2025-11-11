@@ -80,7 +80,7 @@ article h3,
   position: relative;
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
+  align-items: center;
 }
 
 article h1,
