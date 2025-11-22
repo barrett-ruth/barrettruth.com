@@ -1,27 +1,50 @@
-html,
-body {
-  display: flex;
-  flex-direction: column;
-  overscroll-behavior: none;
+html {
   height: 100vh;
   overflow: hidden;
-  overflow-x: hidden;
+}
+
+body {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  height: 100%;
+  overflow: hidden;
+}
+
+.main {
+  height: 100%;
+  overflow: hidden;
 }
 
 .content {
-  display: flex;
-  justify-content: space-between;
   width: 100%;
-}
-
-.posts,
-.topics {
-  padding: 0 40px;
-  align-self: center;
+  height: 100%;
+  padding: 40px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  box-sizing: border-box;
+  display: grid;
+  place-items: center;
 }
 
 .topics {
   font-size: 3em;
+  min-height: 0;
+  max-height: 100%;
+  width: 100%;
+  column-count: 2;
+  column-gap: 80px;
+  column-fill: auto;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.topics li:first-child {
+  margin-top: 0;
+}
+
+.topics li:last-child {
+  margin-bottom: 0;
 }
 
 .posts {
