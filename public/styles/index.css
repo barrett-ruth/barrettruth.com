@@ -4,39 +4,60 @@ html {
 }
 
 body {
-  display: grid;
-  grid-template-rows: auto 1fr auto;
-  height: 100%;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
   overflow: hidden;
 }
 
+/* Fixed header and footer for list pages */
+body:has(.content) header {
+  flex-shrink: 0;
+}
+
+body:has(.content) footer {
+  flex-shrink: 0;
+}
+
 .main {
-  height: 100%;
+  flex: 1;
   overflow: hidden;
+  display: flex;
+  align-items: center;
 }
 
 .content {
   width: 100%;
   height: 100%;
   padding: 40px;
-  overflow-x: auto;
-  overflow-y: hidden;
   box-sizing: border-box;
-  display: grid;
-  place-items: center;
+  display: flex;
+  gap: 80px;
+  align-items: center;
+  justify-content: space-between;
+  overflow: hidden;
 }
 
 .topics {
   font-size: 3em;
-  min-height: 0;
-  max-height: 100%;
-  width: 100%;
+  max-height: calc(100vh - 200px);
   column-count: 2;
   column-gap: 80px;
   column-fill: auto;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  list-style: none;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.topics::-webkit-scrollbar {
+  display: none;
+}
+
+.topics {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .topics li:first-child {
@@ -50,7 +71,14 @@ body {
 .posts {
   font-size: 2.2em;
   text-align: right;
-  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 0;
+}
+
+.posts:empty {
+  display: none;
 }
 
 a {
@@ -63,7 +91,7 @@ a {
 
 ul {
   list-style: none;
-  margin: none;
+  margin: 0;
 }
 
 .topic a {
@@ -95,10 +123,21 @@ ul {
   right: 0;
 }
 
+body:has(.topics:only-child) .content {
+  justify-content: flex-start;
+}
+
+body:has(.topics:only-child) .topics {
+  column-count: 2;
+  column-fill: auto;
+  max-width: 1200px;
+}
+
 @media (max-width: 768px) {
   .topics {
     font-size: 2em;
     padding: 0 20px;
+    column-count: 1;
   }
 
   .posts {
