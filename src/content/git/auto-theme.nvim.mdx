@@ -34,25 +34,21 @@ As of November 28, 2025, I've created [this script](https://github.com/barrett-r
 ## successes
 
 1. neovim: I use my non-polling, macOS/linux-supporting automatic theme switcher [auto-theme.nvim](https://github.com/barrett-ruth/auto-theme.nvim)
-2. ghostty (macOS): `osascript` clicks the "Reload Configuration" button in the Ghostty menu bar configuration.
-3. sioyek: Any changes to user configuration are automatically picked up and reloaded--easy.
+2. ghostty: Ghostty supports [light and dark themes based on the system appearance](https://github.com/tmux/tmux/wiki)--easy.
+3. sioyek: Any changes to user configuration are automatically reloaded--a script updates user preferences in-place
 4. ungoogled-chromium: I folded and used the default system theme which automatically reads and updates according to the system environment
-5. swaywm (linux): sioyek reads from a symlink'ed theme file updated and reloaded by the script
-6. rofi insert here
-7. fzf insert here
-8. tmux: I re-export `$THEME` with `set-environment` and force-redraw the bar with `refresh-client -S` to update any relevant ui.
+5. swaywm (linux): sway reads from a symlink'ed theme file `sed`ed, updated and reloaded by the script
+6. rofi: `config.rasi` also reads from a symlink'ed theme files that is updated and reloaded by the script
+7. fzf insert here - read from symlinked file?/cat?
+8. tmux: `tmux.conf` reads from symlink'ed theme files that are automatically reloaded with `source-file`
 
 ## failures
 
 Unfortunately, the following programs I've found nearly impossible to dynamically reload:
-
-2. ghostty (linux): I've bound `alt+r` to the `reload_config` command and press it manually.
-
-- I could not find an `osacript`-equivalent way to reload the config in linux.
 
 9. ripgrep: I use the default theme.
 
 - The ripgrep global configuration file does not support environment variables, exterminating the option to provide a `${THEME}`-based path in the global configuration file.
 - I'm also not willing to write an alias wrapper. I don't like to stray too far from the defaults.
 
-10. cabn't force export in all shells - doesn't matter because all sub-programs use it
+10. zsh: it's impossible to update `$THEME` across all existing shells (simply a limit of posix). However, all affected _programs_ will read the proper `$THEME`--I'm fine compromising here.

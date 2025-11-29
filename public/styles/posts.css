@@ -5,7 +5,7 @@ body:has(.post-container) {
   overflow: hidden;
 }
 
-body:has(.post-container) header {
+body:has(.post-container) > header {
   flex-shrink: 0;
   position: sticky;
   top: 0;
@@ -19,7 +19,7 @@ body:has(.post-container) .main {
   overflow-x: hidden;
 }
 
-body:has(.post-container) footer {
+body:has(.post-container) > footer {
   flex-shrink: 0;
 }
 
