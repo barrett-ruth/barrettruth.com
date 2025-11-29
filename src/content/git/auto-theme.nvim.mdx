@@ -4,4 +4,55 @@ slug: "auto-theme.nvim"
 date: "11/28/2025"
 ---
 
-wip
+# the problem
+
+I toggle between light and dark mode at at around 17:00 every day. Resetting my environment and theme across all my applications was a pain.
+
+I use my color scheme [midnight.nvim](/git/midnight.nvim.html) on macOS and linux with these applications:
+
+1. [neovim](https://neovim.io/)
+2. [ghostty](https://ghostty.org/)
+3. [sioyek](https://sioyek.info/)
+4. [ungoogled-chromium](https://github.com/ungoogled-software/ungoogled-chromium)
+5. [swaywm](https://swaywm.org/)
+6. [rofi](https://github.com/davatorium/rofi)
+7. [fzf](https://github.com/junegunn/fzf)
+8. [tmux](https://github.com/tmux/tmux/wiki)
+9. [ripgrep](https://github.com/BurntSushi/ripgrep)
+10. [zsh](https://www.zsh.org/)
+
+# criteria for solution
+
+I run or trigger _one command_--every application updates automatically.
+
+The feasability of this depends on the underlying support software has for dynamic reloading of configuration. In many cases this is not possible.
+
+# the solution
+
+As of November 28, 2025, I've created [this script](https://github.com/barrett-ruth/dots/blob/main/scripts/theme) which is bound by a [karabiner](https://karabiner-elements.pqrs.org/) and [keyd](https://github.com/rvaiya/keyd) binding for macOS and linux, respectively.
+
+## successes
+
+1. neovim: I use my non-polling, macOS/linux-supporting automatic theme switcher [auto-theme.nvim](https://github.com/barrett-ruth/auto-theme.nvim)
+2. ghostty (macOS): `osascript` clicks the "Reload Configuration" button in the Ghostty menu bar configuration.
+3. sioyek: Any changes to user configuration are automatically picked up and reloaded--easy.
+4. ungoogled-chromium: I folded and used the default system theme which automatically reads and updates according to the system environment
+5. swaywm (linux): sioyek reads from a symlink'ed theme file updated and reloaded by the script
+6. rofi insert here
+7. fzf insert here
+8. tmux: I re-export `$THEME` with `set-environment` and force-redraw the bar with `refresh-client -S` to update any relevant ui.
+
+## failures
+
+Unfortunately, the following programs I've found nearly impossible to dynamically reload:
+
+2. ghostty (linux): I've bound `alt+r` to the `reload_config` command and press it manually.
+
+- I could not find an `osacript`-equivalent way to reload the config in linux.
+
+9. ripgrep: I use the default theme.
+
+- The ripgrep global configuration file does not support environment variables, exterminating the option to provide a `${THEME}`-based path in the global configuration file.
+- I'm also not willing to write an alias wrapper. I don't like to stray too far from the defaults.
+
+10. cabn't force export in all shells - doesn't matter because all sub-programs use it
