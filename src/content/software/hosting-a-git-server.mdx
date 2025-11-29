@@ -110,7 +110,7 @@ Here's the updated config:
 ```apacheconf
 <VirtualHost *:80>
     ServerName git.barrettruth.com
-    Redirect permanent / https://barrettruth.com/git.html
+    Redirect permanent / https://git.barrettruth.com/
 </VirtualHost>
 
 <VirtualHost *:80>
@@ -126,10 +126,18 @@ Here's the updated config:
     SSLCertificateKeyFile /etc/letsencrypt/live/git.barrettruth.com/privkey.pem
     Include /etc/letsencrypt/options-ssl-apache.conf
 
-    Redirect "/" "https://barrettruth.com/git.html"
+    DocumentRoot /srv/git
+    SetEnv GIT_PROJECT_ROOT /srv/git
+    SetEnv GIT_HTTP_EXPORT_ALL
+    ScriptAlias / /usr/libexec/git-core/git-http-backend/
 
-    ErrorLog /var/log/httpd/unified.log
-    CustomLog /var/log/httpd/unified.log combined
+    <Directory "/usr/libexec/git-core">
+        Options +ExecCGI -MultiViews +SymLinksIfOwnerMatch
+        Require all granted
+    </Directory>
+
+    ErrorLog /var/log/httpd/git_error.log
+    CustomLog /var/log/httpd/git_access.log combined
 </VirtualHost>
 
 <VirtualHost *:443>
