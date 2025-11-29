@@ -29,18 +29,22 @@ const promptText = topic ? `barrett@ruth:~$ ${topic}` : "barrett@ruth:~$";
     cursor: pointer;
     user-select: none;
   }
-  @media (max-width: 768px) {
+  @media (max-width: 640px) {
     header {
       flex-direction: row;
-      flex-wrap: wrap;
+      justify-content: space-between;
       gap: 10px;
     }
     .terminal-container {
       flex: 1 1 auto;
       min-width: 0;
     }
+    .terminal-prompt {
+      font-size: 0.9em;
+    }
     #theme-toggle {
       flex: 0 0 auto;
+      font-size: 1.2em;
     }
   }
 </style>

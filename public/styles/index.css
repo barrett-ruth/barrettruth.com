@@ -1,29 +1,24 @@
-html {
-  height: 100vh;
-  overflow: hidden;
-}
-
-body {
+/* List pages only - no scroll */
+body:has(.content) {
   display: flex;
   flex-direction: column;
   height: 100vh;
   overflow: hidden;
 }
 
-/* Fixed header and footer for list pages */
-body:has(.content) header {
-  flex-shrink: 0;
+body:has(.content) > header {
+  flex: 0 0 auto;
 }
 
-body:has(.content) footer {
-  flex-shrink: 0;
-}
-
-.main {
-  flex: 1;
-  overflow: hidden;
+body:has(.content) > .main {
+  flex: 1 1 auto;
+  min-height: 0;
   display: flex;
   align-items: center;
+}
+
+body:has(.content) > footer {
+  flex: 0 0 auto;
 }
 
 .content {
@@ -35,29 +30,19 @@ body:has(.content) footer {
   gap: 80px;
   align-items: center;
   justify-content: space-between;
-  overflow: hidden;
 }
 
 .topics {
-  font-size: 3em;
-  max-height: calc(100vh - 200px);
-  column-count: 2;
-  column-gap: 80px;
+  font-size: clamp(1.5em, 4vw, 3em);
+  max-height: 80vh;
+  column-width: 300px;
+  column-gap: clamp(20px, 4vw, 60px);
   column-fill: auto;
   margin: 0;
   padding: 0;
   list-style: none;
   overflow-y: auto;
   overflow-x: hidden;
-}
-
-.topics::-webkit-scrollbar {
-  display: none;
-}
-
-.topics {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
 }
 
 .topics li:first-child {
@@ -69,7 +54,7 @@ body:has(.content) footer {
 }
 
 .posts {
-  font-size: 2.2em;
+  font-size: clamp(1.2em, 3vw, 2.2em);
   text-align: right;
   display: flex;
   flex-direction: column;
@@ -123,29 +108,57 @@ ul {
   right: 0;
 }
 
+body:has(#repo-list) .content,
 body:has(.topics:only-child) .content {
   justify-content: flex-start;
+  display: block;
 }
 
+body:has(#repo-list) .topics,
 body:has(.topics:only-child) .topics {
-  column-count: 2;
+  column-width: 350px;
   column-fill: auto;
-  max-width: 1200px;
+  height: calc(100vh - 200px);
+  overflow-y: hidden;
+  overflow-x: auto;
+  max-height: calc(100vh - 200px);
+  width: 100%;
+}
+
+body:has(#repo-list) .posts {
+  display: none;
 }
 
 @media (max-width: 768px) {
+  body:has(.content) {
+    height: auto;
+    min-height: 100vh;
+  }
+
+  body:has(.content) > .main {
+    display: block;
+    min-height: calc(100vh - 200px);
+  }
+
+  .content {
+    display: block;
+    padding: 20px;
+    height: auto;
+  }
+
   .topics {
-    font-size: 2em;
-    padding: 0 20px;
+    font-size: 1.8em;
     column-count: 1;
+    max-height: none;
   }
 
   .posts {
-    font-size: 1.47em;
-    padding: 0 20px;
+    font-size: 1.4em;
+    margin-top: 30px;
   }
 
   .topic a {
+    display: block;
     margin-bottom: 15px;
   }
 }
