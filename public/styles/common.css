@@ -201,7 +201,7 @@ body {
 
 header,
 footer {
-  padding: 20px;
+  padding: 30px 20px;
   font-size: 1.5em;
   display: flex;
   align-items: center;
@@ -270,14 +270,18 @@ pre {
     "calt" 0;
 }
 
-@media (max-width: 768px) {
-  header {
-    font-size: 0.9em;
-    padding: 15px;
-  }
-
+@media (max-width: 1024px) {
+  header,
   footer {
-    font-size: 0.9em;
-    padding: 15px;
+    font-size: 1.2em;
+    padding: 20px 15px;
+  }
+}
+
+@media (max-width: 640px) {
+  header,
+  footer {
+    font-size: 1em;
+    padding: 15px 10px;
   }
 }

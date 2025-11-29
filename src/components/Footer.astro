@@ -29,11 +29,23 @@
     text-decoration: none;
     cursor: pointer;
   }
-  @media (max-width: 768px) {
+  @media (max-width: 1024px) {
+    footer {
+      flex-direction: column;
+      gap: 15px;
+    }
+    .footer-links-left,
+    .footer-links-right {
+      gap: 15px;
+    }
+  }
+
+  @media (max-width: 640px) {
     .footer-links-left,
     .footer-links-right {
       flex-direction: column;
-      gap: 5px;
+      gap: 10px;
+      align-items: center;
     }
   }
 </style>
