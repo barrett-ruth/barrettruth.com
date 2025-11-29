@@ -31,7 +31,7 @@
   }
   @media (max-width: 1024px) {
     footer {
-      flex-direction: column;
+      flex-direction: row;
       gap: 15px;
     }
     .footer-links-left,
@@ -41,11 +41,14 @@
   }
 
   @media (max-width: 640px) {
+    footer {
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
     .footer-links-left,
     .footer-links-right {
-      flex-direction: column;
-      gap: 10px;
-      align-items: center;
+      flex-direction: row;
+      gap: 15px;
     }
   }
 </style>

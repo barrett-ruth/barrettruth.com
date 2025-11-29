@@ -16,8 +16,8 @@ I use my color scheme [midnight.nvim](/git/midnight.nvim.html) on macOS and linu
 4. [ungoogled-chromium](https://github.com/ungoogled-software/ungoogled-chromium)
 5. [swaywm](https://swaywm.org/)
 6. [rofi](https://github.com/davatorium/rofi)
-7. [fzf](https://github.com/junegunn/fzf)
-8. [tmux](https://github.com/tmux/tmux/wiki)
+7. [tmux](https://github.com/tmux/tmux/wiki)
+8. [fzf](https://github.com/junegunn/fzf)
 9. [ripgrep](https://github.com/BurntSushi/ripgrep)
 10. [zsh](https://www.zsh.org/)
 
@@ -39,16 +39,12 @@ As of November 28, 2025, I've created [this script](https://github.com/barrett-r
 4. ungoogled-chromium: I folded and used the default system theme which automatically reads and updates according to the system environment
 5. swaywm (linux): sway reads from a symlink'ed theme file `sed`ed, updated and reloaded by the script
 6. rofi: `config.rasi` also reads from a symlink'ed theme files that is updated and reloaded by the script
-7. fzf insert here - read from symlinked file?/cat?
-8. tmux: `tmux.conf` reads from symlink'ed theme files that are automatically reloaded with `source-file`
+7. tmux: `tmux.conf` reads from symlink'ed theme files that are automatically reloaded with `source-file`
 
 ## failures
 
 Unfortunately, the following programs I've found nearly impossible to dynamically reload:
 
-9. ripgrep: I use the default theme.
-
-- The ripgrep global configuration file does not support environment variables, exterminating the option to provide a `${THEME}`-based path in the global configuration file.
-- I'm also not willing to write an alias wrapper. I don't like to stray too far from the defaults.
-
+8. fzf: Overwriting fzf's themes, from the interactive shell `fzf` binary to `fzf-{cd,file}-widget` to integration with [fzf-lua](https://github.com/ibhagwan/fzf-lua/), I found this potentially doable but just _way too complex_. Feel free to investigate yourself--I'm going with the default theme.
+9. ripgrep: I use the default theme. The ripgrep global configuration file does not support environment variables, exterminating the option to provide a `${THEME}`-based path in the global configuration file.
 10. zsh: it's impossible to update `$THEME` across all existing shells (simply a limit of posix). However, all affected _programs_ will read the proper `$THEME`--I'm fine compromising here.

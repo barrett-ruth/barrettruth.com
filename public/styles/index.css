@@ -34,13 +34,15 @@ body:has(.content) > footer {
 
 .topics {
   font-size: clamp(1.5em, 4vw, 3em);
-  max-height: 100%;
+  max-height: 80vh;
   column-width: 300px;
   column-gap: clamp(20px, 4vw, 60px);
   column-fill: auto;
   margin: 0;
   padding: 0;
   list-style: none;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .topics li:first-child {
@@ -106,43 +108,57 @@ ul {
   right: 0;
 }
 
+body:has(#repo-list) .content,
 body:has(.topics:only-child) .content {
   justify-content: flex-start;
+  display: block;
 }
 
+body:has(#repo-list) .topics,
 body:has(.topics:only-child) .topics {
-  column-width: 300px;
+  column-width: 350px;
   column-fill: auto;
+  height: calc(100vh - 200px);
+  overflow-y: hidden;
+  overflow-x: auto;
+  max-height: calc(100vh - 200px);
+  width: 100%;
 }
 
-@media (max-width: 1024px) {
+body:has(#repo-list) .posts {
+  display: none;
+}
+
+@media (max-width: 768px) {
   body:has(.content) {
-    height: 100vh;
+    height: auto;
+    min-height: 100vh;
+  }
+
+  body:has(.content) > .main {
+    display: block;
+    min-height: calc(100vh - 200px);
   }
 
   .content {
-    flex-direction: column;
+    display: block;
     padding: 20px;
-    gap: 40px;
-    justify-content: flex-start;
-    overflow-y: auto;
+    height: auto;
   }
 
   .topics {
-    font-size: 2em;
-    column-width: unset;
+    font-size: 1.8em;
     column-count: 1;
-    max-height: unset;
-    width: 100%;
+    max-height: none;
   }
 
   .posts {
-    font-size: 1.5em;
-    text-align: left;
-    width: 100%;
+    font-size: 1.4em;
+    margin-top: 30px;
   }
 
   .topic a {
+    display: block;
     margin-bottom: 15px;
   }
 }
