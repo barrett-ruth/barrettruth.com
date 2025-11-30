@@ -113,9 +113,17 @@ local socket_path = ('/tmp/nvim-%d.sock'):format(vim.fn.getpid())
 vim.fn.serverstart(socket_path)
 ```
 
+Then send a a command like so (see `:h remote`):
+
+```sh
+nvim --server "$socket" --remote-send "<c-o><cmd>lua require('fzf_reload').reload()<cr>" 2>/dev/null || true
+```
+
 Neovim instances can be found by just listing `/tmp/nvim-*.sock`.
 
 2. Re-configuring fzf-lua: fzf-lua does not support "dynamic" reconfiguration but you can re-initialize the plugin with `require('fzf-lua').setup(opts)`.
 
 - fzf: I expose a function for RPC calls `fzf_theme.reload_colors()` which re-initializes the fzf environment. Special care must be taken to store and pass down the _initial_ fzf-lua configuration and update it with the new environments colors.
 - ripgrep: automatically re-reads from `$RIPGREP_CONFIG_PATH`, a symlink updated by my theme script
+
+I confess that this solution is not perfect. For example, existing pickers cannot have their theme dynamically re-loaded ([I'm looking into this](https://github.com/ibhagwan/fzf-lua/discussions/2448)) as `FzFLua resume` cannot build theme context. I'm close enough (for now! >:)).
