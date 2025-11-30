@@ -10,7 +10,7 @@ I toggle between light and dark mode at at around 17:00 every day. Resetting my 
 
 ## the solution
 
-I spawn a OS-specific "watcher" (python process) to listen, in non-polling manner, for theme updates:
+I spawn a OS-specific watcher to listen, in a non-polling manner, for theme updates:
 
 - linux: I integrate with D-Bus, parsing and filtering messages for settings changes to the system appearance.
 - macOS: I integrate with the Apple toolkit AppKit to do the same thing--wait for a theme changed notification to be pushed out to the running app object and print accordingly.
@@ -21,7 +21,7 @@ Stdout is continually parsed from the job and the appropriate theme is set.
 
 OK, cool. Now, how can I implement automatic theme-switching for _all_ programs I use?
 
-> I use my color scheme [midnight.nvim](/git/midnight.nvim.html)
+> Note: I use my color scheme [midnight.nvim](/git/midnight.nvim.html)
 
 I most commonly use the following applications:
 
@@ -36,7 +36,7 @@ I most commonly use the following applications:
 9. [ripgrep](https://github.com/BurntSushi/ripgrep)
 10. [zsh](https://www.zsh.org/)
 
-> All of the code can be found in my [dotfiles](https://github.com/barrett-ruth/dots). The implementations are scattered and I provide no guarantee that files will not be moved. Unfortunately, that makes this post a wall of text.
+All of the code can be found in my [dotfiles](https://github.com/barrett-ruth/dots). The implementations are scattered and I provide no guarantee that files will not be moved
 
 ## success criteria
 
@@ -59,9 +59,9 @@ As of November 28, 2025, I've created [this script](https://github.com/barrett-r
 7. tmux: similarly to rofi, the config `tmux.conf` reads from symlink'ed theme files that are automatically reloaded with `source-file`. I also refresh the UI with `refresh-client`:
 
 ```sh
-ln -sf "$XDG_CONFIG_HOME/tmux/themes/$theme.tmux" "$XDG_CONFIG_HOME/tmux/themes/theme.tmux"
-tmux source-file "$XDG_CONFIG_HOME/tmux/themes/$theme.tmux"
-tmux refresh-client -S 2>/dev/null || true
+ln -sf ~/.config/tmux/themes/$theme.tmux ~/.config/tmux/themes/theme.tmux
+tmux source-file ~/.config/tmux/themes/$theme.tmux
+tmux refresh-client -S
 ```
 
 ### failures
@@ -82,11 +82,11 @@ a) cli programs
 
 Since, according to \#10 above, it is impossible to update all running shells, one way I can come to auto-updating program themes is in between terminal prompts. To get around this, I added a zsh precmd hook to my `zshrc` for both programs which checks if a symlink has been updated:
 
-- fzf: If `$XDG_CONFIG_HOME/fzf/themes/theme` is updated, re-export `$FZF_DEFAULT_OPTS` to include the new colors:
+- fzf: If `~/.config/fzf/themes/theme` is updated, re-export `$FZF_DEFAULT_OPTS` to include the new colors:
 
 ```zsh
 _fzf_theme_precmd() {
-    local theme_file="$XDG_CONFIG_HOME/fzf/themes/theme"
+    local theme_file=~/.config/fzf/themes/theme
     local theme_target=$(readlink "$theme_file" 2>/dev/null) || return
     typeset -g _FZF_THEME_TARGET
     test "$theme_target" = "$_FZF_THEME_TARGET" && return
@@ -96,7 +96,7 @@ _fzf_theme_precmd() {
 add-zsh-hook precmd _fzf_theme_precmd
 ```
 
-- ripgrep: If `$XDG_CONFIG_HOME/rg/config` is updated, re-build the `$RIPGREP_CONFIG_PATH` file as a concatentation of the _new_ theme and a separete _base_ configuration file and re-export the environment variable.
+- ripgrep: If `~/.config/rg/themes/theme` is updated, re-build the `$RIPGREP_CONFIG_PATH` file as a concatentation of the _new_ theme and a separete _base_ configuration file and re-export the environment variable.
 
 Any and all shells, after re-rendering their terminal prompts, will see proper colors for all fzf and ripgrep commands.
 
