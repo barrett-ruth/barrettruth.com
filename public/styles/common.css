@@ -154,8 +154,8 @@
   :root {
     --bg: #000;
     --text: #fff;
-    --code-bg: #0a0a0a;
-    --border: #1a1a1a;
+    --code-bg: #121212;
+    --border: #2d2d2d;
     --grid-color: rgba(55, 55, 55, 0.4);
   }
 }
@@ -171,8 +171,8 @@
 [data-theme="dark"] {
   --bg: #000;
   --text: #fff;
-  --code-bg: #0a0a0a;
-  --border: #1a1a1a;
+  --code-bg: #121212;
+  --border: #2d2d2d;
   --grid-color: rgba(55, 55, 55, 0.4);
 }
 
