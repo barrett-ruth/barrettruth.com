@@ -72,7 +72,7 @@ Unfortunately, the following programs I've found nearly impossible to dynamicall
 9. ripgrep: I use the default theme. The ripgrep global configuration file does not support environment variables, exterminating the option to provide a `${THEME}`-based path in the global configuration file.
 10. zsh: it's impossible to update `$THEME` across all existing shells (simply a limit of posix). However, all affected _programs_ will read the proper `$THEME`--I'm fine compromising here.
 
-### UPD: 8, 9 <span class="date">30/11/2025</span>
+### UPD: fzf, ripgrep, fzf-lua, and shell improvements <span class="date">30/11/2025</span>
 
 After some _extreme_ amounts of finagling I'm now able to automatically update fzf and ripgrep themes both in the shell (after re-rendering the prompt\*) and in new fzf-lua instances. I consider this a 99% win.
 
@@ -127,3 +127,34 @@ Neovim instances can be found by just listing `/tmp/nvim-*.sock`.
 - ripgrep: automatically re-reads from `$RIPGREP_CONFIG_PATH`, a symlink updated by my theme script
 
 I confess that this solution is not perfect. For example, existing pickers cannot have their theme dynamically re-loaded ([I'm looking into this](https://github.com/ibhagwan/fzf-lua/discussions/2448)) as `FzFLua resume` cannot build theme context. I'm close enough (for now! >:)).
+
+### upd: neovim, tmux improvements <span class="date">2/23/2025</span>
+
+Apparently, neovim [already supports auto-switching the `vim.o.background`](https://github.com/neovim/neovim/commit/d460928263d0ff53283f301dfcb85f5b6e17d2ac) as of November, 26, 2024. So, technically, auto-theme.nvim is defunct. Welp, who cares... it was fun to make! I use the following config to auto-toggle the theme when the aforementioned option is set:
+
+```lua
+vim.api.nvim_create_autocmd({ 'OptionSet' }, {
+pattern = 'background',
+    callback = function()
+        vim.cmd.colorscheme(
+            vim.o.background == 'dark' and 'midnight' or 'daylight'
+        )
+    end,
+    group = vim.api.nvim_create_augroup(
+        'Midnight',
+        { clear = true }
+    ),
+})
+```
+
+tmux 3.6 also supports this too as of 3.6--see [here](https://github.com/tmux/tmux/issues/4699). I updated my tmux.conf, conveniently removing my `~/.config/tmux/themes/*` symlink hackiness:
+
+```mux
+if -F '#{==:#{client_theme},dark}' {
+  # set dark mode
+}
+
+if -F '#{==:#{client_theme},light}' {
+  # set light mode
+}
+```
