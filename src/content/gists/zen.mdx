@@ -8,26 +8,27 @@ date: "12/12/2025"
 ```lua
 local state = nil
 
-map({'n', '<leader>iz', function()
-  local o = vim.opt
+vim.keymap.set('n', '<leader>iz', function()
   if state then
-    for k, v in pairs(state) do o[k] = v end
+    for k, v in pairs(state) do
+      vim.opt[k] = v
+    end
     state = nil
   else
     state = {
-      number = o.number:get(),
-      relativenumber= o.relativenumber:get(),
-      signcolumn = o.signcolumn:get(),
-      statuscolumn = o.statuscolumn:get(),
-      laststatus = o.laststatus:get(),
-      cmdheight = o.cmdheight:get(),
+      number = opt.number:get(),
+      relativenumber= opt.relativenumber:get(),
+      signcolumn = opt.signcolumn:get(),
+      statuscolumn = opt.statuscolumn:get(),
+      laststatus = opt.laststatus:get(),
+      cmdheight = opt.cmdheight:get(),
     }
-    o.number = false
-    o.relativenumber = false
-    o.signcolumn = "no"
-    o.statuscolumn = ""
-    o.laststatus = 0
-    o.cmdheight = 0
+    vim.opt.number = false
+    vim.opt.relativenumber = false
+    vim.opt.signcolumn = "no"
+    vim.opt.statuscolumn = ""
+    vim.opt.laststatus = 0
+    vim.opt.cmdheight = 0
   end
-end})
+end, { desc = "Toggle Zen Mode" })
 ```
