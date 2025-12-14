@@ -161,9 +161,13 @@ if -F '#{==:#{client_theme},light}' {
 
 ## upd: improve tmux theme updating <span class="date">14/12/2025</span>
 
-The above config does not update the tmux theme in tandem with the system theme. I switched to sourcing a theme file (`$XDG_CONFIG_HOME/tmux/themes/{midnight,daylight}.conf`) and hooking into tmux's internal system theme (the `client-{light,dark}-theme` hook) as follows:
+The above config does not always update the tmux theme in tandem with the system theme. For example, on system startup, the tmux theme is not set. I could only get around this by manually reloading the configuration _inside_ of tmux.
+
+It is simpler (and more correct) to set the theme as a function of when tmux itself detects changes to the system theme. This is possible by leveraging the exposed hooks `client-{light,dark}-theme` as follows:
 
 ```tmux
 set-hook -g client-light-theme 'source $XDG_CONFIG_HOME/tmux/themes/daylight.conf'
 set-hook -g client-dark-theme  'source $XDG_CONFIG_HOME/tmux/themes/midnight.conf'
 ```
+
+where the configuration files house the individual theme logic.
