@@ -72,7 +72,7 @@ Unfortunately, the following programs I've found nearly impossible to dynamicall
 9. ripgrep: I use the default theme. The ripgrep global configuration file does not support environment variables, exterminating the option to provide a `${THEME}`-based path in the global configuration file.
 10. zsh: it's impossible to update `$THEME` across all existing shells (simply a limit of posix). However, all affected _programs_ will read the proper `$THEME`--I'm fine compromising here.
 
-### UPD: fzf, ripgrep, fzf-lua, and shell improvements <span class="date">30/11/2025</span>
+### upd: fzf, ripgrep, fzf-lua, and shell improvements <span class="date">30/11/2025</span>
 
 After some _extreme_ amounts of finagling I'm now able to automatically update fzf and ripgrep themes both in the shell (after re-rendering the prompt\*) and in new fzf-lua instances. I consider this a 99% win.
 
@@ -158,3 +158,16 @@ if -F '#{==:#{client_theme},light}' {
   # set light mode
 }
 ```
+
+## upd: improve tmux theme updating <span class="date">14/12/2025</span>
+
+The above config does not always update the tmux theme in tandem with the system theme. For example, on system startup, the tmux theme is not set. I could only get around this by manually reloading the configuration _inside_ of tmux.
+
+It is simpler (and more correct) to set the theme as a function of when tmux itself detects changes to the system theme. This is possible by leveraging the exposed hooks `client-{light,dark}-theme` as follows:
+
+```tmux
+set-hook -g client-light-theme 'source $XDG_CONFIG_HOME/tmux/themes/daylight.conf'
+set-hook -g client-dark-theme  'source $XDG_CONFIG_HOME/tmux/themes/midnight.conf'
+```
+
+where the configuration files house the individual theme logic.
