@@ -3,32 +3,6 @@ title: "designing this website"
 date: "18/06/2024"
 ---
 
-## update: port to astro <span class="date">22/05/2025</span>
-
-I'm expanding my website to include more detailed algorithms, implementations, write-ups, and low-level optimization case studies.
-
-I thought about writing these posts in the raw HTML as I've been doing and physically cringed.
-
-Then I recalled the below post I made around one year ago and realized the following:
-
-- Sure, you can be efficient with raw HTML/CSS/JS. However, _no matter what you do_ snippets, hotkeys, etc, nothing is faster than writing markdown.
-- Overhead (i.e. the massive overhead of copying over content, writing the html) matters
-- I'll be needing more advanced features that, while possible to do in vanilla web, would just be painful to maintain.
-- Sure, frameworks come with bloat. At this point, I'd added web components and script finagling&mdash;I was on the path to reinventing React myself.
-
-Enter [astro](https://astro.build/).
-
-- Lower overhead
-- Small bundle size
-- SSR opt in/out
-- Minimal boilerplate
-
-Everything is now in MDX. I had to say goodbye to my d3 latex labels (I could only do this with MathJax, which I recently found out was overkill for my needs) and a bit of custom styling.
-
-On the upside, I have around the same LOC, a dead-simple blog post setup ([here](https://github.com/barrett-ruth/barrettruth.com/commit/8666e5a16983b177118f6e8a3246feb0d6907fff) was my biggest commit), and the entire Astro community at my back.
-
-The choice of Astro was of no significance. It did the job and that's all that matters. I'm not quite a fan of the funky `---` syntax to separate HTML and JS, though. I find it counterintuitive to separate the UI and the frontend logic, which ought to be tightly coupled. I don't want to imagine working on larger files in Astro.
-
 # HTML, JavaScript, and CSS
 
 That's all there is to it.
@@ -81,3 +55,29 @@ A user request can be modelled as follows:
 The hardest part of hosting this website was interfacing with GoDaddy.
 
 For example, configuring SSL certificates with GoDaddy is needlessly challenging. Follow [AWS's guide](https://docs.aws.amazon.com/amplify/latest/userguide/to-add-a-custom-domain-managed-by-godaddy.html) if you really want to. Otherwise, [configure your GoDaddy nameservers](https://www.godaddy.com/help/edit-my-domain-nameservers-664) and point them to your own DNS service (like Route53) instead.
+
+# upd: port to astro <span class="date">22/05/2025</span>
+
+I'm expanding my website to include more detailed algorithms, implementations, write-ups, and low-level optimization case studies.
+
+I thought about writing these posts in the raw HTML as I've been doing and physically cringed.
+
+Then I recalled the below post I made around one year ago and realized the following:
+
+- Sure, you can be efficient with raw HTML/CSS/JS. However, _no matter what you do_ snippets, hotkeys, etc, nothing is faster than writing markdown.
+- Overhead (i.e. the massive overhead of copying over content, writing the html) matters
+- I'll be needing more advanced features that, while possible to do in vanilla web, would just be painful to maintain.
+- Sure, frameworks come with bloat. At this point, I'd added web components and script finagling&mdash;I was on the path to reinventing React myself.
+
+Enter [astro](https://astro.build/).
+
+- Lower overhead
+- Small bundle size
+- SSR opt in/out
+- Minimal boilerplate
+
+Everything is now in MDX. I had to say goodbye to my d3 latex labels (I could only do this with MathJax, which I recently found out was overkill for my needs) and a bit of custom styling.
+
+On the upside, I have around the same LOC, a dead-simple blog post setup ([here](https://github.com/barrett-ruth/barrettruth.com/commit/8666e5a16983b177118f6e8a3246feb0d6907fff) was my biggest commit), and the entire Astro community at my back.
+
+The choice of Astro was of no significance. It did the job and that's all that matters. I'm not quite a fan of the funky `---` syntax to separate HTML and JS, though. I find it counterintuitive to separate the UI and the frontend logic, which ought to be tightly coupled. I don't want to imagine working on larger files in Astro.

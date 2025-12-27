@@ -15,7 +15,7 @@ Maybe this is the point. But I can't avoid [foxglove](https://wiki.ros.org/Foxgl
 
 I've switched to [spectrwm](https://github.com/conformal/spectrwm) (essentially [this](https://github.com/conformal/spectrwm)) and [ghostty](https://ghostty.org/).
 
-# update: goodbye xorg <span class="date">09/10/2025</span>
+# upd: goodbye xorg <span class="date">09/10/2025</span>
 
 I am now sick of Xorg and their lack of per-monitor DPI scaling. The new stack is:
 
@@ -24,3 +24,12 @@ I am now sick of Xorg and their lack of per-monitor DPI scaling. The new stack i
 - dynamic menu: [rofi](https://github.com/davatorium/rofi)
 - screen lock: [swaylock](https://github.com/swaywm/swaylock) triggered by [swayidle](https://github.com/swaywm/swayidle)
   - [its](https://github.com/swaywm/swaylock/issues/416) [pretty](https://github.com/swaywm/swayidle/issues/169) [bad](https://github.com/swaywm/swaylock/issues/306)
+
+# upd 2: hello [hyprland](https://hypr.land/)
+
+Unfortunately, sway was too fragile. The floating window support was juvenile (invisible windows, flickering, inconsistent tiling). Further, while [redesigning my developer workflow in December 2025](/software/improving-my-developer-workflow.html), I realized that I needed a level of customizability that sway could not provide. The new stack is as follows:
+
+- compositor: hyprland
+- screen lock: [hypridle](https://wiki.hypr.land/Hypr-Ecosystem/hypridle/)
+- browser: [Google Chrome](https://www.google.com/chrome/)
+  - Sigh... I know. I had ungoogled-chromium freak out when using my hardware key and completely break. Cookie-related issues also required me to be proactive with respect to website permissions. With all the weird sites I browse this was not a recipe for success. Do not ask about the sites I browse.

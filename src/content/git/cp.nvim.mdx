@@ -16,7 +16,7 @@ After many months of using the aforementioned `make` based setup, I had a few qu
   asserting that my outputs matched those of the sample test cases
 - <u>External dependencies</u>: it unsettles me that my bare-bones setup
   required copy-pasting an entire suite of scripts
-- <u>Non-native NeoVim experience</u>: while composition and the UNIX philosophy
+- <u>Non-native neovim experience</u>: while composition and the UNIX philosophy
   are great, there's only so much you can do with pipes and files. - Raw I/O
   files meant I couldn't see colored stdin/stdout - Fine-grained per-testcase
   I/O was suspect--isolating and running a subset of test cases required manual
@@ -34,9 +34,9 @@ The GitHub page documents the plugin well enough so I'll avoid re-hashing it her
    consider the following in my active development of the plugin:
 
 - Comprehensive continuous integration (_real_ testing, linting, and more)
-- [LuaRocks](https://luarocks.org/) integration (the future of NeoVim package management)
+- [LuaRocks](https://luarocks.org/) integration (the future of neovim package management)
 - Concise and thorough Vimdoc documentation that communicates effectively
-- Modern lua tooling: use of [busted](https://lunarmodules.github.io/busted/), [selene](https://kampfkarren.github.io/selene/) and more integrated with the NeoVim lua interpreter
+- Modern lua tooling: use of [busted](https://lunarmodules.github.io/busted/), [selene](https://kampfkarren.github.io/selene/) and more integrated with the neovim lua interpreter
 - Sensible user defaults & extreme customization
 - Proper versioning, tagging, and releases
 
@@ -46,15 +46,15 @@ The GitHub page documents the plugin well enough so I'll avoid re-hashing it her
    [echasnovski](https://github.com/echasnovski) are my greatest inspirations as
    an open-source developer and I've had enough of taking without giving back.
 
-- In the coming months I plan to contribute to [NeoVim core](https://github.com/neovim/neovim), including making `:checkhealth` asynchronous and integrating an [mdx](https://mdxjs.com/) parser.
+- In the coming months I plan to contribute to [neovim core](https://github.com/neovim/neovim), including making `:checkhealth` asynchronous and integrating an [mdx](https://mdxjs.com/) parser.
 
 3. <u>Learning Random things</u>: I think this plugin is *really* cool by virtue
    of its efficacy and the miscellany of knowledge I accrued in the 15k+ LOC as
    of version v0.3.0. Some things I learned include:
 
 - <u>ANSI terminal colors and escape codes</u>: I wrote my own stateful ANSI
-  escape sequence parser to map raw bytes to native NeoVim highlighted text
-- <u>Extmarks</u>: NeoVim extmarks (`:h extmarks`) are extremely powerful. Here,
+  escape sequence parser to map raw bytes to native neovim highlighted text
+- <u>Extmarks</u>: neovim extmarks (`:h extmarks`) are extremely powerful. Here,
   I used them to apply dynamic highlighting across various components of the
   plugin but I also plan to leverage virtual text to catch compile errors in
   real-time

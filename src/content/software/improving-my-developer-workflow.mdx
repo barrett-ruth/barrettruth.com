@@ -3,4 +3,66 @@ title: "improving my developer workflow"
 date: "26/12/2025"
 ---
 
-wip
+# the problem
+
+Everything about my workflow was slow.
+
+# some context
+
+Since May 2025, I've been using the same tmux+neovim-centric setup. Sessions house projects, performing different duties in different windows. It worked for me at the time. However, after a summer at DRW and a fall at Ramp, this became far from the case. During both internships I was met with more tools, third-party integrations, (begrudgingly) Macs, and a litany of previously irrelevant inefficiencies. Here are some problems that I ran into:
+
+# the problems
+
+- <u>Vibe coding</u>: I switched back and forth between
+  Claude/Cursor/Windsurf/neovim in nearly every commit.
+- <u>Poor OS understanding</u>: I waddled my way through the MacOS ecosystem. I
+  barely understood how the OS, package managers, and display manager worked,
+  preventing me from efficiently automating it.
+- <u>Archaic git workflow</u>: Now that I was frequently collaborating on large
+  codebases, I needed to context-switch rapidly. I could not. This was primarily
+  due to two things: 1. <u>Nonexistent task management system</u>: I used a raw
+  `.txt` file to manage my priorities. I have also been known to use Chrome tabs
+  as a backup todo list. 2. <u>Poor workflow processes</u>: creating PRs,
+  leaving reviews, and iterating was slow. Coding was slow. Typing was slow. My
+  neovim broke _all_ the time. It was nearly impossible to keep my Linux config
+  in sync when I went home to code on personal projects.
+
+# the solutions
+
+- <u>Quit MacOS</u>: easy enough.
+- <u>Quit vibe-coding</u>: I used vibe-coding to replace my train of thought
+  rather than amplify it.
+- <u>Constantly tweak</u>: Humility, coupled with the willingness to adapt,
+  would render every point above moot. I constantly analyze and improve my
+  config to a reasonable[^1] extent. For example, I recently extended a hyprland
+  windowing script to interactively prompt for a desired selection. This is
+  because I would consistently pull incorrect Chrome instances with multiple of
+  them open at a time, forcing me to manually reorder them. Evidence of this
+  constant iteration can be found in the revitalized history of my
+  [dotfiles](https://github.com/barrett-ruth/dots).
+- <u>Use tools that "just work"</u>: one of my friend's fathers told me that I
+  was not special during a lacrosse practice in elementary school. I used many
+  programs to feel special, from quirky Linux window managers to niche Neovim
+  plugins. I eliminated tools that could not stand the test of time and
+  sparingly chose well-regarded ones to replace them. For example, I dropped
+  swaywm for hyprland and ungoogled-chromium for Google Chrome (see [my suckless
+  post](/meditations/suck-less-or-suck-more.html)).
+- <u>Manage tasks effectively</u>: develop a philosophy for prioritizing and
+  solving problems. Find or make a program that implements it and immediately
+  abandon *everything* else. [taskwarrior](https://taskwarrior.org/) and some
+  custom scripts worked for me.
+
+## appendix: config changes, enumerated
+
+Here are only a few of the config changes I made in the past month:
+
+- Configure hyprland windows extensively to my needs. I can instantly pull and push any window in any workspace without having to memorize application-to-workspace number mappings.
+- Perform all coding-related tasks in one neovim instance rather than separate windows. This creates an improved separation of concerns and seamless integration with git actions and project task management.
+- Use taskwarrior for tasks and todo management.
+- Use Google Chrome search engines as URL shortcuts, the [fuzzy url finder](https://chromewebstore.google.com/detail/ff-fuzzy-finder-for-chrom/dbgeolnmmjmhcfndmmahnpicpmnpibep?hl=en) chrome extension to find URLs, and [a tab numberer](https://chromewebstore.google.com/detail/chrome-show-tab-numbers/pflnpcinjbcfefgbejjfanemlgcfjbna?hl=en) to find tabs.
+- Make dotfiles OS-agnostic through a variety of OS-specific conditionals in configs and refactoring the directory structure to mirror that of the Unix-like file structure (my dots repo now has `.config`, `/etc` folders).
+- Use [lf](https://github.com/gokcehan/lf) for quickly opening files. Waste a day of your life writing an awesome previewer that supports native (treesitter/vim syntax!) neovim highlighting and video/pdf/gif support. This thing is seriously cool--[check it out](https://github.com/barrett-ruth/dots/blob/main/.config/lf/lf.lua).
+- Auto-theme switching (see [here](/git/auto-theme.nvim.html)).
+- Swap to a stable AppImage build of my PDF reader, [sioyek](https://sioyek.info/), to avoid versioning dependencies.
+
+[^1]: This is an art form. I leverage time-blocking, making changes _only_ based on evidence (i.e. how often do I perform this action in practice?) and intentionally selecting tools after extensive research/trial. I explored around 10 plugins before settling on [overseer.nvim](https://github.com/stevearc/overseer.nvim) when configuring how to run tasks and projects.
