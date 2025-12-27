@@ -53,6 +53,27 @@ Since May 2025, I've been using the same tmux+neovim-centric setup. Sessions hou
   abandon *everything* else. [taskwarrior](https://taskwarrior.org/) and some
   custom scripts worked for me.
 
+# the final product
+
+The below video shows be performing the following actions bl\*zingly fast:
+
+- Previewing some pdfs in the terminal with lf and the kitty graphics protocol
+- Running this site itself locally with overseer.nvim
+- Creating a new file with oil.nvim
+- Switching to a new branch with fzf-lua
+- Committing such file with vim-fugitive
+- Pulling a specific chrome instance to the current workspace with a custom hyprland script
+
+Notably, all coding, git, and task-running actions in neovim are completely separate (in their own tabs).
+This allows my coding experience to be completely uniform and unaffected by, for example, a fugitive buffer.
+I declaratively switch between these tabs with a few bindings, removing all neovim buffer/window overhead.
+
+<video autoplay muted loop playsinline style={{ maxWidth: "100%", height: "auto" }}>
+  <source src="/improving-my-developer-workflow/workflow.webm" type="video/webm" />
+  <source src="/improving-my-developer-workflow/workflow.mp4" type="video/mp4" />
+  Your browser does not support the video tag.
+</video>
+
 ## appendix: config changes, enumerated
 
 Here are only a few of the config changes I made in the past month:
