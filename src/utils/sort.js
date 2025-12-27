@@ -8,5 +8,5 @@ export const sortItem = (a, b) => {
   const aDate = parseEuroDate(a.data.date).getTime();
   const bDate = parseEuroDate(b.data.date).getTime();
 
-  return aDate === bDate ? a.slug.localeCompare(b.slug) : bDate - aDate;
+  return aDate === bDate ? b.slug.localeCompare(a.slug) : bDate - aDate;
 };
