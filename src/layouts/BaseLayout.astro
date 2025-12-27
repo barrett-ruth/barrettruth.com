@@ -6,6 +6,7 @@ const {
   title,
   description = "Barrett Ruth's website",
   bodyClass = "graph-background",
+  useHeader = true,
 } = Astro.props;
 ---
 
@@ -33,7 +34,7 @@ const {
     <slot name="head" />
   </head>
   <body class={bodyClass}>
-    <Header />
+    {useHeader && <Header />}
     <main class="main">
       <slot />
     </main>
@@ -51,6 +52,8 @@ const {
             return "#3d8a44";
           case "git":
             return "#cc5500";
+          case "death":
+            return "#000000";
           default:
             return getComputedStyle(document.documentElement)
               .getPropertyValue("--text")

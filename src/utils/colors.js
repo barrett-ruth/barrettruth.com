@@ -10,6 +10,8 @@ export function getTopicColor(topicName) {
       return "#3d8a44";
     case "git":
       return "#cc5500";
+    case "death":
+      return "#000000";
     default:
       return null;
   }
