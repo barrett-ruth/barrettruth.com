@@ -11,7 +11,7 @@
     "check": "astro check"
   },
   "lint-staged": {
-    "*.{js,ts,jsx,tsx,json,css,scss,md,astro,html}": [
+    "*.{js,ts,jsx,tsx,json,css,scss,md,astro,html,yaml,yml}": [
       "prettier --write",
       "astro check"
     ]
