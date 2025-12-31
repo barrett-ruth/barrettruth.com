@@ -1,7 +1,8 @@
 import { defineConfig } from "astro/config";
 import mdx from "@astrojs/mdx";
-import remarkMath from "remark-math";
+import rehypeExternalLinks from "rehype-external-links";
 import rehypeKatex from "rehype-katex";
+import remarkMath from "remark-math";
 import path from "path";
 
 const midnight = {
@@ -73,7 +74,16 @@ export default defineConfig({
   integrations: [
     mdx({
       remarkPlugins: [remarkMath],
-      rehypePlugins: [rehypeKatex],
+      rehypePlugins: [
+        rehypeKatex,
+        [
+          rehypeExternalLinks,
+          {
+            target: "_blank",
+            rel: ["noopener", "noreferrer"],
+          },
+        ],
+      ],
     }),
   ],
   vite: {
