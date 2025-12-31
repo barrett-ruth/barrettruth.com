@@ -15,7 +15,12 @@ const promptText = topic ? `barrett@ruth:~$ ${topic}` : "barrett@ruth:~$";
 ---
 
 <header>
-  <a href="/" class="home-link" style="text-decoration: none; color: inherit">
+  <a
+    href="/"
+    id="home-link"
+    class="home-link"
+    style="text-decoration: none; color: inherit"
+  >
     <div class="terminal-container">
       <span class="terminal-prompt">{promptText}</span>
       <span class="terminal-cursor"></span>
@@ -48,5 +53,16 @@ const promptText = topic ? `barrett@ruth:~$ ${topic}` : "barrett@ruth:~$";
     }
   }
 </style>
+
+<script is:inline>
+  const homeLink = document.getElementById("home-link");
+
+  homeLink.addEventListener("click", (e) => {
+    if (e.ctrlKey || e.metaKey) {
+      e.preventDefault();
+      window.open("/", "_blank", "noopener");
+    }
+  });
+</script>
 
 <script src="/scripts/index.js" is:inline></script>
