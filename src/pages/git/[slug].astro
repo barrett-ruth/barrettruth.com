@@ -13,7 +13,7 @@ export async function getStaticPaths() {
 const { repo } = Astro.props;
 const { Content } = await repo.render();
 const cloneCommand = `git clone https://git.barrettruth.com/${repo.slug}.git`;
-const githubUrl = `https://github.com/barrett-ruth/${repo.slug}`;
+const githubUrl = `https://github.com/barrettruth/${repo.slug}`;
 ---
 
 <PostLayout frontmatter={repo.data} post={repo}>
