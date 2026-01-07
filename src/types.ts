@@ -6,9 +6,8 @@ export type CollectionKey =
   | "meditations"
   | "autonomous-racing"
   | "git"
-  | "gists"
   | "death";
-export type PostCollection = Exclude<CollectionKey, "git" | "gists">;
+export type PostCollection = Exclude<CollectionKey, "git">;
 
 export type AnyCollectionEntry =
   | CollectionEntry<"algorithms">
@@ -16,5 +15,4 @@ export type AnyCollectionEntry =
   | CollectionEntry<"meditations">
   | CollectionEntry<"autonomous-racing">
   | CollectionEntry<"death">
-  | CollectionEntry<"git">
-  | CollectionEntry<"gists">;
+  | CollectionEntry<"git">;
