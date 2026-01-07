@@ -150,30 +150,12 @@
   --grid-color: rgba(200, 200, 200, 0.4);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #000;
-    --text: #fff;
-    --code-bg: #121212;
-    --border: #2d2d2d;
-    --grid-color: rgba(55, 55, 55, 0.4);
-  }
-}
-
 [data-theme="light"] {
   --bg: #fff;
   --text: #000;
   --code-bg: #f4f4f4;
   --border: #e1e1e1;
   --grid-color: rgba(200, 200, 200, 0.4);
-}
-
-[data-theme="dark"] {
-  --bg: #000;
-  --text: #fff;
-  --code-bg: #121212;
-  --border: #2d2d2d;
-  --grid-color: rgba(55, 55, 55, 0.4);
 }
 
 pre,
@@ -206,11 +188,6 @@ footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
-}
-
-#theme-toggle {
-  cursor: pointer;
-  user-select: none;
 }
 
 .main {
