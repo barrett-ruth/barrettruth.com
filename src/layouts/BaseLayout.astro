@@ -15,9 +15,12 @@ const { title, description = "barrett ruth's website" } = Astro.props;
     <slot name="head" />
   </head>
   <body>
+    <slot name="header" />
+
     <main class="main">
       <slot />
     </main>
+
     <slot name="scripts" />
   </body>
 </html>

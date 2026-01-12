@@ -153,13 +153,6 @@ code[class*="language-"] {
 html,
 body {
   font-family: "Signifier", serif;
-}
-
-header,
-footer {
-  padding: 30px 20px;
-  font-size: 1.5em;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  background: #f5f1e8;
+  color: #3a3a3a;
 }

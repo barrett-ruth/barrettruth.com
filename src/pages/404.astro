@@ -2,8 +2,13 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<BaseLayout title="404 - not found">
-  <div>
-    <h1>404 - not found</h1>
+<BaseLayout title="page not found">
+  <Fragment slot="head">
+    <link rel="stylesheet" href="/styles/base.css" />
+    <link rel="stylesheet" href="/styles/404.css" />
+  </Fragment>
+
+  <div class="container">
+    <h1>404</h1>
   </div>
 </BaseLayout>
