@@ -39,3 +39,10 @@ jobs:
         run: |
           chmod +x scripts/deploy.sh
           scripts/deploy.sh
+
+      - name: Invalidate CloudFront cache
+        env:
+          AWS_CLOUDFRONT_DISTRIBUTION_ID: ${{ secrets.AWS_CLOUDFRONT_DISTRIBUTION_ID }}
+        run: |
+          chmod +x scripts/invalidate.sh
+          scripts/invalidate.sh
