@@ -1,5 +1,49 @@
-header h1 {
+body {
+  background: #f5f1e8;
+  color: #3a3a3a;
+}
+
+header {
+  display: flex;
+  padding: 60px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+h1,
+header span {
+  margin: 0;
   font-weight: 300;
+  font-size: 4em;
+}
+
+section {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 80px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+h2 {
+  margin-top: 24px;
+  font-weight: 300;
+  font-style: italic;
   font-size: 2em;
-  /* letter-spacing: 0.05em; */
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  margin-bottom: 12px;
+  font-size: 1.1em;
+  line-height: 1.6;
+}
+
+a {
+  color: inherit;
+  border-bottom: 1px solid transparent;
 }

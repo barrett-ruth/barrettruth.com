@@ -1,9 +1,61 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
-const title = "barrett ruth";
 ---
 
-<BaseLayout title={title}
-  ><em>barrett</em> ruth
-  <script src="index.css" is:inline></script>
+<BaseLayout title="barrett ruth">
+  <Fragment slot="head">
+    <link rel="stylesheet" href="/styles/index.css" />
+  </Fragment>
+
+  <header>
+    <h1>barrett ruth</h1>
+    <span class="delta">Δ</span>
+  </header>
+
+  <section>
+    <div>
+      <h2>experience</h2>
+      <ul>
+        <li>
+          <a target="_blank" href="https://drw.com">drw</a>&mdash;summer 2025
+        </li>
+        <li>
+          <a target="_blank" href="https://ramp.com">ramp</a>&mdash;spring 2025
+        </li>
+        <li>
+          <a target="_blank" href="https://usa.visa.com">visa</a>&mdash;summer
+          2024
+        </li>
+        <li>
+          <a target="_blank" href="https://trbcap.com">trb capital</a
+          >&mdash;summer 2024
+        </li>
+        <li>
+          <a target="_blank" href="https://www.nthventure.com">nth venture</a
+          >&mdash;spring 2023
+        </li>
+        <li>
+          <a target="_blank" href="https://gotransverse.com">gotransverse</a
+          >&mdash;summer 2022
+        </li>
+      </ul>
+    </div>
+
+    <div>
+      <h2>contact</h2>
+      <ul>
+        <li><a target="_blank" href="mailto:br@barrettruth.com">email</a></li>
+        <li>
+          <a target="_blank" href="https://github.com/barrettruth">github</a>
+        </li>
+        <li>
+          <a target="_blank" href="/resume.pdf" target="_blank">resume</a>
+        </li>
+        <li>
+          <a target="_blank" href="/transcript.pdf" target="_blank"
+            >transcript</a>
+        </li>
+      </ul>
+    </div>
+  </section>
 </BaseLayout>

@@ -3,11 +3,11 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
 <BaseLayout title="Barrett Ruth">
-  <div class="post-container">
-    <header class="post-header">
-      <h1 class="post-title">Barrett Ruth</h1>
+  <div>
+    <header>
+      <h1>Barrett Ruth</h1>
     </header>
-    <article class="post-article">
+    <article>
       <p>
         I am a software developer studying computer science at the University of
         Virginia.
@@ -37,8 +37,4 @@ import BaseLayout from "../layouts/BaseLayout.astro";
       </p>
     </article>
   </div>
-
-  <slot name="head" slot="head">
-    <link rel="stylesheet" href="/styles/posts.css" />
-  </slot>
 </BaseLayout>
