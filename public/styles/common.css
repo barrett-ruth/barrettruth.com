@@ -1,0 +1,165 @@
+@font-face {
+  font-family: "Signifier";
+  src: url("/fonts/signifier/Signifier-Thin.ttf") format("truetype");
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Signifier";
+  src: url("/fonts/signifier/Signifier-ThinItalic.ttf") format("truetype");
+  font-weight: 100;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Signifier";
+  src: url("/fonts/signifier/Signifier-Extralight.ttf") format("truetype");
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Signifier";
+  src: url("/fonts/signifier/Signifier-ExtralightItalic.ttf") format("truetype");
+  font-weight: 200;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Signifier";
+  src: url("/fonts/signifier/Signifier-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Signifier";
+  src: url("/fonts/signifier/Signifier-LightItalic.ttf") format("truetype");
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Signifier";
+  src: url("/fonts/signifier/Signifier-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Signifier";
+  src: url("/fonts/signifier/Signifier-RegularItalic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Signifier";
+  src: url("/fonts/signifier/Signifier-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Signifier";
+  src: url("/fonts/signifier/Signifier-MediumItalic.ttf") format("truetype");
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Signifier";
+  src: url("/fonts/signifier/Signifier-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Signifier";
+  src: url("/fonts/signifier/Signifier-BoldItalic.ttf") format("truetype");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Signifier";
+  src: url("/fonts/signifier/Signifier-Black.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Signifier";
+  src: url("/fonts/signifier/Signifier-BlackItalic.ttf") format("truetype");
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Apercu Mono";
+  src: url("/fonts/apercu-mono/ApercuMonoProLight.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Apercu Mono";
+  src: url("/fonts/apercu-mono/ApercuMonoProRegular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Apercu Mono";
+  src: url("/fonts/apercu-mono/ApercuMonoProMedium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Apercu Mono";
+  src: url("/fonts/apercu-mono/ApercuMonoProBold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+pre,
+code,
+pre code,
+.astro-code,
+code[class*="language-"] {
+  font-family: "Apercu Mono", monospace !important;
+}
+
+html,
+body {
+  font-family: "Signifier", serif;
+}
+
+header,
+footer {
+  padding: 30px 20px;
+  font-size: 1.5em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

@@ -1,6 +1,5 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
-import TableOfContents from "../components/TableOfContents.astro";
 
 interface Props {
   frontmatter: {
@@ -11,7 +10,6 @@ interface Props {
     useD3?: boolean;
     scripts?: string[];
     category?: string;
-    showToc?: boolean;
   };
   post?: {
     id?: string;
@@ -26,13 +24,7 @@ interface Props {
 }
 
 const { frontmatter, headings = [] } = Astro.props as Props;
-const {
-  title,
-  description,
-  useKatex = false,
-  useD3 = false,
-  showToc = false,
-} = frontmatter;
+const { title, description, useKatex = false, useD3 = false } = frontmatter;
 
 let documentTitle = title;
 ---
@@ -54,14 +46,6 @@ let documentTitle = title;
   </Fragment>
 
   <Fragment>
-    {
-      showToc && (
-        <aside>
-          <TableOfContents headings={headings} />
-        </aside>
-      )
-    }
-
     <div>
       <header>
         <h1>{title}</h1>

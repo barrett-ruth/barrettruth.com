@@ -8,7 +8,6 @@ const base = z.object({
   useD3: z.boolean().optional(),
   scripts: z.array(z.string()).optional(),
   redirect: z.string().optional(),
-  showToc: z.boolean().optional(),
 });
 
 export const collections = {
