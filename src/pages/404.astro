@@ -8,28 +8,6 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   </div>
 </BaseLayout>
 
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const base = "barrett@ruth:~$ ";
-    const el = document.querySelector(".terminal-prompt");
-    if (!el) return;
-
-    const type = () => {
-      const target = "/not-found";
-      let i = 0;
-      el.textContent = base;
-      (function step() {
-        if (i < target.length) {
-          el.textContent += target.charAt(i++);
-          setTimeout(step, 250 / target.length);
-        }
-      })();
-    };
-
-    type();
-  });
-</script>
-
 <style>
   .not-found-container {
     display: flex;

@@ -1,164 +1,165 @@
-/* List pages only - no scroll */
-body:has(.content) {
+@font-face {
+  font-family: "Signifier";
+  src: url("/fonts/signifier/Signifier-Thin.ttf") format("truetype");
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Signifier";
+  src: url("/fonts/signifier/Signifier-ThinItalic.ttf") format("truetype");
+  font-weight: 100;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Signifier";
+  src: url("/fonts/signifier/Signifier-Extralight.ttf") format("truetype");
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Signifier";
+  src: url("/fonts/signifier/Signifier-ExtralightItalic.ttf") format("truetype");
+  font-weight: 200;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Signifier";
+  src: url("/fonts/signifier/Signifier-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Signifier";
+  src: url("/fonts/signifier/Signifier-LightItalic.ttf") format("truetype");
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Signifier";
+  src: url("/fonts/signifier/Signifier-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Signifier";
+  src: url("/fonts/signifier/Signifier-RegularItalic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Signifier";
+  src: url("/fonts/signifier/Signifier-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Signifier";
+  src: url("/fonts/signifier/Signifier-MediumItalic.ttf") format("truetype");
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Signifier";
+  src: url("/fonts/signifier/Signifier-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Signifier";
+  src: url("/fonts/signifier/Signifier-BoldItalic.ttf") format("truetype");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Signifier";
+  src: url("/fonts/signifier/Signifier-Black.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Signifier";
+  src: url("/fonts/signifier/Signifier-BlackItalic.ttf") format("truetype");
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Apercu Mono";
+  src: url("/fonts/apercu-mono/ApercuMonoProLight.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Apercu Mono";
+  src: url("/fonts/apercu-mono/ApercuMonoProRegular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Apercu Mono";
+  src: url("/fonts/apercu-mono/ApercuMonoProMedium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Apercu Mono";
+  src: url("/fonts/apercu-mono/ApercuMonoProBold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+pre,
+code,
+pre code,
+.astro-code,
+code[class*="language-"] {
+  font-family: "Apercu Mono", monospace !important;
+}
+
+html,
+body {
+  font-family: "Signifier", serif;
+}
+
+header,
+footer {
+  padding: 30px 20px;
+  font-size: 1.5em;
   display: flex;
-  flex-direction: column;
-  height: 100vh;
-  overflow: hidden;
-}
-
-body:has(.content) > header {
-  flex: 0 0 auto;
-}
-
-body:has(.content) > .main {
-  flex: 1 1 auto;
-  min-height: 0;
-  display: flex;
-  align-items: center;
-}
-
-body:has(.content) > footer {
-  flex: 0 0 auto;
-}
-
-.content {
-  width: 100%;
-  height: 100%;
-  padding: 40px;
-  box-sizing: border-box;
-  display: flex;
-  gap: 80px;
   align-items: center;
   justify-content: space-between;
-}
-
-.topics {
-  font-size: clamp(1.5em, 4vw, 3em);
-  max-height: 80vh;
-  column-width: 300px;
-  column-gap: clamp(20px, 4vw, 60px);
-  column-fill: auto;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  overflow-y: auto;
-  overflow-x: hidden;
-}
-
-.topics li:first-child {
-  margin-top: 0;
-}
-
-.topics li:last-child {
-  margin-bottom: 0;
-}
-
-.posts {
-  font-size: clamp(1.2em, 3vw, 2.2em);
-  text-align: right;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  min-height: 0;
-}
-
-.posts:empty {
-  display: none;
-}
-
-a {
-  text-decoration: none;
-}
-
-.post {
-  margin-bottom: 25px;
-}
-
-ul {
-  list-style: none;
-  margin: 0;
-}
-
-.topic a {
-  position: relative;
-  display: inline-block;
-  color: inherit;
-  text-decoration: none;
-  margin-bottom: 25px;
-  transition: color 0.5s ease;
-}
-
-.topic a::after {
-  content: "";
-  height: 2px;
-  display: block;
-  margin-top: 4px;
-  background: currentColor;
-  width: 0;
-  right: 100%;
-  position: absolute;
-  transition:
-    width 0.5s ease,
-    right 0.5s ease;
-}
-
-.topic a:hover::after,
-.topic a.active::after {
-  width: 100%;
-  right: 0;
-}
-
-body:has(#repo-list) .content,
-body:has(.topics:only-child) .content {
-  justify-content: flex-start;
-  display: block;
-}
-
-body:has(#repo-list) .topics,
-body:has(.topics:only-child) .topics {
-  column-width: 350px;
-  column-fill: auto;
-  height: calc(100vh - 200px);
-  overflow-y: hidden;
-  overflow-x: auto;
-  max-height: calc(100vh - 200px);
-  width: 100%;
-}
-
-body:has(#repo-list) .posts {
-  display: none;
-}
-
-@media (max-width: 768px) {
-  body:has(.content) {
-    height: auto;
-    min-height: 100vh;
-  }
-
-  body:has(.content) > .main {
-    display: block;
-    min-height: calc(100vh - 200px);
-  }
-
-  .content {
-    display: block;
-    padding: 20px;
-    height: auto;
-  }
-
-  .topics {
-    font-size: 1.8em;
-    column-count: 1;
-    max-height: none;
-  }
-
-  .posts {
-    font-size: 1.4em;
-    margin-top: 30px;
-  }
-
-  .topic a {
-    display: block;
-    margin-bottom: 15px;
-  }
 }

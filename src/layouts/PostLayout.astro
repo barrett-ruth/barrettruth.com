@@ -1,6 +1,5 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
-import { getTopicColor } from "../utils/colors.js";
 import TableOfContents from "../components/TableOfContents.astro";
 
 interface Props {
@@ -36,22 +35,10 @@ const {
 } = frontmatter;
 
 let documentTitle = title;
-if (post?.collection === "git" && post?.slug) {
-  documentTitle = `${post.slug}.git`;
-} else if (
-  (post?.collection === "gists" || post?.collection === "gist") &&
-  post?.slug
-) {
-  documentTitle = `${post.slug}`;
-}
-
-const topicColor = getTopicColor(post?.collection);
 ---
 
 <BaseLayout title={documentTitle} description={description}>
   <Fragment slot="head">
-    <link rel="stylesheet" href="/styles/posts.css" />
-    <link rel="stylesheet" href="/styles/graph.css" />
     {
       useKatex && (
         <link
@@ -66,34 +53,29 @@ const topicColor = getTopicColor(post?.collection);
     <slot name="head" />
   </Fragment>
 
-  <div
-    class="post-wrapper"
-    style={topicColor ? `--topic-color: ${topicColor};` : ""}
-  >
+  <Fragment>
     {
-      showToc && headings.length > 0 && (
-        <aside class="toc-column">
+      showToc && (
+        <aside>
           <TableOfContents headings={headings} />
         </aside>
       )
     }
 
-    <div class="post-container">
-      <header class="post-header">
-        <h1 class="post-title">{title}</h1>
-        {frontmatter.date && <p class="post-meta">{frontmatter.date}</p>}
-      </header>
-
-      <article class="post-article">
-        <slot />
-      </article>
+    <div>
+      <header>
+        <h1>{title}</h1>
+        {frontmatter.date}
+      </header>}
     </div>
-  </div>
-
-  <Fragment slot="scripts">
-    <script src="/scripts/index.js" is:inline></script>
-    <script src="/scripts/centerKatex.js" is:inline></script>
-    {frontmatter.scripts?.map((src) => <script src={src} is:inline />)}
-    <slot name="scripts" />
+    <article>
+      <slot />
+    </article>
   </Fragment>
 </BaseLayout>
+
+<Fragment slot="scripts">
+  <script src="/scripts/centerKatex.js" is:inline></script>
+  {frontmatter.scripts?.map((src) => <script src={src} is:inline />)}
+  <slot name="scripts" />
+</Fragment>
