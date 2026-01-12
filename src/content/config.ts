@@ -8,16 +8,8 @@ const base = z.object({
   useD3: z.boolean().optional(),
   scripts: z.array(z.string()).optional(),
   redirect: z.string().optional(),
-  showToc: z.boolean().optional(),
 });
 
 export const collections = {
-  algorithms: defineCollection({ type: "content", schema: base }),
-  software: defineCollection({ type: "content", schema: base }),
-  meditations: defineCollection({ type: "content", schema: base }),
-  "autonomous-racing": defineCollection({ type: "content", schema: base }),
-  death: defineCollection({ type: "content", schema: base }),
-
-  git: defineCollection({ type: "content", schema: base }),
-  gists: defineCollection({ type: "content", schema: base }),
+  x: defineCollection({ type: "content", schema: base }),
 };

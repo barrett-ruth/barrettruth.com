@@ -2,46 +2,13 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 ---
 
-<BaseLayout title="404 - Not Found">
-  <div class="not-found-container">
+<BaseLayout title="page not found">
+  <Fragment slot="head">
+    <link rel="stylesheet" href="/styles/base.css" />
+    <link rel="stylesheet" href="/styles/404.css" />
+  </Fragment>
+
+  <div class="container">
     <h1>404</h1>
   </div>
 </BaseLayout>
-
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const base = "barrett@ruth:~$ ";
-    const el = document.querySelector(".terminal-prompt");
-    if (!el) return;
-
-    const type = () => {
-      const target = "/not-found";
-      let i = 0;
-      el.textContent = base;
-      (function step() {
-        if (i < target.length) {
-          el.textContent += target.charAt(i++);
-          setTimeout(step, 250 / target.length);
-        }
-      })();
-    };
-
-    type();
-  });
-</script>
-
-<style>
-  .not-found-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    min-height: 60vh;
-  }
-
-  h1 {
-    font-size: 5em;
-    font-weight: normal;
-    margin: 0;
-  }
-</style>

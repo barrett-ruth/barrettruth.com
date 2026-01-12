@@ -1,13 +1,5 @@
 ---
-import Header from "../components/Header.astro";
-import Footer from "../components/Footer.astro";
-
-const {
-  title,
-  description = "Barrett Ruth's website",
-  bodyClass = "graph-background",
-  useHeader = true,
-} = Astro.props;
+const { title, description = "barrett ruth's website" } = Astro.props;
 ---
 
 <!doctype html>
@@ -18,38 +10,17 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
     <link rel="icon" type="image/webp" href="/logo.webp" />
-    <link rel="stylesheet" href="/styles/common.css" />
+    <link rel="stylesheet" href="/styles/base.css" />
     <title>{title}</title>
     <slot name="head" />
   </head>
-  <body class={bodyClass}>
-    {useHeader && <Header />}
+  <body>
+    <slot name="header" />
+
     <main class="main">
       <slot />
     </main>
-    <Footer />
-    <script is:inline>
-      window.getTopicColor = function (topicName) {
-        switch ((topicName || "").toLowerCase()) {
-          case "software":
-            return "#0073e6";
-          case "algorithms":
-            return "#d50032";
-          case "meditations":
-            return "#6a0dad";
-          case "autonomous-racing":
-            return "#3d8a44";
-          case "git":
-            return "#cc5500";
-          case "death":
-            return "#000000";
-          default:
-            return getComputedStyle(document.documentElement)
-              .getPropertyValue("--text")
-              .trim();
-        }
-      };
-    </script>
+
     <slot name="scripts" />
   </body>
 </html>
