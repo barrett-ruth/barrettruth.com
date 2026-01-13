@@ -10,7 +10,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 20px;
 }
 
@@ -18,12 +18,18 @@ h1,
 .delta {
   font-size: clamp(1.5rem, 8vw, 4rem);
   font-weight: 300;
+  flex-shrink: 1;
+}
+
+.delta {
+  flex-shrink: 0;
 }
 
 section {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: clamp(20px, 3vw, 40px);
+  padding-bottom: clamp(80px, 15vw, 150px);
 }
 
 h2 {
