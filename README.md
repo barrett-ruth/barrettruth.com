@@ -1,3 +1,3 @@
-# barrettruth.com
+#  barrettruth.com
 
 my portfolio
