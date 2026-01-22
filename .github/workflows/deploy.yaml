@@ -25,4 +25,6 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-2
       - run: chmod +x scripts/deploy.sh && scripts/deploy.sh
-      - run: chmod +x scripts/invalidate.sh && scripts/invalidate.sh
+      - env:
+          AWS_CLOUDFRONT_DISTRIBUTION_ID: ${{ secrets.AWS_CLOUDFRONT_DISTRIBUTION_ID }}
+        run: chmod +x scripts/invalidate.sh && scripts/invalidate.sh
