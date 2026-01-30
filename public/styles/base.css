@@ -148,7 +148,7 @@ code,
 pre code,
 .astro-code,
 code[class*="language-"] {
-  font-family: "Apercu Mono", monospace !important;
+  font-family: "Berkeley Mono", monospace !important;
 }
 
 @media (prefers-color-scheme: dark) {
